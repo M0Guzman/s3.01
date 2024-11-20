@@ -1,3 +1,19 @@
 body {
-    background-color: $base;
+    background-color: $text;
+}
+
+.navbar{
+    text-align: left;
+}
+
+.header-right{
+    text-align: left;
+}
+
+.lang-switch{
+    text-align: right;
+}
+
+.num1{
+    border: 2px solid black;
 }
