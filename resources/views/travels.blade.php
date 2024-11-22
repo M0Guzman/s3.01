@@ -9,7 +9,7 @@
 <body>
     <header class="header">
         <div class="logo">
-            <img src="./images/logo.png" alt="Vinotrip Logo">
+            <!--<img src="./images/logo.png" alt="Vinotrip Logo">-->
             <span>VINOTRIP</span>
         </div>
         <nav class="navbar">
@@ -51,13 +51,57 @@
                  sont élaborés pour permettre à tous les publics, 
                  de l’amateur au néophyte, de trouver leur bonheur.
             </p>
+        
         </section>
-        <section class="sejour">
-            <div id="num1">
-                <p>Titre sejour</p>
-                <br>
-                <p>Debut desc sejour</p><p>moyenne avis avec etoiles</p>
+        <section class="filtre">
+            <div id="filtreI">
+                Quel Vignoble? <!--menu defilant -->
             </div>
+            <div id="filtreI">
+                Durée? <!--menu defilant -->
+            </div>
+            <div id="filtreI">
+                Pour Qui? <!--menu defilant -->
+            </div>
+            <div id="filtreI">
+                Une Envie Particuliere? <!--menu defilant -->
+            </div>
+            <button id="filtreB">
+                recherche
+            </button>
+        </section>
+        
+            <div id="trier_prix">
+                <p>Trier par</p> <!--menu defilant (du + cher au - cher ou du - cher au + cher--> 
+            </div>
+        
+        <br>
+        <section class="sejour">            
+                <div id="num1">
+                    <br>
+                    <p> image avec etiquette pour le prix</p>
+                    <p>Titre sejour</p>                                        
+                    <p id="vignoble">Quel vignoble</p> <p id="avis">moyenne avis avec etoiles</p>
+                    <p id="description">Debut desc sejour</p>
+                    <p id="jours">nb jours</p> 
+                </div>
+                <div id="num1">
+                    <br>
+                    <p> image avec etiquette pour le prix</p>
+                    <p>Titre sejour</p>                    
+                    <p id="vignoble">Quel vignoble</p> <p id="avis">moyenne avis avec etoiles</p>
+                    <p id="description">Debut desc sejour</p>
+                    <p id="jours">nb jours</p> 
+                </div>
+                <div id="num1">
+                    <br>
+                    <p> image avec etiquette pour le prix</p>
+                    <p>Titre sejour</p>                    
+                    <p id="vignoble">Quel vignoble</p> <p id="avis">moyenne avis avec etoiles</p>
+                    <p id="description">Debut desc sejour</p>
+                    <p id="jours">nb jours</p> 
+                </div>
+            
         </section>
     </main>
 </body>
