@@ -2,11 +2,46 @@
     <form method="POST" action="{{ route('register') }}">
         @csrf
 
-        <!-- Name -->
+        <div class="flex flex-row gap-2 mb-4">
+            <!-- First Name -->
+            <div class="w-full mr-3">
+                <x-input-label for="first_name" :value="__('First Name')" />
+                <x-text-input id="first_name" class="block mt-1 w-full" type="text" name="first_name" :value="old('first_name')" required autofocus autocomplete="first_name" />
+                <x-input-error :messages="$errors->get('first_name')" class="mt-2" />
+            </div>
+
+            <!-- Last Name -->
+            <div class="w-full ml-3">
+                <x-input-label for="last_name" :value="__('Last Name')" />
+                <x-text-input id="last_name" class="block mt-1 w-full" type="text" name="last_name" :value="old('last_name')" required autofocus autocomplete="last_name" />
+                <x-input-error :messages="$errors->get('last_name')" class="mt-2" />
+            </div>
+        </div>
+
+        <!-- Gender -->
         <div>
-            <x-input-label for="name" :value="__('Name')" />
-            <x-text-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus autocomplete="name" />
-            <x-input-error :messages="$errors->get('name')" class="mt-2" />
+            <x-input-label for="gender" :value="__('Gender')" />
+            <x-select id="gender" class="block mt-1 w-full" name="gender" :value="old('gender')" required autofocus autocomplete="gender" list="genderlist">
+                <option>Male</option>
+                <option>Female</option>
+                <option>Non-Binary"</option>
+                <option>Other</option>
+            </x-select>
+            <x-input-error :messages="$errors->get('last_name')" class="mt-2" />
+        </div>
+
+         <!-- Birth date -->
+        <div class="mt-4">
+            <x-input-label for="birth_date" :value="__('Birth Date')" />
+            <x-text-input id="birth_date" class="block mt-1 w-full" type="date" name="birth_date" :value="old('birth_date')" required autocomplete="birth_date" />
+            <x-input-error :messages="$errors->get('birth_date')" class="mt-2" />
+        </div>
+
+        <!-- Phone Number -->
+        <div class="mt-4">
+            <x-input-label for="phone" :value="__('Phone Number')" />
+            <x-text-input id="phone" class="block mt-1 w-full" type="tel" name="phone" :value="old('phone')" required autocomplete="phone" />
+            <x-input-error :messages="$errors->get('phone')" class="mt-2" />
         </div>
 
         <!-- Email Address -->

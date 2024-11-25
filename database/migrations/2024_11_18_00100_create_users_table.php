@@ -29,8 +29,13 @@ return new class extends Migration
         });
 
         Schema::table('users', function (Blueprint $table) {
-            $table->foreignIdFor(BankDetails::class)->constrained();
-            $table->foreignIdFor(UserRole::class)->constrained();
+            $bank = $table->foreignIdFor(BankDetails::class);
+            $bank->constrained();
+            $bank->nullable();
+
+            $role = $table->foreignIdFor(UserRole::class);
+            $role->constrained();
+            $role->default(0);
         });
 
         Schema::create('password_reset_tokens', function (Blueprint $table) {
