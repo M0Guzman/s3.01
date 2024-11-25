@@ -1,11 +1,12 @@
 <?php
-
+ 
 namespace App\Http\Controllers;
-
+ 
 use Illuminate\Http\Request;
-
+ 
 class SejourController extends Controller
 {
+ 
     public function rechercherSejours(Request $request)
     {
         $idcatvignoble = $request->input('idcatvignoble');
@@ -28,6 +29,8 @@ class SejourController extends Controller
             })
             ->get();
  
-        return response()->json($sejours);
+            return view('travels', ['sejours' => $sejours]);
     }
+ 
+ 
 }
