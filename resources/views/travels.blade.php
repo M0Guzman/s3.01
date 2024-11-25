@@ -103,36 +103,38 @@
     </div>
   </div>
 
-  <section class="sejour">            
-                <div id="num1">
-                    <br>
-                    <p> image avec etiquette pour le prix</p>
-                    <p>Titre sejour</p>                                        
-                    <p id="vignoble">Quel vignoble</p> <p id="avis">moyenne avis avec etoiles</p>
-                    <p id="description">Debut desc sejour</p>
-                    <p id="jours">nb jours</p> 
-                    <a href="#"><button> Decouvrir l'offre</button></a>
-                </div>
-                <div id="num1">
-                    <br>
-                    <p> image avec etiquette pour le prix</p>
-                    <p>Titre sejour</p>                    
-                    <p id="vignoble">Quel vignoble</p> <p id="avis">moyenne avis avec etoiles</p>
-                    <p id="description">Debut desc sejour</p>
-                    <p id="jours">nb jours</p> 
-                    <a href="#"><button> Decouvrir l'offre</button></a>
-                </div>
-                <div id="num1">
-                    <br>
-                    <p> image avec etiquette pour le prix</p>
-                    <p>Titre sejour</p>                    
-                    <p id="vignoble">Quel vignoble</p> <p id="avis">moyenne avis avec etoiles</p>
-                    <p id="description">Debut desc sejour</p>
-                    <p id="jours">nb jours</p> 
-                    <a href="#"><button> Decouvrir l'offre</button></a>
-                </div>
-            
-        </section>
+  <section class="sejour">
+    
+    
+    <div id="num1">
+        <br>
+        <p> image avec etiquette pour le prix</p>
+        <p>Titre sejour</p>                                        
+        <p id="vignoble">Quel vignoble</p> <p id="avis">moyenne avis avec etoiles</p>
+        <p id="description">Debut desc sejour</p>
+        <p id="jours">nb jours</p> 
+        <a href="#"><button> Decouvrir l'offre</button></a>
+    </div>
+    <div id="num1">
+        <br>
+        <p> image avec etiquette pour le prix</p>
+        <p>Titre sejour</p>                    
+        <p id="vignoble">Quel vignoble</p> <p id="avis">moyenne avis avec etoiles</p>
+        <p id="description">Debut desc sejour</p>
+        <p id="jours">nb jours</p> 
+        <a href="#"><button> Decouvrir l'offre</button></a>
+    </div>
+    <div id="num1">
+        <br>
+        <p> image avec etiquette pour le prix</p>
+        <p>Titre sejour</p>                    
+        <p id="vignoble">Quel vignoble</p> <p id="avis">moyenne avis avec etoiles</p>
+        <p id="description">Debut desc sejour</p>
+        <p id="jours">nb jours</p> 
+        <a href="#"><button> Decouvrir l'offre</button></a>
+    </div>
+      
+  </section>
 
 
   @vite(['resources/js/app.js'])
