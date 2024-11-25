@@ -1,44 +1,52 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vinotrip - Séjours œnologiques</title>
-    @vite(['resources/scss/app.scss'])
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Filtres Séjours Œnologiques</title>
+  @vite(['resources/scss/app.scss'])
 </head>
-<body>
-    <header class="header">
-        <div class="logo">
-            <!--<img src="./images/logo.png" alt="Vinotrip Logo">-->
-            <span>VINOTRIP</span>
+<header>
+        <!-- Bande supérieure -->
+        <div class="header-top">
+            <ul>
+                <li><a href="#">Bénéficiaire cadeau</a></li>
+                <li><a href="#">Contact</a></li>
+                <li><span>01 85 46 00 09</span></li>
+                <li><a href="#">Mon compte</a></li>
+                <li>
+                    <a href="#" class="panier">
+                        <span>Panier</span>
+                        <span class="panier-count">0</span>
+                    </a>
+                </li>
+            </ul>
         </div>
-        <nav class="navbar">
-            <a href="#">TOUS NOS SÉJOURS</a>
-            <a href="#">DESTINATIONS</a>
-            <a href="#">THÉMATIQUES</a>
-            <a href="#">COFFRET CADEAU</a>
-            <a href="#">PRÉPARER VOTRE SÉJOUR</a>
-        </nav>
-        <div class="header-right">
-            <a href="#">CONTACT</a>
-            <a href="#">01 85 46 00 09</a>
-            <a href="#" class="account">MON COMPTE</a>
-            <a href="#" class="cart">PANIER <span class="cart-count">0</span></a>
-            <div class="lang-switch">
-                <a href="#">FR</a> | <a href="#">EN</a>
+ 
+        <!-- Bande inférieure -->
+        <div class="header-bottom">
+            <div class="logo">
+                <img src="{{ Vite::asset('resources/images/logo.png') }}" alt="Logo VinoTrip">
+                <p>Créateurs de séjours œnotouristiques</p>
             </div>
+            <nav class="navigation">
+                <ul>
+                    <li><a href="#">Tous nos séjours</a></li>
+                    <li><a href="#">Destinations</a></li>
+                    <li><a href="#">Thématiques</a></li>
+                    <li><a href="#">Coffret cadeau</a></li>
+                    <li><a href="#">Préparer votre séjour</a></li>
+                </ul>
+            </nav>
         </div>
     </header>
 
-    <main>
-        <nav class="breadcrumb">
-            <a href="#">Accueil</a> &gt; <span> Séjours</span>
-        </nav>
-        <section class="content">
-            <h1>SÉJOURS ŒNOLOGIQUES</h1>
-            <h2>Comment choisir son séjour œnologique</h2>
-            <p>
-                Personnalisez votre séjour œnologique en 
+<body>
+    <br>
+  <div class="filters-container">
+    <h1>Séjours Œnologiques</h1>
+    <br>
+    <p> Personnalisez votre séjour œnologique en 
                 fonction de vos envies ! Séjourner au 
                 Château dans le Bordelais, réaliser 
                 votre propre cuvée en Champagne, découvrir 
@@ -49,34 +57,53 @@
                 Proposés par thématique – bien-être, gastronomie,
                  culture ou sport – nos week-ends œnologiques 
                  sont élaborés pour permettre à tous les publics, 
-                 de l’amateur au néophyte, de trouver leur bonheur.
-            </p>
+                 de l’amateur au néophyte, de trouver leur bonheur.</p>
+    <div class="filters">
+      <select id="vignoble" name="vignoble">
+        <option value="" selected>Quel vignoble ?</option>
+        <option value="Alsace">Alsace</option>
+        <option value="Beaujolais">Beaujolais</option>
+        <option value="Bordeaux">Bordeaux</option>
+        <option value="bourgogne">Bourgogne</option>
+        <option value="Catalogne">Catalogne</option>
+        <option value="Champagne">Champagne</option>
+        <option value="Jura">Jura</option>
+        <option value="Languedoc-roussilon">Languedoc-roussilon</option>
+        <option value="Paris">Paris</option>
+        <option value="Provence">Provence</option>
+        <option value="Savoie">Savoie</option>
+        <option value="Sud-ouest">Sud-ouest</option>
+        <option value="Val de loire">Val de loire</option>
+        <option value="Vallée du rhône">Vallée du rhône</option>
+      </select>
+      <select id="duree" name="duree">
+        <option value=""  selected>Durée ?</option>
+        <option value="1/2">Demi-journée</option>
+        <option value="1">1 jour</option>
+        <option value="2">2 jour / 1 nuit</option>
+        <option value="3">3 jours / 2 nuits</option>
+      </select>
+      <select id="pour-qui" name="pour-qui">
+        <option value="" selected>Pour qui ?</option>
+        <option value="couple">Couple</option>
+        <option value="famille">Famille</option>
+        <option value="Amis">Amis</option>
+      </select>
+      <select id="envie" name="envie">
+        <option value="" selected>Une envie particulière ?</option>
         
-        </section>
-        <section class="filtre">
-            <div id="filtreI">
-                Quel Vignoble? <!--menu defilant -->
-            </div>
-            <div id="filtreI">
-                Durée? <!--menu defilant -->
-            </div>
-            <div id="filtreI">
-                Pour Qui? <!--menu defilant -->
-            </div>
-            <div id="filtreI">
-                Une Envie Particuliere? <!--menu defilant -->
-            </div>
-            <button id="filtreB">
-                recherche
-            </button>
-        </section>
-        
-            <div id="trier_prix">
-                <p>Trier par</p> <!--menu defilant (du + cher au - cher ou du - cher au + cher--> 
-            </div>
-        
-        <br>
-        <section class="sejour">            
+        <option value="bien-etre">Bien-être</option>
+        <option value="gastronomie">Gastronomie</option>
+        <option value="culture">Culture</option>
+        <option value="Golf">Golf</option>
+        <option value="Bio">Bio</option>
+        <option value="Insolite">Insolite</option>
+      </select>
+      <button id="search-button">Rechercher</button>
+    </div>
+  </div>
+
+  <section class="sejour">            
                 <div id="num1">
                     <br>
                     <p> image avec etiquette pour le prix</p>
@@ -84,6 +111,7 @@
                     <p id="vignoble">Quel vignoble</p> <p id="avis">moyenne avis avec etoiles</p>
                     <p id="description">Debut desc sejour</p>
                     <p id="jours">nb jours</p> 
+                    <a href="#"><button> Decouvrir l'offre</button></a>
                 </div>
                 <div id="num1">
                     <br>
@@ -92,6 +120,7 @@
                     <p id="vignoble">Quel vignoble</p> <p id="avis">moyenne avis avec etoiles</p>
                     <p id="description">Debut desc sejour</p>
                     <p id="jours">nb jours</p> 
+                    <a href="#"><button> Decouvrir l'offre</button></a>
                 </div>
                 <div id="num1">
                     <br>
@@ -100,9 +129,12 @@
                     <p id="vignoble">Quel vignoble</p> <p id="avis">moyenne avis avec etoiles</p>
                     <p id="description">Debut desc sejour</p>
                     <p id="jours">nb jours</p> 
+                    <a href="#"><button> Decouvrir l'offre</button></a>
                 </div>
             
         </section>
-    </main>
+
+
+  @vite(['resources/js/app.js'])
 </body>
 </html>

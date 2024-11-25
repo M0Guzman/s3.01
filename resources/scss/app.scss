@@ -1,56 +1,184 @@
+
 body {
-    background-color: $text;
-}
-
-.navbar{
-    //display: flex;
-    text-align: left;
-}
-
-.header-right{
-    display: flex;
-    text-align: left;
-}
-
-.lang-switch{
-    text-align: right;
-
-}
-
-#num1{
-    border: 2px solid black;
-    display: inline-block;
-    width: 200px;
-}
-
-.filtre{
-    display: flex;
-    flex-direction: row;
-    background-color: rgb(107, 107, 107);
-    position: sticky;
-    height: 100px;
+    font-family: Arial, sans-serif;
+    background-color: #f8f8f8;
+    margin: 0;
+    padding: 20px;
+  }
+  
+  .filters-container {
+    max-width: 800px;
+    margin: 0 auto;
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .filters-container h1 {
+    font-size: 24px;
+    margin-bottom: 10px;
+    text-align: center;
     
+  }
+  
+  p {
+    margin-bottom: 20px;
+    color: #666;
+  }
+  
+  .filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  
+    select, button {
+      flex: 1 1 calc(25% - 10px);
+      padding: 10px;
+      font-size: 14px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      background: #fff;
+      cursor: pointer;
+  
+      &:hover {
+        border-color: #888;
+      }
+  
+      &:focus {
+        outline: none;
+        border-color: #c70039;
+      }
+    }
+  
+    button {
+      background-color: #c70039;
+      color: white;
+      border: none;
+  
+      &:hover {
+        background-color: #a5002f;
+      }
+    }
+  }
+  
+  // Variables de couleur
+$dark-brown: #3c2c28;
+$light-gray: #f7f6f5;
+$mauve: #7b2b80;
+$hot-pink: #f50057;
+$white: #ffffff;
+ 
+// Global styles
+header {
+    font-family: Arial, sans-serif;
+}
+ 
+// Bande supérieure
+.header-top {
+    background-color: $dark-brown;
+    color: $white;
+    padding: 10px 20px;
+ 
+    ul {
+        list-style: none;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        margin: 0;
+        padding: 0;
+ 
+        li {
+            margin: 0 15px;
+ 
+            a, span {
+                color: $white;
+                text-decoration: none;
+                font-size: 0.9rem;
+            }
+        }
+ 
+        .panier {
+            background-color: $hot-pink;
+            color: $white;
+            padding: 5px 10px;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+ 
+            .panier-count {
+                background-color: $white;
+                color: $hot-pink;
+                font-weight: bold;
+                padding: 2px 5px;
+                border-radius: 50%;
+            }
+        }
+    }
+}
+ 
+// Bande inférieure
+.header-bottom {
+    background-color: $light-gray;
+    padding: 15px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+ 
+    .logo {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+ 
+        img {
+            max-height: 50px;
+            margin-bottom: 5px;
+        }
+ 
+        p {
+            font-size: 0.8rem;
+            color: $mauve;
+            margin: 0;
+        }
+    }
+ 
+    .navigation {
+        ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            margin: 0;
+            padding: 0;
+ 
+            li {
+                margin: 0 15px;
+ 
+                a {
+                    color: $mauve;
+                    text-decoration: none;
+                    font-weight: bold;
+                    font-size: 1rem;
+                }
+            }
+        }
+    }
 }
 
-.filtre #filtreI{
-    border: 1px solid black;
-    display: inline-block;
-    width: 100px;
-    height: 50px;
-    margin: 15px;
-}
+  .sejour{
+    display: flex;
+    flex-direction:row;
+    align-items: center;
+    justify-content: center;
+    
+    
 
-.filtre #filtreB{
-    border: 1px solid black;
-    height: 50px;
-    margin: 15px;
-    width:50px;
-    background-color: rgb(255, 0, 170);
-}
-
-#trier_prix{
-    border: 2px solid black;
-    text-align: right;
-    margin: 0px;
-    padding: 0px;
-}
+    & #num1{
+        border: 2px solid black;
+        margin: 10px;
+        padding: 10px;
+        text-align: center;
+    }
+  }
+  
