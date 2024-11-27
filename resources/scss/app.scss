@@ -32,23 +32,27 @@ body {
     flex-wrap: wrap;
     gap: 10px;
   
-    select, button {
+    select, #submit {
       flex: 1 1 calc(25% - 10px);
       padding: 10px;
       font-size: 14px;
       border: 1px solid #ccc;
       border-radius: 4px;
-      background: #fff;
+      background-color: #fff;
       cursor: pointer;
   
       &:hover {
         border-color: #888;
+        
       }
   
       &:focus {
         outline: none;
         border-color: #c70039;
       }
+    }
+    #submit{
+      background-color: #a903af
     }
   
     button {
