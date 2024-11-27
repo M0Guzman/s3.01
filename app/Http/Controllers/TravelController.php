@@ -14,19 +14,46 @@ class TravelController extends Controller
     public function show(Request $request)
     {
         $sejours = array();
-
-        if ($request->has('idcatvignoble')) {
-            $idcatvignoble = $request->input('idcatvignoble');
-            $nbjours = $request->input('nbjours');
-            $idcatparticipant = $request->input('idcatparticipant');
-            $idtheme = $request->input('idtheme');
+        //dd($request);
+        if ($request->has('vignoble') || $request->has('duree') || $request->has('pour-qui') || $request->has('envie')) {
+            
+            $travels = Travel::all();
+            
+            //$caDays = Travel::where('name','=',$days)->first();
+            //$caParticipant = ParticipantCategory::where('name','=',$idcatParticipant)->first();
+            //$caTravel = TravelCategory::where('name','=',$idcatTravel)->first();
+            
+            if($request->has('vignoble') && $request->input('vignoble') != null)
+            {
+                $cavignoble = VineyardCategory::where('name', '=', $request->input('vignoble'))->first();
+                $travels = $travels->where('vineyard_category_id', '=', $cavignoble->id);
+            }
+            if($request->has('duree') && $request->input('duree') != null)
+            {           
+                $caDays = Travel::where('name','=',$request->input('duree'))->first();
+                $travels = $travels->where('days','=', $caDays->id);
+                
+            }
+            if($request->has('pour-qui') && $request->input('pour-qui') != null)
+            {           
+                $caParticipant = Travel::where('name','=',$request->input('pour-qui'))->first();
+                $travels = $travels->where('participant_category_id','=',$caParticipant->id);
+            }
+            if($request->has('envie') && $request->input('envie') != null)
+            {           
+                $caTravel = Travel::where('name','=',$request->input('envie'))->first();
+                $travels = $travels->where('travel_category','=',$caTravel->id);
+            }
     
-            $sejours = Travel::where([
-                [VineyardCategory::class, '=', $idcatvignoble],
-                [Travel::class,'=',$nbjours],
-                [ParticipantCategory::class,'=', $idcatparticipant],
-                [TravelCategory::class,'=', $idtheme]            
-            ]);
+            
+            
+
+            //->take(10)
+            //->get();
+            
+            
+                
+
         } else {
             $sejours = Travel::all();
         }
