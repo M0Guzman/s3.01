@@ -2,17 +2,19 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Fouladgar\MobileVerification\Contracts\MustVerifyMobile as IMustVerifyMobile;
+use Fouladgar\MobileVerification\Concerns\MustVerifyMobile;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
-class User extends Authenticatable
+class User extends Authenticatable implements MustVerifyEmail, IMustVerifyMobile
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
-    use HasFactory, Notifiable;
+    use HasFactory, Notifiable, MustVerifyMobile;
 
 
     /**
@@ -21,13 +23,13 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'firt_name',
+        'first_name',
         'last_name',
         'gender',
         'email',
         'birth_date',
-        'phone',
-        'password'
+        'mobile',
+        'password',
     ];
 
     /**

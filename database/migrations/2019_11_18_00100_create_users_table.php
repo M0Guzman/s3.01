@@ -19,9 +19,10 @@ return new class extends Migration
             $table->string('last_name');
             $table->char('gender');
             $table->date('birth_date');
-            $table->string('phone');
+            //$table->string('mobile');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
+            //$table->timestamp('mobile_verified_at')->nullable();
             $table->string('password');
 
             $table->rememberToken();
@@ -29,8 +30,13 @@ return new class extends Migration
         });
 
         Schema::table('users', function (Blueprint $table) {
-            $table->foreignIdFor(BankDetails::class)->constrained();
-            $table->foreignIdFor(UserRole::class)->constrained();
+            $bank = $table->foreignIdFor(BankDetails::class);
+            $bank->constrained();
+            $bank->nullable();
+
+            $role = $table->foreignIdFor(UserRole::class);
+            $role->constrained();
+            $role->default(0);
         });
 
         Schema::create('password_reset_tokens', function (Blueprint $table) {
