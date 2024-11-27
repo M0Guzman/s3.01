@@ -10,12 +10,12 @@
         <!-- Bande supérieure -->
         <div class="header-top">
             <ul>
-                <li><a href="#">Bénéficiaire cadeau</a></li>
-                <li><a href="#">Contact</a></li>
+                <li><a href="">Bénéficiaire cadeau</a></li>
+                <li><a href="">Contact</a></li>
                 <li><span>01 85 46 00 09</span></li>
-                <li><a href="#">Mon compte</a></li>
+                <li><a href="">Mon compte</a></li>
                 <li>
-                    <a href="#" class="panier">
+                    <a href="" class="panier">
                         <span>Panier</span>
                         <span class="panier-count">0</span>
                     </a>
@@ -31,11 +31,11 @@
             </div>
             <nav class="navigation">
                 <ul>
-                    <li><a href="#">Tous nos séjours</a></li>
-                    <li><a href="#">Destinations</a></li>
-                    <li><a href="#">Thématiques</a></li>
-                    <li><a href="#">Coffret cadeau</a></li>
-                    <li><a href="#">Préparer votre séjour</a></li>
+                    <li><a href="">Tous nos séjours</a></li>
+                    <li><a href="">Destinations</a></li>
+                    <li><a href="">Thématiques</a></li>
+                    <li><a href="">Coffret cadeau</a></li>
+                    <li><a href="">Préparer votre séjour</a></li>
                 </ul>
             </nav>
         </div>
@@ -105,61 +105,31 @@
 
   <section class="sejour">
     
-  @if($sejours->isEmpty())
-      <p>Aucun séjour ne correspond à vos critères.</p>
-    @else
+    @if($sejours->isEmpty())
+        <p>Aucun séjour ne correspond à vos critères.</p>
+      @else
 
-    <table border="1">
-      <thead>
-        <tr>
-          <th>ID</th>
-          <th>Titre</th>
-          <th>Description</th>
-          <th>Prix</th>
-          <th>Nombre de jours</th>
-        </tr>
-      </thead>
-      <tbody> 
+        
+
         @foreach ($sejours as $sejour)
-          <tr>
-            <td>{{ $sejour->idsejour }}</td>
-            <td>{{ $sejour->titresejour }}</td>
-            <td>{{ $sejour->descsejour }}</td>
-            <td>{{ $sejour->prixparpersonne }}</td>
-            <td>{{ $sejour->nbjours }}</td>
-          </tr>
+          
+          <div id="num1">
+              <br>
+              <p id="image"> image avec etiquette pour le prix</p>
+              <p id="title">{{ mb_substr($sejour->title,0,50,'UTF-8') }}</p>                                        
+              <p id="vignoble">{{ mb_substr($sejour->vineyard_category->name,0,50,'UTF-8') }} moyenne avis avec etoiles</p>
+              <p id="description">{{ mb_substr($sejour->description,0,50,'UTF-8') }}</p>
+              <p id="jours">{{ $sejour->days }} @if( $sejour->days >1)jours 
+                @else 
+                jour
+                @endif
+              </p>
+          
+              <a href="#"><button> Decouvrir l'offre</button></a>
+          </div>
         @endforeach
-      </tbody>
-    </table> 
     @endif
-    <div id="num1">
-        <br>
-        <p> image avec etiquette pour le prix</p>
-        <p>Titre sejour</p>                                        
-        <p id="vignoble">Quel vignoble</p> <p id="avis">moyenne avis avec etoiles</p>
-        <p id="description">Debut desc sejour</p>
-        <p id="jours">nb jours</p> 
-        <a href="#"><button> Decouvrir l'offre</button></a>
-    </div>
-    <div id="num1">
-        <br>
-        <p> image avec etiquette pour le prix</p>
-        <p>Titre sejour</p>                    
-        <p id="vignoble">Quel vignoble</p> <p id="avis">moyenne avis avec etoiles</p>
-        <p id="description">Debut desc sejour</p>
-        <p id="jours">nb jours</p> 
-        <a href="#"><button> Decouvrir l'offre</button></a>
-    </div>
-    <div id="num1">
-        <br>
-        <p> image avec etiquette pour le prix</p>
-        <p>Titre sejour</p>                    
-        <p id="vignoble">Quel vignoble</p> <p id="avis">moyenne avis avec etoiles</p>
-        <p id="description">Debut desc sejour</p>
-        <p id="jours">nb jours</p> 
-        <a href="#"><button> Decouvrir l'offre</button></a>
-    </div>
-      
+   
   </section>
 
 

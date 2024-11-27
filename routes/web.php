@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\TravelController;
+
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,9 +20,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/travels', function () {
-    return view('travels');
-});
+Route::get('/travels', [TravelController::class, 'show'])->name('travels.show');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
