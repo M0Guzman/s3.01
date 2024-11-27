@@ -62,7 +62,7 @@
                  de l’amateur au néophyte, de trouver leur bonheur.</p>
     <form class="filters" action="#">
       @csrf
-      <select id="vignoble" name="vignoble">
+      <select id="vignoble" name="vignoble"> <!-- mettre les valeur select avec la base de donnée-->
         <option value="" selected>Quel vignoble ?</option>
         <option value="Alsace">Alsace</option>
         <option value="Beaujolais">Beaujolais</option>
