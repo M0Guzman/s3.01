@@ -22,11 +22,4 @@ document.getElementById('search-button').addEventListener('click', () => {
     //alert(`Recherche effectuée avec les critères : \nVignoble : ${vignoble}\nDurée : ${duree}\nPour qui : ${pourQui}\nEnvie : ${envie}`);
   });
 
-  // Exemple d'incrémentation du panier
-document.querySelector('.panier').addEventListener('click', () => {
-    const panierCount = document.querySelector('.panier-count');
-    let currentCount = parseInt(panierCount.textContent);
-    panierCount.textContent = currentCount + 1; // Ajoute 1 au compteur
-  });
-  
   
