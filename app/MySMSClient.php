@@ -2,15 +2,13 @@
 
 namespace App;
 
+use App\Mail\OTPCode;
 use Fouladgar\MobileVerification\Contracts\SMSClient;
 use Fouladgar\MobileVerification\Notifications\Messages\Payload;
-use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Mail;
 
 class MySMSClient implements SMSClient
 {
-    protected $SMSService;
-
-
     /**
      * @param Payload $payload
      *
@@ -18,20 +16,6 @@ class MySMSClient implements SMSClient
      */
     public function sendMessage(Payload $payload):mixed
     {
-        // preparing SMSService
-
-        if(!isset($this->SMSService)) {
-        }
-
-        $res = Http::post("https://textbelt.com/text", [
-            'phone' => $payload->getTo(),
-            'message' =>  "You verification code for Vino: " . $payload->getToken(),
-            'key' => '85d3a9f6e45beaeff0e86583c357b37f34e29e4aU78PdzOIB6ohLqrE0nmDInDD8'
-        ]);
-
-        info($res);
-        return $res;
+        return Mail::to($payload->getTo())->send(new OTPCode($payload->getToken()));
     }
-
-    // ...
 }
