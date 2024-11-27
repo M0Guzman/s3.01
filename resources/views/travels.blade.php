@@ -105,7 +105,33 @@
 
   <section class="sejour">
     
-    
+  @if($sejours->isEmpty())
+      <p>Aucun séjour ne correspond à vos critères.</p>
+    @else
+
+    <table border="1">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Titre</th>
+          <th>Description</th>
+          <th>Prix</th>
+          <th>Nombre de jours</th>
+        </tr>
+      </thead>
+      <tbody> 
+        @foreach ($sejours as $sejour)
+          <tr>
+            <td>{{ $sejour->idsejour }}</td>
+            <td>{{ $sejour->titresejour }}</td>
+            <td>{{ $sejour->descsejour }}</td>
+            <td>{{ $sejour->prixparpersonne }}</td>
+            <td>{{ $sejour->nbjours }}</td>
+          </tr>
+        @endforeach
+      </tbody>
+    </table> 
+    @endif
     <div id="num1">
         <br>
         <p> image avec etiquette pour le prix</p>
