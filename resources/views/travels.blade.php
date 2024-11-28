@@ -12,7 +12,7 @@
             <ul>
                 <li><a href="">Bénéficiaire cadeau</a></li>
                 <li><a href="">Contact</a></li>
-                <li><span>01 85 46 00 09</span></li>
+                <li><span>07 66 43 39 18</span></li>
                 <li><a href="">Mon compte</a></li>
                 <li>
                     <a href="" class="panier">
