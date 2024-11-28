@@ -93,7 +93,6 @@ header {
 
             li {
                 position: relative;
-    
                 a {
                     color: $mauve;
                     text-decoration: none;
@@ -108,16 +107,14 @@ header {
                     background-color: $light-gray;
                     padding: 10px 0;
                     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    
-                    li {
-                        padding: 10px 20px;
-    
+                    
+                    li {    
                         a:hover {
                             color: $hot-pink;
                         }
                     }
                 }
-    
+                
                 &:hover .menu-dropdown {
                     display: block;
                 }
@@ -175,15 +172,4 @@ main {
     .reviews {
         text-align: right;
     }
-}
-
-.container {
-    display: flex;
-    width: 100%;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    align-content: center;
-    flex-direction: row;
-    margin: 15vw;
 }
