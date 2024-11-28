@@ -16,19 +16,15 @@ class TravelController extends Controller
     {
         
         //dd($request);
-        
-        $avis = Review::where('travel_id','=',Travel::all('id'));
-        $moyenneAvis = $avis->avg(Review::all('rating')->where($avis,'=',Review::where('travel_id','=',$avis)));
-        array_push($moyenneAvis, ['travel_id', '=', $avis->id]);
-        
-
-        $sejours = array();
+        $travels = [];
         //dd($request);
-        if ($request->has('vignoble') || $request->has('duree') || $request->has('pour-qui') || $request->has('envie')) {
+
+        if (
+            $request->has('vignoble') &&   $request->input('vignoble') != ''|| 
+            $request->has('duree') &&  $request->input('duree') != '' ||
+            $request->has('pour-qui') &&   $request->input('pour-qui') != '' ||
+            $request->has('envie') && $request->input('envie') != '') {
             $wheres = [];
-
-
-            
             
             if($request->has('vignoble') && $request->input('vignoble') != '')
             {
@@ -36,27 +32,25 @@ class TravelController extends Controller
                 //$travels = $travels->where('vineyard_category_id', '=', $cavignoble->id);
                 array_push($wheres, ['vineyard_category_id', '=', $cavignoble->id]);
             }
-            if($request->has('duree') && $request->input('duree') != null)
+            if($request->has('duree') && $request->input('duree') != '')
             {   
                 //$travels = $travels->where('days','=', $request->input('duree'));
                 array_push($wheres, ['days', '=', $request->input('duree')]);
 
             }
-            if($request->has('pour-qui') && $request->input('pour-qui') != null)
+            if($request->has('pour-qui') && $request->input('pour-qui') != '')
             {           
                 $caParticipant = ParticipantCategory::where('name','=',$request->input('pour-qui'))->first();
                 //$travels = $travels->where('participant_category_id','=',$caParticipant->id);
                 array_push($wheres, ['participant_category_id', '=', $caParticipant->id]);
 
             }
-            if($request->has('envie') && $request->input('envie') != null)
+            if($request->has('envie') && $request->input('envie') != '')
             {           
                 $caTravel = TravelCategory::where('name','=',$request->input('envie'))->first();
                 //$travels = $travels->where('travel_category','=',$caTravel->id);
                 array_push($wheres, ['travel_category_id', '=', $caTravel->id]); //erreur array_push() does not accept unknown named parameters
             }
-    
-            $travels = null;
 
             foreach($wheres as $where) {
                 if($travels == null) {
@@ -66,7 +60,17 @@ class TravelController extends Controller
                 }
             }
 
-            $travels = $travels->get();
+         /*   $avis = Review::where('travel_id','=',Travel::all('id'));
+            $moyenneAvis = $avis->avg(Review::all('rating')->where($avis,'=',Review::where('travel_id','=',$avis)));
+            array_push($moyenneAvis, ['travel_id', '=', $avis->id]);*/
+
+            if($travels != null) {
+            $travels->leftJoin('reviews', 'reviews.travel_id', '=', 'travels.id')->avg('rating');
+            $travels = $travels->get(['travels.*', 'rating']);
+            }
+            
+
+    
             
 
             //->take(10)
@@ -76,7 +80,10 @@ class TravelController extends Controller
                 
 
         } else {
-            $travels = Travel::all();
+            $travels = Travel::take(10);
+            $travels->leftJoin('reviews', 'reviews.travel_id', '=', 'travels.id')->avg('rating');
+
+            $travels = $travels->get(['travels.*', 'rating']);
         }
  
             return view('travels', ['sejours' => $travels]);
