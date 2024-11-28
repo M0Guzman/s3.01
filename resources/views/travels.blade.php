@@ -108,7 +108,7 @@
 
   <section class="sejour">
     
-    @if($sejours->isEmpty())
+    @if(count($sejours) == 0)
         <p>Aucun séjour ne correspond à vos critères.</p>
     @else
 
@@ -118,16 +118,17 @@
         
         <div id="num1">
             <br>
+            
             <p id="image"> image avec etiquette pour le prix</p>
             <p id="title">{{ mb_substr($sejour->title,0,50,'UTF-8') }}</p>                                        
-            <p id="vignoble">{{ mb_substr($sejour->vineyard_category->name,0,50,'UTF-8') }} moyenne avis avec etoiles</p>
+            <p id="vignoble">{{ mb_substr($sejour->vineyard_category->name,0,50,'UTF-8') }} {{ $sejour->rating }} étoiles</p>
             <p id="description">{{ mb_substr($sejour->description,0,50,'UTF-8') }}</p>
             <p id="jours">{{ $sejour->days }} @if( $sejour->days >1)jours 
               @else 
               jour
               @endif
             </p>
-        
+          
             <a href="#"><button> Decouvrir l'offre</button></a>
         </div>
       @endforeach
