@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
  
 use App\Models\ParticipantCategory;
+use App\Models\Review;
 use Illuminate\Http\Request;
 use App\Models\Travel;
 use App\Models\TravelCategory;
@@ -13,6 +14,14 @@ class TravelController extends Controller
  
     public function show(Request $request)
     {
+        
+        //dd($request);
+        
+        $avis = Review::where('travel_id','=',Travel::all('id'));
+        $moyenneAvis = $avis->avg(Review::all('rating')->where($avis,'=',Review::where('travel_id','=',$avis)));
+        array_push($moyenneAvis, ['travel_id', '=', $avis->id]);
+        
+
         $sejours = array();
         //dd($request);
         if ($request->has('vignoble') || $request->has('duree') || $request->has('pour-qui') || $request->has('envie')) {
