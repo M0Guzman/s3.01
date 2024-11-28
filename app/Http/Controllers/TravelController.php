@@ -44,7 +44,7 @@ class TravelController extends Controller
             {           
                 $caTravel = TravelCategory::where('name','=',$request->input('envie'))->first();
                 //$travels = $travels->where('travel_category','=',$caTravel->id);
-                array_push($wheres, ['travel_category', '=', $caTravel->id]); //erreur array_push() does not accept unknown named parameters
+                array_push($wheres, ['travel_category_id', '=', $caTravel->id]); //erreur array_push() does not accept unknown named parameters
             }
     
             $travels = null;
