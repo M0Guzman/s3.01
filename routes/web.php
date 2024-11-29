@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\FileController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Middleware\FullyVerified;
 use Illuminate\Support\Facades\Route;
@@ -28,5 +29,7 @@ Route::middleware(['auth', FullyVerified::class])->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+
+Route::get('/file/{id}', [FileController::class, 'get_file'])->name('file');
 
 require __DIR__.'/auth.php';
