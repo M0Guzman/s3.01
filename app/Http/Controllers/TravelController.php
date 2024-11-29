@@ -82,7 +82,7 @@ class TravelController extends Controller
 
         } else {
             $page = $page +1;
-            $travels = Travel::take(10)->offset($page * 10);
+            $travels = Travel::take(100);//->offset($page * 10);
             $travels->leftJoin('reviews', 'reviews.travel_id', '=', 'travels.id')->avg('rating');
 
             $travels = $travels->get(['travels.*', 'rating']);
