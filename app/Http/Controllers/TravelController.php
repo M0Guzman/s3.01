@@ -17,6 +17,7 @@ class TravelController extends Controller
         
         //dd($request);
         $travels = [];
+        $page = 0;
         //dd($request);
 
         if (
@@ -80,7 +81,8 @@ class TravelController extends Controller
                 
 
         } else {
-            $travels = Travel::take(10);
+            $page = $page +1;
+            $travels = Travel::take(10)->offset($page * 10);
             $travels->leftJoin('reviews', 'reviews.travel_id', '=', 'travels.id')->avg('rating');
 
             $travels = $travels->get(['travels.*', 'rating']);
