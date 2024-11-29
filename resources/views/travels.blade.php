@@ -119,7 +119,7 @@
         <div id="num1">
             <br>
             
-            <p id="image"> image avec etiquette pour le prix</p>
+            <img id="image"> {{ $sejour->ressources[0]->filename }}</img>
             <p id="title">{{ mb_substr($sejour->title,0,50,'UTF-8') }}</p>                                        
             <p id="vignoble">{{ mb_substr($sejour->vineyard_category->name,0,50,'UTF-8') }} @if( $sejour->rating != '') {{ $sejour->rating }} étoiles @endif</p>
             <p id="description">{{ mb_substr($sejour->description,0,50,'UTF-8') }}</p>

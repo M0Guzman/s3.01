@@ -4,11 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Travel extends Model
 {
-    public $table = "travels";
     public function wine_road(): BelongsTo
     {
         return $this->belongsTo(WineRoad::class);
@@ -32,5 +32,10 @@ class Travel extends Model
     public function participant_category(): BelongsTo
     {
         return $this->belongsTo(ParticipantCategory::class);
+    }
+
+    public function ressources(): BelongsToMany
+    {
+        return $this->belongsToMany(Ressource::class, 'travel_has_resources');
     }
 }

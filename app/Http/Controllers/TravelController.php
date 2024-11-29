@@ -9,6 +9,7 @@ use App\Models\Travel;
 use App\Models\TravelCategory;
 use App\Models\VineyardCategory;
 use App\Models\TravelHasResource;
+use App\Models\Ressource;
  
 class TravelController extends Controller
 {
@@ -62,32 +63,25 @@ class TravelController extends Controller
                 }
             }
 
-         /*   $avis = Review::where('travel_id','=',Travel::all('id'));
-            $moyenneAvis = $avis->avg(Review::all('rating')->where($avis,'=',Review::where('travel_id','=',$avis)));
-            array_push($moyenneAvis, ['travel_id', '=', $avis->id]);*/
 
             if($travels != null) {
-            $travels->leftJoin('reviews', 'reviews.travel_id', '=', 'travels.id')->avg('rating');
-            $travels = $travels->get(['travels.*', 'rating']);
+            $travels->leftJoin('reviews', 'reviews.travel_id', '=', 'travel.id')->avg('rating');
+            $travels = $travels->get(['travel.*', 'rating']);
+            //$travels = $travels->get();
             }
             
-
-    
-            
-
             //->take(10)
             //->get();
-            
-            
-                
-
+                      
         } else {
             $page = $page +1;
-            $travels = Travel::take(100);//->offset($page * 10);
-            $travels->leftJoin('reviews', 'reviews.travel_id', '=', 'travels.id')->avg('rating');
+            $travels = Travel::take(1000);//->offset($page * 10);
+            $travels->leftJoin('reviews', 'reviews.travel_id', '=', 'travel.id')->avg('rating');
 
-            $travels = $travels->get(['travels.*', 'rating']);
+            $travels = $travels->get(['travel.*', 'rating']);
         }
+
+        
  
             return view('travels', ['sejours' => $travels]);
     }

@@ -1,7 +1,7 @@
 <?php
 
 use App\Models\Ressource;
-use App\Models\Travel;
+use App\Models\TravelStep;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -14,7 +14,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('travel_step_has_resources', function (Blueprint $table) {
-            $travel = $table->foreignIdFor(Travel::class);
+            $travel = $table->foreignIdFor(TravelStep::class);
             $travel->constrained();
 
             $resource = $table->foreignIdFor(Ressource::class);
