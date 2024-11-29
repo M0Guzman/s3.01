@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Models\Travel;
 use App\Models\TravelCategory;
 use App\Models\VineyardCategory;
+use App\Models\TravelHasResource;
  
 class TravelController extends Controller
 {
