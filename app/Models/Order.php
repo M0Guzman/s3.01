@@ -3,33 +3,38 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
-use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Order extends Model
 {
-    public function payment_type(): HasOne
+    public function payment_type(): BelongsTo
     {
-        return $this->hasOne(PaymentType::class);
+        return $this->belongsTo(PaymentType::class);
     }
 
-    public function ressource(): HasOne
+    public function ressource(): BelongsTo
     {
-        return $this->hasOne(Ressource::class);
+        return $this->belongsTo(Ressource::class);
     }
 
-    public function user(): HasOne
+    public function user(): BelongsTo
     {
-        return $this->hasOne(User::class);
+        return $this->belongsTo(User::class);
     }
 
-    public function coupon(): HasOne
+    public function coupon(): BelongsTo
     {
-        return $this->hasOne(Coupon::class);
+        return $this->belongsTo(Coupon::class);
     }
 
-    public function booking_orders(): BelongsToMany
+    public function booking_orders(): HasMany
     {
-        return $this->belongsToMany(BookingOrder::class);
+        return $this->hasMany(BookingOrder::class);
+    }
+
+    public function address(): BelongsTo
+    {
+        return $this->belongsTo(Address::class);
     }
 }

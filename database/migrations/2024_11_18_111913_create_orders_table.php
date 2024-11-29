@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Address;
 use App\Models\Coupon;
 use App\Models\PaymentType;
 use App\Models\Ressource;
@@ -21,6 +22,7 @@ return new class extends Migration
             $table->foreignIdFor(Ressource::class)->constrained();
             $table->foreignIdFor(User::class)->constrained();
             $table->foreignIdFor(Coupon::class)->constrained();
+            $table->foreignIdFor(Address::class)->constrained();
             $table->text('message');
             $table->string('state', 10);
         });
