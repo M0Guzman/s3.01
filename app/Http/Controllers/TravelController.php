@@ -63,8 +63,9 @@ class TravelController extends Controller
 
 
             if($travels != null) {
-            $travels->leftJoin('reviews', 'reviews.travel_id', '=', 'travel.id')->avg('rating');
-            $travels = $travels->get(['travel.*', 'rating']);
+            //$travels->leftJoin('reviews', 'reviews.travel_id', '=', 'travel.id')->avg('rating');
+            $travels->withAvg('reviews', 'rating');
+            $travels = $travels->get();
             
             }
             
@@ -72,7 +73,8 @@ class TravelController extends Controller
                       
         } else {
             $travels = Travel::take(1000);
-            $travels->leftJoin('reviews', 'reviews.travel_id', '=', 'travel.id')->avg('rating');
+            //$travels->leftJoin('reviews', 'reviews.travel_id', '=', 'travel.id')->avg('rating');
+            $travels->withAvg('reviews', 'rating');
 
             $travels = $travels->get(['travel.*', 'rating']);
         }
@@ -84,7 +86,9 @@ class TravelController extends Controller
     public function afficher($id)
     {
         $travel = Travel::where('id', $id)->first();
+        //$travel->leftJoin('reviews', 'reviews.travel_id', '=', 'travel.id');
 
+        
         $dateString = Carbon::now()->addMonths(18)->format('d-m-Y');
         return view('travel',['date'=>$dateString,'travel' => $travel]);
 

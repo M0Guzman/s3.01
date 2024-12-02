@@ -34,6 +34,15 @@
                         <span class="format">coffret (livraison sous 4 à 6 jours ouvrés)</span>
                     </p>
                 </div>
+                <div class="avis">
+                        @foreach ($travel->reviews as $review)
+                        
+                            <h3>{{ $review->title }}</h3>
+                            {{ $review->rating }} étoiles <br>
+                            {{ $review->description }}
+                        
+                        @endforeach                    
+                </div>
             </div>
         </div>
     </body>
