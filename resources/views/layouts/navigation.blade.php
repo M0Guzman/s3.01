@@ -5,10 +5,19 @@
                 <li><a href="#">Bénéficiaire cadeau</a></li>
                 <li><a href="#">Contact</a></li>
                 <li><span>07 66 69 71 18</span></li>
-                <li>
-                    <i class="fa-solid fa-child" style="color: #ffffff;"></i>
-                    <a href="#">Mon compte</a>
-                </li>
+                @if (Auth::check())
+                    <li>
+                        <i class="fa-solid fa-child" style="color: #ffffff;"></i>
+                        <a href="{{ route('profile.edit') }}">Mon compte</a>
+                    </li>
+                @else
+                    <li>
+                        <a href="{{ route('login') }}">Se connecter</a>
+                    </li>
+                    <li>
+                        <a href="{{ route('register') }}">s'enregistrer</a>
+                    </li>
+                @endif
                 <li>
                     <a href="#" class="panier">
                         <i class="fa-solid fa-cart-shopping" style="color: #ffffff;"></i>
@@ -21,19 +30,19 @@
 
         <!-- Bande inférieure -->
         <div class="header-bottom">
-            <div class="logo">
+            <a href="/" class="logo">
                 <img src="{{ Vite::asset('resources/images/logo.png') }}" alt="Logo VinoTrip">
                 <p>Créateurs de séjours œnotouristiques</p>
-            </div>
+            </a>
             <nav class="navigation">
                 <ul class="hList">
-                    <li><a href="#"><p class="menu-title">Tous nos séjours</p></a></li>
+                    <li><a href="{{ route('travels.show')}}"><p class="menu-title">Tous nos séjours</p></a></li>
                     <li class="menu">
                         <a href="#"><p class="menu-title">Destinations</p></a>
                         <ul class="menu-dropdown">
                         @foreach ($vinecats as $vinecat)
                             <li>
-                                <a>{{ substr($vinecat->name,0,50) }}</a>
+                                <a href="{{ route('travels.show', ['vignoble' => $vinecat->name]) }}">{{ substr($vinecat->name,0,50) }}</a>
                             </li>
                         @endforeach
                         </ul>
@@ -49,9 +58,7 @@
                     <li class="menu">
                         <a href="#"><p class="menu-title">Coffret cadeau</p></a>
                         <ul class="menu-dropdown">
-                            <li><a href="https://www.vinotrip.com/fr/sejours-oenologiques-alsace">Alsace</a></li>
-                            <li><a href="https://www.vinotrip.com/fr/sejours-oenologiques-bordeaux">Bordeaux</a></li>
-                            <li><a href="https://www.vinotrip.com/fr/sejours-oenologiques-champagne">Champagne</a></li>
+                            <li><a href="#">Inexistan</a></li>
                         </ul>
                     </li>
                     <li class="menu">

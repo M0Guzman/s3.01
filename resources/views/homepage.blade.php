@@ -1,22 +1,22 @@
 <x-app-layout>
-  
     
     <!-- Contenu principal -->
     <main class="main_destinations">
-        <h1>Nos destinations</h1>
+        <h1 class="text-center text-3xl">Nos destinations</h1>
     </main>
     
     <!-- Contenu principal -->
     <main class="main_coeur">
-        <h1>Séjours coups de coeur</h1>
+        <h1 class="text-center text-3xl">Séjours coups de coeur</h1>
     </main>
     
     <!-- Contenu principal -->
+     @vite(['resources/scss/app.scss'])
     <main class="main_avis">
-        <h1>Avis des voyageurs</h1>
+        <h1 class="text-center text-3xl">Avis des voyageurs</h1>
         @foreach ($travels_avis as $travel_avis)
         <!--{{ $travel_avis }} -->
-            <div class="avis_aficher">
+            <div class="avis_aficher mt-4">
                 <div class="name">
                     <a href="https://www.vinotrip.com/fr/sejours-oenologiques/12-week-end-oenologique-saint-emilion.html" 
                         title="Saint-Emilion - Séjour oenologique">
@@ -57,7 +57,5 @@
                 </div>
             </div>
         @endforeach
-        
-
     </main>
 </x-app-layout>

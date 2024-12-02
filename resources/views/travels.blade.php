@@ -22,9 +22,9 @@
         @csrf
         <select id="vignoble" name="vignoble"> <!-- mettre les valeur select avec la base de donnée-->
 
-          <option value="" selected>Vignoble</option>
+          <option value="" @selected($vignoble == "")>Vignoble</option>
           @foreach ($vinecats as $vinecat)
-            <option value="{{ $vinecat->name}}" @selected($vignoble == "{{ $vinecat->name}}")> {{ $vinecat->name}}</option>
+            <option value="{{ $vinecat->name}}" @selected($vignoble == $vinecat->name)> {{ $vinecat->name}}</option>
           @endforeach
         </select>
         <select id="duree" name="duree">
@@ -81,8 +81,6 @@
     @endif
    
   </section>
-
-
     @vite(['resources/js/app.js'])
   </section>
 </x-app-layout>

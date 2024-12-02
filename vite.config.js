@@ -13,7 +13,6 @@ export default defineConfig({
         laravel({
             input: [
                 'resources/css/test.css',
-                'resources/scss/app.scss',
                 'resources/js/app.js',
                 'resources/scss/app.scss',
                 'resources/scss/travel.scss',

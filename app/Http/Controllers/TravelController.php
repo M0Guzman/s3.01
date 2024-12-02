@@ -18,7 +18,6 @@ class TravelController extends Controller
  
     public function show(Request $request)
     {
-        $vineyardCategorys = VineyardCategory::all();
         $travels = [];
         if (
             $request->has('vignoble') &&   $request->input('vignoble') != ''|| 
@@ -78,8 +77,14 @@ class TravelController extends Controller
         }
 
         
-        View::share("vinecats", $vineyardCategorys);
-        return view('travels', ['vignoble'=>$request->input('vignoble'),'duree'=>$request->input('duree'),'pour_qui'=>$request->input('pour-qui'),'envie'=>$request->input('envie'),'sejours' => $travels]);
+        View::share("vinecats", VineyardCategory::all());
+        return view('travels', [
+            'vignoble'=>$request->input('vignoble'),
+            'duree'=>$request->input('duree'),
+            'pour_qui'=>$request->input('pour-qui'),
+            'envie'=>$request->input('envie'),
+            'sejours' => $travels
+        ]);
     }
     public function afficher($id)
     {
