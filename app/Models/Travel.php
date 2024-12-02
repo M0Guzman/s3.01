@@ -3,32 +3,39 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Travel extends Model
 {
-    public function wine_road(): HasOne
+    public function wine_road(): BelongsTo
     {
-        return $this->hasOne(WineRoad::class);
+        return $this->belongsTo(WineRoad::class);
     }
 
-    public function department(): HasOne
+    public function department(): BelongsTo
     {
-        return $this->hasOne(Department::class);
+        return $this->belongsTo(Department::class);
     }
 
-    public function travel_category(): HasOne
+    public function travel_category(): BelongsTo
     {
-        return $this->hasOne(TravelCategory::class);
+        return $this->belongsTo(TravelCategory::class);
     }
 
-    public function vineyard_category(): HasOne
+    public function vineyard_category(): BelongsTo
     {
-        return $this->hasOne(VineyardCategory::class);
+        return $this->belongsTo(VineyardCategory::class);
     }
 
-    public function participant_category(): HasOne
+    public function participant_category(): BelongsTo
     {
-        return $this->hasOne(ParticipantCategory::class);
+        return $this->belongsTo(ParticipantCategory::class);
+    }
+
+    public function ressources(): BelongsToMany
+    {
+        return $this->belongsToMany(Ressource::class, 'travel_has_resources');
     }
 }
