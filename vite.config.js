@@ -15,6 +15,7 @@ export default defineConfig({
                 'resources/css/app.css',
                 'resources/js/app.js',
                 'resources/scss/app.scss',
+                'resources/scss/travel.scss',
                 'resources/images/logo.png'
             ],
             refresh: true,

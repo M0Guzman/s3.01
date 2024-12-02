@@ -130,7 +130,7 @@
               @endif
             </p>
             <p id="price">{{ $sejour->price_per_person }} € par personne</p>
-            <a href="#"><button> Decouvrir l'offre</button></a>
+            <a href="afficher\{{ $sejour->id }}"><button> Decouvrir l'offre</button></a>
         </div>
       @endforeach
     @endif

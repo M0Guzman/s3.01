@@ -10,18 +10,15 @@ use App\Models\TravelCategory;
 use App\Models\VineyardCategory;
 use App\Models\TravelHasResource;
 use App\Models\Ressource;
+use Carbon\Carbon;
  
 class TravelController extends Controller
 {
  
     public function show(Request $request)
     {
-        
-        
+
         $travels = [];
-        
-        
-        
 
         if (
             $request->has('vignoble') &&   $request->input('vignoble') != ''|| 
@@ -88,7 +85,8 @@ class TravelController extends Controller
     {
         $travel = Travel::where('id', $id)->first();
 
-        return view('travel',$travel);
+        $dateString = Carbon::now()->addMonths(18)->format('d-m-Y');
+        return view('travel',['date'=>$dateString,'travel' => $travel]);
 
     }
 }
