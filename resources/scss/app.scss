@@ -1,65 +1,198 @@
-.sejour-card {
-    max-width: 400px;
-    margin: 20px auto;
-    padding: 20px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    background-color: #f9f9f9; /* Fond gris léger */
+
+body {
     font-family: Arial, sans-serif;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-
-    .sejour-title {
-        color: #4a4a4a;
-        font-size: 20px;
-        margin-bottom: 10px;
-        font-weight: bold;
+    background-color: #f8f8f8;
+    margin: 0;
+    padding: 20px;
+  }
+  
+  .filters-container {
+    max-width: 800px;
+    margin: 0 auto;
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .filters-container h1 {
+    font-size: 24px;
+    margin-bottom: 10px;
+    text-align: center;
+    
+  }
+  
+  p {
+    margin-bottom: 20px;
+    color: #666;
+  }
+  
+  .filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  
+    select, #submit {
+      flex: 1 1 calc(25% - 10px);
+      padding: 10px;
+      font-size: 14px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      background-color: #fff;
+      cursor: pointer;
+  
+      &:hover {
+        border-color: #888;
+        
+      }
+  
+      &:focus {
+        outline: none;
+        border-color: #c70039;
+      }
     }
-
-    .sejour-price {
-        font-size: 24px;
-        font-weight: bold;
-        color: #ba2632; /* Rouge pour attirer l’attention */
-        margin: 10px 0;
+    #submit{
+      background-color: #a903af;
+      color: #ffffff
     }
-
-    .sejour-description {
-        color: #4a4a4a;
-        font-size: 14px;
-        margin-bottom: 15px;
+  
+    button {
+      background-color: #c70039;
+      color: white;
+      border: none;
+  
+      &:hover {
+        background-color: #a5002f;
+      }
     }
-
-    .sejour-days {
-        color: #4a4a4a;
-        font-size: 14px;
-        margin-bottom: 15px;
-    }
-
-    .sejour-gift-text {
-        font-weight: bold;
-        color: #4a4a4a;
-        font-size: 14px;
-        margin-top: 15px;
-    }
-
-    .sejour-validity {
-        color: #4a4a4a;
-        font-size: 14px;
-    }
-
-    .sejour-formats-title {
-        color: #4a4a4a;
-        font-size: 14px;
-        margin-bottom: 5px;
-    }
-
-    .sejour-formats {
-        list-style-type: none;
-        padding-left: 0;
-        color: #4a4a4a;
-        font-size: 14px;
-
+  }
+  
+  // Variables de couleur
+$dark-brown: #3c2c28;
+$light-gray: #f7f6f5;
+$mauve: #7b2b80;
+$hot-pink: #f50057;
+$white: #ffffff;
+ 
+// Global styles
+header {
+    font-family: Arial, sans-serif;
+}
+ 
+// Bande supérieure
+.header-top {
+    background-color: $dark-brown;
+    color: $white;
+    padding: 10px 20px;
+ 
+    ul {
+        list-style: none;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        margin: 0;
+        padding: 0;
+ 
         li {
-            margin-bottom: 5px;
+            margin: 0 15px;
+ 
+            a, span {
+                color: $white;
+                text-decoration: none;
+                font-size: 0.9rem;
+            }
+        }
+ 
+        .panier {
+            background-color: $hot-pink;
+            color: $white;
+            padding: 5px 10px;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+ 
+            .panier-count {
+                background-color: $white;
+                color: $hot-pink;
+                font-weight: bold;
+                padding: 2px 5px;
+                border-radius: 50%;
+            }
         }
     }
 }
+ 
+// Bande inférieure
+.header-bottom {
+    background-color: $light-gray;
+    padding: 15px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+ 
+    .logo {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+ 
+        img {
+            max-height: 50px;
+            margin-bottom: 5px;
+        }
+ 
+        p {
+            font-size: 0.8rem;
+            color: $mauve;
+            margin: 0;
+        }
+    }
+ 
+    .navigation {
+        ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            margin: 0;
+            padding: 0;
+ 
+            li {
+                margin: 0 15px;
+ 
+                a {
+                    color: $mauve;
+                    text-decoration: none;
+                    font-weight: bold;
+                    font-size: 1rem;
+                }
+            }
+        }
+    }
+}
+
+  .sejour{
+    
+    flex-direction:row;
+    align-items: center;
+    justify-content: center;
+    display: flex;    
+    flex-wrap: wrap;
+    
+
+    & #num1{
+        width: 35vw;
+        height: 55vh;
+        border: 2px solid black;
+        margin: 10px;
+        padding: 10px;
+        text-align: center;
+      
+      & img{
+        width: 30vw;
+        height: 25vh;
+      }
+        
+    }
+  }
+  

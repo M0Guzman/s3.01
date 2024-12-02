@@ -2,15 +2,20 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Fouladgar\MobileVerification\Contracts\MustVerifyMobile as IMustVerifyMobile;
+use Fouladgar\MobileVerification\Concerns\MustVerifyMobile;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use Laravel\Sanctum\HasApiTokens;
 
-class User extends Authenticatable
+class User extends Authenticatable implements MustVerifyEmail, IMustVerifyMobile
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    /** @use HasFactory<\Database\Factories\UserFactory> */
+    use HasFactory, Notifiable, MustVerifyMobile;
+
 
     /**
      * The attributes that are mass assignable.
@@ -18,8 +23,12 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',
+        'first_name',
+        'last_name',
+        'gender',
         'email',
+        'birth_date',
+        'mobile',
         'password',
     ];
 
@@ -30,16 +39,33 @@ class User extends Authenticatable
      */
     protected $hidden = [
         'password',
-        'remember_token',
+        'remember_token'
     ];
 
     /**
-     * The attributes that should be cast.
+     * Get the attributes that should be cast.
      *
-     * @var array<string, string>
+     * @return array<string, string>
      */
-    protected $casts = [
-        'email_verified_at' => 'datetime',
-        'password' => 'hashed',
-    ];
+    protected function casts(): array
+    {
+        return [
+            'email_verified_at' => 'datetime',
+            'password' => 'hashed',
+        ];
+    }
+
+    public function role(): HasOne
+    {
+        return $this->hasOne(UserRole::class);
+    }
+
+    public function bank_details(): HasOne
+    {
+        return $this->hasOne(BankDetails::class);
+    }
+    public function user_addresses(): HasMany
+    {
+        return $this->hasMany(UserAddress::class);
+    }
 }
