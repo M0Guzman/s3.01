@@ -126,7 +126,7 @@ class UserAddressController extends Controller
 
         UserAddress::where('user_id', $user_id)->where('address_id', $this_address_id)->delete();
 
-        $UserAddress=UserAddress::where('address_id','=',$this_address_id)->first();
+        $UserAddress=Address::where('address_id','=',$this_address_id)->first();
         if ($UserAddress == null) {
             Address::where('id', $this_address_id)->delete();
         }
