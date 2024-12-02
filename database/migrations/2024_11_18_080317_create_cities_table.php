@@ -15,7 +15,8 @@ return new class extends Migration
         Schema::create('cities', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->foreignIdFor(Department::class)->constrained();
+            $table->string('department_zip', 5)->index();
+            $table->foreign('department_zip')->references('zip')->on('departments')->constrained();
         });
     }
 
