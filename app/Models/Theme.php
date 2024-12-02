@@ -6,5 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Theme extends Model
 {
-    private string $name;
+    public $timestamps = false;
+
+    protected $fillable = [
+        'name'
+    ];
 }

@@ -1,6 +1,6 @@
 <?php
 
-use App\Models\Ressource;
+use App\Models\Resource;
 use App\Models\TravelStep;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -17,7 +17,7 @@ return new class extends Migration
             $travel = $table->foreignIdFor(TravelStep::class);
             $travel->constrained();
 
-            $resource = $table->foreignIdFor(Ressource::class);
+            $resource = $table->foreignIdFor(Resource::class);
             $resource->constrained();
 
             $table->primary([$travel->name, $resource->name]);

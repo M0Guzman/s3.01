@@ -11,11 +11,11 @@
     <body>
         <div class="container">
             <div class="image-section">
-                <img src="{{ $travel->ressources[0]->get_url() }}">
+                <img src="{{ $travel->resources[0]->get_url() }}">
             </div>
             <div class="info-section">
                 <div class="header">
-                    
+
                     <h3>{{ $travel->title }}</h3>
                 </div>
                 <div class="price">
@@ -24,24 +24,24 @@
                 </div>
                 <div class="details">
                     <p>{{ $travel->description}}</p>
-                    
+
                 </div>
                 <div class="footer">
                     <button class="gift-option">J'opte pour le format cadeau</button>
                     <p class="validity">Cadeau valable jusqu’au <strong> {{ $date }} </strong></p>
-                    <p>Disponible aux formats : 
-                        <span class="format">e-coffret (envoi immédiat)</span> | 
+                    <p>Disponible aux formats :
+                        <span class="format">e-coffret (envoi immédiat)</span> |
                         <span class="format">coffret (livraison sous 4 à 6 jours ouvrés)</span>
                     </p>
                 </div>
                 <div class="avis">
                         @foreach ($travel->reviews as $review)
-                        
+
                             <h3>{{ $review->title }}</h3>
                             {{ $review->rating }} étoiles <br>
                             {{ $review->description }}
-                        
-                        @endforeach                    
+
+                        @endforeach
                 </div>
             </div>
         </div>
