@@ -5,8 +5,6 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Middleware\FullyVerified;
 use App\Http\Controllers\TravelController;
-use App\Http\Middleware\FullyVerified;
-use App\Http\Controllers\TravelController;
 use Illuminate\Support\Facades\Route;
 
 /*

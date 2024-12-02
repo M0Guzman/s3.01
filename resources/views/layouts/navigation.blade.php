@@ -22,7 +22,7 @@
         <!-- Bande inférieure -->
         <div class="header-bottom">
             <div class="logo">
-                <!--<img src="path-to-logo.png" alt="Logo VinoTrip">-->
+                <img src="{{ Vite::asset('resources/images/logo.png') }}" alt="Logo VinoTrip">
                 <p>Créateurs de séjours œnotouristiques</p>
             </div>
             <nav class="navigation">

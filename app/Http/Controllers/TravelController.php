@@ -10,19 +10,15 @@ use App\Models\TravelCategory;
 use App\Models\VineyardCategory;
 use App\Models\TravelHasResource;
 use App\Models\Ressource;
+use View;
  
 class TravelController extends Controller
 {
  
     public function show(Request $request)
     {
-        
-        
+        $vineyardCategorys = VineyardCategory::all();
         $travels = [];
-        
-        
-        
-
         if (
             $request->has('vignoble') &&   $request->input('vignoble') != ''|| 
             $request->has('duree') &&  $request->input('duree') != '' ||
@@ -81,8 +77,8 @@ class TravelController extends Controller
         }
 
         
- 
-            return view('travels', ['vignoble'=>$request->input('vignoble'),'duree'=>$request->input('duree'),'pour_qui'=>$request->input('pour-qui'),'envie'=>$request->input('envie'),'sejours' => $travels]);
+        View::share("vinecats", $vineyardCategorys);
+        return view('travels', ['vignoble'=>$request->input('vignoble'),'duree'=>$request->input('duree'),'pour_qui'=>$request->input('pour-qui'),'envie'=>$request->input('envie'),'sejours' => $travels]);
     }
     public function afficher($id)
     {

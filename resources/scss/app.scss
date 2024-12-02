@@ -82,7 +82,6 @@ header {
             margin: 0;
         }
     }
-
     .navigation {
         ul {
             list-style: none;
@@ -122,6 +121,29 @@ header {
         }
     }
 }
+
+.sejour{
+    flex-direction:row;
+    align-items: center;
+    justify-content: center;
+    display: flex;    
+    flex-wrap: wrap;
+
+    & #num1{
+        width: 35vw;
+        height: 55vh;
+        border: 2px solid black;
+        margin: 10px;
+        padding: 10px;
+        text-align: center;
+      
+        & img{
+            width: 30vw;
+            height: 25vh;
+        }  
+    }
+}
+
 
 
 //main
@@ -173,5 +195,74 @@ main {
 
     .reviews {
         text-align: right;
+    }
+}
+
+
+
+
+
+.body_travels {
+    font-family: Arial, sans-serif;
+    background-color: #f8f8f8;
+    margin: 0;
+    padding: 20px;
+}
+  
+.filters-container {
+    max-width: 800px;
+    margin: 0 auto;
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+  
+.filters-container h1 {
+    font-size: 24px;
+    margin-bottom: 10px;
+    text-align: center;
+}
+  
+p {
+    margin-bottom: 20px;
+    color: #666;
+}
+  
+.filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  
+    select, #submit {
+      flex: 1 1 calc(25% - 10px);
+      padding: 10px;
+      font-size: 14px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      background-color: #fff;
+      cursor: pointer;
+  
+        &:hover {
+            border-color: #888;
+        }
+    
+        &:focus {
+            outline: none;
+            border-color: #c70039;
+        }
+    }
+    #submit{
+      background-color: #a903af;
+      color: #ffffff
+    }
+  
+    button {
+      background-color: #c70039;
+      color: white;
+      border: none;
+        &:hover {
+            background-color: #a5002f;
+        }
     }
 }

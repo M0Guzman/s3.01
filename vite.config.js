@@ -12,6 +12,7 @@ export default defineConfig({
     plugins: [
         laravel({
             input: [
+                'resources/images/logo.png',
                 'resources/css/app.css',
                 'resources/js/app.js',
                 'resources/scss/app.scss'
