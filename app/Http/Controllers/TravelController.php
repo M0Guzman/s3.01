@@ -84,9 +84,11 @@ class TravelController extends Controller
  
             return view('travels', ['vignoble'=>$request->input('vignoble'),'duree'=>$request->input('duree'),'pour_qui'=>$request->input('pour-qui'),'envie'=>$request->input('envie'),'sejours' => $travels]);
     }
-    public function store(Request $request){
-        $travel = [];
+    public function afficher($id)
+    {
+        $travel = Travel::where('id', $id)->first();
 
-        
+        return view('travel',$travel);
+
     }
 }

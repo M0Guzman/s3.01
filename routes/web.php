@@ -22,7 +22,7 @@ Route::get('/', function () {
 
 Route::get('/travels', [TravelController::class, 'show'])->name('travels.show');
 
-Route::get('/afficher', [TravelController::class,'afficher'])->name('travels.afficher');
+Route::get('/afficher/{id}', [TravelController::class,'afficher'])->name('afficher');
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', FullyVerified::class])->name('dashboard');
