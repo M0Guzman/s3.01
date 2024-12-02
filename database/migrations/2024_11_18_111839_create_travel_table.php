@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\Department;
+use App\Models\Theme;
 use App\Models\WineRoad;
 use App\Models\TravelCategory;
 use App\Models\VineyardCategory;
@@ -20,6 +21,8 @@ return new class extends Migration
             $table->id();
 
             $table->foreignIdFor(WineRoad::class)->constrained();
+            $table->foreignIdFor(Department::class)->constrained();
+            $table->foreignIdFor(Theme::class)->constrained();
             $table->foreignIdFor(TravelCategory::class)->constrained();
             $table->foreignIdFor(VineyardCategory::class)->constrained();
             $table->foreignIdFor(ParticipantCategory::class)->constrained();
@@ -30,6 +33,7 @@ return new class extends Migration
             $table->string('title');
             $table->text('description');
             $table->double('price_per_person');
+            $table->double('days');
         });
     }
 

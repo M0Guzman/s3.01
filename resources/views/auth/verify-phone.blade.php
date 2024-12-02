@@ -4,27 +4,25 @@
     </div>
 
     <div class="mt-4 flex items-center justify-between">
-        <form method="POST" action="{{ route('mobile.verify') }}">
+        <form method="POST" action="{{ route('mobile.process') }}">
             @csrf
 
             <!-- Email Address -->
             <div>
                 <x-input-label for="token" :value="__('Code')" />
-                <x-text-input id="token" class="block mt-1 w-full" type="text" name="token" required autofocus />
+                <x-text-input id="token" class="block mt-1 w-full" type="text" name="token" autofocus />
                 <x-input-error :messages="$errors->get('token')" class="mt-2" />
             </div>
 
             <div class="mt-3">
-                <x-primary-button>
+                <x-primary-button name='action' value='verify'>
                     {{ __('Verify') }}
                 </x-primary-button>
 
-                <x-secondary-button>
+                <x-secondary-button type='submit' name='action' value='resend'>
                     {{ __('Resend code') }}
                 </x-secondary-button>
-            </div>
-
-            <div>
+            </form>
 
             </div>
         </form>
