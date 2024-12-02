@@ -1,3 +1,36 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.segment {
+    width: 100%;
+}
+
+.content {
+    width: 300px;
+}
+
+
+
+.formConteneur {
+    display:flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+}
+
+.sous-section {
+    border: solid 1px $base;
+    box-shadow: 5px 6px 19px 0px $text;
+    margin-top: 5%;
+    padding: 1em;
+    border-radius: 20px;
+}
+
+.conteneur {
+    display: flex;
+    flex-wrap: wrap;
+    flex-basis: max-content;
+}
 
 body {
     font-family: Arial, sans-serif;
@@ -5,7 +38,7 @@ body {
     margin: 0;
     padding: 20px;
   }
-  
+
   .filters-container {
     max-width: 800px;
     margin: 0 auto;
@@ -14,24 +47,24 @@ body {
     border-radius: 8px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   }
-  
+
   .filters-container h1 {
     font-size: 24px;
     margin-bottom: 10px;
     text-align: center;
-    
+
   }
-  
+
   p {
     margin-bottom: 20px;
     color: #666;
   }
-  
+
   .filters {
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
-  
+
     select, #submit {
       flex: 1 1 calc(25% - 10px);
       padding: 10px;
@@ -40,12 +73,12 @@ body {
       border-radius: 4px;
       background-color: #fff;
       cursor: pointer;
-  
+
       &:hover {
         border-color: #888;
-        
+
       }
-  
+
       &:focus {
         outline: none;
         border-color: #c70039;
@@ -55,36 +88,36 @@ body {
       background-color: #a903af;
       color: #ffffff
     }
-  
+
     button {
       background-color: #c70039;
       color: white;
       border: none;
-  
+
       &:hover {
         background-color: #a5002f;
       }
     }
   }
-  
+
   // Variables de couleur
 $dark-brown: #3c2c28;
 $light-gray: #f7f6f5;
 $mauve: #7b2b80;
 $hot-pink: #f50057;
 $white: #ffffff;
- 
+
 // Global styles
 header {
     font-family: Arial, sans-serif;
 }
- 
+
 // Bande supérieure
 .header-top {
     background-color: $dark-brown;
     color: $white;
     padding: 10px 20px;
- 
+
     ul {
         list-style: none;
         display: flex;
@@ -92,17 +125,17 @@ header {
         align-items: center;
         margin: 0;
         padding: 0;
- 
+
         li {
             margin: 0 15px;
- 
+
             a, span {
                 color: $white;
                 text-decoration: none;
                 font-size: 0.9rem;
             }
         }
- 
+
         .panier {
             background-color: $hot-pink;
             color: $white;
@@ -111,7 +144,7 @@ header {
             display: flex;
             align-items: center;
             gap: 5px;
- 
+
             .panier-count {
                 background-color: $white;
                 color: $hot-pink;
@@ -122,7 +155,7 @@ header {
         }
     }
 }
- 
+
 // Bande inférieure
 .header-bottom {
     background-color: $light-gray;
@@ -130,25 +163,25 @@ header {
     display: flex;
     align-items: center;
     justify-content: space-between;
- 
+
     .logo {
         display: flex;
         flex-direction: column;
         align-items: center;
         text-align: center;
- 
+
         img {
             max-height: 50px;
             margin-bottom: 5px;
         }
- 
+
         p {
             font-size: 0.8rem;
             color: $mauve;
             margin: 0;
         }
     }
- 
+
     .navigation {
         ul {
             list-style: none;
@@ -156,10 +189,10 @@ header {
             justify-content: center;
             margin: 0;
             padding: 0;
- 
+
             li {
                 margin: 0 15px;
- 
+
                 a {
                     color: $mauve;
                     text-decoration: none;
@@ -172,13 +205,13 @@ header {
 }
 
   .sejour{
-    
+
     flex-direction:row;
     align-items: center;
     justify-content: center;
-    display: flex;    
+    display: flex;
     flex-wrap: wrap;
-    
+
 
     & #num1{
         width: 35vw;
@@ -187,13 +220,11 @@ header {
         margin: 10px;
         padding: 10px;
         text-align: center;
-      
+
       & img{
         width: 30vw;
         height: 25vh;
       }
-        
+
     }
   }
-  //---------------------travel-----------------------//
-
