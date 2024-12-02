@@ -17,8 +17,9 @@ class TravelController extends Controller
     public function show(Request $request)
     {
         
-        //dd($request);
+        
         $travels = [];
+        //$travels = Travel::query();
         $page = 0;
         //dd($request);
 
@@ -83,7 +84,7 @@ class TravelController extends Controller
 
         
  
-            return view('travels', ['sejours' => $travels]);
+            return view('travels', ['vignoble'=>$request->input('vignoble'),'duree'=>$request->input('duree'),'pour_qui'=>$request->input('pour-qui'),'envie'=>$request->input('envie'),'sejours' => $travels]);
     }
  
 }

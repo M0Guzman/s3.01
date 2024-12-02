@@ -63,44 +63,45 @@
     <form class="filters" action="#">
       @csrf
       <select id="vignoble" name="vignoble"> <!-- mettre les valeur select avec la base de donnée-->
-        <option value="" selected>Quel vignoble ?</option>
-        <option value="Alsace">Alsace</option>
-        <option value="Beaujolais">Beaujolais</option>
-        <option value="Bordeaux">Bordeaux</option>
-        <option value="bourgogne">Bourgogne</option>
-        <option value="Catalogne">Catalogne</option>
-        <option value="Champagne">Champagne</option>
-        <option value="Jura">Jura</option>
-        <option value="Languedoc-roussilon">Languedoc-roussilon</option>
-        <option value="Paris">Paris</option>
-        <option value="Provence">Provence</option>
-        <option value="Savoie">Savoie</option>
-        <option value="Sud-ouest">Sud-ouest</option>
-        <option value="Val de loire">Val de loire</option>
-        <option value="Vallée du rhône">Vallée du rhône</option>
+
+        <option value="" selected>Vignoble</option>
+        <option value="Alsace" @selected($vignoble == "Alsace")>Alsace</option>
+        <option value="Beaujolais" @selected($vignoble == "Beaujolais")>Beaujolais</option>
+        <option value="Bordeaux" @selected($vignoble == "Bordeaux")>Bordeaux</option>
+        <option value="bourgogne" @selected($vignoble == "bourgogne")>Bourgogne</option>
+        <option value="Catalogne" @selected($vignoble == "Catalogne")>Catalogne</option>
+        <option value="Champagne" @selected($vignoble == "Champagne")>Champagne</option>
+        <option value="Jura" @selected($vignoble == "Jura")>Jura</option>
+        <option value="Languedoc-roussilon" @selected($vignoble == "Languedoc-roussilon")>Languedoc-roussilon</option>
+        <option value="Paris" @selected($vignoble == "Paris")>Paris</option>
+        <option value="Provence" @selected($vignoble == "Provence")>Provence</option>
+        <option value="Savoie" @selected($vignoble == "Savoie")>Savoie</option>
+        <option value="Sud-ouest" @selected($vignoble == "Sud-ouest")>Sud-ouest</option>
+        <option value="Val de loire" @selected($vignoble == "Val de loire")>Val de loire</option>
+        <option value="Vallée du rhône" @selected($vignoble == "Vallée du rhône")>Vallée du rhône</option>
       </select>
       <select id="duree" name="duree">
-        <option value=""  selected>Durée ?</option>
-        <option value="1/2">Demi-journée</option>
-        <option value="1">1 jour</option>
-        <option value="2">2 jour / 1 nuit</option>
-        <option value="3">3 jours / 2 nuits</option>
+        <option value="" >Quelle durée</option>
+        <option value="0.5" @selected($duree == "0.5")>Demi-journée</option>
+        <option value="1" @selected($duree == "1")>1 jour</option>
+        <option value="2" @selected($duree == "2")>2 jour / 1 nuit</option>
+        <option value="3" @selected($duree == "3")>3 jours / 2 nuits</option>
       </select>
       <select id="pour-qui" name="pour-qui">
-        <option value="" selected>Pour qui ?</option>
-        <option value="couple">Couple</option>
-        <option value="famille">Famille</option>
-        <option value="Amis">Amis</option>
+        <option value="" selected>Pour qui</option>
+        <option value="couple" @selected($pour_qui == 'couple')>Couple</option>
+        <option value="famille" @selected($pour_qui == 'famille')>Famille</option>
+        <option value="Amis" @selected($pour_qui == 'Amis')>Amis</option>
       </select>
       <select id="envie" name="envie">
-        <option value="" selected>Une envie particulière ?</option>
+        <option value="" selected>Envie</option>
         
-        <option value="bien-etre">Bien-être</option>
-        <option value="gastronomie">Gastronomie</option>
-        <option value="culture">Culture</option>
-        <option value="Golf">Golf</option>
-        <option value="Bio">Bio</option>
-        <option value="Insolite">Insolite</option>
+        <option value="bien-etre" @selected($envie == "bien-etre")>Bien-être</option>
+        <option value="gastronomie" @selected($envie == "gastronomie")>Gastronomie</option>
+        <option value="culture" @selected($envie == "culture")>Culture</option>
+        <option value="Golf" @selected($envie == "Golf")>Golf</option>
+        <option value="Bio" @selected($envie == "Bio")>Bio</option>
+        <option value="Insolite" @selected($envie == "Insolite")>Insolite</option>
       </select>
       <input id="submit" type="submit" value="Recherche">
     </form>
@@ -119,7 +120,7 @@
         <div id="num1">
             <br>
             
-            <img id="image"> {{ $sejour->ressources[0]->filename }}</img>
+            <img id="image" src="{{ $sejour->ressources[0]->get_url() }}"> </img>
             <p id="title">{{ mb_substr($sejour->title,0,50,'UTF-8') }}</p>                                        
             <p id="vignoble">{{ mb_substr($sejour->vineyard_category->name,0,50,'UTF-8') }} @if( $sejour->rating != '') {{ $sejour->rating }} étoiles @endif</p>
             <p id="description">{{ mb_substr($sejour->description,0,50,'UTF-8') }}</p>
@@ -128,7 +129,7 @@
               jour
               @endif
             </p>
-          
+            <p id="price">{{ $sejour->price_per_person }} € par personne</p>
             <a href="#"><button> Decouvrir l'offre</button></a>
         </div>
       @endforeach
