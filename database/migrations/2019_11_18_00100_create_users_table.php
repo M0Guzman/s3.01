@@ -19,10 +19,8 @@ return new class extends Migration
             $table->string('last_name');
             $table->char('gender');
             $table->date('birth_date');
-            //$table->string('mobile');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
-            //$table->timestamp('mobile_verified_at')->nullable();
             $table->string('password');
 
             $table->rememberToken();
@@ -36,7 +34,7 @@ return new class extends Migration
 
             $role = $table->foreignIdFor(UserRole::class);
             $role->constrained();
-            $role->default(0);
+            $role->default(1);
         });
 
         Schema::create('password_reset_tokens', function (Blueprint $table) {

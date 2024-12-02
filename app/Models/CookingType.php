@@ -6,5 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class CookingType extends Model
 {
-    //
+    public $timestamps = false;
+
+    protected $fillable = [
+        'name'
+    ];
 }

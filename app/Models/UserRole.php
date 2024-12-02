@@ -7,6 +7,12 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class UserRole extends Model
 {
+    public $timestamps = false;
+
+    protected $fillable = [
+        'name'
+    ];
+
     public function permissions(): HasMany
     {
         return $this->hasMany(RolePermission::class);

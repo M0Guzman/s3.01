@@ -13,9 +13,9 @@ class Order extends Model
         return $this->belongsTo(PaymentType::class);
     }
 
-    public function ressource(): BelongsTo
+    public function resource(): BelongsTo
     {
-        return $this->belongsTo(Ressource::class);
+        return $this->belongsTo(Resource::class);
     }
 
     public function user(): BelongsTo

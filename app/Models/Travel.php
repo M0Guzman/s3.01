@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -10,6 +11,23 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Travel extends Model
 {
+    use HasFactory;
+
+    public $timestamps = false;
+
+    protected $fillable = [
+        'name',
+        'wine_road_id',
+        'department_id',
+        'travel_category_id',
+        'vineyard_category_id',
+        'ParticipantCategory_id',
+        'title',
+        'description',
+        'price_per_person',
+        'days'
+    ];
+
     public function wine_road(): BelongsTo
     {
         return $this->belongsTo(WineRoad::class);
@@ -40,8 +58,8 @@ class Travel extends Model
         return $this->hasMany(Review::class);
     }
 
-    public function ressources(): BelongsToMany
+    public function resources(): BelongsToMany
     {
-        return $this->belongsToMany(Ressource::class, 'travel_has_resources');
+        return $this->belongsToMany(Resource::class, 'travel_has_resources');
     }
 }

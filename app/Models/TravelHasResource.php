@@ -15,8 +15,8 @@ class TravelHasResource extends Model
         return $this->belongsTo(Travel::class);
     }
 
-    public function ressource(): BelongsTo
+    public function resource(): BelongsTo
     {
-        return $this->belongsTo(Ressource::class);
+        return $this->belongsTo(Resource::class);
     }
 }

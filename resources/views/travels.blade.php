@@ -1,22 +1,22 @@
 <x-app-layout>
   <section class body_travels>
       <br>
-    
+
     <div class="filters-container" >
-      
+
       <h1>Séjours Œnologiques</h1>
       <br>
-      <p> Personnalisez votre séjour œnologique en 
-                  fonction de vos envies ! Séjourner au 
-                  Château dans le Bordelais, réaliser 
-                  votre propre cuvée en Champagne, découvrir 
-                  les accords mets & vins en Bourgogne, se 
-                  relaxer dans un spa au milieu des vignes ou 
-                  encore survoler la plaine d'Alsace en 
+      <p> Personnalisez votre séjour œnologique en
+                  fonction de vos envies ! Séjourner au
+                  Château dans le Bordelais, réaliser
+                  votre propre cuvée en Champagne, découvrir
+                  les accords mets & vins en Bourgogne, se
+                  relaxer dans un spa au milieu des vignes ou
+                  encore survoler la plaine d'Alsace en
                   montgolfière, ...
                   Proposés par thématique – bien-être, gastronomie,
-                  culture ou sport – nos week-ends œnologiques 
-                  sont élaborés pour permettre à tous les publics, 
+                  culture ou sport – nos week-ends œnologiques
+                  sont élaborés pour permettre à tous les publics,
                   de l’amateur au néophyte, de trouver leur bonheur.</p>
       <form class="filters" action="#">
         @csrf
@@ -42,7 +42,7 @@
         </select>
         <select id="envie" name="envie">
           <option value="" selected>Envie</option>
-          
+
           <option value="bien-etre" @selected($envie == "bien-etre")>Bien-être</option>
           <option value="gastronomie" @selected($envie == "gastronomie")>Gastronomie</option>
           <option value="culture" @selected($envie == "culture")>Culture</option>
@@ -55,22 +55,22 @@
     </div>
 
     <section class="sejour">
-      
+
       @if(count($sejours) == 0)
           <p>Aucun séjour ne correspond à vos critères.</p>
       @else
 
       @foreach ($sejours as $sejour)
-        
+
         <div id="num1">
             <br>
-            
-            <img id="image" src="{{ $sejour->ressources[0]->get_url() }}"> </img>
-            <p id="title">{{ mb_substr($sejour->title,0,50,'UTF-8') }}</p>                                        
-            <p id="vignoble">{{ mb_substr($sejour->vineyard_category->name,0,50,'UTF-8') }} @if( $sejour->rating != '') {{ $sejour->rating }} étoiles @endif</p>
+
+            <img id="image" src="{{ $sejour->resources[0]->get_url() }}"> </img>
+            <p id="title">{{ mb_substr($sejour->title,0,50,'UTF-8') }}</p>
+            <p id="vignoble">{{ mb_substr($sejour->vineyard_category->name,0,50,'UTF-8') }} @if( $sejour->reviews_avg_rating != null) {{ $sejour->reviews_avg_rating }} étoiles @endif</p>
             <p id="description">{{ mb_substr($sejour->description,0,50,'UTF-8') }}</p>
-            <p id="jours">{{ $sejour->days }} @if( $sejour->days >1)jours 
-              @else 
+            <p id="jours">{{ $sejour->days }} @if( $sejour->days >1)jours
+              @else
               jour
               @endif
             </p>
@@ -79,7 +79,7 @@
         </div>
       @endforeach
     @endif
-   
+
   </section>
     @vite(['resources/js/app.js'])
   </section>

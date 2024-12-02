@@ -175,10 +175,49 @@ header {
       margin-bottom: 5px;
     }
 
-    p {
-      font-size: 0.8rem;
-      color: $mauve;
-      margin: 0;
+    .navigation {
+        ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            margin: 0;
+            padding: 0;
+
+            li {
+                margin: 0 15px;
+
+                a {
+                    color: $mauve;
+                    text-decoration: none;
+                    font-weight: bold;
+                    font-size: 1rem;
+                }
+            }
+        }
+    }
+}
+
+  .sejour{
+
+    flex-direction:row;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    flex-wrap: wrap;
+
+
+    & #num1{
+        width: 35vw;
+        height: 65vh;
+        border: 2px solid black;
+        margin: 10px;
+        padding: 10px;
+        text-align: center;
+
+      & img{
+        width: 30vw;
+        height: 25vh;
+      }
     }
   }
 
@@ -207,14 +246,14 @@ header {
           background-color: $mantle;
           padding: 10px 0;
           box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-          
-          li {    
+
+          li {
             a:hover {
               color: $hot-pink;
             }
           }
         }
-        
+
         &:hover .menu-dropdown {
           display: block;
         }
@@ -230,7 +269,7 @@ header {
   justify-content: center;
   display: flex;
   flex-wrap: wrap;
-  
+
 
   & #num1{
     width: 35vw;
