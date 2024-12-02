@@ -1,8 +1,12 @@
 <?php
 
+use App\Http\Controllers\FileController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\User\UserAddressController;
 use App\Http\Middleware\FullyVerified;
+use App\Http\Controllers\TravelController;
+use App\Http\Middleware\FullyVerified;
+use App\Http\Controllers\TravelController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,10 +24,15 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/travels', [TravelController::class, 'show'])->name('travels.show');
+
+Route::get('/afficher/{id}', [TravelController::class,'afficher'])->name('afficher');
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', FullyVerified::class])->name('dashboard');
+})->middleware(['auth', FullyVerified::class])->name('dashboard');
 
+Route::middleware(['auth', FullyVerified::class])->group(function () {
 Route::middleware(['auth', FullyVerified::class])->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
@@ -33,5 +42,7 @@ Route::middleware(['auth', FullyVerified::class])->group(function () {
     Route::patch('/address', [UserAddressController::class, 'edit'])->name('address.edit');
     Route::delete('/address', [UserAddressController::class, 'destroy'])->name('address.destroy');
 });
+
+Route::get('/file/{id}', [FileController::class, 'get_file'])->name('file');
 
 require __DIR__.'/auth.php';
