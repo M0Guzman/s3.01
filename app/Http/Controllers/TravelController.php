@@ -63,8 +63,9 @@ class TravelController extends Controller
 
 
             if($travels != null) {
-            $travels->leftJoin('reviews', 'reviews.travel_id', '=', 'travel.id')->avg('rating');
-            $travels = $travels->get(['travel.*', 'rating']);
+            //$travels->leftJoin('reviews', 'reviews.travel_id', '=', 'travel.id')->avg('rating');
+            $travels->withAvg('reviews', 'rating');
+            $travels = $travels->get();
             
             }
             
@@ -72,7 +73,8 @@ class TravelController extends Controller
                       
         } else {
             $travels = Travel::take(1000);
-            $travels->leftJoin('reviews', 'reviews.travel_id', '=', 'travel.id')->avg('rating');
+            //$travels->leftJoin('reviews', 'reviews.travel_id', '=', 'travel.id')->avg('rating');
+            $travels->withAvg('reviews', 'rating');
 
             $travels = $travels->get(['travel.*', 'rating']);
         }
