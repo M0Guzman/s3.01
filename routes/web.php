@@ -1,8 +1,12 @@
 <?php
 
+use App\Http\Controllers\FileController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Middleware\FullyVerified;
+use App\Http\Controllers\TravelController;
+use App\Http\Middleware\FullyVerified;
+use App\Http\Controllers\TravelController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -23,6 +27,10 @@ Route::get('/', function () {
 
 Route::get('/homepage', [HomeController::class, 'index']);
 
+Route::get('/travels', [TravelController::class, 'show'])->name('travels.show');
+
+Route::get('/afficher/{id}', [TravelController::class,'afficher'])->name('afficher');
+
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', FullyVerified::class])->name('dashboard');
@@ -32,5 +40,7 @@ Route::middleware(['auth', FullyVerified::class])->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+
+Route::get('/file/{id}', [FileController::class, 'get_file'])->name('file');
 
 require __DIR__.'/auth.php';
