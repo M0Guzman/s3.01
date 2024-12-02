@@ -82,6 +82,7 @@ class TravelController extends Controller
             'duree'=>$request->input('duree'),
             'pour_qui'=>$request->input('pour-qui'),
             'envie'=>$request->input('envie'),
+            "vinecats" => VineyardCategory::all(),
             'sejours' => $travels
         ]);
     }
