@@ -26,14 +26,14 @@
                 <p>Créateurs de séjours œnotouristiques</p>
             </div>
             <nav class="navigation">
-            <ul class="hList">
+                <ul class="hList">
                     <li><a href="#"><p class="menu-title">Tous nos séjours</p></a></li>
                     <li class="menu">
                         <a href="#"><p class="menu-title">Destinations</p></a>
                         <ul class="menu-dropdown">
                         @foreach ($vinecats as $vinecat)
-                            <li id="num1">
-                                <a id="title">{{ mb_substr($vinecat->name,'UTF-8') }}</a>
+                            <li>
+                                <a>{{ substr($vinecat->name,0,50) }}</a>
                             </li>
                         @endforeach
                         </ul>

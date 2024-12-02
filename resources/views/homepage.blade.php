@@ -14,37 +14,50 @@
     <!-- Contenu principal -->
     <main class="main_avis">
         <h1>Avis des voyageurs</h1>
-        <div class="avis_aficher">
-            <div class="name">
-                <a href="https://www.vinotrip.com/fr/sejours-oenologiques/12-week-end-oenologique-saint-emilion.html" 
-                    title="Saint-Emilion - Séjour oenologique">
-                    Saint-Emilion - Séjour oenologique
-                </a>
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-regular fa-star-half-stroke"></i>
-                <i class="fa-regular fa-star"></i>
-                <span class="note">4,8/5</span>
-            </div>
-
-            <div class="product_desc row">
-                <div class="avis_text">
-                    <span class="comment">
-                        Très belle expérience avec Vinotrip. Nous étions au château la rose Perriere. 
-                        Nous avons été très bien accueillis. La salle de bain était immense ! 
-                        Un séjour très agréable. Le choix de Vinotrip pour le clos Mirande comme restaurant était excellent !
-                    </span>
-                    <span class="author">Célia J.</span>
-                </div>
-                    
-                <div class="avis_nb">
-                    <a class="reviews" href="https://www.vinotrip.com/fr/sejours-oenologiques/12-week-end-oenologique-saint-emilion.html#avis">
-                    Lire les 60 avis
+        @foreach ($travels_avis as $travel_avis)
+        <!--{{ $travel_avis }} -->
+            <div class="avis_aficher">
+                <div class="name">
+                    <a href="https://www.vinotrip.com/fr/sejours-oenologiques/12-week-end-oenologique-saint-emilion.html" 
+                        title="Saint-Emilion - Séjour oenologique">
+                        {{ substr($travel_avis->title,0,50) }}
                     </a>
+                    @php
+                        $note = $travel_avis->reviews_avg_rating
+                    @endphp
+                    @for ($i = 0; $i < 5; $i++)
+                        @if ($note >= 1)
+                            <i class="fa-solid fa-star"></i>
+                        @elseif ($note < 0.5)
+                            <i class="fa-regular fa-star"></i>
+                        @else
+                            <i class="fa-regular fa-star-half-stroke"></i>
+                        @endif
+                        @php
+                            $note --
+                        @endphp
+                    @endfor
+                    <span class="note">{{ $travel_avis->reviews_avg_rating }}/5</span>
+                </div>
+
+                <div class="product_desc row">
+                    <div class="avis_text">
+                        <h2>{{ $travel_avis->review_title }}</h2>
+                        <span class="comment">
+                            {{ $travel_avis->review_desc }}
+                        </span>
+                        <span class="author">{{ $travel_avis->user_last_name }} <a>{{ $travel_avis->user_first_name }}</a>.</span>
+                    </div>
+                        
+                    <div class="avis_nb">
+                        <a class="reviews" href="https://www.vinotrip.com/fr/sejours-oenologiques/12-week-end-oenologique-saint-emilion.html#avis">
+                        Lire les {{ $travel_avis->reviews_count }} avis
+                        </a>
+                    </div>
                 </div>
             </div>
-        </div>
+        @endforeach
+        
 
     </main>
 </x-app-layout>
