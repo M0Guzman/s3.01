@@ -1,0 +1,65 @@
+.sejour-card {
+    max-width: 400px;
+    margin: 20px auto;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #f9f9f9; /* Fond gris léger */
+    font-family: Arial, sans-serif;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+    .sejour-title {
+        color: #4a4a4a;
+        font-size: 20px;
+        margin-bottom: 10px;
+        font-weight: bold;
+    }
+
+    .sejour-price {
+        font-size: 24px;
+        font-weight: bold;
+        color: #ba2632; /* Rouge pour attirer l’attention */
+        margin: 10px 0;
+    }
+
+    .sejour-description {
+        color: #4a4a4a;
+        font-size: 14px;
+        margin-bottom: 15px;
+    }
+
+    .sejour-days {
+        color: #4a4a4a;
+        font-size: 14px;
+        margin-bottom: 15px;
+    }
+
+    .sejour-gift-text {
+        font-weight: bold;
+        color: #4a4a4a;
+        font-size: 14px;
+        margin-top: 15px;
+    }
+
+    .sejour-validity {
+        color: #4a4a4a;
+        font-size: 14px;
+    }
+
+    .sejour-formats-title {
+        color: #4a4a4a;
+        font-size: 14px;
+        margin-bottom: 5px;
+    }
+
+    .sejour-formats {
+        list-style-type: none;
+        padding-left: 0;
+        color: #4a4a4a;
+        font-size: 14px;
+
+        li {
+            margin-bottom: 5px;
+        }
+    }
+}
