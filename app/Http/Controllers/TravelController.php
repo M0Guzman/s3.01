@@ -20,7 +20,6 @@ class TravelController extends Controller
         
         $travels = [];
         
-        $page = 0;
         
 
         if (
@@ -74,7 +73,6 @@ class TravelController extends Controller
             
                       
         } else {
-            $page = $page +1;
             $travels = Travel::take(1000);
             $travels->leftJoin('reviews', 'reviews.travel_id', '=', 'travel.id')->avg('rating');
 
