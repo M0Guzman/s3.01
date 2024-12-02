@@ -60,26 +60,27 @@
           <p>Aucun séjour ne correspond à vos critères.</p>
       @else
 
-        @foreach ($sejours as $sejour)
-          
-          <div id="num1">
-              <br>
-              <img id="image" src="{{ $sejour->ressources[0]->get_url() }}"> </img>
-              <p id="title">{{ mb_substr($sejour->title,0,50,'UTF-8') }}</p>                                        
-              <p id="vignoble">{{ mb_substr($sejour->vineyard_category->name,0,50,'UTF-8') }} @if( $sejour->rating != '') {{ $sejour->rating }} étoiles @endif</p>
-              <p id="description">{{ mb_substr($sejour->description,0,50,'UTF-8') }}</p>
-              <p id="jours">{{ $sejour->days }} @if( $sejour->days >1)jours 
-                @else 
-                jour
-                @endif
-              </p>
-              <p id="price">{{ $sejour->price_per_person }} € par personne</p>
-              <a href="#"><button> Decouvrir l'offre</button></a>
-          </div>
-        @endforeach
-      @endif
-    
-    </section>
+      @foreach ($sejours as $sejour)
+        
+        <div id="num1">
+            <br>
+            
+            <img id="image" src="{{ $sejour->ressources[0]->get_url() }}"> </img>
+            <p id="title">{{ mb_substr($sejour->title,0,50,'UTF-8') }}</p>                                        
+            <p id="vignoble">{{ mb_substr($sejour->vineyard_category->name,0,50,'UTF-8') }} @if( $sejour->rating != '') {{ $sejour->rating }} étoiles @endif</p>
+            <p id="description">{{ mb_substr($sejour->description,0,50,'UTF-8') }}</p>
+            <p id="jours">{{ $sejour->days }} @if( $sejour->days >1)jours 
+              @else 
+              jour
+              @endif
+            </p>
+            <p id="price">{{ $sejour->price_per_person }} € par personne</p>
+            <a href="afficher\{{ $sejour->id }}"><button> Decouvrir l'offre</button></a>
+        </div>
+      @endforeach
+    @endif
+   
+  </section>
 
 
     @vite(['resources/js/app.js'])

@@ -6,4 +6,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class Department extends Model
 {
+    public $timestamps = false;
+    public $primaryKey = 'zip';
+    public $keyType = 'string';
+
+    protected $fillable = [
+        'zip',
+        'name'
+    ];
 }

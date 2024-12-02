@@ -1,12 +1,111 @@
-// Variables de couleur
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.segment {
+    width: 100%;
+}
+
+.content {
+    width: 300px;
+}
+
+
+
+.formConteneur {
+    display:flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+}
+
+.sous-section {
+    border: solid 1px $base;
+    box-shadow: 5px 6px 19px 0px $text;
+    margin-top: 5%;
+    padding: 1em;
+    border-radius: 20px;
+}
+
+.conteneur {
+    display: flex;
+    flex-wrap: wrap;
+    flex-basis: max-content;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f8f8f8;
+    margin: 0;
+    padding: 20px;
+  }
+
+  .filters-container {
+    max-width: 800px;
+    margin: 0 auto;
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .filters-container h1 {
+    font-size: 24px;
+    margin-bottom: 10px;
+    text-align: center;
+
+  }
+
+  p {
+    margin-bottom: 20px;
+    color: #666;
+  }
+
+  .filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+
+    select, #submit {
+      flex: 1 1 calc(25% - 10px);
+      padding: 10px;
+      font-size: 14px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      background-color: #fff;
+      cursor: pointer;
+
+      &:hover {
+        border-color: #888;
+
+      }
+
+      &:focus {
+        outline: none;
+        border-color: #c70039;
+      }
+    }
+    #submit{
+      background-color: #a903af;
+      color: #ffffff
+    }
+
+    button {
+      background-color: #c70039;
+      color: white;
+      border: none;
+
+      &:hover {
+        background-color: #a5002f;
+      }
+    }
+  }
+
+  // Variables de couleur
 $dark-brown: #3c2c28;
 $mantle: #f7f6f5;
 $mauve: #7b2b80;
 $hot-pink: #f50057;
 $white: #ffffff;
-
-// 
-
 
 // Global styles
 header {
@@ -82,6 +181,7 @@ header {
             margin: 0;
         }
     }
+
     .navigation {
         ul {
             list-style: none;
@@ -91,7 +191,8 @@ header {
             padding: 0;
 
             li {
-                position: relative;
+                margin: 0 15px;
+
                 a {
                     color: $mauve;
                     text-decoration: none;
@@ -122,12 +223,14 @@ header {
     }
 }
 
-.sejour{
+  .sejour{
+
     flex-direction:row;
     align-items: center;
     justify-content: center;
-    display: flex;    
+    display: flex;
     flex-wrap: wrap;
+    
 
     & #num1{
         width: 35vw;
@@ -136,133 +239,11 @@ header {
         margin: 10px;
         padding: 10px;
         text-align: center;
-      
-        & img{
-            width: 30vw;
-            height: 25vh;
-        }  
+
+      & img{
+        width: 30vw;
+        height: 25vh;
+      }
+
     }
-}
-
-
-
-//main
-main {
-    text-align: center;
-    margin: 10px;
-    padding: 10px;
-    background-color: $base;
-}
-
-
-.main_destinations {
-    
-}
-
-.main_coeur {
-
-}
-
-.main_avis {
-
-    .avis_aficher {
-        border: $dark-brown;
-        border-radius: 5px;
-        background-color: $mantle;
-        box-shadow: 1px 1px 1px black;
-        border-radius: 5px;
-        padding: 10px;
-        margin: 25px;
-    }
-
-    .name {
-        text-align: left;
-        font-size:larger;
-    }
-
-    .avis_text {
-        text-align: left;
-    }
-
-    .avis_nb {
-        text-align: right;
-    }
-
-    .author {
-        font-style: $hot-pink;
-        font-weight: bold;
-    }
-
-    .reviews {
-        text-align: right;
-    }
-}
-
-
-
-
-
-.body_travels {
-    font-family: Arial, sans-serif;
-    background-color: #f8f8f8;
-    margin: 0;
-    padding: 20px;
-}
-  
-.filters-container {
-    max-width: 800px;
-    margin: 0 auto;
-    background: #fff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-}
-  
-.filters-container h1 {
-    font-size: 24px;
-    margin-bottom: 10px;
-    text-align: center;
-}
-  
-p {
-    margin-bottom: 20px;
-    color: #666;
-}
-  
-.filters {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-  
-    select, #submit {
-      flex: 1 1 calc(25% - 10px);
-      padding: 10px;
-      font-size: 14px;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-      background-color: #fff;
-      cursor: pointer;
-  
-        &:hover {
-            border-color: #888;
-        }
-    
-        &:focus {
-            outline: none;
-            border-color: #c70039;
-        }
-    }
-    #submit{
-      background-color: #a903af;
-      color: #ffffff
-    }
-  
-    button {
-      background-color: #c70039;
-      color: white;
-      border: none;
-        &:hover {
-            background-color: #a5002f;
-        }
-    }
-}
+  }

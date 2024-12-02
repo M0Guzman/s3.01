@@ -2,20 +2,22 @@ import { defineConfig } from 'vite';
 import laravel from 'laravel-vite-plugin';
 
 export default defineConfig({
-    css : {
+    css: {
         preprocessorOptions:{
             scss: {
-                additionalData: '@use "resources/scss/global.scss" as *;',
+                additionalData: `@use "resources/scss/global.scss" as *;`,
             },
         },
     },
     plugins: [
         laravel({
             input: [
-                'resources/images/logo.png',
-                'resources/css/app.css',
+                'resources/css/test.css',
+                'resources/scss/app.scss',
                 'resources/js/app.js',
-                'resources/scss/app.scss'
+                'resources/scss/app.scss',
+                'resources/scss/travel.scss',
+                'resources/images/logo.png'
             ],
             refresh: true,
         }),
