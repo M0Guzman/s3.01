@@ -77,7 +77,6 @@ class TravelController extends Controller
             $travels = $travels->get(['travel.*', 'rating']);
         }
 
-        View::share("vinecats", VineyardCategory::all());
         return view('travels', [
             'vignoble'=>$request->input('vignoble'),
             'duree'=>$request->input('duree'),

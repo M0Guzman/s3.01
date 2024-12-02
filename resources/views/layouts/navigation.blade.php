@@ -67,7 +67,7 @@
         <div class="header-bottom">
             <a href="/" class="logo">
                 <img src="{{ Vite::asset('resources/images/logo.png') }}" alt="Logo VinoTrip">
-                <p>Créateurs de séjours œnotouristiques</p>
+               <!-- <p>Créateurs de séjours œnotouristiques</p> -->
             </a>
             <nav class="navigation">
                 <ul class="hList">

@@ -235,7 +235,16 @@ header {
           font-weight: bold;
           padding: 10px;
           display: block;
+
+          p {
+              transition: .15s;
+          }
+
+          p:hover {
+            color: $hot-pink;
+          }
         }
+
 
         .menu-dropdown {
           display: none;
@@ -245,6 +254,9 @@ header {
           box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 
           li {
+            a {
+                transition: .15s;
+            }
             a:hover {
               color: $hot-pink;
             }

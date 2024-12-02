@@ -2,7 +2,11 @@
 
 namespace App\Providers;
 
+use App\Models\VineyardCategory;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades;
+use Illuminate\View\View;
+
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -11,7 +15,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        //
     }
 
     /**
@@ -19,6 +22,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        Facades\View::composer('layouts.app', function(View $view) {
+            $view->with('vinecats', VineyardCategory::all());
+        });
     }
 }

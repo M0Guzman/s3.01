@@ -14,7 +14,6 @@ use View;
 class HomeController extends Controller
 {
     public function index() {
-        $vineyardCategorys = VineyardCategory::all();
 
         $travels_avis = Travel::query();
         $travels_avis->join('reviews', 'reviews.travel_id', '=', 'travel.id');
@@ -32,7 +31,6 @@ class HomeController extends Controller
         $travels_avis = $travels_avis->get();
 
         View::share("travels_avis", $travels_avis);
-        View::share("vinecats", $vineyardCategorys);
         return view('homepage');
     }
 }
