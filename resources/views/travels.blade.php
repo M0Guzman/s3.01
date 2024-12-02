@@ -1,5 +1,5 @@
 <x-app-layout>
-  <section class body_travels>
+  <section class="body_travels">
       <br>
 
     <div class="filters-container" >

@@ -1,14 +1,6 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="travel">
-    <title>Travel</title>
+<x-app-layout>
     @vite(['resources/scss/travel.scss'])
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css" integrity="sha512-5Hs3dF2AEPkpNAR7UiOHba+lRSJNeM2ECkwxUIxC1Q/FLycGTbNapWXB4tP889k5T5Ju8fs4b1P5z/iB4nMfSQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/js/all.min.js" integrity="sha512-1JkMy1LR9bTo3psH+H4SV5bO2dFylgOy+UJhMus1zF4VEFuZVu5lsi4I6iIndE4N9p01z1554ZDcvMSjMaqCBQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <body>
+        <section>
         <div class="container">
             <div class="image-section">
                 <img src="{{ $travel->resources[0]->get_url() }}">
@@ -34,7 +26,7 @@
                         <span class="format">coffret (livraison sous 4 à 6 jours ouvrés)</span>
                     </p>
                 </div>
-                <div class="avis">
+                <div class="avis mt-4">
                         @foreach ($travel->reviews as $review)
 
                             <h3>{{ $review->title }}</h3>
@@ -45,6 +37,5 @@
                 </div>
             </div>
         </div>
-    </body>
-</head>
-</html>
+    </section>
+</x-app-layout>

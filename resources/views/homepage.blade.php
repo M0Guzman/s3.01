@@ -1,24 +1,23 @@
 <x-app-layout>
-    
+
     <!-- Contenu principal -->
     <main class="main_destinations">
         <h1 class="text-center text-3xl">Nos destinations</h1>
     </main>
-    
+
     <!-- Contenu principal -->
     <main class="main_coeur">
         <h1 class="text-center text-3xl">Séjours coups de coeur</h1>
     </main>
-    
+
     <!-- Contenu principal -->
-     @vite(['resources/scss/app.scss'])
-    <main class="main_avis">
+    <main class="main_avis container mx-auto">
         <h1 class="text-center text-3xl">Avis des voyageurs</h1>
         @foreach ($travels_avis as $travel_avis)
-        <!--{{ $travel_avis }} -->
+        <!--{ { $travel_avis } } -->
             <div class="avis_aficher mt-4">
                 <div class="name">
-                    <a href="https://www.vinotrip.com/fr/sejours-oenologiques/12-week-end-oenologique-saint-emilion.html" 
+                    <a href="{{ route('afficher', [ 'id' => $travel_avis->id ]) }}"
                         title="Saint-Emilion - Séjour oenologique">
                         {{ substr($travel_avis->title,0,50) }}
                     </a>
@@ -48,9 +47,9 @@
                         </span>
                         <span class="author">{{ $travel_avis->user_last_name }} <a>{{ $travel_avis->user_first_name }}</a>.</span>
                     </div>
-                        
+
                     <div class="avis_nb">
-                        <a class="reviews" href="https://www.vinotrip.com/fr/sejours-oenologiques/12-week-end-oenologique-saint-emilion.html#avis">
+                        <a class="reviews" href="{{ route('afficher', [ 'id' => $travel_avis->id ]) }}">
                         Lire les {{ $travel_avis->reviews_count }} avis
                         </a>
                     </div>

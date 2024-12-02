@@ -5,7 +5,7 @@
         </h2>
     </header>
 
-   
+
 
     <div style="width: 350px; margin:1em;">
         <form method="post" action="{{ route('address.create') }}" class="sous-section">
@@ -17,7 +17,7 @@
 
             <label style="margin: 10px 0;">Rue</label>
             <div class="content">
-                
+
                 <x-text-input style="width: 300px;" id="rue" name="rue" type="text" required autofocus />
             </div>
 
@@ -37,12 +37,12 @@
                 <div style="width: 75px;">
                     <x-text-input style="width: 75px;" id="cp" name="cp" type="text" required autofocus/>
                 </div>
-                    
+
                 <div style="margin: 0 0 0 10px; width:215px;">
                 <select style="width: 215px;" id="department" name="department" required autofocus>
                     <option>Selectionner un département</option>
                     @foreach($departments as $unDepartment)
-                        <option>
+                        <option value="{{ $unDepartment->id }}">
                             {{ $unDepartment->name }}
                         </option>
                     @endforeach

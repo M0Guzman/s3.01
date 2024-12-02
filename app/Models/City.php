@@ -11,7 +11,8 @@ class City extends Model
 
     protected $fillable = [
         'name',
-        'department_zip'
+        'zip',
+        'department_id'
     ];
 
     public function department(): BelongsTo
@@ -22,7 +23,7 @@ class City extends Model
     public function casts(): array
     {
         return [
-            'department_zip' => 'string'
+            'zip' => 'string'
         ];
     }
 }

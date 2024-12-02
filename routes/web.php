@@ -6,6 +6,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\User\UserAddressController;
 use App\Http\Middleware\FullyVerified;
 use App\Http\Controllers\TravelController;
+use App\Http\Middleware\RedirectIfUnverified;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,11 +20,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [HomeController::class, 'index']);
-
-Route::get('/travels', [TravelController::class, 'show'])->name('travels.show');
-
-Route::get('/afficher/{id}', [TravelController::class,'afficher'])->name('afficher');
+Route::middleware([RedirectIfUnverified::class])->group(function() {
+    Route::get('/', [HomeController::class, 'index']);
+    Route::get('/travels', [TravelController::class, 'show'])->name('travels.show');
+    Route::get('/afficher/{id}', [TravelController::class,'afficher'])->name('afficher');
+});
 
 
 Route::get('/dashboard', function () {

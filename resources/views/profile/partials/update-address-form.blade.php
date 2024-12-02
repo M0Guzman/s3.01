@@ -9,7 +9,7 @@
         </p>
     </header>
 
-    
+
     @if (session('status') === 'Address-deleted')
         <p
             x-data="{ show: true }"
@@ -19,8 +19,8 @@
             class="text-sm text-gray-600 dark:text-gray-400"
         >{{ __('Adresse supprimé.') }}</p>
     @endif
-    
-    
+
+
     <div class="segment formConteneur">
         @foreach ($userAddresses as $OneUserAddress)
             <div style="width: 350px; margin:1em;">
@@ -46,24 +46,24 @@
 
                     <div class="conteneur" style="margin: 10px 0;">
                         <div style="width: 75px;">
-                            <x-text-input style="width: 75px;" id="cp" name="cp" type="text" value="{{ $OneUserAddress->address->city->department_zip }}" required autofocus/>
+                            <x-text-input style="width: 75px;" id="cp" name="cp" type="text" value="{{ $OneUserAddress->address->city->zip }}" required autofocus/>
                         </div>
-                            
+
                         <div style="margin: 0 0 0 10px; width:215px;">
                         <select style="width: 215px;" id="department" name="department" required autofocus>
                             <option>Sélectionnez un département</option>
                             @foreach($departments as $unDepartment)
-                                <option
-                                    @if($OneUserAddress->address->city->department->id == $unDepartment->id) selected @endif>
+                                <option value="{{ $unDepartment->id }}"
+                                    @selected($unDepartment->id == $OneUserAddress->address->city->department->id)>
                                     {{ $unDepartment->name }}
                                 </option>
                             @endforeach
                         </select>
                     </div>
-                        
+
                     </div>
 
-                    
+
 
                     <div>
                         <x-primary-button style="margin: 0 0 0 10px;width:300px; height:50px;justify-content:center;margin: 0 10px 0 0">Modifier</x-primary-button>
@@ -84,10 +84,10 @@
                     @method('delete')
                     <input type="hidden" id="address_id" name="address_id" value="{{ $OneUserAddress->address_id }}"></input>
                     <x-primary-button  id="remove_button" name="remove_button" class="content" style="width:300px;height:50px;justify-content:center;">Supprimer l'adresse</x-primary-button>
-                </form>    
+                </form>
             </div>
         @endforeach
-    </div>  
+    </div>
 
 
     <x-modal name="confirm-save-address" focusable>

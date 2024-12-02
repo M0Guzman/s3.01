@@ -10,6 +10,10 @@ $mauve: #7b2b80;
 $hot-pink: #f50057;
 $white: #ffffff;
 
+body {
+    margin: 0;
+    padding: 0;
+}
 
 .segment {
     width: 100%;
@@ -37,13 +41,6 @@ $white: #ffffff;
     display: flex;
     flex-wrap: wrap;
     flex-basis: max-content;
-}
-
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f8f8f8;
-    margin: 0;
-    padding: 20px;
 }
 
 .filters-container {

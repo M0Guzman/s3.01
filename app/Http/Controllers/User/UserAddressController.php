@@ -12,7 +12,7 @@ use Illuminate\Http\Request;
 class UserAddressController extends Controller
 {
     public function edit(Request $request) {
-    
+
         $request->merge([
             'address_id' => (int) $request->address_id,
         ]);
@@ -24,15 +24,15 @@ class UserAddressController extends Controller
             'telephone' => ['required','string', 'max:10'],
             'ville' => ['required','string','max:255'],
             'cp' => ['required','string','max:5'],
-            'department' => ['required','string','max:100']
+            'department' => ['required','int',"exists:departments,id"]
         ]);
-        
+
         $user_id = $request->user()->id;
 
         $useraddress = UserAddress::whereIn('user_id', [$user_id])
             ->where('address_id', $validated["address_id"])
             ->first();
-        
+
         $oneAddress = $useraddress->address;
         if (!$useraddress) {return "ERROR";} // A modifier proprement
 
@@ -45,58 +45,50 @@ class UserAddressController extends Controller
             'phone' => $validated['telephone']
         ]);
 
-        if ($validated['ville'] != $oneAddress->city->name) {
+        if ($validated['ville'] != $oneAddress->city->name || $validated['cp'] != $oneAddress->city->zip || $validated['department'] != $oneAddress->city->department_id) {
             $city=City::where('name','=',$validated['ville'])->first();
             if($city == null) {
-                $department=Department::find($validated['cp']);
-                if($department == null) {
-                    $department = Department::create([
-                        'zip' => $validated['cp'],
-                        'name' => $validated['department']
-                    ]);
-                }
-
                 $city = City::create([
                     'name' => $validated['ville'],
-                    'department_zip' => $department->zip,
+                    'zip' => $validated['cp'],
+                    'department_id' => $validated['department']
                 ]);
-            
+            } elseif ($city->zip != $validated['cp'] || $validated['department'] != $oneAddress->city->department_id) {
+                $city->update([
+                    'zip' => $validated['cp'],
+                    'department_id' => $validated['department']
+                ]);
+            }
+
             $oneAddress->update([
                 'city_id' => $city->id,
-                'department_id' => $department->id
             ]);
-            }
         }
 
-        
+
         return back()->with('status', 'Address-updated');
 
     }
 
-
-
-
     public function create(Request $request) {
-        
-        
         $validated = $request->validate([
-            //Rajouter nom address dans la bd
             'addressname' => ['required', 'string', 'max:255'],
             'rue' => ['required','string','max:255'],
             'ville' => ['required','string','max:255'],
             'cp' => ['required','string','max:5'],
-            'department' => ['required','string','max:100'],
+            'department' => ['required','int',"exists:departments,id"],
             'telephone' => ['required','string', 'max:10']
         ]);
-        
+
 
         $user_id = $request->user()->id;
-        
+
         $city=City::where('name','=',$validated['ville'])->first();
         if($city == null) {
             $city = City::create([
                 'name' => $validated['ville'],
-                'department_zip' => $validated['department'],
+                'zip' => $validated['cp'],
+                'department_id' => $validated['department'],
             ]);
         }
 
@@ -106,7 +98,6 @@ class UserAddressController extends Controller
             'street' => $validated['rue'],
             'city_id' => $city->id,
         ]);
-                
 
         $UserAddress = UserAddress::create([
             'user_id' => $user_id,
@@ -117,8 +108,8 @@ class UserAddressController extends Controller
     }
 
     public function destroy(Request $request) {
-        
-        $user_id = $request->user()->id;        
+
+        $user_id = $request->user()->id;
 
         $this_address_id = $request->address_id;
 
@@ -126,8 +117,8 @@ class UserAddressController extends Controller
 
         UserAddress::where('user_id', $user_id)->where('address_id', $this_address_id)->delete();
 
-        $UserAddress=Address::where('address_id','=',$this_address_id)->first();
-        if ($UserAddress == null) {
+        $UserAddress = Address::find($this_address_id)->first();
+        if ($UserAddress != null) {
             Address::where('id', $this_address_id)->delete();
         }
 
