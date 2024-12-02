@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Filtres Séjours Œnologiques</title>
-  @vite(['resources/scss/app.scss'])
+  @vite(['resources/scss/travels.scss'])
 </head>
 <header>
         <!-- Bande supérieure -->
