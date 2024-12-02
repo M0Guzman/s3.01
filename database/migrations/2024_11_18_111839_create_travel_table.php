@@ -20,10 +20,12 @@ return new class extends Migration
             $table->id();
 
             $table->foreignIdFor(WineRoad::class)->constrained();
-            $table->foreignIdFor(Department::class)->constrained();
             $table->foreignIdFor(TravelCategory::class)->constrained();
             $table->foreignIdFor(VineyardCategory::class)->constrained();
             $table->foreignIdFor(ParticipantCategory::class)->constrained();
+
+            $table->string('department_zip')->index();
+            $table->foreign('department_zip')->references('zip')->on('departments')->constrained();
 
             $table->string('title');
             $table->text('description');

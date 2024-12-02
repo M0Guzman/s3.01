@@ -9,89 +9,85 @@
         </p>
     </header>
 
-    <form id="send-verification" method="post" action="{{ route('verification.send') }}">
-        @csrf
-    </form>
-
     
-        @csrf
-        @method('patch')
+    @if (session('status') === 'Address-deleted')
+        <p
+            x-data="{ show: true }"
+            x-show="show"
+            x-transition
+            x-init="setTimeout(() => show = false, 2000)"
+            class="text-sm text-gray-600 dark:text-gray-400"
+        >{{ __('Adresse supprimé.') }}</p>
+    @endif
+    
+    
+    <div class="segment formConteneur">
+        @foreach ($userAddresses as $OneUserAddress)
+            <div style="width: 350px; margin:1em;">
+                <form method="post" action="{{ route('address.edit') }}" class="sous-section">
+                    @csrf
+                    @method('patch')
+                    <input type="hidden" id="address_id" name="address_id" value="{{ $OneUserAddress->address->id }}"></input>
+                    <div class="content" style="margin: 10px 0;">
+                        <x-text-input style="width: 300px;" id="addressname" name="addressname" type="text" value="{{ $OneUserAddress->address->name }}" required/>
+                    </div>
 
-        @php
-            $adresses = [
-                [
-                "name" => "Perso",
-                "numero" => "1 rue de l'arc-en-ciel",
-                "code" => "74000",
-                "ville" => "Annecy"
-                ],
-                [
-                "name" => "Private",
-                "numero" => "7 rue de l'arc-en-ciel",
-                "code" => "74000",
-                "ville" => "Annecy"
-                ],
-                [
-                "name" => "Ancienne adresse",
-                "numero" => "124 route des alpes",
-                "code" => "73100",
-                "ville" => "Aix les bains"
-                ]
-                ]
+                    <div class="content" style="margin: 10px 0;">
+                        <x-text-input style="width: 300px;" id="rue" name="rue" type="text" value="{{ $OneUserAddress->address->street }}" required autofocus />
+                    </div>
 
-        @endphp
-        
-        <div class="segment formConteneur">
-            @foreach ($adresses as $adresse)  
-                <div style="width: 350px; margin:1em;">
-                    <form method="post" action="{{ route('profile.update') }}" class="sous-section">
+                    <div style="margin: 10px 0; width:300px; ">
+                        <x-text-input style="width:300px" id="telephone" name="telephone" type="text" value="{{ $OneUserAddress->address->phone }}" required autofocus/>
+                    </div>
 
-                        <input type="hidden" name="adresse_id" value="{{ adresse->address_id }}"></input>
-                        <div class="content" style="margin: 10px 0;">
-                            <x-text-input style="width: 300px;" id="addressname" name="addressname" type="text" value="{{ $adresse['name'] }}" required/>
+                    <div style="width:300px;">
+                            <x-text-input style="width:300px" id="ville" name="ville" type="text" value="{{ $OneUserAddress->address->city->name }}" required autofocus/>
+                    </div>
+
+                    <div class="conteneur" style="margin: 10px 0;">
+                        <div style="width: 75px;">
+                            <x-text-input style="width: 75px;" id="cp" name="cp" type="text" value="{{ $OneUserAddress->address->city->department_zip }}" required autofocus/>
                         </div>
-
-                        <div class="content" style="margin: 10px 0;">
-                            <x-text-input style="width: 300px;" id="numero" name="numero" type="text" value="{{ $adresse['numero'] }}" required autofocus />
-                        </div>
-
+                            
                         <div style="margin: 0 0 0 10px; width:215px;">
-                            <x-text-input style="width:215px" id="telephone" name="telephone" type="text" value="{{ $adresse['ville'] }}" required autofocus/>
-                        </div>
-
-                        <div style="margin: 0 0 0 10px; width:215px;">
-                                <x-text-input style="width:215px" id="ville" name="ville" type="text" value="{{ $useradress->address->ville->name }}" required autofocus/>
-                        </div>
-
-                        <div class="conteneur" style="margin: 10px 0;">
-                            <div style="width: 75px;">
-                                <x-text-input style="width: 75px;" id="cp" name="code" type="text" value="{{ $adresse['code'] }}" required autofocus/>
-                            </div>
-                                
-                            <div style="margin: 0 0 0 10px; width:215px;">
-                                <x-text-input style="width:215px" id="departement" name="departement" type="text" value="{{ $useradress->address->ville->name }}" required autofocus/>
-                            </div>
-                        </div>
-
-                        <x-primary-button class="content" style="margin: 10px 0; height:40px; justify-content: center;">Supprimer l'adresse</x-primary-button>     
+                        <select style="width: 215px;" id="department" name="department" required autofocus>
+                            <option>Sélectionnez un département</option>
+                            @foreach($departments as $unDepartment)
+                                <option
+                                    @if($OneUserAddress->address->city->department->id == $unDepartment->id) selected @endif>
+                                    {{ $unDepartment->name }}
+                                </option>
+                            @endforeach
+                        </select>
+                    </div>
                         
-                        <div class="flex items-center gap-4">
-                            <x-primary-button>Save</x-primary-button>
+                    </div>
 
-                            @if (session('status') === 'password-updated')
-                                <p
-                                    x-data="{ show: true }"
-                                    x-show="show"
-                                    x-transition
-                                    x-init="setTimeout(() => show = false, 2000)"
-                                    class="text-sm text-gray-600 dark:text-gray-400"
-                                >{{ __('Saved.') }}</p>
-                            @endif
-                        </div>
-                    </form>
-                </div>
-            @endforeach
-        </div>  
+                    
+
+                    <div>
+                        <x-primary-button style="margin: 0 0 0 10px;width:300px; height:50px;justify-content:center;margin: 0 10px 0 0">Modifier</x-primary-button>
+
+                        @if (session('status') === 'Address-updated')
+                            <p
+                                x-data="{ show: true }"
+                                x-show="show"
+                                x-transition
+                                x-init="setTimeout(() => show = false, 2000)"
+                                class="text-sm text-gray-600 dark:text-gray-400"
+                            >{{ __('Saved.') }}</p>
+                        @endif
+                    </div>
+                </form>
+                <form  method="post" action="{{ route('address.destroy') }}" class="sous-section">
+                    @csrf
+                    @method('delete')
+                    <input type="hidden" id="address_id" name="address_id" value="{{ $OneUserAddress->address_id }}"></input>
+                    <x-primary-button  id="remove_button" name="remove_button" class="content" style="width:300px;height:50px;justify-content:center;">Supprimer l'adresse</x-primary-button>
+                </form>    
+            </div>
+        @endforeach
+    </div>  
 
 
     <x-modal name="confirm-save-address" focusable>
