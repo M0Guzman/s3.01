@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Booking extends Model
@@ -20,8 +21,9 @@ class Booking extends Model
         'start_date'
     ];
 
-    public function get_travel(): HasOne
+    
+    public function travel(): BelongsTo
     {
-        return $this->hasOne(Travel::class);
+        return $this->belongsTo(Travel::class);
     }
 }

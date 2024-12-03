@@ -50,11 +50,11 @@
                         <a href="{{ route('login') }}">Se connecter</a>
                     </li>
                     <li>
-                        <a href="{{ route('register') }}">s'enregistrer</a>
+                        <a href="{{ route('register') }}">S'enregistrer</a>
                     </li>
                 @endif
                 <li>
-                    <a href="#" class="panier">
+                    <a href="{{ route('panier.show') }}" class="panier">
                         <i class="fa-solid fa-cart-shopping" style="color: #ffffff;"></i>
                         <span>Panier</span>
                         <span class="panier-count">0</span>

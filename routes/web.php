@@ -8,7 +8,7 @@ use App\Http\Middleware\FullyVerified;
 use App\Http\Controllers\TravelController;
 use App\Http\Middleware\RedirectIfUnverified;
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\PanierController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -30,6 +30,8 @@ Route::middleware([RedirectIfUnverified::class])->group(function() {
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', FullyVerified::class])->name('dashboard');
+
+Route::get('/panier', [PanierController::class, 'show'])->name('panier.show');
 
 Route::middleware(['auth', FullyVerified::class])->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

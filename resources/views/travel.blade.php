@@ -5,7 +5,7 @@
             <div class="image-section">
                 <img src="{{ $travel->resources[0]->get_url() }}">
             </div>
-            <div class="info-section">
+            <section class="info-section">
                 <div class="header">
 
                     <h3>{{ $travel->title }}</h3>
@@ -26,6 +26,9 @@
                         <span class="format">coffret (livraison sous 4 à 6 jours ouvrés)</span>
                     </p>
                 </div>
+                <div id="panier">
+                    <a href="{{ route('panier.show') }}"><button id="paniers">Ajouter aux panier</button></a>
+                </div>
                 <div class="avis mt-4">
                         @foreach ($travel->reviews as $review)
 
@@ -35,6 +38,7 @@
 
                         @endforeach
                 </div>
+                
             </div>
         </div>
     </section>

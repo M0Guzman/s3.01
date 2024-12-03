@@ -19,16 +19,27 @@ return new class extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(PaymentType::class)->constrained();
+
+            $payment = $table->foreignIdFor(PaymentType::class);
+            $payment->constrained();
+            $payment->nullable();
+
             $resource = $table->foreignIdFor(Resource::class);
             $resource->constrained();
             $resource->nullable();
+
             $table->foreignIdFor(User::class)->constrained();
+
             $coupon = $table->foreignIdFor(Coupon::class);
             $coupon->constrained();
             $coupon->nullable();
-            $table->foreignIdFor(Address::class)->constrained();
+
+            $address = $table->foreignIdFor(Address::class);
+            $address->constrained();
+            $address->nullable();
+
             $table->text('message')->nullable();
+            
             $table->foreignIdFor(OrderState::class)->default(0);
         });
     }

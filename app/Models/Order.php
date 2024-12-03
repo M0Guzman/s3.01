@@ -42,11 +42,6 @@ class Order extends Model
         return $this->belongsTo(Coupon::class);
     }
 
-    public function booking_orders(): HasMany
-    {
-        return $this->hasMany(BookingOrder::class, '');
-    }
-
     public function bookings(): BelongsToMany
     {
         return $this->belongsToMany(Booking::class, 'booking_orders');
