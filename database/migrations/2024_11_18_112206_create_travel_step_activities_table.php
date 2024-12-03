@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('travel_activities', function (Blueprint $table) {
+        Schema::create('travel_step_activities', function (Blueprint $table) {
             $ts = $table->foreignIdFor(TravelStep::class);
             $a = $table->foreignIdFor(Activity::class);
 
@@ -29,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('travel_activities');
+        Schema::dropIfExists('travel_step_activities');
     }
 };

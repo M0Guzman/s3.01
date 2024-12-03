@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class WineRoad extends Model
 {
@@ -15,4 +17,9 @@ class WineRoad extends Model
         'name',
         'description'
     ];
+
+    public function wineRoadSteps(): HasMany
+    {
+        return $this->hasMany(WineRoadStep::class);
+    }
 }

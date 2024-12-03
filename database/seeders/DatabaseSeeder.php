@@ -7,6 +7,8 @@ use App\Models\ActivityCategory;
 use App\Models\ActivityType;
 use App\Models\CookingType;
 use App\Models\Department;
+use App\Models\OrderState;
+use App\Models\OtherPartnerActivityType;
 use App\Models\ParticipantCategory;
 use App\Models\PaymentType;
 use App\Models\RolePermission;
@@ -192,5 +194,8 @@ class DatabaseSeeder extends Seeder
         UserRole::create(['name' => 'Admin']);
 
         RolePermission::create(['name' => 'user.is_admin', 'value' => true, 'user_role_id' => 2]);
+
+        OtherPartnerActivityType::create(['name' => 'tmp_plz_fix']);
+        OrderState::create(['name' => 'En attente']);
     }
 }

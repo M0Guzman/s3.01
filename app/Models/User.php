@@ -6,8 +6,8 @@ use Fouladgar\MobileVerification\Contracts\MustVerifyMobile as IMustVerifyMobile
 use Fouladgar\MobileVerification\Concerns\MustVerifyMobile;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
@@ -55,17 +55,17 @@ class User extends Authenticatable implements MustVerifyEmail, IMustVerifyMobile
         ];
     }
 
-    public function role(): HasOne
+    public function role(): BelongsTo
     {
-        return $this->hasOne(UserRole::class);
+        return $this->belongsTo(UserRole::class);
     }
 
-    public function bank_details(): HasOne
+    public function bank_details(): BelongsTo
     {
-        return $this->hasOne(BankDetails::class);
+        return $this->belongsTo(BankDetails::class);
     }
-    public function user_addresses(): HasMany
+    public function addresses(): BelongsToMany
     {
-        return $this->hasMany(UserAddress::class);
+        return $this->belongsToMany(Address::class, 'user_addresses');
     }
 }

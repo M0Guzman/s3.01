@@ -2,11 +2,25 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Restaurant extends Model
 {
+    use HasFactory;
+
+    public $timestamps = false;
+    protected $primaryKey = 'partner_id';
+
+    protected $fillable = [
+        'partner_id',
+        'cooking_type_id',
+        'ranking',
+        'speciality'
+    ];
+
+
     public function partner(): HasOne
     {
         return $this->hasOne(Partner::class);

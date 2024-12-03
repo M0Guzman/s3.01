@@ -4,6 +4,7 @@ use App\Models\Address;
 use App\Models\Coupon;
 use App\Models\PaymentType;
 use App\Models\Resource;
+use App\Models\OrderState;
 use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -19,12 +20,16 @@ return new class extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
             $table->foreignIdFor(PaymentType::class)->constrained();
-            $table->foreignIdFor(Resource::class)->constrained();
+            $resource = $table->foreignIdFor(Resource::class);
+            $resource->constrained();
+            $resource->nullable();
             $table->foreignIdFor(User::class)->constrained();
-            $table->foreignIdFor(Coupon::class)->constrained();
+            $coupon = $table->foreignIdFor(Coupon::class);
+            $coupon->constrained();
+            $coupon->nullable();
             $table->foreignIdFor(Address::class)->constrained();
-            $table->text('message');
-            $table->string('state', 10);
+            $table->text('message')->nullable();
+            $table->foreignIdFor(OrderState::class)->default(0);
         });
     }
 

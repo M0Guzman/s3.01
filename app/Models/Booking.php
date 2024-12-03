@@ -10,6 +10,16 @@ class Booking extends Model
 {
     use HasFactory;
 
+    public $timestamps = false;
+
+    protected $fillable = [
+        'travel_id',
+        'adult_count',
+        'children_count',
+        'room_count',
+        'start_date'
+    ];
+
     public function get_travel(): HasOne
     {
         return $this->hasOne(Travel::class);

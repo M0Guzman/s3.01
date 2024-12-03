@@ -17,10 +17,9 @@ return new class extends Migration
         Schema::create('activities', function (Blueprint $table) {
             $table->id();
             $table->foreignIdFor(Partner::class)->constrained();
-            $table->foreignIdFor(ActivityType::class)->constrained();
             $table->foreignIdFor(ActivityCategory::class)->constrained();
             $table->string('name');
-            $table->string('description');
+            $table->text('description');
             $table->string('timeslot');
             $table->double('adult_price');
             $table->double('children_price');

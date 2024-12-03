@@ -2,9 +2,14 @@
 
 namespace Database\Seeders;
 
+use App\Models\Activity;
+use App\Models\Address;
+use App\Models\Order;
+use App\Models\Partner;
 use App\Models\Resource;
 use App\Models\Review;
 use App\Models\Travel;
+use App\Models\TravelStep;
 use App\Models\User;
 use App\Models\WineRoad;
 use Database\Factories\WineRoadFactory;
@@ -19,9 +24,13 @@ class DummySeeder extends Seeder
     public function run(): void
     {
         Resource::factory(10)->create();
-        WineRoad::factory(10)->create();
+        Address::factory(100)->create();
+        Activity::factory(30)->create();
+        WineRoad::factory(10)->hasWineRoadSteps(3)->create();
         Travel::factory(30)->hasResources(2)->create();
-        User::factory(50)->create();
+        User::factory(50)->hasAddresses(1)->create();
+        TravelStep::factory(20)->hasResources(2)->hasActivities(3)->create();
+        Order::factory(10)->hasBookings(2)->create();
         //Review::factory(100)->create();
 
         $titles = [

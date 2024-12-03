@@ -16,8 +16,12 @@ return new class extends Migration
     {
         Schema::create('wine_road_steps', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(GPSCoordinate::class)->constrained();
-            $table->foreignIdFor(Address::class)->constrained();
+            $gps = $table->foreignIdFor(GPSCoordinate::class);
+            $gps->constrained();
+            $gps->nullable();
+            $address = $table->foreignIdFor(Address::class);
+            $address->constrained();
+            $address->nullable();
             $table->foreignIdFor(WineRoad::class)->constrained();
             $table->string('name');
         });

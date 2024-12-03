@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\ActivityType;
 use App\Models\Address;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -14,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('partners', function (Blueprint $table) {
             $table->id();
+            $table->foreignIdFor(ActivityType::class)->constrained();
             $table->foreignIdFor(Address::class)->constrained();
             $table->string('name');
             $table->string('email');
