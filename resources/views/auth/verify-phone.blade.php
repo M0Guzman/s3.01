@@ -1,4 +1,6 @@
 <x-app-layout>
+ <div class="flex flex-col sm:justify-center items-center sm:pt-0 bg-gray-100 dark:bg-gray-900">
+<div class="w-full sm:max-w-xl mt-6 px-6 py-4 bg-white dark:bg-gray-800 shadow-md overflow-hidden sm:rounded-lg">
     <div class="mb-4 text-sm text-gray-600 dark:text-gray-400">
         {{ __('Un code de vérification vous a été envoyer par SMS, merci de le renseigner ci-dessous pour terminer votre inscription.') }}
     </div>
@@ -34,5 +36,7 @@
                 {{ __('Se déconnecter') }}
             </button>
         </form>
+    </div>
+    </div>
     </div>
 </x-app-layout>
