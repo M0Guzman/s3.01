@@ -19,15 +19,15 @@ class TravelController extends Controller
     {
         $travels = [];
         if (
-            $request->has('vignoble') &&   $request->input('vignoble') != ''||
+            $request->has('vineyard_category') && $request->input('vineyard_category') != ''||
             $request->has('duree') &&  $request->input('duree') != '' ||
-            $request->has('pour-qui') &&   $request->input('pour-qui') != '' ||
-            $request->has('envie') && $request->input('envie') != '') {
+            $request->has('participant_category') &&   $request->input('participant_category') != '' ||
+            $request->has('travel_category') && $request->input('travel_category') != '') {
             $wheres = [];
 
-            if($request->has('vignoble') && $request->input('vignoble') != '')
+            if($request->has('vineyard_category') && $request->input('vineyard_category') != '')
             {
-                $cavignoble = VineyardCategory::where('name', '=', $request->input('vignoble'))->first();
+                $cavignoble = VineyardCategory::where('name', '=', $request->input('vineyard_category'))->first();
 
                 array_push($wheres, ['vineyard_category_id', '=', $cavignoble->id]);
             }
@@ -37,16 +37,16 @@ class TravelController extends Controller
                 array_push($wheres, ['days', '=', $request->input('duree')]);
 
             }
-            if($request->has('pour-qui') && $request->input('pour-qui') != '')
+            if($request->has('participant_category') && $request->input('participant_category') != '')
             {
-                $caParticipant = ParticipantCategory::where('name','=',$request->input('pour-qui'))->first();
+                $caParticipant = ParticipantCategory::where('name','=',$request->input('participant_category'))->first();
 
                 array_push($wheres, ['participant_category_id', '=', $caParticipant->id]);
 
             }
-            if($request->has('envie') && $request->input('envie') != '')
+            if($request->has('travel_category') && $request->input('travel_category') != '')
             {
-                $caTravel = TravelCategory::where('name','=',$request->input('envie'))->first();
+                $caTravel = TravelCategory::where('name','=',$request->input('travel_category'))->first();
 
                 array_push($wheres, ['travel_category_id', '=', $caTravel->id]);
             }
@@ -78,11 +78,13 @@ class TravelController extends Controller
         }
 
         return view('travels', [
-            'vignoble'=>$request->input('vignoble'),
-            'duree'=>$request->input('duree'),
-            'pour_qui'=>$request->input('pour-qui'),
-            'envie'=>$request->input('envie'),
-            "vinecats" => VineyardCategory::all(),
+            'vineyard_category' => $request->input('vineyard_category'),
+            'duree' => $request->input('duree'),
+            'participant_category' => $request->input('pour-qui'),
+            'travel_category'=> $request->input('travel_category'),
+            "vineyard_categories" => VineyardCategory::all(),
+            "travel_categories" => TravelCategory::all(),
+            "participant_categories" => ParticipantCategory::all(),
             'sejours' => $travels
         ]);
     }

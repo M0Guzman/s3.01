@@ -20,11 +20,11 @@
                   de l’amateur au néophyte, de trouver leur bonheur.</p>
       <form class="filters" action="#">
         @csrf
-        <select id="vignoble" name="vignoble"> <!-- mettre les valeur select avec la base de donnée-->
+        <select id="vineyard_category" name="vineyard_category">
 
-          <option value="" @selected($vignoble == "")>Vignoble</option>
-          @foreach ($vinecats as $vinecat)
-            <option value="{{ $vinecat->name}}" @selected($vignoble == $vinecat->name)> {{ $vinecat->name}}</option>
+          <option value="" @selected($vineyard_category == "")>Vignoble</option>
+          @foreach ($vineyard_categories as $cat)
+            <option value="{{ $cat->name}}" @selected($vineyard_category == $cat->name)> {{ $cat->name}}</option>
           @endforeach
         </select>
         <select id="duree" name="duree">
@@ -34,21 +34,18 @@
           <option value="2" @selected($duree == "2")>2 jour / 1 nuit</option>
           <option value="3" @selected($duree == "3")>3 jours / 2 nuits</option>
         </select>
-        <select id="pour-qui" name="pour-qui">
-          <option value="" selected>Pour qui</option>
-          <option value="couple" @selected($pour_qui == 'couple')>Couple</option>
-          <option value="famille" @selected($pour_qui == 'famille')>Famille</option>
-          <option value="Amis" @selected($pour_qui == 'Amis')>Amis</option>
-        </select>
-        <select id="envie" name="envie">
-          <option value="" selected>Envie</option>
+        <select id="participant_category" name="participant_category">
+          <option value="" @selected($participant_category == "")>Pour qui</option>
 
-          <option value="bien-etre" @selected($envie == "bien-etre")>Bien-être</option>
-          <option value="gastronomie" @selected($envie == "gastronomie")>Gastronomie</option>
-          <option value="culture" @selected($envie == "culture")>Culture</option>
-          <option value="Golf" @selected($envie == "Golf")>Golf</option>
-          <option value="Bio" @selected($envie == "Bio")>Bio</option>
-          <option value="Insolite" @selected($envie == "Insolite")>Insolite</option>
+          @foreach ($participant_categories as $cat)
+            <option value="{{ $cat->name}}" @selected($participant_category == $cat->name)> {{ $cat->name}}</option>
+          @endforeach
+        </select>
+        <select id="travel_category" name="travel_category">
+          <option value="" @selected($travel_category = "")>Envie</option>
+          @foreach ($travel_categories as $cat)
+            <option value="{{ $cat->name}}" @selected($travel_category == $cat->name)> {{ $cat->name}}</option>
+          @endforeach
         </select>
         <input id="submit" type="submit" value="Recherche">
       </form>
