@@ -1,0 +1,96 @@
+body {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f8f8f8;
+    color: #333;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 20px auto;
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.info-section, .booking-section {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.info-section div {
+    flex: 1;
+    margin-right: 20px;
+}
+
+.info-section div:last-child {
+    margin-right: 0;
+}
+
+.card {
+    border: 1px solid #ddd;
+    padding: 15px;
+    border-radius: 8px;
+    background-color: #fefefe;
+}
+
+.card img {
+    max-width: 100%;
+    border-radius: 8px;
+    margin-bottom: 10px;
+}
+
+.card h2 {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.options {
+    margin-top: 20px;
+}
+
+.options label {
+    display: block;
+    margin-bottom: 10px;
+}
+
+.price {
+    font-size: 24px;
+    font-weight: bold;
+    text-align: right;
+    margin-top: 20px;
+}
+
+.btn {
+    display: inline-block;
+    text-align: center;
+    background-color: #572a7f;
+    color: #fff;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 4px;
+    text-decoration: none;
+    margin-top: 20px;
+}
+
+.steps {
+    background: #f4f4f4;
+    padding: 15px;
+    border-radius: 8px;
+}
+
+.steps p {
+    margin: 10px 0;
+}
+
+.steps p span {
+    font-weight: bold;
+}

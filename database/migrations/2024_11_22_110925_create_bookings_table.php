@@ -15,10 +15,10 @@ return new class extends Migration
         Schema::create('bookings', function (Blueprint $table) {
             $table->id();
             $table->foreignIdFor(Travel::class)->constrained();
-            $table->integer('adult_count');
-            $table->integer('children_count');
-            $table->integer('room_count');
-            $table->date('start_date');
+            $table->integer('adult_count')->default(1);
+            $table->integer('children_count')->default(0);
+            $table->integer('room_count')->default(1);
+            $table->date('start_date')->default(now());
         });
     }
 

@@ -9,6 +9,7 @@ use App\Http\Controllers\TravelController;
 use App\Http\Middleware\RedirectIfUnverified;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PanierController;
+use App\Http\Controllers\ModifeControlleur;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -32,7 +33,9 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', FullyVerified::class])->name('dashboard');
 
 Route::get('/panier', [PanierController::class, 'show'])->name('panier.show');
+Route::get('/addpanier', [PanierController::class, 'addPanier'])->name('addpanier.addPanier');
 
+Route::get('/modife', [ModifeControlleur::class,'show'])->name('modife.show');
 
 Route::middleware(['auth', FullyVerified::class])->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

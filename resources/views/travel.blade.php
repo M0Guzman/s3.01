@@ -18,17 +18,25 @@
                     <p>{{ $travel->description}}</p>
 
                 </div>
-                <div class="footer">
-                    <a href="{{ route('panier.show') }}"><button class="gift-option">J'opte pour le format cadeau</button></a>
-                    <p class="validity">Cadeau valable jusqu’au <strong> {{ $date }} </strong></p>
-                    <p>Disponible aux formats :
-                        <span class="format">e-coffret (envoi immédiat)</span> |
-                        <span class="format">coffret (livraison sous 4 à 6 jours ouvrés)</span>
-                    </p>
-                </div>
-                <div id="panier">
-                    <a href="{{ route('panier.show') }}"><button id="paniers">Ajouter aux panier</button></a>
-                </div>
+                <form action="{{ route('addpanier.addPanier') }}" method="get">
+                    <div class="footer">
+                        <button class="gift-option">J'opte pour le format cadeau</button>
+                        <input type="hidden" value="{{ $travel->id }}" name="id"/>
+                        <p class="validity">Cadeau valable jusqu’au <strong> {{ $date }} </strong></p>
+                        <p>Disponible aux formats :
+                            <span class="format">e-coffret (envoi immédiat)</span> |
+                            <span class="format">coffret (livraison sous 4 à 6 jours ouvrés)</span>
+                        </p>
+                    </div>
+                </form>
+
+                <form action="{{ route('modife.show') }}" method="get">
+                    <div id="panier">
+                        <input id="paniers"type="submit" value="Ajouter aux panier"/>
+                        <input type="hidden" value="{{ $travel->id }}" name="id"/>
+                    </div>
+                </form>
+
                 <div class="avis mt-4">
                         @foreach ($travel->reviews as $review)
 
