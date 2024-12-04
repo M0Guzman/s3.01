@@ -19,7 +19,7 @@
 
                 </div>
                 <div class="footer">
-                    <a href="{{ route('panier.show') }}"><button class="gift-option">J'opte pour le format cadeau</button></a>
+                    <a href="{{ route('order.show') }}"><button class="gift-option">J'opte pour le format cadeau</button></a>
                     <p class="validity">Cadeau valable jusqu’au <strong> {{ $date }} </strong></p>
                     <p>Disponible aux formats :
                         <span class="format">e-coffret (envoi immédiat)</span> |
@@ -27,7 +27,7 @@
                     </p>
                 </div>
                 <div id="panier">
-                    <a href="{{ route('panier.show') }}"><button id="paniers">Ajouter aux panier</button></a>
+                    <a href="{{ route('order.show') }}"><button id="paniers">Ajouter aux panier</button></a>
                 </div>
                 <div class="avis mt-4">
                         @foreach ($travel->reviews as $review)
@@ -37,7 +37,7 @@
                             {{ $review->description }}
 
                         @endforeach
-                </div>                
+                </div>
             </div>
         </div>
     </section>

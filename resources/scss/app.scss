@@ -330,3 +330,11 @@ header {
     text-align: right;
   }
 }
+
+label:has(> div > .payment-radio:checked) > div {
+    background-color: theme('colors.orange.300');
+}
+
+label:has(> div > .payment-radio:checked:hover) > div {
+    background-color: theme('colors.orange.400');
+}

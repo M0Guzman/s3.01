@@ -31,10 +31,19 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', FullyVerified::class])->name('dashboard');
 
-Route::get('/panier', [PanierController::class, 'show'])->name('panier.show');
+Route::get('/order', [PanierController::class, 'show'])->name('order.show');
 
 
 Route::middleware(['auth', FullyVerified::class])->group(function () {
+    Route::get('/process-order/address', [PanierController::class, 'show_address'])->name('order.process.address.show');
+    Route::post('/process-order/address', [PanierController::class, 'process_address'])->name('order.process.address');
+
+    Route::get('/process-order/agreements', [PanierController::class, 'show_agreements'])->name('order.process.agreements.show');
+    Route::post('/process-order/agreements', [PanierController::class, 'process_agreements'])->name('order.process.agreements');
+
+    Route::get('/process-order/confirmation', [PanierController::class, 'show_confirmation'])->name('order.process.confirmation.show');
+    Route::post('/process-order/confirmation', [PanierController::class, 'process_confirmation'])->name('order.process.confirmation');
+
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
