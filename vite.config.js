@@ -18,6 +18,7 @@ export default defineConfig({
                 'resources/scss/travel.scss',
                 'resources/scss/travels.scss',
                 'resources/scss/panier.scss',
+                'resources/images/delete.png',
                 'resources/images/logo.png'
             ],
             refresh: true,

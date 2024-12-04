@@ -19,7 +19,7 @@
 
                 </div>
                 <div class="footer">
-                    <button class="gift-option">J'opte pour le format cadeau</button>
+                    <a href="{{ route('panier.show') }}"><button class="gift-option">J'opte pour le format cadeau</button></a>
                     <p class="validity">Cadeau valable jusqu’au <strong> {{ $date }} </strong></p>
                     <p>Disponible aux formats :
                         <span class="format">e-coffret (envoi immédiat)</span> |
@@ -37,8 +37,7 @@
                             {{ $review->description }}
 
                         @endforeach
-                </div>
-                
+                </div>                
             </div>
         </div>
     </section>

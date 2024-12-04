@@ -125,14 +125,24 @@ body {
     font-weight: bold;
   }
 
-  #paniers{
+  #panier{
+    text-align: center;
+    align-items: center;
+    margin-top: 20px;
+
+  & #paniers{
     background: #8a2be2;
+    text-align: center;
     color: #fff;
     border: none;
     padding: 10px 20px;
     border-radius: 4px;
     cursor: pointer;
     transition: background 0.3s;
+
+    &:hover {
+        background: #5d1480;
+    }
   }
-  
+}
   

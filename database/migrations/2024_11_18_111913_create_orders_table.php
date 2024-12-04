@@ -28,7 +28,9 @@ return new class extends Migration
             $resource->constrained();
             $resource->nullable();
 
-            $table->foreignIdFor(User::class)->constrained();
+            $user = $table->foreignIdFor(User::class);
+            $user->constrained();
+            $user->nullable();
 
             $coupon = $table->foreignIdFor(Coupon::class);
             $coupon->constrained();

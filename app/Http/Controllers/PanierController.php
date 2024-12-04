@@ -19,7 +19,7 @@ class PanierController extends Controller
     {
         
 
-        Session::put('order_id',5);
+        Session::remove('order_id');
         $order = null;
 
         if(Session::has('order_id')) 
@@ -28,7 +28,7 @@ class PanierController extends Controller
         }
         else {
             $order = Order::create([
-                'user_id' =>$request->user()->id,
+                
             ]);
             Session::put('order_id',$order->id);
         }
