@@ -44,3 +44,7 @@ Route::middleware(['auth', FullyVerified::class])->group(function () {
 Route::get('/file/{id}', [FileController::class, 'get_file'])->name('file');
 
 require __DIR__.'/auth.php';
+
+Route::get('/wine_road', function () {
+    return view('wine_road');
+});

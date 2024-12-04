@@ -1,0 +1,82 @@
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: #f7f7f7;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.title {
+  text-align: center;
+  color: #4a1a1a; /* Couleur du texte */
+  font-size: 36px;
+  font-family: 'Georgia', serif;
+  position: relative;
+  display: inline-block; /* Nécessaire pour positionner la ligne */
+  margin-bottom: 20px;
+  width: 100%;
+
+  &::after {
+      content: "";
+      display: block;
+      width: 50%; /* Ajuste la largeur de la ligne */
+      height: 3px; /* Épaisseur de la ligne */
+      background-color: #8b1b1b; /* Couleur de la ligne */
+      margin: 0 auto; /* Centre la ligne sous le texte */
+      margin-top: 5px; /* Espacement entre le texte et la ligne */
+  }
+}
+
+
+.intro, .routes {
+  margin: 20px 0;
+}
+
+.intro h2, .routes h2 {
+  color: #7b1b1b;
+  font-size: 28px;
+  border-bottom: 2px solid #7b1b1b;
+  display: inline-block;
+  margin-bottom: 10px;
+}
+
+p {
+  color: #333;
+  line-height: 1.8;
+  font-size: 16px;
+}
+
+.images {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 3 colonnes égales */
+  gap: 0; /* Supprime l'espace entre les cellules */
+  margin: 0;
+  padding: 0;
+}
+
+.images img {
+  width: 100%; /* Remplit complètement chaque cellule */
+  height: auto;
+  margin: 0;
+  border: none;
+  padding: 0;
+  
+}
+
+
+
+a {
+  color: #7b1b1b;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+a:hover {
+  text-decoration: underline;
+}

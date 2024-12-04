@@ -17,7 +17,11 @@ export default defineConfig({
                 'resources/scss/app.scss',
                 'resources/scss/travel.scss',
                 'resources/scss/travels.scss',
-                'resources/images/logo.png'
+                'resources/images/logo.png',
+                'resources/scss/wine_road.scss',
+                'resources/images/vrdv.jpg', 
+                'resources/images/trdv.jpg', 
+                'resources/images/rdv.jpg'
             ],
             refresh: true,
         }),
