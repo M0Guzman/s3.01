@@ -41,11 +41,12 @@ class PanierController extends Controller
     }
 
     public function addPanier(Request $request)
-    {
-        if(!$request->has('id'))
-            return redirect(RouteServiceProvider::HOME);
+{
+    if (!$request->has('id')) {
+        return redirect(RouteServiceProvider::HOME);
+    }
         
-        $order = null;
+        /*$order = null;
        
         if(Session::has('order_id')) 
         {
@@ -59,15 +60,24 @@ class PanierController extends Controller
                 
             ]);
             Session::put('order_id',$order->id);
-        }
+        }*/ 
 
+        $order = Session::has('order_id') 
+        ? Order::find(Session::get('order_id')) 
+        : Order::create([]);
+
+    Session::put('order_id', $order->id);
         
 
-        $order->bookings()->create([
-            'travel_id' => $request->input('id'),
-        ]);
-        
-        return view('panier', ['order' => $order]);
-    }
+    $order->bookings()->create([
+        'travel_id' => $request->input('id'),
+        'adult_count' => $request->input('nbAdultes'),
+        'children_count' => $request->input('nbEnfants'),
+        'room_count' => $request->input('nbChambre'),
+        'start_date' => $request->input('date'),
+    ]);
+
+    return view('panier', ['order' => $order]);
+}
     
 }

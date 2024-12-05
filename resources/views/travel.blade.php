@@ -18,7 +18,7 @@
                     <p>{{ $travel->description}}</p>
 
                 </div>
-                <form action="{{ route('addpanier.addPanier') }}" method="get">
+                <form action="{{ route('modife.show') }}" method="get">
                     <div class="footer">
                         <button class="gift-option">J'opte pour le format cadeau</button>
                         <input type="hidden" value="{{ $travel->id }}" name="id"/>

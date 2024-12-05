@@ -26,18 +26,21 @@
                         <th>Date du sejour</th>
                         <th>Nombre d'adulte(s)</th>
                         <th>Nombre d'enfant(s)</th>
+                        <th>Nombre de chambre(s)</th>
                         <th>Prix</th>
 
                         
                         @foreach ($order->bookings as $booking)
-                        <tr>
-                            <td id="title">{{ $booking->travel->title}}</td>
-                            <td id="date">{{ Carbon\Carbon::createFromFormat('Y-m-d',$booking->start_date)->format('d/m/Y') }}</td>
-                            <td id="adultes">{{ $booking->adult_count }} adulte(s)</td>
-                            <td id="enfants">{{ $booking->children_count }} enfant(s)</td>
-                            <td id="prix">{{ $booking->travel->price_per_person * ( $booking->adult_count + $booking->children_count ) }} € </td>
-                            <td id="img"><img src="{{ Vite::asset('resources/images/delete.png') }}"></td>
-                        </tr>
+                            <tr>
+                                
+                                <td id="title"><a href="{{ route('modife.show') }}">{{ $booking->travel->title }}</a></td>
+                                <td id="date">{{ $booking->start_date }}</td>
+                                <td id="adultes">{{ $booking->adult_count }} adulte(s)</td>
+                                <td id="enfants">{{ $booking->children_count }} enfant(s)</td>
+                                <td id="chambres">{{ $booking->room_count }} chambre(s)</td>
+                                <td id="prix">{{ $booking->travel->price_per_person * ($booking->adult_count + $booking->children_count) }} €</td>
+                                <a href=""><td id="img"><img src="{{ Vite::asset('resources/images/delete.png') }}" alt="Supprimer"></td></a>
+                            </tr>
                         @endforeach
                         
                         <tr>
@@ -45,7 +48,8 @@
                             <td></td>
                             <td></td>
                             <td></td>
-                            <td> {{ $order->bookings->sum(function($booking) { return $booking->travel->price_per_person * ( $booking->adult_count + $booking->children_count ); }) }}
+                            <td></td>
+                            <td> {{ $order->bookings->sum(function($booking) { return $booking->travel->price_per_person * ( $booking->adult_count + $booking->children_count ); }) }}€
                             </td>
 
                         </tr>

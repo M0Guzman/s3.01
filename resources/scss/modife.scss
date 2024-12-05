@@ -24,6 +24,8 @@ h1 {
     display: flex;
     justify-content: space-between;
     margin-bottom: 20px;
+    
+
 }
 
 .info-section div {
@@ -40,6 +42,7 @@ h1 {
     padding: 15px;
     border-radius: 8px;
     background-color: #fefefe;
+    //width: 1200px;
 }
 
 .card img {
@@ -69,7 +72,7 @@ h1 {
     margin-top: 20px;
 }
 
-.btn {
+.gift-option {
     display: inline-block;
     text-align: center;
     background-color: #572a7f;
