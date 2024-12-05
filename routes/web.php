@@ -46,4 +46,16 @@ Route::middleware(['auth', FullyVerified::class])->group(function () {
 
 Route::get('/file/{id}', [FileController::class, 'get_file'])->name('file');
 
+Route::get('/policies/terms', function() {
+    return view('policies.terms');
+})->name('policies.terms');
+
+Route::get('/policies/cookies', function() {
+    return view('policies.cookies');
+})->name('policies.cookies');
+
+Route::get('/policies/privacy', function() {
+    return view('policies.privacy');
+})->name('policies.privacy');
+
 require __DIR__.'/auth.php';

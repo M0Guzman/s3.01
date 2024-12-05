@@ -18,7 +18,7 @@
     </head>
     <body class="font-sans antialiased">
           <!-- En-tête -->
-   
+
 
         <div class="min-h-screen bg-gray-100 dark:bg-gray-900">
             @include('layouts.navigation')
@@ -36,6 +36,12 @@
             <main>
                 {{ $slot }}
             </main>
+
+            <div class="mt-8 mb-6 flex flex-column gap-6 justify-center"">
+                <a href="{{ route('policies.cookies') }}">Politique de cookies</a>
+                <a href="{{ route('policies.privacy') }}">Politique de confidencialité</a>
+                <a href="{{ route('policies.terms') }}">Politique particulière de vente</a>
+            </div>
         </div>
     </body>
 </html>
