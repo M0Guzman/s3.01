@@ -34,6 +34,7 @@ Route::get('/dashboard', function () {
 
 Route::get('/panier', [PanierController::class, 'show'])->name('panier.show');
 Route::get('/addpanier', [PanierController::class, 'addPanier'])->name('addpanier.addPanier');
+Route::get('/panier/supprimer/{id}', [PanierController::class, 'supprimerProduit'])->name('panier.supprimer');
 
 Route::get('/modife', [ModifeControlleur::class,'show'])->name('modife.show');
 

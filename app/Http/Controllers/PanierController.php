@@ -61,7 +61,6 @@ class PanierController extends Controller
             ]);
             Session::put('order_id',$order->id);
         }
-
         
         
 
@@ -74,6 +73,20 @@ class PanierController extends Controller
     ]);
 
     return redirect(route('panier.show'));
-}
-    
+    }
+    public function supprimerProduit(Request $request,$booking_id) {
+        $order = Order::find(Session::get('order_id'));
+
+        $booking = $order->bookings()->find($booking_id);
+        $order->bookings()->detach($booking_id); 
+        $booking->delete();
+        
+
+        return back()->with('status', 'Article-deleted');
+    }
+    public function updateProduit(Request $request,$booking_id)
+    {
+        
+
+    }
 }

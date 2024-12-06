@@ -21,7 +21,7 @@
                 <form action="{{ route('modife.show') }}" method="get">
                     <div class="footer">
                         <button class="gift-option">J'opte pour le format cadeau</button>
-                        <input type="hidden" value="{{ $travel->id }}" name="id"/>
+                        <input type="hidden" value="{{ $travel->id }}" name="travel_id"/>
                         <p class="validity">Cadeau valable jusqu’au <strong> {{ $date }} </strong></p>
                         <p>Disponible aux formats :
                             <span class="format">e-coffret (envoi immédiat)</span> |

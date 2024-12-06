@@ -39,7 +39,10 @@
                                 <td id="enfants">{{ $booking->children_count }} enfant(s)</td>
                                 <td id="chambres">{{ $booking->room_count }} chambre(s)</td>
                                 <td id="prix">{{ $booking->travel->price_per_person * ($booking->adult_count + $booking->children_count) }} €</td>
-                                <a href=""><td id="img"><img src="{{ Vite::asset('resources/images/delete.png') }}" alt="Supprimer"></td></a>
+                                <form action="{{ route('panier.supprimer',[$booking->id]) }}" method="get">
+                                    
+                                    <td id="img"><button type="submit" ><img src="{{ Vite::asset('resources/images/delete.png') }}" alt="Supprimer"></button></td>
+                                </form>                                
                             </tr>
                         @endforeach
                         

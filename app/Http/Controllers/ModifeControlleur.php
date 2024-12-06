@@ -36,7 +36,7 @@ class ModifeControlleur extends Controller
             $booking = Booking::find($request->input('booking_id'));
             $travel = $booking->travel;
         }            
-
+        
         return view("modife", ['booking'=>$booking, 'travel'=>$travel]);
 
     }

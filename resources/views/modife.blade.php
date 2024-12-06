@@ -6,14 +6,33 @@
             <div>
                 <h2>Informations</h2>
                 <label for="adults">Adultes :</label>
-                <input type="number" id="adults" name="adults" value="1" min="1" onchange="updatePrice()">
+                
+                @if($booking != null) 
+                    {{ $adult =  $booking->adult_count }}
+                @else
+                    {{ $adult =  1 }}
+                @endif
+
+                @if($booking != null) 
+                    {{ $child =  $booking->children_count }}
+                @else
+                    {{ $child =  0 }}
+                @endif
+
+                @if($booking != null) 
+                    {{ $room =  $booking->room_count }}
+                @else
+                    {{ $room =  1 }}
+                @endif
+
+                <input type="number" id="adults" name="adults" value="{{ $adult }}" min="1" onchange="updatePrice()">
                 <br>
                 <label for="children">Enfants :</label>
-                <input type="number" id="children" name="children" value="0" min="0" onchange="updatePrice()">
+                <input type="number" id="children" name="children" value="{{ $child }}" min="0" onchange="updatePrice()">
 
                 <br>
                 <label for="room">Chambre(s) :</label>
-                <input type="number" id="room" name="room" value="1" min="1" onchange="updatePrice()">
+                <input type="number" id="room" name="room" value="{{ $room }}" min="1" onchange="updatePrice()">
                 
                 <script>
                     const adultPrice = {{ $travel->price_per_person }};
@@ -58,32 +77,31 @@
             </div>
             <div>
                 <h2>Période du séjour</h2>
-                <p>Début: <input type="date" id="dateInput" value="{{ now()->format('d-m-Y') }}" onchange="updateDate()"></p>
+                <p>Début: <input type="date" id="dateInput" value="{{ $booking->start_date }}" onchange="updateDate()"></p>
 
             </div>
         </div>
 
         <div class="booking-section">
             <div class="card">
-                <!-- <img src="https://via.placeholder.com/300x200">-->
+                
 
                 @if($travel->travel_steps->count() != 0 )
                     @foreach ( $travel->travel_steps as $travel_step)
                         @if($travel_step->activities->count() != 0 )
                             @foreach ($travel_step->activities as $activity)                                
                                 @if($activity->partner->activity_type->name == 'hotel' )  <!-- changer activity->activity_category en activity_types -->
-                                    
                                     <h2>{{ $activity->partner->name }}</h2>                                   
                                     <p> {{ $activity->partner->hotel->description }} </p>
                                     {{ $activity->partner->hotel }}
-                                    @break
-                                    
+                                    @break                                    
                                 @endif 
                             @endforeach
                             @break
                         @endif
                     @endforeach                    
                 @endif
+
             </div>
 
             <div class="steps">
@@ -93,6 +111,7 @@
                 <p><span>3</span> Vous recevez votre carnet de route contenant toutes les informations pratiques (heures de rendez-vous, adresses...)</p>
                 <p><strong>Bon voyage !</strong></p>
             </div>
+
         </div>
 
         <div class="options">
@@ -115,7 +134,7 @@
         </div>
 
         <div class="price" id="totalPrice">
-            PRIX TOTAL: {{ $travel->price_per_person }} €
+            PRIX TOTAL: {{ $travel->price_per_person * ($booking->adult_count + $booking->children_count) }} €
         </div>
         <form action="{{ route('addpanier.addPanier') }}" method="get">
             <input class="gift-option" type="submit" value="RESERVER" />
