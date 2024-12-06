@@ -1,13 +1,11 @@
 <?php
-
 namespace Database\Factories;
-
+use App\Models\SamplingType;
 use Illuminate\Database\Eloquent\Factories\Factory;
-
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Hotel>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Model>
  */
-class HotelFactory extends Factory
+class WineCellarFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -17,8 +15,7 @@ class HotelFactory extends Factory
     public function definition(): array
     {
         return [
-            'description' => fake()->paragraph(),
-            'room_count' => fake()->numberBetween(30, 1000)
+            'sampling_type_id' => SamplingType::all()->random()->id,
         ];
     }
 }

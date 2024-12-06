@@ -12,6 +12,7 @@ use App\Models\OtherPartnerActivityType;
 use App\Models\ParticipantCategory;
 use App\Models\PaymentType;
 use App\Models\RolePermission;
+use App\Models\SamplingType;
 use App\Models\Theme;
 use App\Models\TravelCategory;
 use App\Models\UserRole;
@@ -39,9 +40,10 @@ class DatabaseSeeder extends Seeder
         ActivityCategory::create(['name' => 'Repas et pique-niques']);
         ActivityCategory::create(['name' => 'Initiations et découvertes']);
 
-        ActivityType::create(['name' => 'visite']);
-        ActivityType::create(['name' => 'repas']);
-        ActivityType::create(['name' => 'hebergement']);
+        ActivityType::create(['name' => 'Cave']);
+        ActivityType::create(['name' => 'Restaurant']);
+        ActivityType::create(['name' => 'Hotel']);
+        ActivityType::create(['name' => 'Autres']);
 
         Department::create(['name' => 'Ain']);
         Department::create(['name' => 'Aisne']);
@@ -197,5 +199,7 @@ class DatabaseSeeder extends Seeder
 
         OtherPartnerActivityType::create(['name' => 'tmp_plz_fix']);
         OrderState::create(['name' => 'En attente']);
+
+        SamplingType::create(['name'=> 'Degustation dans une cave']);
     }
 }

@@ -93,9 +93,7 @@ class TravelController extends Controller
         $travel = Travel::where('id', $id)->first();
 
         $travel->join('reviews', 'reviews.travel_id', '=', 'travel.id');
-        $travel->withCount('reviews');
-        $travel->orderBy('reviews_count', 'desc')->limit(10);
-
+        $travel->orderBy('rating', 'desc');
         $travels = $travel->get();
 
         View::share("travels_avis", $travels);

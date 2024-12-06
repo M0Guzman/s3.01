@@ -30,17 +30,6 @@
                 </div>
             </div>
         </div>
-        
-        <!-- Navbar -->
-        <div class="nav_Bar">
-            <button class="tab active">Programme du séjour</button>
-            <button class="tab">Options</button>
-            <button class="tab">Hébergements</button>
-            <button class="tab">Châteaux / Domaines</button>
-            <button class="tab">Avis (16)</button>
-        </div>
-
-        {{ $travel->travel_steps[0]->activities[0]->partner->other_partner }}
 
         <!-- container détaillé séjour -->
         <h2 class="text-center text-3xl">Le programme détaillé de votre séjour</h2>
@@ -63,24 +52,18 @@
         <!-- container hébergements -->
         <h2 class="text-center text-3xl">Les hébergements</h2>
         <div class="container_etapes">
-            @if($travel->travel_steps->count() != 0 )
-                @foreach ( $travel->travel_steps as $travel_step)
-                    @if($travel_step->activities->count() != 0 )
-                        @foreach ($travel_step->activities as $activity)                                
-                            @if($activity->partner->activity_type->name == 'hotel' )  <!-- changer activity->activity_category en activity_types -->
-                                
-                            <div class="container_etape">
-                                <h3>{{ $activity->partner->name }}</h3>                                  
-                                <p> {{ $activity->partner->hotel->description }} </p>
-                                {{ $activity->partner->hotel }}
-                            </div>
-                                
-                            @endif
-                        @endforeach
-                        @break
+            @foreach ($travel->travel_steps as $travelStep)
+                @foreach ($travelStep->activities as $activitiy)
+                    @if( $activitiy->partner->hotel != null)
+                        <div class="container_etape">
+                            <h3>{{ $activitiy->title }}</h3>
+                            <p>
+                                {{ $activitiy->description }}
+                            </p>
+                        </div>
                     @endif
-                @endforeach                    
-            @endif
+                @endforeach
+            @endforeach
         </div>
         
         <!-- container partenaire autre que hotel et restaurant -->
@@ -88,7 +71,7 @@
         <div class="container_etapes">
             @foreach ($travel->travel_steps as $travelStep)
                 @foreach ($travelStep->activities as $activitiy)
-                    @if( $activitiy->partner->hotel != null)
+                    @if( $activitiy->partner->winecellar != null || $activitiy->partner->restaurant != null)
                         <div class="container_etape">
                             <h3>{{ $activitiy->title }}</h3>
                             <p>
