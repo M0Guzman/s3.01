@@ -33,7 +33,7 @@
                 <form action="{{ route('modife.show') }}" method="get">
                     <div id="panier">
                         <input id="paniers"type="submit" value="Ajouter aux panier"/>
-                        <input type="hidden" value="{{ $travel->id }}" name="id"/>
+                        <input type="hidden" value="{{ $travel->id }}" name="travel_id"/>
                     </div>
                 </form>
 

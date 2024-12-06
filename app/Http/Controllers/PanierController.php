@@ -46,7 +46,7 @@ class PanierController extends Controller
         return redirect(RouteServiceProvider::HOME);
     }
         
-        /*$order = null;
+        $order = null;
        
         if(Session::has('order_id')) 
         {
@@ -60,13 +60,9 @@ class PanierController extends Controller
                 
             ]);
             Session::put('order_id',$order->id);
-        }*/ 
+        }
 
-        $order = Session::has('order_id') 
-        ? Order::find(Session::get('order_id')) 
-        : Order::create([]);
-
-    Session::put('order_id', $order->id);
+        
         
 
     $order->bookings()->create([
@@ -77,7 +73,7 @@ class PanierController extends Controller
         'start_date' => $request->input('date'),
     ]);
 
-    return view('panier', ['order' => $order]);
+    return redirect(route('panier.show'));
 }
     
 }

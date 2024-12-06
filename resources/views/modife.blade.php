@@ -71,10 +71,10 @@
                     @foreach ( $travel->travel_steps as $travel_step)
                         @if($travel_step->activities->count() != 0 )
                             @foreach ($travel_step->activities as $activity)                                
-                                @if($activity->activity_category->name = 'hebergement' )  <!-- changer activity->activity_category en activity_types -->
+                                @if($activity->partner->activity_type->name == 'hotel' )  <!-- changer activity->activity_category en activity_types -->
                                     
                                     <h2>{{ $activity->partner->name }}</h2>                                   
-                                    <p> {{ $activity->partner->activity_type_id }} </p>
+                                    <p> {{ $activity->partner->hotel->description }} </p>
                                     {{ $activity->partner->hotel }}
                                     @break
                                     
@@ -124,11 +124,7 @@
             <input type="hidden" id="chambres" value="1" name="nbChambre" />
             <input type="hidden" id="date" value="{{ now()->format('Y-m-d') }}" name="date" />
             <input type="hidden" value="{{ $travel->id }}" name="id" />
-        </form>
-
-
-        
+            
+        </form>        
     </div>
-
-
 </x-app-layout>

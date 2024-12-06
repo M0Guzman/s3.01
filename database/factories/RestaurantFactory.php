@@ -19,7 +19,7 @@ class RestaurantFactory extends Factory
     {
         return [
             'cooking_type_id' => CookingType::all()->random()->id,
-            'ranking' => fake()->randomNumber(3, 5),
+            'ranking' => fake()->numberBetween(3, 5),
             'speciality' => fake()->word()
         ];
     }

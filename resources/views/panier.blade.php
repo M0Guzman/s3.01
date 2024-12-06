@@ -33,7 +33,7 @@
                         @foreach ($order->bookings as $booking)
                             <tr>
                                 
-                                <td id="title"><a href="{{ route('modife.show') }}">{{ $booking->travel->title }}</a></td>
+                                <td id="title"><a href="{{ route('modife.show', ['booking_id'=>$booking->id]) }}">{{ $booking->travel->title }}</a></td>
                                 <td id="date">{{ $booking->start_date }}</td>
                                 <td id="adultes">{{ $booking->adult_count }} adulte(s)</td>
                                 <td id="enfants">{{ $booking->children_count }} enfant(s)</td>
