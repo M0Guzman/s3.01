@@ -24,12 +24,12 @@ class DummySeeder extends Seeder
     public function run(): void
     {
         Resource::factory(10)->create();
-        Address::factory(100)->create();
+        Address::factory(1000)->create();
         Activity::factory(30)->create();
         WineRoad::factory(10)->hasWineRoadSteps(3)->create();
-        Travel::factory(30)->hasResources(2)->create();
+        Travel::factory(50)->hasResources(2)->create();
         User::factory(50)->hasAddresses(1)->create();
-        TravelStep::factory(20)->hasResources(2)->hasActivities(3)->create();
+        TravelStep::factory(200)->hasResources(2)->hasActivities(3)->create();
         Order::factory(10)->hasBookings(2)->create();
         //Review::factory(100)->create();
 
@@ -65,13 +65,14 @@ class DummySeeder extends Seeder
             'J ai vraiment apprécié la visite du domaine viticole et les dégustations de leurs meilleurs crus.'
         ];
 
-        for($i = 0; $i < count($titles); $i++) {
+        for($i = 0; $i < 400; $i++) {
+            $index = fake()->numberBetween(0, count($titles)) % count($titles);
             Review::create([
                 'travel_id' => Travel::all()->random()->id,
                 'user_id' => User::all()->random()->id,
-                'rating' => fake()->randomFloat(1, 0, 5),
-                'title' => $titles[$i],
-                'description' => $descriptions[$i]
+                'rating' => fake()->randomFloat(1, 1, 5),
+                'title' => $titles[$index],
+                'description' => $descriptions[$index]
             ]);
         }
     }

@@ -1,7 +1,9 @@
 <x-app-layout>
     @vite(['resources/scss/travel.scss'])
-        <section>
-        <div class="container">
+    <section>
+    
+        <!-- container séjour -->
+        <div class="container_sejour">
             <div class="image-section">
                 <img src="{{ $travel->resources[0]->get_url() }}">
             </div>
@@ -26,16 +28,105 @@
                         <span class="format">coffret (livraison sous 4 à 6 jours ouvrés)</span>
                     </p>
                 </div>
-                <div class="avis mt-4">
-                        @foreach ($travel->reviews as $review)
-
-                            <h3>{{ $review->title }}</h3>
-                            {{ $review->rating }} étoiles <br>
-                            {{ $review->description }}
-
-                        @endforeach
-                </div>
             </div>
+        </div>
+        
+        <!-- Navbar -->
+        <div class="nav_Bar">
+            <button class="tab active">Programme du séjour</button>
+            <button class="tab">Options</button>
+            <button class="tab">Hébergements</button>
+            <button class="tab">Châteaux / Domaines</button>
+            <button class="tab">Avis (16)</button>
+        </div>
+
+        {{ $travel->travel_steps[0]->activities[0]->partner->other_partner }}
+
+        <!-- container détaillé séjour -->
+        <h2 class="text-center text-3xl">Le programme détaillé de votre séjour</h2>
+        <div class="container_etapes">
+            @foreach ($travel->travel_steps as $travelStep)
+                <div class="container_etape">
+                    <div class="image-section">
+                        <img src="{{ $travelStep->resources[0]->get_url() }}">
+                    </div>
+                    <div class="info-section">
+                        <h3>{{ $travelStep->title }}</h3>
+                        <p>
+                            {{ $travelStep->description }}
+                        </p>
+                    </div>
+                </div>
+            @endforeach
+        </div>
+        
+        <!-- container hébergements -->
+        <h2 class="text-center text-3xl">Les hébergements</h2>
+        <div class="container_etapes">
+            @if($travel->travel_steps->count() != 0 )
+                @foreach ( $travel->travel_steps as $travel_step)
+                    @if($travel_step->activities->count() != 0 )
+                        @foreach ($travel_step->activities as $activity)                                
+                            @if($activity->partner->activity_type->name == 'hotel' )  <!-- changer activity->activity_category en activity_types -->
+                                
+                            <div class="container_etape">
+                                <h3>{{ $activity->partner->name }}</h3>                                  
+                                <p> {{ $activity->partner->hotel->description }} </p>
+                                {{ $activity->partner->hotel }}
+                            </div>
+                                
+                            @endif
+                        @endforeach
+                        @break
+                    @endif
+                @endforeach                    
+            @endif
+        </div>
+        
+        <!-- container partenaire autre que hotel et restaurant -->
+        <h2 class="text-center text-3xl">Les châteaux et les domaines...</h2>
+        <div class="container_etapes">
+            @foreach ($travel->travel_steps as $travelStep)
+                @foreach ($travelStep->activities as $activitiy)
+                    @if( $activitiy->partner->hotel != null)
+                        <div class="container_etape">
+                            <h3>{{ $activitiy->title }}</h3>
+                            <p>
+                                {{ $activitiy->description }}
+                            </p>
+                        </div>
+                    @endif
+                @endforeach
+            @endforeach
+        </div>
+
+        <!-- container d'avis -->
+        <h2 class="text-center text-3xl">Les Avis</h2>
+        <div class="container_avis mt-4">
+            @foreach ($travel->reviews as $review)
+                <div class="avis_aficher">
+                    <h3>
+                        {{ $review->title }}
+                        @php
+                            $note = $review->rating
+                        @endphp
+                        @for ($i = 0; $i < 5; $i++)
+                            @if ($note >= 1)
+                                <i class="fa-solid fa-star"></i>
+                            @elseif ($note < 0.5)
+                                <i class="fa-regular fa-star"></i>
+                            @else
+                                <i class="fa-regular fa-star-half-stroke"></i>
+                            @endif
+                            @php
+                                $note --
+                            @endphp
+                        @endfor
+                        <span class="note">{{ $review->rating }}/5</span>
+                    </h3>
+                    {{ $review->description }}
+                </div>
+            @endforeach
         </div>
     </section>
 </x-app-layout>

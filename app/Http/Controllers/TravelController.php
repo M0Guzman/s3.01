@@ -88,13 +88,18 @@ class TravelController extends Controller
             'sejours' => $travels
         ]);
     }
-    public function afficher($id)
+    public function afficher($id, Request $request)
     {
         $travel = Travel::where('id', $id)->first();
-        //$travel->leftJoin('reviews', 'reviews.travel_id', '=', 'travel.id');
 
-View::share("vinecats", VineyardCategory::all());
+        $travel->join('reviews', 'reviews.travel_id', '=', 'travel.id');
+        $travel->withCount('reviews');
+        $travel->orderBy('reviews_count', 'desc')->limit(10);
 
+        $travels = $travel->get();
+
+        View::share("travels_avis", $travels);
+        
         $dateString = Carbon::now()->addMonths(18)->format('d-m-Y');
         return view('travel',['date'=>$dateString,'travel' => $travel]);
 

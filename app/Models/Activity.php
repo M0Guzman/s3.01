@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Activity extends Model
@@ -20,18 +21,18 @@ class Activity extends Model
         'children_price'
     ];
 
-    public function partner(): HasOne
+    public function partner(): BelongsTo
     {
-        return $this->hasOne(Partner::class);
+        return $this->belongsTo(Partner::class);
     }
 
-    public function activity_type(): HasOne
+    public function activity_type(): BelongsTo
     {
-        return $this->hasOne(ActivityType::class);
+        return $this->belongsTo(ActivityType::class);
     }
 
-    public function activity_category(): HasOne
+    public function activity_category(): BelongsTo
     {
-        return $this->hasOne(ActivityCategory::class);
+        return $this->belongsTo(ActivityCategory::class);
     }
 }

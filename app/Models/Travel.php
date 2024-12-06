@@ -53,6 +53,11 @@ class Travel extends Model
         return $this->belongsTo(ParticipantCategory::class);
     }
 
+    public function travel_steps(): HasMany
+    {
+        return $this->hasMany(TravelStep::class);
+    }
+
     public function reviews(): HasMany
     {
         return $this->hasMany(Review::class);
