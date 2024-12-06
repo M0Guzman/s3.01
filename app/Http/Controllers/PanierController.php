@@ -41,11 +41,7 @@ class PanierController extends Controller
     }
 
     public function addPanier(Request $request)
-{
-    if (!$request->has('id')) {
-        return redirect(RouteServiceProvider::HOME);
-    }
-        
+{        
         $order = null;
        
         if(Session::has('order_id')) 
@@ -61,17 +57,26 @@ class PanierController extends Controller
             ]);
             Session::put('order_id',$order->id);
         }
-        
-        
+        dd($request->has('booking_id'));
+        //$etat = $request->input('etat');
+        //dd($request->input('travel_id'));
+    if($request->has('booking_id'))  
+        $order->bookings()->find($request->input('booking_id'))->update([
+            'adult_count' => $request->input('adults'),
+            'children_count' => $request->input('children'),
+            'room_count' => $request->input('room'),
+            'start_date' => $request->input('dateInput'),
+        ]);
 
-    $order->bookings()->create([
-        'travel_id' => $request->input('id'),
-        'adult_count' => $request->input('nbAdultes'),
-        'children_count' => $request->input('nbEnfants'),
-        'room_count' => $request->input('nbChambre'),
-        'start_date' => $request->input('date'),
-    ]);
-
+    else
+        $order->bookings()->create([
+            'travel_id' => $request->query('id'),
+            'adult_count' => $request->query('adults'),
+            'children_count' => $request->query('children'),
+            'room_count' => $request->query('room'),
+            'start_date' => $request->input('dateInput'),
+        ]);
+    
     return redirect(route('panier.show'));
     }
     public function supprimerProduit(Request $request,$booking_id) {
@@ -84,9 +89,5 @@ class PanierController extends Controller
 
         return back()->with('status', 'Article-deleted');
     }
-    public function updateProduit(Request $request,$booking_id)
-    {
-        
-
-    }
+   
 }
