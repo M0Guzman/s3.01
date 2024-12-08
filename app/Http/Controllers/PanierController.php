@@ -43,18 +43,17 @@ class PanierController extends Controller
     public function addPanier(Request $request)
 {        
         $order = null;
-        $validated = $request->validate([
-            'travel_id' => ['required' ,'int',"exists:travel,id"],
+        /*$validated = $request->validate([
+            'travel_id' => ['required' ,'int',"exists:booking,travel_id"],
             'booking_id' => ['int','exists:booking,id'],
             'adult_count' => ['required','int','exists:booking,adult_count'],
             'children_count'=>['required','int','exists:booking,children_count'],
             'room_count' => ['required','int','exists:booking,children_count'],
             'start_date' => ['required','int','exists:booking,start_date'],
-        ]);
+        ]);*/
         if(Session::has('order_id')) 
         {
             $order = Order::find(Session::get('order_id'));
-            //dd($order);
             
         }
         if($order == null) 
@@ -87,7 +86,6 @@ class PanierController extends Controller
             if($booking != null)
             {
                 $booking->update([
-                    //'travel_id' => $travelId,
                     'adult_count' => $adultCount,
                     'children_count' => $childCount,
                     'room_count' => $roomCount,
@@ -97,7 +95,6 @@ class PanierController extends Controller
         }
         else
         {
-            //dd($travelId);
             $order->bookings()->create([
                 'travel_id' => $travelId,
                 'adult_count' => $adultCount,
