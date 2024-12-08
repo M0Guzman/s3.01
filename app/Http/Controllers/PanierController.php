@@ -6,6 +6,7 @@ use App\Mail\PurchaseCompletedMail;
 use App\Models\Address;
 use App\Models\City;
 use App\Models\Department;
+use App\Models\Booking;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Http\Request;
 use App\Models\Review;
@@ -15,7 +16,9 @@ use App\Models\TravelHasResource;
 use App\Models\VineyardCategory;
 use App\Models\Travel;
 use App\Models\Order;
+use Illuminate\Support\Facades\Mail;
 use Srmklive\PayPal\Services\PayPal as PayPalClient;
+use App\Models\Booking_orders;
 use Session;
 use View;
 
@@ -23,7 +26,6 @@ class PanierController extends Controller
 {
     public function show(Request $request)
     {
-        Session::put('order_id', 2);
         $order = null;
 
         if(Session::has('order_id'))
@@ -31,12 +33,9 @@ class PanierController extends Controller
             $order = Order::find(Session::get('order_id'));
         }
         else {
-            $order = Order::create([
-
-            ]);
+            $order = Order::create([]);
             Session::put('order_id',$order->id);
         }
-
 
         return view('panier', ['order' => $order]);
     }
@@ -178,5 +177,84 @@ class PanierController extends Controller
 
     public function show_thanks() {
         return view('order_process.thanks');
+    }
+
+    public function addPanier(Request $request)
+    {
+        $order = null;
+        /*$validated = $request->validate([
+            'travel_id' => ['required' ,'int',"exists:bookings,travel_id"],
+            'booking_id' => ['int','exists:booking,id'],
+            'adult_count' => ['required','int','exists:booking,adult_count'],
+            'children_count'=>['required','int','exists:booking,children_count'],
+            'room_count' => ['required','int','exists:booking,children_count'],
+            'start_date' => ['required','int','exists:booking,start_date'],
+        ]);*/
+        $etat = $request->session()->get('etat');
+        if($etat == 'add')
+        {
+
+        }
+        if ($etat == 'offre')
+        {
+
+        }
+        if(Session::has('order_id'))
+        {
+            $order = Order::find(Session::get('order_id'));
+
+        }
+        if($order == null)
+        {
+            $order = Order::create([]);
+            Session::put('order_id',$order->id);
+        }
+
+        $bookingId = $request->input('booking_id');
+        $travelId = $request->input('travel_id');
+
+        $adultCount = $request->input('adults', 1);
+        $childCount = $request->input('children', 0);
+        $roomCount = $request->input('room', 1);
+        $startDate = $request->input('dateInput');
+
+        if($request->has('booking_id') && $request->input('booking_id') != '')
+        {
+            $bookingId = $request->input('booking_id');
+            $booking = $order->bookings()->find($bookingId);
+
+            if($booking != null)
+            {
+                $booking->update([
+                    'adult_count' => $adultCount,
+                    'children_count' => $childCount,
+                    'room_count' => $roomCount,
+                    'start_date' => $startDate,
+                ]);
+            }
+        }
+        else
+        {
+            $order->bookings()->create([
+                'travel_id' => $travelId,
+                'adult_count' => $adultCount,
+                'children_count' => $childCount,
+                'room_count' => $roomCount,
+                'start_date' => $startDate,
+            ]);
+        }
+
+        return redirect(route('panier.show'));
+    }
+
+
+    public function supprimerProduit(Request $request,$booking_id) {
+        $order = Order::find(Session::get('order_id'));
+
+        $booking = $order->bookings()->find($booking_id);
+        $order->bookings()->detach($booking_id);
+        $booking->delete();
+
+        return back()->with('status', 'Article-deleted');
     }
 }

@@ -30,7 +30,8 @@ class AppServiceProvider extends ServiceProvider
             $nborder = 0;
             if(Session::has('order_id')) 
             {
-                $nborder = Order::find(Session::get('order_id'))->bookings->count();
+                $order = Order::find(Session::get('order_id'));
+                $nborder = $order == null ? 0 : $order->bookings->count();
             }
             $view->with('vinecats', VineyardCategory::all());
             $view->with('nborder', $nborder);

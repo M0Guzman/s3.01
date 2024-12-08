@@ -18,17 +18,28 @@
                     <p>{{ $travel->description}}</p>
 
                 </div>
-                <div class="footer">
-                    <a href="{{ route('order.show') }}"><button class="gift-option">J'opte pour le format cadeau</button></a>
-                    <p class="validity">Cadeau valable jusqu’au <strong> {{ $date }} </strong></p>
-                    <p>Disponible aux formats :
-                        <span class="format">e-coffret (envoi immédiat)</span> |
-                        <span class="format">coffret (livraison sous 4 à 6 jours ouvrés)</span>
-                    </p>
-                </div>
-                <div id="panier">
-                    <a href="{{ route('order.show') }}"><button id="paniers">Ajouter aux panier</button></a>
-                </div>
+                <form action="{{ route('modife.show') }}" method="get">
+                    <div class="footer">
+                        <input type="hidden" value="{{ $travel->id }}" name="travel_id"/>
+                        <input type="hidden" value="offre" name="etat"/>
+                        <input class="gift-option" type="submit" value="J'opte pour le format cadeau"/>
+                        <p class="validity">Cadeau valable jusqu’au <strong> {{ $date }} </strong></p>
+                        <p>Disponible aux formats :
+                            <span class="format">e-coffret (envoi immédiat)</span> |
+                            <span class="format">coffret (livraison sous 4 à 6 jours ouvrés)</span>
+                        </p>
+                    </div>
+                </form>
+
+                <form action="{{ route('modife.show') }}" method="get">
+                    <div id="panier">
+                        <input type="hidden" value="{{ $travel->id }}" name="travel_id"/>
+                        <input type="hidden" value="add" name="etat"/>
+                        <input id="paniers"type="submit" value="Ajouter aux panier"/>
+
+                    </div>
+                </form>
+
                 <div class="avis mt-4">
                         @foreach ($travel->reviews as $review)
 

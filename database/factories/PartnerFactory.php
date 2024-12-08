@@ -39,7 +39,7 @@ class PartnerFactory extends Factory
                 Hotel::factory(1)->state(['partner_id' => $partner->id])->create();
             } elseif($partner->activity_type->name == 'Restaurant') {
                 Restaurant::factory(1)->state(['partner_id' => $partner->id])->create();
-            } elseif($partner->activity_type->name == 'Cave a Vins') {
+            } elseif($partner->activity_type->name == 'Cave') {
                 WineCellar::factory(1)->state(['partner_id' => $partner->id])->create();
             } else {
                 OtherPartner::factory(1)->state(['partner_id' => $partner->id])->create();

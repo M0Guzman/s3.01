@@ -93,9 +93,10 @@ class TravelController extends Controller
         $travel = Travel::where('id', $id)->first();
         //$travel->leftJoin('reviews', 'reviews.travel_id', '=', 'travel.id');
 
-View::share("vinecats", VineyardCategory::all());
+        View::share("vinecats", VineyardCategory::all());
 
         $dateString = Carbon::now()->addMonths(18)->format('d-m-Y');
+        
         return view('travel',['date'=>$dateString,'travel' => $travel]);
 
     }
