@@ -81,10 +81,9 @@
         <div class="price" id="totalPrice">
             PRIX TOTAL: {{ $travel->price_per_person * (($booking != null ? $booking->adult_count : 1) + ($booking != null ? $booking->children_count : 0)) }} €
         </div>
-        
+        <input type="hidden" value="{{ $travel->id }}" name="travel_id"/> 
+        <input type="hidden" value="{{ $booking != null ? $booking->id : null }}" name="booking_id"/>
         <input class="gift-option" type="submit" value="RESERVER" />
-        <input type="hidden" value="{{$booking }}" name="etat"/>
-        <input type="hidden" value="{{ $travel->id }}" name="id" />
         </div>
     </form>
      

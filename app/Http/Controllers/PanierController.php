@@ -43,11 +43,18 @@ class PanierController extends Controller
     public function addPanier(Request $request)
 {        
         $order = null;
-       
+        $validated = $request->validate([
+            'travel_id' => ['required' ,'int',"exists:travel,id"],
+            'booking_id' => ['int','exists:booking,id'],
+            'adult_count' => ['required','int','exists:booking,adult_count'],
+            'children_count'=>['required','int','exists:booking,children_count'],
+            'room_count' => ['required','int','exists:booking,children_count'],
+            'start_date' => ['required','int','exists:booking,start_date'],
+        ]);
         if(Session::has('order_id')) 
         {
             $order = Order::find(Session::get('order_id'));
-
+            //dd($order);
             
         }
         if($order == null) 
@@ -57,28 +64,53 @@ class PanierController extends Controller
             ]);
             Session::put('order_id',$order->id);
         }
-        dd($request->has('booking_id'));
-        //$etat = $request->input('etat');
-        //dd($request->input('travel_id'));
-    if($request->has('booking_id'))  
-        $order->bookings()->find($request->input('booking_id'))->update([
-            'adult_count' => $request->input('adults'),
-            'children_count' => $request->input('children'),
-            'room_count' => $request->input('room'),
-            'start_date' => $request->input('dateInput'),
-        ]);
+               
+        $bookingId = $request->input('booking_id');
+        $travelId = $request->input('travel_id');
+        
+        $adultCount = $request->input('adults', 1); 
+        $childCount = $request->input('children', 0);
+        $roomCount = $request->input('room', 1);
+        $startDate = $request->input('dateInput');
+        
+        if($request->has('booking_id') && $request->input('booking_id') != '')
+        {
+            
+            $bookingId = ($request->input('booking_id'));
+            
+           
 
-    else
-        $order->bookings()->create([
-            'travel_id' => $request->query('id'),
-            'adult_count' => $request->query('adults'),
-            'children_count' => $request->query('children'),
-            'room_count' => $request->query('room'),
-            'start_date' => $request->input('dateInput'),
-        ]);
+            $booking = $order->bookings()->find($bookingId);
+
+            
+
+            if($booking != null)
+            {
+                $booking->update([
+                    //'travel_id' => $travelId,
+                    'adult_count' => $adultCount,
+                    'children_count' => $childCount,
+                    'room_count' => $roomCount,
+                    'start_date' => $startDate,
+                ]);
+            }
+        }
+        else
+        {
+            //dd($travelId);
+            $order->bookings()->create([
+                'travel_id' => $travelId,
+                'adult_count' => $adultCount,
+                'children_count' => $childCount,
+                'room_count' => $roomCount,
+                'start_date' => $startDate,
+            ]);
+        }
+            
+        return redirect(route('panier.show'));
+        }    
+        
     
-    return redirect(route('panier.show'));
-    }
     public function supprimerProduit(Request $request,$booking_id) {
         $order = Order::find(Session::get('order_id'));
 

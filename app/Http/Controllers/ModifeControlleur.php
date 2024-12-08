@@ -25,6 +25,11 @@ class ModifeControlleur extends Controller
         $travel = null;
         $booking = null;
 
+        if( $request->has('reserve')){
+            $reserve = $request->get('reserve');
+            
+        }
+
         if($request->has('travel_id') )
         {
             $travel = Travel::find($request->input('travel_id'));
