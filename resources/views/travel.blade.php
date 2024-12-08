@@ -20,8 +20,9 @@
                 </div>
                 <form action="{{ route('modife.show') }}" method="get">
                     <div class="footer">
-                        <button class="gift-option">J'opte pour le format cadeau</button>
                         <input type="hidden" value="{{ $travel->id }}" name="travel_id"/>
+                        <input type="hidden" value="offre" name="etat"/>
+                        <input class="gift-option" type="submit" value="J'opte pour le format cadeau"/>
                         <p class="validity">Cadeau valable jusqu’au <strong> {{ $date }} </strong></p>
                         <p>Disponible aux formats :
                             <span class="format">e-coffret (envoi immédiat)</span> |
@@ -32,8 +33,10 @@
 
                 <form action="{{ route('modife.show') }}" method="get">
                     <div id="panier">
-                        <input id="paniers"type="submit" value="Ajouter aux panier"/>
                         <input type="hidden" value="{{ $travel->id }}" name="travel_id"/>
+                        <input type="hidden" value="add" name="etat"/>
+                        <input id="paniers"type="submit" value="Ajouter aux panier"/>
+                        
                     </div>
                 </form>
 

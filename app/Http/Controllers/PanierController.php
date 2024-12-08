@@ -51,6 +51,16 @@ class PanierController extends Controller
             'room_count' => ['required','int','exists:booking,children_count'],
             'start_date' => ['required','int','exists:booking,start_date'],
         ]);*/
+        $etat = $request->session()->get('etat');  
+        if($etat == 'add')
+        {
+            
+        }
+        if ($etat == 'offre')
+        {
+            
+        }
+        //dd($etat);
         if(Session::has('order_id')) 
         {
             $order = Order::find(Session::get('order_id'));
