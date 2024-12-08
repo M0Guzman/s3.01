@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\PurchaseCompletedMail;
 use App\Models\Address;
 use App\Models\City;
 use App\Models\Department;
+use App\Providers\RouteServiceProvider;
 use Illuminate\Http\Request;
 use App\Models\Review;
 use App\Models\ParticipantCategory;
@@ -13,6 +15,7 @@ use App\Models\TravelHasResource;
 use App\Models\VineyardCategory;
 use App\Models\Travel;
 use App\Models\Order;
+use Srmklive\PayPal\Services\PayPal as PayPalClient;
 use Session;
 use View;
 
@@ -112,11 +115,11 @@ class PanierController extends Controller
             return redirect(route('order.process.address.show'));
 
         $validated = $request->validate([
-            'agree_cgv' => ['required', 'boolean', 'in:true'],
-            'agree_cpv' => ['required','boolean', 'in:true'],
+            'agree_cgv' => ['required', 'string', 'in:on'],
+            'agree_cpv' => ['required','string', 'in:on'],
         ]);
 
-        return redirect('order.process.confirmation.show');
+        return redirect(route('order.process.confirmation.show'));
     }
 
     public function show_confirmation(Request $request)
@@ -132,5 +135,48 @@ class PanierController extends Controller
             'order' => $order,
             'address' => $address
         ]);
+    }
+
+    public function create_order(Request $request) {
+        if(!$request->has('order_id')) {
+            return redirect(RouteServiceProvider::HOME);
+        }
+
+        $order = Order::find($request->input('order_id'));
+
+        $provider = app(PayPalClient::class);
+        $provider->getAccessToken();
+        $res = $provider->createOrder([
+            'intent' => 'CAPTURE',
+            'purchase_units' => [
+                [
+                    'amount' => [
+                        'currency_code' => 'EUR',
+                        'value' => strval($order->bookings->sum(function($booking) { return $booking->travel->price_per_person * ( $booking->adult_count + $booking->children_count); }))
+                    ]
+                ]
+            ],
+            'prefer' => 'return=minimal'
+        ]);
+
+        if($res["status"] == "COMPLETED") {
+            Mail::to($request->user()->mail)->send(new PurchaseCompletedMail());
+        }
+
+        return $res;
+    }
+
+    public function approve_order(Request $request, $order_id)
+    {
+        $provider = app(PayPalClient::class);
+        $provider->getAccessToken();
+
+        return $provider->capturePaymentOrder($order_id, [
+            'prefer' => "return=minimal"
+        ]);
+    }
+
+    public function show_thanks() {
+        return view('order_process.thanks');
     }
 }

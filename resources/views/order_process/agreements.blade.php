@@ -29,7 +29,7 @@
 
                             <div class="text-lg mb-4">Conditions particulières de ventes</div>
                             <div class="w-full mr-3 mb-4">
-                                <input id="agree_cpv" class="mt-1 rounded transition w-4 h-4" type="checkbox" name="agree_cgv" required />
+                                <input id="agree_cpv" class="mt-1 rounded transition w-4 h-4" type="checkbox" name="agree_cpv" required />
                                 <label for="agree_cpv" class="font-medium text-sm text-gray-700 dark:text-gray-300">
                                     J'ai lu les conditions particulières de ventes et j'y adhère sans réserve (<a href='#'>Lire les conditions particulières de ventes</a>")"
                                 </label>

@@ -44,6 +44,11 @@ Route::middleware(['auth', FullyVerified::class])->group(function () {
     Route::get('/process-order/confirmation', [PanierController::class, 'show_confirmation'])->name('order.process.confirmation.show');
     Route::post('/process-order/confirmation', [PanierController::class, 'process_confirmation'])->name('order.process.confirmation');
 
+    Route::get('/process-order/thanks', [PanierController::class, 'show_thanks'])->name('order.thanks.show');
+
+    Route::post('/order/create', [PanierController::class, 'create_order'])->name('order.create');
+    Route::post('/order/approve/{order_id}/capture', [PanierController::class, 'approve_order'])->name('order.approve');
+
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
