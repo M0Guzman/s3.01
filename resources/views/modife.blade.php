@@ -91,7 +91,7 @@
     <script>
                     const adultPrice = {{ $travel->price_per_person }};
                     const childPrice = {{ $travel->price_per_person }};
-                    const roomPrice = 250;
+                    const roomPrice = 0;
 
                     function updatePrice() {
                         const numAdults = parseInt(document.getElementById('adults').value) || 0;

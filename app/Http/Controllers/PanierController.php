@@ -44,7 +44,7 @@ class PanierController extends Controller
 {        
         $order = null;
         /*$validated = $request->validate([
-            'travel_id' => ['required' ,'int',"exists:booking,travel_id"],
+            'travel_id' => ['required' ,'int',"exists:bookings,travel_id"],
             'booking_id' => ['int','exists:booking,id'],
             'adult_count' => ['required','int','exists:booking,adult_count'],
             'children_count'=>['required','int','exists:booking,children_count'],

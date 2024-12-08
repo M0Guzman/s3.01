@@ -56,7 +56,16 @@
                             </td>
 
                         </tr>
-                    </table>                    
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        <td><button>COMMANDER</button></td>
+                        </tr>
+                    </table>
+                               
                 </div>        
             @endif
         </div>
