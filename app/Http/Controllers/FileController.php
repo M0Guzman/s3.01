@@ -11,7 +11,7 @@ class FileController extends Controller
     public function get_file($id) : BinaryFileResponse {
         if(Storage::exists($id))
         {
-            return response()->file(Storage::path($id));
+            return response()->file(Storage::path(1));
         } else {
             return abort(404);
         }

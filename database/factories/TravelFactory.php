@@ -9,16 +9,8 @@ use App\Models\VineyardCategory;
 use App\Models\WineRoad;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-/**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Travel>
- */
 class TravelFactory extends Factory
 {
-    /**
-     * Define the model's default state.
-     *
-     * @return array<string, mixed>
-     */
     public function definition(): array
     {
         return [
@@ -27,10 +19,18 @@ class TravelFactory extends Factory
             'travel_category_id' => TravelCategory::all()->random()->id,
             'vineyard_category_id' => VineyardCategory::all()->random()->id,
             'participant_category_id' => ParticipantCategory::all()->random()->id,
-            'title' => fake()->sentence(3),
-            'description' => fake()->paragraph(),
+            'title' => fake()->randomElement([
+                'Découverte des vignobles', 
+                'Circuit vin et gastronomie', 
+                'Expérience de dégustation exclusive'
+            ]),
+            'description' => fake()->randomElement([
+                'Explorez les meilleurs vignobles de la région avec un guide expert.', 
+                'Participez à une expérience unique mêlant histoire et dégustation de vin.', 
+                'Profitez d’un voyage pittoresque à travers des paysages de vignobles.'
+            ]),
             'price_per_person' => fake()->randomFloat(2, 100, 300),
-            'days' => fake()->randomElement(['0.5', '1', '2', '3']),
+            'days' => fake()->randomElement([0.5, 1, 2, 3]),
         ];
     }
 }

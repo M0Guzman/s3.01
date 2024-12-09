@@ -8,6 +8,7 @@ use App\Http\Middleware\FullyVerified;
 use App\Http\Controllers\TravelController;
 use App\Http\Middleware\RedirectIfUnverified;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\WineRoadController;
 
 /*
 |--------------------------------------------------------------------------
@@ -45,6 +46,11 @@ Route::get('/file/{id}', [FileController::class, 'get_file'])->name('file');
 
 require __DIR__.'/auth.php';
 
-Route::get('/wine_road', function () {
-    return view('wine_road');
-});
+
+
+
+Route::get('/wine-roads', [WineRoadController::class, 'index'])->name('wine-road.index');
+Route::get('/wine-roads/{id}', [WineRoadController::class, 'show'])->name('wine-road.show'); 
+
+
+

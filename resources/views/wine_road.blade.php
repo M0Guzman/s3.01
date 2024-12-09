@@ -1,5 +1,6 @@
 <x-app-layout>
     @vite(['resources/scss/wine_road.scss'])
+
     <div class="container">
         <h1 class="title">Route des Vins</h1>
         <section class="intro">
@@ -13,12 +14,12 @@
                 exploration d’une région !
             </p>
         </section>
-        <div class="images">
-            <img src="{{ Vite::asset('resources/images/vrdv.jpg') }}" alt="Vignoble Alsace"><img
-            src="{{ Vite::asset('resources/images/trdv.jpg') }}" alt="Cave à Vin"><img
-            src="{{ Vite::asset('resources/images/rdv.jpg') }}" alt="Route des Vins en Nature">
-        </div>
 
+        <div class="images">
+            <img src="{{ Vite::asset('resources/images/vrdv.jpg') }}" alt="Vignoble Alsace">
+            <img src="{{ Vite::asset('resources/images/trdv.jpg') }}" alt="Cave à Vin">
+            <img src="{{ Vite::asset('resources/images/rdv.jpg') }}" alt="Route des Vins en Nature">
+        </div>
 
         <section class="routes">
             <h2>LES ROUTES DES VINS EN FRANCE</h2>
@@ -33,8 +34,39 @@
                 à visiter ou à (re)visiter. Les itinéraires des routes des vins de France sont à parcourir comme il vous plaît : en voiture, à pied ou à vélo !
             </p>
             <p>
-                * Source : <a href="https://www.atout-france.fr/" target="_blank">Atout France</a>, Tourisme et Vin - données 2010
+                * Source : <a href="https://www.atout-france.fr/" target="_blank">Atout France</a>, Tourisme et Vin - données 2023
             </p>
         </section>
     </div>
+    
+    <section class="routes-vins">
+        <h2>Découvrez les Routes des Vins</h2>      
+            <div class="images-two-by-two">
+                @foreach ($wine_roads as $road)
+                    <div class="route-item">
+                        <img 
+                            src="{{ $road->resources[0]->get_url() }}" 
+                            alt="Image de {{ $road->name }}" 
+                            class="route-image"
+                        >
+
+
+                        <p id="title">
+                            {{ $road->name }}
+                        </p>
+
+                        <p id="description">
+                            {{ mb_substr($road->description, 0, 100, 'UTF-8') }}...
+                        </p>
+
+                        <a href="{{ route('wine-roads.show', $road->id) }}">
+                            <button>Découvrir la Route des Vins</button>
+                        </a>
+                    </div>
+                @endforeach
+            </div>
+
+    </section>
+
+
 </x-app-layout>
