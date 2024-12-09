@@ -29,15 +29,15 @@
 
         <div class="booking-section">
             <div class="card">
-
+                
                 @if($travel->travel_steps->count() != 0 )
-                    @foreach ( $travel->travel_steps as $travel_step)
+                    @foreach ( $travel->travel_steps as $travel_step)                    
                         @if($travel_step->activities->count() != 0 )
-                            @foreach ($travel_step->activities as $activity)
-                                @if($activity->partner->activity_type->name == 'hotel' )  <!-- changer activity->activity_category en activity_types -->
-                                    <h2>{{ $activity->partner->name }}</h2>
+                            @foreach ($travel_step->activities as $activity)                           
+                                @if($activity->partner->activity_type->name == 'Hotel' )  <!-- changer activity->activity_category en activity_types -->
+                                    <h2>{{ $activity->partner->name }}</h2>                                    
                                     <p> {{ $activity->partner->hotel->description }} </p>
-                                    {{ $activity->partner->hotel }}
+                                    
                                     @break
                                 @endif
                             @endforeach
@@ -61,19 +61,21 @@
 
 
         <div class="options">
-            <h2>Sélectionnez vos options</h2>
+            <h2>Sélectionnez vos options</h2>            
                 @if($travel->travel_steps->count() != 0 )
                     @foreach ( $travel->travel_steps as $travel_step)
-                        @foreach ($travel_step->activities as $activity)
-                        @if($activity->activity_category->name == 'hotel')
-                            <label>
-                                <input type="radio" name="{{ $activity->name }}" checked> {{ $activity->name }}: Non
-                            </label>
-                            <label>
-                                <input type="radio" name="{{ $activity->name }}"> {{ $activity->name }}: Oui
-                            </label>
+                        @foreach ($travel_step->activities as $activity)        
+                        
+                        @if($activity->activity_type != null)              
+                            @if($activity->activity_type->name == 'Hotel')
+                                <label>
+                                    <input type="radio" name="{{ $activity->name }}" checked> {{ $activity->name }}: Non
+                                </label>
+                                <label>
+                                    <input type="radio" name="{{ $activity->name }}"> {{ $activity->name }}: Oui
+                                </label>
+                            @endif
                         @endif
-
                         @endforeach
                     @endforeach
                 @endif

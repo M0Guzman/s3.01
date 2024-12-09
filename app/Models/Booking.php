@@ -27,6 +27,11 @@ class Booking extends Model
         return $this->belongsTo(Travel::class);
     }
 
+    public function offeredTravel(): HasOne
+    {
+        return $this->hasone(OfferedTravel::class);
+    }
+
     public function order(): HasOne
     {
         return $this->hasOne(Order::class);

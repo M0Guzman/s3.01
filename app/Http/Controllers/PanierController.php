@@ -294,7 +294,13 @@ class PanierController extends Controller
         $order = Order::find(Session::get('order_id'));
 
         $booking = $order->bookings()->find($booking_id);
-        $order->bookings()->detach($booking_id);
+        if($booking->offeredTravel != null)
+        {
+            $booking->offeredTravel()->delete();
+        }
+        
+            $order->bookings()->detach($booking_id);
+
         $booking->delete();
 
         return back()->with('status', 'Article-deleted');
