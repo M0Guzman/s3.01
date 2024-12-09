@@ -1,4 +1,4 @@
-<x-app-layout>
+class<x-app-layout>
 
     <!-- Contenu principal -->
     <main class="main_destinations">

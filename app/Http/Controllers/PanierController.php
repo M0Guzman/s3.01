@@ -188,14 +188,7 @@ class PanierController extends Controller
         $provider->getAccessToken();
         $res = $provider->createOrder([
             'intent' => 'CAPTURE',
-            'purchase_units' => $units /*[
-                [
-                    'amount' => [
-                        'currency_code' => 'EUR',
-                        'value' => strval($order->bookings->sum(function($booking) { return $booking->travel->price_per_person * ( $booking->adult_count + $booking->children_count); }))
-                    ]
-                ]
-            ]*/,
+            'purchase_units' => $units,
             'prefer' => 'return=minimal'
         ]);
 

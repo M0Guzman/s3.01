@@ -99,7 +99,7 @@
                 <li class="menu">
                     <a href="#"><p class="menu-title">Préparer votre séjour</p></a>
                     <ul class="menu-dropdown">
-                        <li><a href="https://www.vinotrip.com/fr/route-des-vins">Route des vins</a></li>
+                        <li><a href="{{ route('wine-road.index') }}">Route des vins</a></li>
                         <li><a href="https://www.vinotrip.com/fr/vignoble">Guide des vignobles</a></li>
                     </ul>
                 </li>

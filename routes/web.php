@@ -9,6 +9,8 @@ use App\Http\Controllers\TravelController;
 use App\Http\Middleware\RedirectIfUnverified;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PanierController;
+use App\Http\Controllers\WineRoadController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -76,3 +78,12 @@ Route::get('/policies/privacy', function() {
 })->name('policies.privacy');
 
 require __DIR__.'/auth.php';
+
+
+
+
+Route::get('/wine-roads', [WineRoadController::class, 'index'])->name('wine-road.index');
+Route::get('/wine-roads/{id}', [WineRoadController::class, 'show'])->name('wine-road.show');
+
+
+

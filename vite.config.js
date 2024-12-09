@@ -24,7 +24,11 @@ export default defineConfig({
                 'resources/images/logo.png',
                 'resources/images/paypal.svg',
                 'resources/images/stripe.svg',
-                'resources/images/visa.svg'
+                'resources/images/visa.svg',
+                'resources/scss/wine_road.scss',
+                'resources/images/vrdv.jpg',
+                'resources/images/trdv.jpg',
+                'resources/images/rdv.jpg'
             ],
             refresh: true,
         }),

@@ -22,4 +22,9 @@ class WineRoad extends Model
     {
         return $this->hasMany(WineRoadStep::class);
     }
+
+    public function resources(): BelongsToMany
+    {
+        return $this->belongsToMany(Resource::class, 'wine_road_has_resources');
+    }
 }
