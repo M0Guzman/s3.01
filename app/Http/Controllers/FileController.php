@@ -12,7 +12,7 @@ class FileController extends Controller
         $id = $id % 99;// kinda doesn't want to have 500 images in the repo
         if(Storage::exists($id))
         {
-            return response()->file(Storage::path(1));
+            return response()->file(Storage::path($id));
         } else {
             return abort(404);
         }

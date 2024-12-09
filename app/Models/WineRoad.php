@@ -27,4 +27,9 @@ class WineRoad extends Model
     {
         return $this->belongsToMany(Resource::class, 'wine_road_has_resources');
     }
+
+    public function travels(): HasMany
+    {
+        return $this->hasMany(Travel::class);
+    }
 }

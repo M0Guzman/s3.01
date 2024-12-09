@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 class WineRoadController extends Controller
 {
     /**
-     * 
+     *
      *
      * @param Request $request
      * @return \Illuminate\View\View
@@ -23,8 +23,7 @@ class WineRoadController extends Controller
         }
 
         $wine_roads = $query->get();
-        dd($wine_roads);
-        return view('wine_road', [
+        return view('wine_roads', [
             'name' => $request->input('name'),
             'wine_roads' => $wine_roads,
         ]);
@@ -32,8 +31,11 @@ class WineRoadController extends Controller
 
     public function show(Request $request , $id)
     {
-    
-        return view('wine_road');
+        $wineroad = WineRoad::find($id);
+
+        return view('wine_road', [
+            'wineroad' => $wineroad
+        ]);
 
     }
 
