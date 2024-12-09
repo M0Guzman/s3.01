@@ -54,7 +54,7 @@
                     </li>
                 @endif
                 <li>
-                    <a href="{{ route('panier.show') }}" class="panier">
+                    <a href="{{ route('order.show') }}" class="panier">
                         <i class="fa-solid fa-cart-shopping" style="color: #ffffff;"></i>
                         <span>Panier</span>
                         <span class="panier-count">{{ $nborder }}</span>

@@ -20,6 +20,9 @@ return new class extends Migration
             $order->constrained();
             $booking->constrained();
 
+            $order->onDelete('cascade');
+            $booking->onDelete('cascade');
+
             $table->primary([ $order->name, $booking->name ]);
         });
     }

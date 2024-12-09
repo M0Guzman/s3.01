@@ -26,4 +26,17 @@ class Booking extends Model
     {
         return $this->belongsTo(Travel::class);
     }
+
+    public function order(): HasOne
+    {
+        return $this->hasOne(Order::class);
+    }
+
+    /*protected static function boot()
+    {
+        static::deleting(function(User $user) { // before delete() method call this
+            BookingOrder::where('order_id',  '=', $this->order_id)->where('booking_id', '=', $this->id)->delete();
+            // do the rest of the cleanup...
+       });
+    }*/
 }

@@ -12,45 +12,65 @@
                     <li>Confirmation</li>
                 </ul>
             </nav>
-            @if($order == null)
-            
+
+            @if($order == null || $order->bookings->count() == 0)
+
                 <div class="commande-panier">
                     <p class="panier-vide">Votre panier est vide</p>
                 </div>
-            
+
             @else
                 <div class="table">
-                        <table>
-                            <th>Nom du Sejour</th>
-                            <th>Date du sejour</th>
-                            <th>Nombre d'adulte(s)</th>
-                            <th>Nombre d'enfant(s)</th>
-                            <th>Prix</th>
-                            @foreach ($order->bookings as $booking)
-                            <tr>
+                    <table>
+                        <th>Nom du Sejour</th>
+                        <th>Date du sejour</th>
+                        <th>Nombre d'adulte(s)</th>
+                        <th>Nombre d'enfant(s)</th>
+                        <th>Nombre de chambre(s)</th>
+                        <th>Prix</th>
 
-                                <td id="title">{{ $booking->travel->title}}</td>
-                                <td id="date">{{ Carbon\Carbon::createFromFormat('Y-m-d',$booking->start_date)->format('d/m/Y') }}</td>
+
+                        @foreach ($order->bookings as $booking)
+                            <tr>
+                                <td id="title">
+                                    <form action='{{ route('travel.edit', ['id' => $booking->travel->id, 'booking_id' => $booking->id]) }}' method='post'>
+                                        @csrf
+                                        <button name='action' type='submit' value='edit'>{{ $booking->travel->title }}</a>
+                                    </form>
+                                </td>
+                                <td id="date">{{ $booking->start_date }}</td>
                                 <td id="adultes">{{ $booking->adult_count }} adulte(s)</td>
                                 <td id="enfants">{{ $booking->children_count }} enfant(s)</td>
-                                <td id="prix">{{ $booking->travel->price_per_person * ( $booking->adult_count + $booking->children_count ) }} € </td>
-                                <td id="img"><img src="{{ Vite::asset('resources/images/delete.png') }}"></td>
-                            </tr>
-                            @endforeach
-                            
-                            <tr>
-                                <td>Prix total</td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td>                              
-                                    {{ $order->bookings->sum(function($booking) { return $booking->travel->price_per_person * ( $booking->adult_count + $booking->children_count ); }) }} €
-                                </td>
+                                <td id="chambres">{{ $booking->room_count }} chambre(s)</td>
+                                <td id="prix">{{ $booking->travel->price_per_person * ($booking->adult_count + $booking->children_count) }} €</td>
+                                <form action="{{ route('panier.supprimer',[$booking->id]) }}" method="get">
 
+                                    <td id="img"><button type="submit" ><img src="{{ Vite::asset('resources/images/delete.png') }}" alt="Supprimer"></button></td>
+                                </form>
                             </tr>
-                        </table>  
-                    
-                </div>        
+                        @endforeach
+
+                        <tr>
+                            <td>Prix total</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td> {{ $order->bookings->sum(function($booking) { return $booking->travel->price_per_person * ( $booking->adult_count + $booking->children_count ); }) }}€
+                            </td>
+
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        <td><a href="{{ route('order.process.address.show') }}">COMMANDER</button></td>
+                        </tr>
+                    </table>
+
+                </div>
             @endif
         </div>
     </main>

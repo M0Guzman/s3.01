@@ -58,6 +58,11 @@ class Travel extends Model
         return $this->hasMany(Review::class);
     }
 
+    public function travel_steps(): HasMany
+    {
+        return $this->hasMany(TravelStep::class);
+    }
+
     public function resources(): BelongsToMany
     {
         return $this->belongsToMany(Resource::class, 'travel_has_resources');

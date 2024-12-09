@@ -18,17 +18,23 @@
                     <p>{{ $travel->description}}</p>
 
                 </div>
-                <div class="footer">
-                    <a href="{{ route('panier.show') }}"><button class="gift-option">J'opte pour le format cadeau</button></a>
-                    <p class="validity">Cadeau valable jusqu’au <strong> {{ $date }} </strong></p>
-                    <p>Disponible aux formats :
-                        <span class="format">e-coffret (envoi immédiat)</span> |
-                        <span class="format">coffret (livraison sous 4 à 6 jours ouvrés)</span>
-                    </p>
-                </div>
-                <div id="panier">
-                    <a href="{{ route('panier.show') }}"><button id="paniers">Ajouter aux panier</button></a>
-                </div>
+                <form action="{{ route('travel.edit', ['id' => $travel->id]) }}" method="post">
+                    @csrf
+
+                    <div class="footer">
+                        <button class="gift-option" type="submit" name='action' value="gift">J'opte pour le format cadeau</button>
+
+                        <p class="validity">Cadeau valable jusqu’au <strong> {{ $date }} </strong></p>
+                        <p>Disponible aux formats :
+                            <span class="format">e-coffret (envoi immédiat)</span> |
+                            <span class="format">coffret (livraison sous 4 à 6 jours ouvrés)</span>
+                        </p>
+                    </div>
+                    <div id="panier">
+                        <button id="paniers" type="submit" name='action' value="for_me">Ajouter aux panier</button>
+                    </div>
+                </form>
+
                 <div class="avis mt-4">
                         @foreach ($travel->reviews as $review)
 
@@ -37,7 +43,7 @@
                             {{ $review->description }}
 
                         @endforeach
-                </div>                
+                </div>
             </div>
         </div>
     </section>

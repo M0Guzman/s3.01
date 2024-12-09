@@ -10,6 +10,8 @@ class WineCellar extends Model
 {
     use HasFactory;
 
+    public $timestamps = false;
+    public $primaryKey = 'partner_id';
     public function partner(): HasOne
     {
         return $this->hasOne(Partner::class);

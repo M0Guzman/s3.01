@@ -72,7 +72,7 @@
               @endif
             </p>
             <p id="price">{{ $sejour->price_per_person }} € par personne</p>
-            <a href="afficher\{{ $sejour->id }}"><button> Decouvrir l'offre</button></a>
+            <a href="{{ route('travel.show', ['id' => $sejour->id]) }}"><button> Decouvrir l'offre</button></a>
         </div>
       @endforeach
     @endif
