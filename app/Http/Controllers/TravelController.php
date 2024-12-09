@@ -61,23 +61,16 @@ class TravelController extends Controller
 
 
             if($travels != null) {
-            //$travels->leftJoin('reviews', 'reviews.travel_id', '=', 'travel.id')->avg('rating');
-            $travels->withAvg('reviews', 'rating');
-            $travels = $travels->get();
-
+                $travels->withAvg('reviews', 'rating');
+                $travels = $travels->get();
             }
-
-
-
         } else {
             $travels = Travel::take(1000);
-            //$travels->leftJoin('reviews', 'reviews.travel_id', '=', 'travel.id')->avg('rating');
             $travels->withAvg('reviews', 'rating');
-
             $travels = $travels->get(['travel.*', 'rating']);
         }
 
-        return view('travels', [
+        return view('travels.travels', [
             'vineyard_category' => $request->input('vineyard_category'),
             'duree' => $request->input('duree'),
             'participant_category' => $request->input('pour-qui'),
@@ -88,16 +81,11 @@ class TravelController extends Controller
             'sejours' => $travels
         ]);
     }
-    public function afficher($id)
+    public function show_single($id)
     {
         $travel = Travel::where('id', $id)->first();
-        //$travel->leftJoin('reviews', 'reviews.travel_id', '=', 'travel.id');
-
-        View::share("vinecats", VineyardCategory::all());
-
         $dateString = Carbon::now()->addMonths(18)->format('d-m-Y');
-        
-        return view('travel',['date'=>$dateString,'travel' => $travel]);
 
+        return view('travels.travel',['date'=>$dateString,'travel' => $travel]);
     }
 }

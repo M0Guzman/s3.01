@@ -9,7 +9,6 @@ use App\Http\Controllers\TravelController;
 use App\Http\Middleware\RedirectIfUnverified;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PanierController;
-use App\Http\Controllers\ModifeControlleur;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -24,19 +23,19 @@ use App\Http\Controllers\ModifeControlleur;
 Route::middleware([RedirectIfUnverified::class])->group(function() {
     Route::get('/', [HomeController::class, 'index']);
     Route::get('/travels', [TravelController::class, 'show'])->name('travels.show');
-    Route::get('/afficher/{id}', [TravelController::class,'afficher'])->name('afficher');
+    Route::get('/travel/{id}', [TravelController::class, 'show_single'])->name('travel.show');
+
+    Route::get('/order', [PanierController::class, 'show'])->name('order.show');
+    Route::post('/order/travel/{id}', [PanierController::class, 'edit'])->name('travel.edit'); // used both for editing and adding
+    Route::post('/order', [PanierController::class, 'update_booking'])->name('order.update_booking');
+    Route::get('/panier/supprimer/{id}', [PanierController::class, 'supprimerProduit'])->name('panier.supprimer');
+
 });
 
 
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', FullyVerified::class])->name('dashboard');
-
-Route::get('/panier', [PanierController::class, 'show'])->name('panier.show');
-Route::get('/addpanier', [PanierController::class, 'addPanier'])->name('addpanier.addPanier');
-Route::get('/panier/supprimer/{id}', [PanierController::class, 'supprimerProduit'])->name('panier.supprimer');
-
-Route::get('/modife', [ModifeControlleur::class,'show'])->name('modife.show');
 
 Route::middleware(['auth', FullyVerified::class])->group(function () {
     Route::get('/process-order/address', [PanierController::class, 'show_address'])->name('order.process.address.show');

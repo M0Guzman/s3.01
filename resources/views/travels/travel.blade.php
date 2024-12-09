@@ -18,25 +18,20 @@
                     <p>{{ $travel->description}}</p>
 
                 </div>
-                <form action="{{ route('modife.show') }}" method="get">
+                <form action="{{ route('travel.edit', ['id' => $travel->id]) }}" method="post">
+                    @csrf
+
                     <div class="footer">
-                        <input type="hidden" value="{{ $travel->id }}" name="travel_id"/>
-                        <input type="hidden" value="offre" name="etat"/>
-                        <input class="gift-option" type="submit" value="J'opte pour le format cadeau"/>
+                        <button class="gift-option" type="submit" name='action' value="gift">J'opte pour le format cadeau</button>
+
                         <p class="validity">Cadeau valable jusqu’au <strong> {{ $date }} </strong></p>
                         <p>Disponible aux formats :
                             <span class="format">e-coffret (envoi immédiat)</span> |
                             <span class="format">coffret (livraison sous 4 à 6 jours ouvrés)</span>
                         </p>
                     </div>
-                </form>
-
-                <form action="{{ route('modife.show') }}" method="get">
                     <div id="panier">
-                        <input type="hidden" value="{{ $travel->id }}" name="travel_id"/>
-                        <input type="hidden" value="add" name="etat"/>
-                        <input id="paniers"type="submit" value="Ajouter aux panier"/>
-
+                        <button id="paniers" type="submit" name='action' value="for_me">Ajouter aux panier</button>
                     </div>
                 </form>
 

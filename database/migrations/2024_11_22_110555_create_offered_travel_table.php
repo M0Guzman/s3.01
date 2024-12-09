@@ -1,6 +1,9 @@
 <?php
 
+use App\Models\Booking;
 use App\Models\Order;
+use App\Models\Travel;
+use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -13,9 +16,10 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('offered_travel', function (Blueprint $table) {
-            $table->id();
-            $table->foreignIdFor(Order::class)->constrained();
-            $table->integer('price');
+            $booking = $table->foreignIdFor(Booking::class);
+            $booking->constrained();
+            $booking->primary();
+            $table->string('code');
         });
     }
 

@@ -2,6 +2,7 @@
 
 namespace App\Mail;
 
+use App\Models\Travel;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
@@ -9,14 +10,14 @@ use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
-class PurchaseCompletedMail extends Mailable
+class OfferedTravelCodeMail extends Mailable
 {
     use Queueable, SerializesModels;
 
     /**
      * Create a new message instance.
      */
-    public function __construct()
+    public function __construct(public Travel $travel, public string $code)
     {
         //
     }
@@ -27,7 +28,7 @@ class PurchaseCompletedMail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Merci de votre achat sur vinotrip',
+            subject: 'Offered Travel Code Mail',
         );
     }
 
@@ -37,7 +38,7 @@ class PurchaseCompletedMail extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'mails.purchase_complete',
+            view: 'mails.offered_travel',
         );
     }
 

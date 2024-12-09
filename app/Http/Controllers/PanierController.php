@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\OfferedTravelCodeMail;
 use App\Mail\PurchaseCompletedMail;
 use App\Models\Address;
 use App\Models\City;
 use App\Models\Department;
 use App\Models\Booking;
+use App\Models\OfferedTravel;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Http\Request;
 use App\Models\Review;
@@ -17,6 +19,7 @@ use App\Models\VineyardCategory;
 use App\Models\Travel;
 use App\Models\Order;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Str;
 use Srmklive\PayPal\Services\PayPal as PayPalClient;
 use App\Models\Booking_orders;
 use Session;
@@ -39,6 +42,33 @@ class PanierController extends Controller
 
         return view('panier', ['order' => $order]);
     }
+
+    public function edit(Request $request, $id)
+    {
+        $validated = $request->validate([
+            'booking_id' => ['int', 'exists:bookings,id'],
+            'action' => ['string', 'in:gift,for_me,edit']
+        ]);
+
+        $travel = Travel::find($id);
+        if($travel == null) {
+            return back();
+        }
+
+        $booking = null;
+
+        if($request->has('booking_id'))
+        {
+            $booking = Booking::find($validated['booking_id']);
+        }
+
+        return view("travels.edit", [
+            'booking' => $booking,
+            'travel' => $travel,
+            'action' => $validated['action']
+        ]);
+    }
+
 
     public function show_address(Request $request)
     {
@@ -142,25 +172,33 @@ class PanierController extends Controller
         }
 
         $order = Order::find($request->input('order_id'));
+        $units = [];
+
+        foreach($order->bookings as $booking) {
+            array_push($units, [
+                'reference_id' => strval($booking->id),
+                'amount' => [
+                    'currency_code' => 'EUR',
+                    'value' => strval($booking->travel->price_per_person * ( $booking->adult_count + $booking->children_count))
+                ]
+            ]);
+        }
 
         $provider = app(PayPalClient::class);
         $provider->getAccessToken();
         $res = $provider->createOrder([
             'intent' => 'CAPTURE',
-            'purchase_units' => [
+            'purchase_units' => $units /*[
                 [
                     'amount' => [
                         'currency_code' => 'EUR',
                         'value' => strval($order->bookings->sum(function($booking) { return $booking->travel->price_per_person * ( $booking->adult_count + $booking->children_count); }))
                     ]
                 ]
-            ],
+            ]*/,
             'prefer' => 'return=minimal'
         ]);
 
-        if($res["status"] == "COMPLETED") {
-            Mail::to($request->user()->mail)->send(new PurchaseCompletedMail());
-        }
 
         return $res;
     }
@@ -170,16 +208,30 @@ class PanierController extends Controller
         $provider = app(PayPalClient::class);
         $provider->getAccessToken();
 
-        return $provider->capturePaymentOrder($order_id, [
+        $res = $provider->capturePaymentOrder($order_id, [
             'prefer' => "return=minimal"
         ]);
+
+        if($res["status"] == "COMPLETED") {
+            Mail::to($request->user())->send(new PurchaseCompletedMail());
+            foreach($res['purchase_units'] as $unit) {
+                $booking_id = intval($unit['reference_id']);
+
+                $offered = OfferedTravel::find($booking_id);
+                if($offered != null) {
+                    Mail::to($request->user())->send(new OfferedTravelCodeMail($offered->booking->travel, $offered->code));
+                }
+            }
+        }
+
+        return $res;
     }
 
     public function show_thanks() {
         return view('order_process.thanks');
     }
 
-    public function addPanier(Request $request)
+    public function update_booking(Request $request)
     {
         $order = null;
         /*$validated = $request->validate([
@@ -190,19 +242,10 @@ class PanierController extends Controller
             'room_count' => ['required','int','exists:booking,children_count'],
             'start_date' => ['required','int','exists:booking,start_date'],
         ]);*/
-        $etat = $request->session()->get('etat');
-        if($etat == 'add')
-        {
 
-        }
-        if ($etat == 'offre')
-        {
-
-        }
         if(Session::has('order_id'))
         {
             $order = Order::find(Session::get('order_id'));
-
         }
         if($order == null)
         {
@@ -220,7 +263,6 @@ class PanierController extends Controller
 
         if($request->has('booking_id') && $request->input('booking_id') != '')
         {
-            $bookingId = $request->input('booking_id');
             $booking = $order->bookings()->find($bookingId);
 
             if($booking != null)
@@ -235,16 +277,23 @@ class PanierController extends Controller
         }
         else
         {
-            $order->bookings()->create([
+            $booking = $order->bookings()->create([
                 'travel_id' => $travelId,
                 'adult_count' => $adultCount,
                 'children_count' => $childCount,
                 'room_count' => $roomCount,
                 'start_date' => $startDate,
             ]);
+
+            if($request->has('action') && $request->input('action') == 'gift') {
+                OfferedTravel::create([
+                    'booking_id' => $booking->id,
+                    'code' => Str::random(16)
+                ]);
+            }
         }
 
-        return redirect(route('panier.show'));
+        return redirect(route('order.show'));
     }
 
 

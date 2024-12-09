@@ -17,7 +17,7 @@
         <!--{ { $travel_avis } } -->
             <div class="avis_aficher mt-4">
                 <div class="name">
-                    <a href="{{ route('afficher', [ 'id' => $travel_avis->id ]) }}"
+                    <a href="{{ route('travel.show', [ 'id' => $travel_avis->id ]) }}"
                         title="Saint-Emilion - Séjour oenologique">
                         {{ substr($travel_avis->title,0,50) }}
                     </a>
@@ -49,7 +49,7 @@
                     </div>
 
                     <div class="avis_nb">
-                        <a class="reviews" href="{{ route('afficher', [ 'id' => $travel_avis->id ]) }}">
+                        <a class="reviews" href="{{ route('travel.show', [ 'id' => $travel_avis->id ]) }}">
                         Lire les {{ $travel_avis->reviews_count }} avis
                         </a>
                     </div>

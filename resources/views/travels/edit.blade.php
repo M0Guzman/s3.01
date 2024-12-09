@@ -1,6 +1,7 @@
 <x-app-layout>
     @vite(['resources/scss/modife.scss'])
-<form action="{{ route('addpanier.addPanier') }}" method="get">
+<form action="{{ route('order.update_booking') }}" method="post">
+    @csrf
     <div class="container">
         <h1>Votre séjour</h1>
         <div class="info-section">
@@ -9,7 +10,7 @@
 
                 <label for="adults">Adultes :</label>
                 <input type="number" id="adults" name="adults" value="{{ $booking != null ? $booking->adult_count : 1 }}" min="1" onchange="updatePrice()">
-                
+
                 <br>
 
                 <label for="children">Enfants :</label>
@@ -28,21 +29,21 @@
 
         <div class="booking-section">
             <div class="card">
-    
+
                 @if($travel->travel_steps->count() != 0 )
                     @foreach ( $travel->travel_steps as $travel_step)
                         @if($travel_step->activities->count() != 0 )
-                            @foreach ($travel_step->activities as $activity)                                
+                            @foreach ($travel_step->activities as $activity)
                                 @if($activity->partner->activity_type->name == 'hotel' )  <!-- changer activity->activity_category en activity_types -->
-                                    <h2>{{ $activity->partner->name }}</h2>                                   
+                                    <h2>{{ $activity->partner->name }}</h2>
                                     <p> {{ $activity->partner->hotel->description }} </p>
                                     {{ $activity->partner->hotel }}
-                                    @break                                    
-                                @endif 
+                                    @break
+                                @endif
                             @endforeach
                             @break
                         @endif
-                    @endforeach                    
+                    @endforeach
                 @endif
 
             </div>
@@ -57,13 +58,13 @@
 
         </div>
 
-        
+
 
         <div class="options">
             <h2>Sélectionnez vos options</h2>
                 @if($travel->travel_steps->count() != 0 )
                     @foreach ( $travel->travel_steps as $travel_step)
-                        @foreach ($travel_step->activities as $activity) 
+                        @foreach ($travel_step->activities as $activity)
                         @if($activity->activity_category->name == 'hotel')
                             <label>
                                 <input type="radio" name="{{ $activity->name }}" checked> {{ $activity->name }}: Non
@@ -73,20 +74,21 @@
                             </label>
                         @endif
 
-                        @endforeach 
-                    @endforeach                   
+                        @endforeach
+                    @endforeach
                 @endif
         </div>
 
         <div class="price" id="totalPrice">
             PRIX TOTAL: {{ $travel->price_per_person * (($booking != null ? $booking->adult_count : 1) + ($booking != null ? $booking->children_count : 0)) }} €
         </div>
-        <input type="hidden" value="{{ $travel->id }}" name="travel_id"/> 
+        <input type="hidden" value="{{ $travel->id }}" name="travel_id"/>
         <input type="hidden" value="{{ $booking != null ? $booking->id : null }}" name="booking_id"/>
+        <input type="hidden" value="{{ $action }}" name="action"/>
         <input class="gift-option" type="submit" value="RESERVER" />
         </div>
     </form>
-     
+
 
     <script>
                     const adultPrice = {{ $travel->price_per_person }};
