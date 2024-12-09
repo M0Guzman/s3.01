@@ -26,6 +26,11 @@ class Activity extends Model
         return $this->belongsTo(Partner::class);
     }
 
+    public function activity_type(): BelongsTo
+    {
+        return $this->belongsTo(ActivityType::class);
+    }
+
     public function activity_category(): BelongsTo
     {
         return $this->belongsTo(ActivityCategory::class);

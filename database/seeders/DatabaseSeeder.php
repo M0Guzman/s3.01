@@ -43,7 +43,7 @@ class DatabaseSeeder extends Seeder
         ActivityType::create(['name' => 'Cave']);
         ActivityType::create(['name' => 'Restaurant']);
         ActivityType::create(['name' => 'Hotel']);
-        ActivityType::create(['name' => 'Autre']);
+        ActivityType::create(['name' => 'Autres']);
 
         Department::create(['name' => 'Ain']);
         Department::create(['name' => 'Aisne']);

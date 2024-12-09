@@ -36,7 +36,7 @@
                             $note --
                         @endphp
                     @endfor
-                    <span class="note">{{ $travel_avis->reviews_avg_rating }}/5</span>
+                    <span class="note">{{ round($travel_avis->reviews_avg_rating, 1) }}/5</span>
                 </div>
 
                 <div class="product_desc row">

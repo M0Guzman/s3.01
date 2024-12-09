@@ -64,7 +64,27 @@
 
             <img id="image" src="{{ $sejour->resources[0]->get_url() }}"> </img>
             <p id="title">{{ mb_substr($sejour->title,0,50,'UTF-8') }}</p>
-            <p id="vignoble">{{ mb_substr($sejour->vineyard_category->name,0,50,'UTF-8') }} @if( $sejour->reviews_avg_rating != null) {{ $sejour->reviews_avg_rating }} étoiles @endif</p>
+            <p id="vignoble">
+              {{ mb_substr($sejour->vineyard_category->name,0,50,'UTF-8') }}
+              @if( $sejour->reviews_avg_rating != null)
+                @php
+                    $note = $sejour->reviews_avg_rating
+                  @endphp
+                  @for ($i = 0; $i < 5; $i++)
+                    @if ($note >= 1)
+                      <i class="fa-solid fa-star"></i>
+                    @elseif ($note < 0.5)
+                      <i class="fa-regular fa-star"></i>
+                    @else
+                      <i class="fa-regular fa-star-half-stroke"></i>
+                    @endif
+                    @php
+                      $note --
+                    @endphp
+                  @endfor
+                {{ round($sejour->reviews_avg_rating, 1) }}/5 
+              @endif
+            </p>
             <p id="description">{{ mb_substr($sejour->description,0,50,'UTF-8') }}</p>
             <p id="jours">{{ $sejour->days }} @if( $sejour->days >1)jours
               @else

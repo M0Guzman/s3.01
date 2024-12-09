@@ -81,9 +81,9 @@ class TravelController extends Controller
             'sejours' => $travels
         ]);
     }
-    public function show_single($id)
+    public function show_single($id, Request $request)
     {
-        $travel = Travel::where('id', $id)->first();
+        $travel = Travel::find($id);
         $dateString = Carbon::now()->addMonths(18)->format('d-m-Y');
 
         return view('travels.travel',['date'=>$dateString,'travel' => $travel]);
