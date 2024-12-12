@@ -11,19 +11,12 @@ use App\Models\Booking;
 use App\Models\OfferedTravel;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Http\Request;
-use App\Models\Review;
-use App\Models\ParticipantCategory;
-use App\Models\TravelCategory;
-use App\Models\TravelHasResource;
-use App\Models\VineyardCategory;
 use App\Models\Travel;
 use App\Models\Order;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 use Srmklive\PayPal\Services\PayPal as PayPalClient;
-use App\Models\Booking_orders;
 use Session;
-use View;
 
 class PanierController extends Controller
 {

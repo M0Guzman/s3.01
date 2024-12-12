@@ -57,4 +57,8 @@
             @endif
         </div>
     </form>
+    <form action="{{ route('historique.show') }}">
+    <button type="submit">Historique de commande</button>
+    </form>
+    
 </section>

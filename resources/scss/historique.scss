@@ -1,0 +1,64 @@
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    font-size: 16px;
+    text-align: left;
+    background-color: #f9f9f9;
+  
+    th, td {
+      padding: 12px 15px;
+      border: 1px solid #ddd;
+    }
+  
+    th {
+      background-color: #8a2be2;
+      color: white;
+      font-weight: bold;
+      text-transform: uppercase;
+    }
+  
+    tr {
+      &:nth-child(even) {
+        background-color: #f2f2f2;
+      }
+  
+      &:hover {
+        background-color: #ddd;
+      }
+    }
+  
+    td {
+      &.price {
+        font-weight: bold;
+        color: #ff5722;
+      }
+  
+      &.status {
+        text-transform: capitalize;
+        color: #8a2be2;
+  
+        &.pending {
+          color: #ff9800;
+        }
+  
+        &.completed {
+          color: #8a2be2;
+        }
+  
+        &.canceled {
+          color: #f44336;
+        }
+      }
+
+      a {
+        color: #8a2be2;
+        text-decoration: none;
+  
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
+  }
+  

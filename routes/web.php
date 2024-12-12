@@ -10,6 +10,7 @@ use App\Http\Middleware\RedirectIfUnverified;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PanierController;
 use App\Http\Controllers\WineRoadController;
+use App\Http\Controllers\HistoriqueControlleur;
 
 /*
 |--------------------------------------------------------------------------
@@ -61,6 +62,8 @@ Route::middleware(['auth', FullyVerified::class])->group(function () {
     Route::post('/address', [UserAddressController::class, 'create'])->name('address.create');
     Route::patch('/address', [UserAddressController::class, 'edit'])->name('address.edit');
     Route::delete('/address', [UserAddressController::class, 'destroy'])->name('address.destroy');
+
+    Route::get('/historique', [HistoriqueControlleur::class, 'show'])->name('historique.show');
 });
 
 Route::get('/file/{id}', [FileController::class, 'get_file'])->name('file');
