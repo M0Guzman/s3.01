@@ -26,6 +26,10 @@ class Order extends Model
     {
         return $this->belongsTo(PaymentType::class);
     }
+    public function order_state(): BelongsTo
+    {
+        return $this->belongsTo(OrderState::class);
+    }
 
     public function resource(): BelongsTo
     {

@@ -1,30 +1,44 @@
-<!DOCTYPE html>
-<html lang="fr">
+<x-app-layout>
     @vite(['resources/scss/historique.scss'])
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vino</title>
-</head>
 <body>
+    <h3><a href="{{route('profile.edit')}}">Mon Compte</a></h3>
     <table>
         <th>Nom sejour</th>
         <th>Date</th>
         <th>Prix Total</th>
         <th>Etat</th>
-        <th>Facture</th> 
-        @foreach ($orders as $order)
-            @foreach ($order->bookings as $booking)
-                <tr>
-                    <td> {{$booking->travel->name }} </td>
-                    <td> {{$booking->travel->start_date}} </td>
-                    <td>{{ $booking->travel->price }} </td>
-                    <td>{{$order->order_states->name}} </td>
-                    <td> </td>
+        <th>Facture</th>
+        
+        @if($orders != null && $orders !='')
+        
+            @foreach ($orders as $order)
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>{{ $order->order_state->name }}</td>
+                <td>facture</td>
+            </tr>
+                @foreach ($order->bookings as $booking)
+                    <tr>       
+                            <td> <a href="{{ route('travel.show', ['id' => $booking->id]) }}"> {{ $booking->travel->title }} </a></td>
+                            <td> {{ $booking->start_date }} </td>
+                            <td>{{ $booking->travel->price_per_person * ($booking->adult_count + $booking->children_count) }} € </td>
+                            <td></td>              
+                            <td></td>
+                    </tr>    
+                @endforeach
+                
+                <tr id="black">
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
                 </tr>
-
-            @endforeach   
-        @endforeach 
+            @endforeach
+            
+        @endif
     </table>
 </body>
-</html>
+</x-app-layout>

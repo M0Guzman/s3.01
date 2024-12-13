@@ -1,3 +1,8 @@
+h3{
+    font-weight: bold;
+    font-size:large;
+}
+
 table {
     width: 100%;
     border-collapse: collapse;
@@ -39,7 +44,7 @@ table {
         color: #8a2be2;
   
         &.pending {
-          color: #ff9800;
+          color: #00CED1 ;
         }
   
         &.completed {
@@ -61,4 +66,12 @@ table {
       }
     }
   }
+  #black{
+    height: 15px;    
+    background-color: black;    
+  td{
+    border:  2px solid black;
+  }
+  }
+  
   

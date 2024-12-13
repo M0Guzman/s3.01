@@ -199,6 +199,9 @@ class DatabaseSeeder extends Seeder
 
         OtherPartnerActivityType::create(['name' => 'tmp_plz_fix']);
         OrderState::create(['name' => 'En attente']);
+        OrderState::create(['name' => 'En cours de livraison']);
+        OrderState::create(['name' => 'Livree']);
+        OrderState::create(['name' => 'Annule']);
 
         SamplingType::create(['name'=> 'Degustation dans une cave']);
     }

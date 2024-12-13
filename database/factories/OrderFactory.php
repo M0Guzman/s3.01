@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\OrderState;
 use App\Models\PaymentType;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -24,7 +25,8 @@ class OrderFactory extends Factory
             'payment_type_id' => PaymentType::all()->random()->id,
             'user_id' => $user->id,
             'address_id' => $user->addresses->random()->id,
-            'message' => fake()->paragraph()
+            'message' => fake()->paragraph(),
+            'order_state_id' => OrderState::all()->random()->id,
         ];
     }
 }
