@@ -21,7 +21,11 @@ class Booking extends Model
         'start_date'
     ];
 
-    
+    public function get_price() : float
+    {
+        return $this->travel->price_per_person * ($this->adult_count + $this->children_count);
+    }
+
     public function travel(): BelongsTo
     {
         return $this->belongsTo(Travel::class);
@@ -29,7 +33,7 @@ class Booking extends Model
 
     public function offeredTravel(): HasOne
     {
-        return $this->hasone(OfferedTravel::class);
+        return $this->hasOne(OfferedTravel::class);
     }
 
     public function order(): HasOne

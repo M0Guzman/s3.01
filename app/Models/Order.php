@@ -6,7 +6,6 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Order extends Model
 {
@@ -21,6 +20,13 @@ class Order extends Model
         'address_id',
         'order_state_id'
     ];
+
+    public function get_price(): float
+    {
+        return  $this->bookings->sum(function($booking) {
+            return $booking->get_price();
+        });
+    }
 
     public function payment_type(): BelongsTo
     {

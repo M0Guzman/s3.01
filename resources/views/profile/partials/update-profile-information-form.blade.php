@@ -18,7 +18,7 @@
         @method('patch')
 
         <div>
-            
+
         </div>
 
         <div>
@@ -57,7 +57,7 @@
             @endif
         </div>
     </form>
-    <form action="{{ route('historique.show') }}">
-    <x-primary-button>{{ __('Historique de commande') }}</x-primary-button>
-    </form>    
+    <form class="mt-4" action="{{ route('order.history.show') }}">
+        <x-secondary-button type="submit">{{ __('Historique de commande') }}</x-secondary-button>
+    </form>
 </section>

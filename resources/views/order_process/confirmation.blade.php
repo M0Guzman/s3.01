@@ -46,7 +46,7 @@
                                 <td></td>
                                 <td></td>
                                 <td>
-                                    {{ $order->bookings->sum(function($booking) { return $booking->travel->price_per_person * ( $booking->adult_count + $booking->children_count ); }) }} €
+                                    {{ $order->get_price() }} €
                                 </td>
                             </tr>
                         </table>

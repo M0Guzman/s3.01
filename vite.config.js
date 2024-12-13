@@ -26,7 +26,7 @@ export default defineConfig({
                 'resources/images/stripe.svg',
                 'resources/images/visa.svg',
                 'resources/scss/wine_road.scss',
-                'resources/scss/historique.scss',
+                'resources/scss/order_history.scss',
                 'resources/images/vrdv.jpg',
                 'resources/images/trdv.jpg',
                 'resources/images/rdv.jpg'

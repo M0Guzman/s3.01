@@ -10,6 +10,7 @@ use App\Models\Department;
 use App\Models\Booking;
 use App\Models\OfferedTravel;
 use App\Providers\RouteServiceProvider;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Models\Travel;
 use App\Models\Order;
@@ -18,7 +19,7 @@ use Illuminate\Support\Str;
 use Srmklive\PayPal\Services\PayPal as PayPalClient;
 use Session;
 
-class PanierController extends Controller
+class OrderController extends Controller
 {
     public function show(Request $request)
     {
@@ -33,7 +34,7 @@ class PanierController extends Controller
             Session::put('order_id',$order->id);
         }
 
-        return view('panier', ['order' => $order]);
+        return view('order', ['order' => $order]);
     }
 
     public function edit(Request $request, $id)
@@ -283,19 +284,34 @@ class PanierController extends Controller
     }
 
 
-    public function supprimerProduit(Request $request,$booking_id) {
+    public function remove_booking(Request $request) {
+        $validated = $request->validate([
+            'booking_id' => ['required' ,'int',"exists:bookings,id"],
+        ]);
+
+
         $order = Order::find(Session::get('order_id'));
 
-        $booking = $order->bookings()->find($booking_id);
+        $booking = $order->bookings()->find($validated['booking_id']);
         if($booking->offeredTravel != null)
         {
             $booking->offeredTravel()->delete();
         }
-        
-            $order->bookings()->detach($booking_id);
 
+        $order->bookings()->detach($validated['booking_id']);
         $booking->delete();
 
         return back()->with('status', 'Article-deleted');
+    }
+
+    public function show_history(Request $request)
+    {
+        $orders = Order::where('user_id', '=', $request->user()->id)->get();
+
+        $orders = $orders->sortBy(function ($order, int $key) {
+            return Carbon::parse($order->bookings[0]['start_date'])->timestamp;
+        });
+
+        return view('profile/order_history', ['orders' => $orders]);
     }
 }

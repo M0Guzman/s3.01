@@ -8,9 +8,8 @@ use App\Http\Middleware\FullyVerified;
 use App\Http\Controllers\TravelController;
 use App\Http\Middleware\RedirectIfUnverified;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\PanierController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\WineRoadController;
-use App\Http\Controllers\HistoriqueControlleur;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,10 +27,10 @@ Route::middleware([RedirectIfUnverified::class])->group(function() {
     Route::get('/travels', [TravelController::class, 'show'])->name('travels.show');
     Route::get('/travel/{id}', [TravelController::class, 'show_single'])->name('travel.show');
 
-    Route::get('/order', [PanierController::class, 'show'])->name('order.show');
-    Route::post('/order/travel/{id}', [PanierController::class, 'edit'])->name('travel.edit'); // used both for editing and adding
-    Route::post('/order', [PanierController::class, 'update_booking'])->name('order.update_booking');
-    Route::get('/panier/supprimer/{id}', [PanierController::class, 'supprimerProduit'])->name('panier.supprimer');
+    Route::get('/order', [OrderController::class, 'show'])->name('order.show');
+    Route::post('/order/travel/{id}', [OrderController::class, 'edit'])->name('travel.edit'); // used both for editing and adding
+    Route::post('/order', [OrderController::class, 'update_booking'])->name('order.update_booking');
+    Route::post('/order/remove_booking', [OrderController::class, 'remove_booking'])->name('order.booking.remove');
 
 });
 
@@ -41,19 +40,19 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', FullyVerified::class])->name('dashboard');
 
 Route::middleware(['auth', FullyVerified::class])->group(function () {
-    Route::get('/process-order/address', [PanierController::class, 'show_address'])->name('order.process.address.show');
-    Route::post('/process-order/address', [PanierController::class, 'process_address'])->name('order.process.address');
+    Route::get('/process-order/address', [OrderController::class, 'show_address'])->name('order.process.address.show');
+    Route::post('/process-order/address', [OrderController::class, 'process_address'])->name('order.process.address');
 
-    Route::get('/process-order/agreements', [PanierController::class, 'show_agreements'])->name('order.process.agreements.show');
-    Route::post('/process-order/agreements', [PanierController::class, 'process_agreements'])->name('order.process.agreements');
+    Route::get('/process-order/agreements', [OrderController::class, 'show_agreements'])->name('order.process.agreements.show');
+    Route::post('/process-order/agreements', [OrderController::class, 'process_agreements'])->name('order.process.agreements');
 
-    Route::get('/process-order/confirmation', [PanierController::class, 'show_confirmation'])->name('order.process.confirmation.show');
-    Route::post('/process-order/confirmation', [PanierController::class, 'process_confirmation'])->name('order.process.confirmation');
+    Route::get('/process-order/confirmation', [OrderController::class, 'show_confirmation'])->name('order.process.confirmation.show');
+    Route::post('/process-order/confirmation', [OrderController::class, 'process_confirmation'])->name('order.process.confirmation');
 
-    Route::get('/process-order/thanks', [PanierController::class, 'show_thanks'])->name('order.thanks.show');
+    Route::get('/process-order/thanks', [OrderController::class, 'show_thanks'])->name('order.thanks.show');
 
-    Route::post('/order/create', [PanierController::class, 'create_order'])->name('order.create');
-    Route::post('/order/approve/{order_id}/capture', [PanierController::class, 'approve_order'])->name('order.approve');
+    Route::post('/order/create', [OrderController::class, 'create_order'])->name('order.create');
+    Route::post('/order/approve/{order_id}/capture', [OrderController::class, 'approve_order'])->name('order.approve');
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
@@ -63,7 +62,7 @@ Route::middleware(['auth', FullyVerified::class])->group(function () {
     Route::patch('/address', [UserAddressController::class, 'edit'])->name('address.edit');
     Route::delete('/address', [UserAddressController::class, 'destroy'])->name('address.destroy');
 
-    Route::get('/historique', [HistoriqueControlleur::class, 'show'])->name('historique.show');
+    Route::get('/order/history', [OrderController::class, 'show_history'])->name('order.history.show');
 });
 
 Route::get('/file/{id}', [FileController::class, 'get_file'])->name('file');
