@@ -12,7 +12,8 @@ export default defineConfig({
     plugins: [
         laravel({
             input: [
-                'resources/css/test.css',
+                'resources/js/address.js',
+                'resources/scss/address.scss',
                 'resources/js/process_order.js',
                 'resources/js/app.js',
                 'resources/scss/app.scss',
