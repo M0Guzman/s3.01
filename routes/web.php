@@ -10,6 +10,7 @@ use App\Http\Middleware\RedirectIfUnverified;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PanierController;
 use App\Http\Controllers\WineRoadController;
+use App\Http\Controllers\PartnerController;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,6 +34,8 @@ Route::middleware([RedirectIfUnverified::class])->group(function() {
     Route::get('/panier/supprimer/{id}', [PanierController::class, 'supprimerProduit'])->name('panier.supprimer');
 
 });
+
+Route::get('/partner/{id}', [PartnerController::class, 'show_single'])->name('partner.show');
 
 
 Route::get('/dashboard', function () {

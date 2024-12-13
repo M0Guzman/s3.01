@@ -19,6 +19,7 @@ return new class extends Migration
             $table->foreignIdFor(Address::class)->constrained();
             $table->string('name');
             $table->string('email');
+            $table->text('description');
             $table->string('phone');
         });
     }

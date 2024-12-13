@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Partner extends Model
@@ -18,6 +19,7 @@ class Partner extends Model
         'address_id',
         'name',
         'email',
+        'description',
         'phone'
     ];
 
@@ -49,5 +51,10 @@ class Partner extends Model
     public function other_partner(): HasOne
     {
         return $this->hasOne(OtherPartner::class);
+    }
+
+    public function resources(): BelongsToMany
+    {
+        return $this->belongsToMany(Resource::class, 'partner_has_resources');
     }
 }
