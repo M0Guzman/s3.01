@@ -28,6 +28,7 @@ class PartnerFactory extends Factory
             'address_id' => Address::all()->random()->id,
             'name' => fake()->sentence(2),
             'email' => fake()->companyEmail(),
+            'description' => fake()->paragraph(),
             'phone' => fake()->phoneNumber()
         ];
     }

@@ -36,17 +36,7 @@
                         <button id="paniers" type="submit" name='action' value="for_me">Ajouter aux panier</button>
                     </div>
                 </form>
-
-                <div class="avis mt-4">
-                        @foreach ($travel->reviews as $review)
-
-                            <h3>{{ $review->title }}</h3>
-                            {{ $review->rating }} étoiles <br>
-                            {{ $review->description }}
-
-                        @endforeach
-                </div>
-            </div>
+            </section>
         </div>
 
         <!-- container détaillé séjour -->
@@ -72,12 +62,14 @@
         <div class="container_etapes">
             @foreach ($travel->travel_steps as $travelStep)
                 @foreach ($travelStep->activities as $activitiy)
-                    @if( $activitiy->partner->hotel != null)
+                    @if( $activitiy->partner->Hotel != null)
                         <div class="container_etape">
-                            <h3>{{ $activitiy->title }}</h3>
+                            <h3>{{ $activitiy->name }}</h3>
                             <p>
                                 {{ $activitiy->description }}
                             </p>
+                            <br>
+                            <a href="{{ route('partner.show', ['id' => $activitiy->partner->id]) }}">En savoir plus sur notre partenaire {{$activitiy->partner->name}}</a>
                         </div>
                     @endif
                 @endforeach
@@ -91,10 +83,12 @@
                 @foreach ($travelStep->activities as $activitiy)
                     @if( $activitiy->partner->winecellar != null || $activitiy->partner->restaurant != null)
                         <div class="container_etape">
-                            <h3>{{ $activitiy->title }}</h3>
+                            <h3>{{ $activitiy->name }}</h3>
                             <p>
                                 {{ $activitiy->description }}
                             </p>
+                            <br>
+                            <a href="{{ route('partner.show', ['id' => $activitiy->partner->id]) }}">En savoir plus sur notre partenaire {{$activitiy->partner->name}}</a>
                         </div>
                     @endif
                 @endforeach
