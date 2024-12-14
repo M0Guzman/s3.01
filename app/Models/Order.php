@@ -22,6 +22,10 @@ class Order extends Model
         'order_state_id'
     ];
 
+    public function coupons(): BelongsTo
+    {
+        return $this->belongsTo(Coupon::class);
+    }
     public function payment_type(): BelongsTo
     {
         return $this->belongsTo(PaymentType::class);

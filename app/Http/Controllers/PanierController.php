@@ -6,6 +6,7 @@ use App\Mail\OfferedTravelCodeMail;
 use App\Mail\PurchaseCompletedMail;
 use App\Models\Address;
 use App\Models\City;
+use App\Models\Coupon;
 use App\Models\Department;
 use App\Models\Booking;
 use App\Models\OfferedTravel;
@@ -23,6 +24,7 @@ class PanierController extends Controller
     public function show(Request $request)
     {
         $order = null;
+        $coupon = null;
 
         if(Session::has('order_id'))
         {
@@ -32,8 +34,17 @@ class PanierController extends Controller
             $order = Order::create([]);
             Session::put('order_id',$order->id);
         }
+        $coupon = Coupon::get();
+        $coupon = Coupon::where('id', '=', '15')->first(); // Retrieve the first matching coupon directly  
 
-        return view('panier', ['order' => $order]);
+        if ($coupon) {  
+            
+        } else {  
+            echo "Coupon not found."; // This will execute if no coupon was found  
+        }  
+
+// Return the coupon object (can be null) to the view  
+return view('panier', ['order' => $order, 'coupon' => $coupon]); 
     }
 
     public function edit(Request $request, $id)
