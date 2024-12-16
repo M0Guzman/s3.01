@@ -176,6 +176,10 @@ class PanierController extends Controller
                 return $booking->travel->price_per_person * ($booking->adult_count + $booking->children_count);
             });
             Coupon::where('code','=',$coupon->code)->update(['value' => $coupon->value-$totalPrice]);
+            if($coupon->value < 0 )
+            {
+                Coupon::where('code','=',$coupon->code)->update(['value' => 0]);
+            }
         }
 
         else{
@@ -188,13 +192,6 @@ class PanierController extends Controller
             'coupon'=> $codeVerif,
         ]);
     }
-
-    public function updateCoupon(Request $request)
-    {
-        $couponValue = $request->get();
-        
-    }
-
     public function create_order(Request $request) {
         if(!$request->has('order_id')) {
             return redirect(RouteServiceProvider::HOME);

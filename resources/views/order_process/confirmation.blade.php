@@ -50,7 +50,7 @@
                             <td>
                                 @if($coupon != null)
                                 
-                                - {{$coupon->value}}
+                                {{$coupon->value}}
                                 @else
                                     {{$coupon= 0}}
                                 @endif
