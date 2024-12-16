@@ -63,6 +63,12 @@ class OrderController extends Controller
         ]);
     }
 
+    public function show_facture(Request $request) 
+    {
+        $order = Order::find(Session::get('order_id'));
+        return view('PDF.facture', ['order'=>$order]);
+    }
+
 
     public function show_address(Request $request)
     {
