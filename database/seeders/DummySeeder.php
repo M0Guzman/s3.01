@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\Activity;
 use App\Models\Address;
+use App\Models\Coupon;
 use App\Models\Order;
 use App\Models\Partner;
 use App\Models\Resource;
@@ -31,6 +32,7 @@ class DummySeeder extends Seeder
         User::factory(50)->hasAddresses(1)->create();
         TravelStep::factory(200)->hasResources(2)->hasActivities(3)->create();
         Order::factory(10)->hasBookings(2)->create();
+        Coupon::factory(10)->hasOrder(1)->create();
         //Review::factory(100)->create();
 
         $titles = [
@@ -75,5 +77,7 @@ class DummySeeder extends Seeder
                 'description' => $descriptions[$index]
             ]);
         }
+
+
     }
 }

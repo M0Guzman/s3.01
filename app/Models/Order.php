@@ -23,11 +23,21 @@ class Order extends Model
 
     public function get_price(): float
     {
-        return  $this->bookings->sum(function($booking) {
+        $price = $this->bookings->sum(function($booking) {
             return $booking->get_price();
         });
+
+        if($this->coupon_id != null) {
+            $price = max(0, $price - $this->coupon->value);
+        }
+
+        return $price;
     }
 
+    public function coupons(): BelongsTo
+    {
+        return $this->belongsTo(Coupon::class);
+    }
     public function payment_type(): BelongsTo
     {
         return $this->belongsTo(PaymentType::class);

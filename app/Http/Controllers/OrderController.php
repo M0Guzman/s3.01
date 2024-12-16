@@ -6,6 +6,7 @@ use App\Mail\OfferedTravelCodeMail;
 use App\Mail\PurchaseCompletedMail;
 use App\Models\Address;
 use App\Models\City;
+use App\Models\Coupon;
 use App\Models\Department;
 use App\Models\Booking;
 use App\Models\OfferedTravel;
@@ -24,6 +25,7 @@ class OrderController extends Controller
     public function show(Request $request)
     {
         $order = null;
+       
 
         if(Session::has('order_id'))
         {
@@ -36,7 +38,6 @@ class OrderController extends Controller
 
         return view('order', ['order' => $order]);
     }
-
     public function edit(Request $request, $id)
     {
         $validated = $request->validate([
@@ -159,13 +160,45 @@ class OrderController extends Controller
             return redirect(route('order.process.address.show'));
 
         $address = Address::find(Session::get('order_address'));
+        //------------coupon----------------------//
+        $codeCoupon = $request->get('code');
+        
+        $coupons = Coupon::get();
+        
+        $codeExist = false;
+
+        foreach ($coupons as $coupon){
+            $code = $coupon->code;
+            if($codeCoupon == $code)
+            {
+                $codeExist = true;                
+                break;
+            }            
+        }
+
+        if ($codeExist == 'true')
+        {
+            $codeVerif = $coupon;
+            $totalPrice = $order->bookings->sum(function($booking) {
+                return $booking->travel->price_per_person * ($booking->adult_count + $booking->children_count);
+            });
+            Coupon::where('code','=',$coupon->code)->update(['value' => $coupon->value-$totalPrice]);
+            if($coupon->value < 0 )
+            {
+                Coupon::where('code','=',$coupon->code)->update(['value' => 0]);
+            }
+        }
+
+        else{
+            $codeVerif = null;
+        }
 
         return view('order_process.confirmation', [
             'order' => $order,
-            'address' => $address
+            'address' => $address,
+            'coupon'=> $codeVerif,
         ]);
     }
-
     public function create_order(Request $request) {
         if(!$request->has('order_id')) {
             return redirect(RouteServiceProvider::HOME);

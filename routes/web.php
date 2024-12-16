@@ -33,7 +33,6 @@ Route::middleware([RedirectIfUnverified::class])->group(function() {
     Route::post('/order/travel/{id}', [OrderController::class, 'edit'])->name('travel.edit'); // used both for editing and adding
     Route::post('/order', [OrderController::class, 'update_booking'])->name('order.update_booking');
     Route::post('/order/remove_booking', [OrderController::class, 'remove_booking'])->name('order.booking.remove');
-
 });
 
 Route::get('/partner/{id}', [PartnerController::class, 'show_single'])->name('partner.show');

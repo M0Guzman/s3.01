@@ -57,6 +57,8 @@
                             </tr>
                         @endforeach
 
+
+                            <!-- verifie code renter et mettre value  -->
                         <tr>
                             <td>Prix total</td>
                             <td></td>
@@ -65,8 +67,8 @@
                             <td></td>
                             <td> {{ $order->get_price() }}€
                             </td>
-
                         </tr>
+
                         <tr>
                             <td></td>
                             <td></td>

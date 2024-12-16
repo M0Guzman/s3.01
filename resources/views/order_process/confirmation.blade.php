@@ -30,24 +30,32 @@
                                 <th class="p-4">Prix</th>
                             <tr>
 
+
                             @foreach ($order->bookings as $booking)
                                 <tr>
                                     <td class="" id="title">{{ $booking->travel->title}}</td>
                                     <td class="" id="date">{{ Carbon\Carbon::createFromFormat('Y-m-d',$booking->start_date)->format('d/m/Y') }}</td>
                                     <td class="" id="adultes">{{ $booking->adult_count }} adulte(s)</td>
                                     <td class="" id="enfants">{{ $booking->children_count }} enfant(s)</td>
-                                    <td class="" id="prix">{{ $booking->travel->price_per_person * ( $booking->adult_count + $booking->children_count ) }} € </td>
+                                    <td class="" id="prix">{{ $booking->get_price() }} € </td>
                                 </tr>
                             @endforeach
+                            <tr>
 
+                            <td>Bon de réduction:</td>
+                            <td><form action="{{ route('order.process.confirmation.show')}}"><input type="text" name="code"></form></td>
+                            <td></td>
+                            <td></td>
+
+                            <td>{{ $coupon == null ? 0 : $coupon->value }} €</td>
+
+                        </tr>
                             <tr>
                                 <td>Prix total</td>
                                 <td></td>
                                 <td></td>
                                 <td></td>
-                                <td>
-                                    {{ $order->get_price() }} €
-                                </td>
+                                <td>{{ $order->get_price() }} €</td>
                             </tr>
                         </table>
                     </div>
