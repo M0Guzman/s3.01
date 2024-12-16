@@ -12,9 +12,9 @@
             <p id="chambres">{{ $booking->room_count }} chambre(s)</p>
         </div>
     </div>
-    <h1 id="prix">{{ $booking->travel->price_per_person * ($booking->adult_count + $booking->children_count) }} € Modifier la function price</h1>
+    <h1 id="prix">{{ $booking->get_price() }} €</h1>
 </div>
 <hr>
 
-    
+
 @endforeach

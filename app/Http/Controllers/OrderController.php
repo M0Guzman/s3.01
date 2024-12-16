@@ -10,15 +10,18 @@ use App\Models\Coupon;
 use App\Models\Department;
 use App\Models\Booking;
 use App\Models\OfferedTravel;
+use App\Models\Resource;
 use App\Providers\RouteServiceProvider;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Models\Travel;
 use App\Models\Order;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Srmklive\PayPal\Services\PayPal as PayPalClient;
 use Session;
+use PDF;
 
 class OrderController extends Controller
 {
@@ -63,13 +66,6 @@ class OrderController extends Controller
             'action' => $validated['action']
         ]);
     }
-
-    public function show_facture(Request $request)
-    {
-        $order = Order::find(Session::get('order_id'));
-        return view('PDF.facture', ['order'=>$order]);
-    }
-
 
     public function show_address(Request $request)
     {
@@ -215,7 +211,6 @@ class OrderController extends Controller
         ]);
 
         if($res["status"] == "COMPLETED") {
-            Mail::to($request->user())->send(new PurchaseCompletedMail());
             foreach($res['purchase_units'] as $unit) {
                 $booking_id = intval($unit['reference_id']);
 
@@ -225,12 +220,27 @@ class OrderController extends Controller
                 }
             }
 
-            $order = Booking::find(intval($res['purchase_units'][0]['reference_id']))->order;
-            if($order->coupon != null) {
+            $order = Booking::find(intval($res['purchase_units'][0]['reference_id']))->orders[0];
+            if(isset($order['coupon_id']) && $order->coupon_id != null) {
                 $order->coupon->update([
                     'value' => min(0, $order->coupon->value - $order->get_price(true))
                 ]);
             }
+
+            $pdf = PDF::loadView('PDF.facture', ['order'=>$order]);
+
+            $file = Resource::create([
+                'filename' => 'invoice.pdf',
+                'mimetype' => 'application/pdf',
+                'permission' => 'user.' . $request->user()->id
+            ]);
+
+            Storage::put($file->id, $pdf->stream("invoice.pdf"));
+
+            $order->resource_id = $file->id;
+            $order->save();
+
+            Mail::to($request->user())->send(new PurchaseCompletedMail($order));
         }
 
         return $res;

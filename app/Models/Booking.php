@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Booking extends Model
@@ -36,16 +37,8 @@ class Booking extends Model
         return $this->hasOne(OfferedTravel::class);
     }
 
-    public function order(): HasOne
+    public function orders(): BelongsToMany
     {
-        return $this->hasOne(Order::class);
+        return $this->belongsToMany(Order::class, 'booking_orders');
     }
-
-    /*protected static function boot()
-    {
-        static::deleting(function(User $user) { // before delete() method call this
-            BookingOrder::where('order_id',  '=', $this->order_id)->where('booking_id', '=', $this->id)->delete();
-            // do the rest of the cleanup...
-       });
-    }*/
 }
