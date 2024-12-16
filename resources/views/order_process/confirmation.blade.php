@@ -30,6 +30,7 @@
                                 <th class="p-4">Prix</th>
                             <tr>
 
+                            
                             @foreach ($order->bookings as $booking)
                                 <tr>
                                     <td class="" id="title">{{ $booking->travel->title}}</td>
@@ -65,24 +66,24 @@
                                 <td>
                                 @php $couponValue = 0; @endphp
 
-@if($coupon != null)
-    @php $couponValue = $coupon->value; @endphp
-@endif
+                                    @if($coupon != null)
+                                        @php $couponValue = $coupon->value; @endphp
+                                    @endif
+                                    
+                                    @php
+                                        $totalPrice = $order->bookings->sum(function($booking) {
+                                            return $booking->travel->price_per_person * ($booking->adult_count + $booking->children_count);
+                                        });
 
- 
-@php
-    $totalPrice = $order->bookings->sum(function($booking) {
-        return $booking->travel->price_per_person * ($booking->adult_count + $booking->children_count);
-    });
+                                        if ($totalPrice <= $couponValue) {
+                                            $finalPrice = "0€";
+                                        } else {
+                                        
+                                            $finalPrice = ($totalPrice - $couponValue) . "€";
+                                        }
+                                    @endphp
 
-    if ($totalPrice <= $couponValue) {
-        $finalPrice = "0€";
-    } else {
-        $finalPrice = ($totalPrice - $couponValue) . "€";
-    }
-@endphp
-
-{{ $finalPrice }}
+                                    {{ $finalPrice }}
                                 </td>
                             </tr>
                         </table>

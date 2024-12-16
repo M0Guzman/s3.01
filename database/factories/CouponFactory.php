@@ -15,7 +15,7 @@ class CouponFactory extends Factory
     {
         return [
             'code' => Str::random(),
-            'value'=> fake()->numberBetween(100, 1000),
+            'value'=> fake()->randomFloat(2,100, 1000),
             'expiration_date' => fake()->dateTimeBetween('13-06-2025','13-06-2026'),
         ];
     }
