@@ -43,11 +43,15 @@
                             <tr>
 
                             <td>Bon de réduction:</td>
-                            <td><form action="{{ route('order.process.confirmation.show')}}"><input type="text" name="code"></form></td>
+                            <td>
+                                <form action="{{ route('order.process.confirmation.show')}}">
+                                    <input type="text" name="code" value="{{ $order->coupon == null ? "" : $order->coupon->code }}" />
+                                </form>
+                            </td>
                             <td></td>
                             <td></td>
 
-                            <td>{{ $coupon == null ? 0 : $coupon->value }} €</td>
+                            <td>{{ $order->coupon == null ? 0 : (- min($order->coupon->value, $order->get_price(true))) }} €</td>
 
                         </tr>
                             <tr>

@@ -25,7 +25,7 @@ class OrderController extends Controller
     public function show(Request $request)
     {
         $order = null;
-       
+
 
         if(Session::has('order_id'))
         {
@@ -64,7 +64,7 @@ class OrderController extends Controller
         ]);
     }
 
-    public function show_facture(Request $request) 
+    public function show_facture(Request $request)
     {
         $order = Order::find(Session::get('order_id'));
         return view('PDF.facture', ['order'=>$order]);
@@ -161,42 +161,17 @@ class OrderController extends Controller
 
         $address = Address::find(Session::get('order_address'));
         //------------coupon----------------------//
-        $codeCoupon = $request->get('code');
-        
-        $coupons = Coupon::get();
-        
-        $codeExist = false;
 
-        foreach ($coupons as $coupon){
-            $code = $coupon->code;
-            if($codeCoupon == $code)
-            {
-                $codeExist = true;                
-                break;
-            }            
-        }
-
-        if ($codeExist == 'true')
-        {
-            $codeVerif = $coupon;
-            $totalPrice = $order->bookings->sum(function($booking) {
-                return $booking->travel->price_per_person * ($booking->adult_count + $booking->children_count);
-            });
-            Coupon::where('code','=',$coupon->code)->update(['value' => $coupon->value-$totalPrice]);
-            if($coupon->value < 0 )
-            {
-                Coupon::where('code','=',$coupon->code)->update(['value' => 0]);
-            }
-        }
-
-        else{
-            $codeVerif = null;
+        if($request->has('code') && $request->input('code') != '') {
+            $coupon = Coupon::where('code', '=', $request->input('code'))->first();
+            $order->update([
+                'coupon_id' => $coupon == null ? null : $coupon->id
+            ]);
         }
 
         return view('order_process.confirmation', [
             'order' => $order,
             'address' => $address,
-            'coupon'=> $codeVerif,
         ]);
     }
     public function create_order(Request $request) {
@@ -205,6 +180,7 @@ class OrderController extends Controller
         }
 
         $order = Order::find($request->input('order_id'));
+        $val = ($order->coupon == null ? 0 : $order->coupon->value) / $order->bookings()->count();
         $units = [];
 
         foreach($order->bookings as $booking) {
@@ -212,7 +188,7 @@ class OrderController extends Controller
                 'reference_id' => strval($booking->id),
                 'amount' => [
                     'currency_code' => 'EUR',
-                    'value' => strval($booking->travel->price_per_person * ( $booking->adult_count + $booking->children_count))
+                    'value' => strval($booking->get_price())
                 ]
             ]);
         }
@@ -247,6 +223,13 @@ class OrderController extends Controller
                 if($offered != null) {
                     Mail::to($request->user())->send(new OfferedTravelCodeMail($offered->booking->travel, $offered->code));
                 }
+            }
+
+            $order = Booking::find(intval($res['purchase_units'][0]['reference_id']))->order;
+            if($order->coupon != null) {
+                $order->coupon->update([
+                    'value' => min(0, $order->coupon->value - $order->get_price(true))
+                ]);
             }
         }
 

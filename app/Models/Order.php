@@ -13,21 +13,22 @@ class Order extends Model
 
     public $timestamps = false;
 
-    protected $fillables = [
+    protected $fillable = [
         'payment_type_id',
         'resource',
         'user_id',
         'address_id',
-        'order_state_id'
+        'order_state_id',
+        'coupon_id'
     ];
 
-    public function get_price(): float
+    public function get_price(bool $ignore_coupon = false): float
     {
         $price = $this->bookings->sum(function($booking) {
             return $booking->get_price();
         });
 
-        if($this->coupon_id != null) {
+        if($this->coupon_id != null && !$ignore_coupon) {
             $price = max(0, $price - $this->coupon->value);
         }
 

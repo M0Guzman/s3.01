@@ -23,12 +23,10 @@ class ProfileController extends Controller
         $UserAdresse = UserAddress::where('user_id','=',$request->user()->id)->get();
         $departments = Department::all();
 
-        View::share("vinecats", VineyardCategory::all());
         return view('profile.edit', [
             'user' => $request->user(),
             'userAddresses' => $UserAdresse,
-            'departments' => $departments,
-            'cities' => City::all()
+            'departments' => $departments
         ]);
     }
 
