@@ -80,10 +80,9 @@ class UserAddressController extends Controller
             'telephone' => ['required','string', 'max:10']
         ]);
 
-
         $user_id = $request->user()->id;
 
-        $city=City::where('name','=',$validated['ville'])->first();
+        $city=City::where('name','=',$validated['ville'])->where('zip', '=', $validated['cp'])->first();
         if($city == null) {
             $city = City::create([
                 'name' => $validated['ville'],

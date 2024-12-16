@@ -24,7 +24,7 @@
     <div class="segment formConteneur">
         @foreach ($userAddresses as $OneUserAddress)
             <div style="width: 350px; margin:1em;">
-                <form method="post" action="{{ route('address.edit') }}" class="sous-section">
+                <form method="post" action="{{ route('address.edit') }}" class="sous-section address-form">
                     @csrf
                     @method('patch')
                     <input type="hidden" id="address_id" name="address_id" value="{{ $OneUserAddress->address->id }}"></input>

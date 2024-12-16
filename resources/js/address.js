@@ -1,6 +1,4 @@
-const cp = document.getElementById("cp");
-
-function autocomplete(inp) {//, arr) {
+function autocomplete(inp, cp, dept) {//, arr) {
   if (inp == null) {return 1;}
     //
     console.log("test")
@@ -26,7 +24,7 @@ function autocomplete(inp) {//, arr) {
 
         }).toString())).json()
 
-        
+
 
         for (i = 0; i < arr.length; i++) {
           /*check if the item starts with the same letters as the text field value:*/
@@ -38,12 +36,13 @@ function autocomplete(inp) {//, arr) {
             b.innerHTML = "<strong>" + Textville.substr(0, val.length) + "</strong>";
             b.innerHTML += Textville.substr(val.length);
             /*insert a input field that will hold the current array item's value:*/
-            b.innerHTML += "<input type='hidden' value='" + arr[i]['name'] +"' data-zip='" + arr[i]['zip'] +"'>";
+            b.innerHTML += "<input type='hidden' value='" + arr[i]['name'] +"' data-zip='" + arr[i]['zip'] +"' data-department='" + arr[i]['department_id'] + "'>";
             /*execute a function when someone clicks on the item value (DIV element):*/
-                b.addEventListener("click", function(e) {
+            b.addEventListener("click", function(e) {
                 /*insert the value for the autocomplete text field:*/
                 inp.value = this.getElementsByTagName("input")[0].value;
                 cp.value = this.getElementsByTagName("input")[0].getAttribute("data-zip");
+                dept.value = this.getElementsByTagName("input")[0].getAttribute("data-department");
                 /*close the list of autocompleted values,
                 (or any other open lists of autocompleted values:*/
                 closeAllLists();
@@ -107,5 +106,8 @@ function autocomplete(inp) {//, arr) {
   document.addEventListener("click", function (e) {
       closeAllLists(e.target);
   });
-} 
-autocomplete(document.getElementById("ville"));
+}
+
+for(const form of document.getElementsByClassName("address-form")) {
+    autocomplete(form.querySelector("#ville"), form.querySelector("#cp"), form.querySelector("#department"));
+}

@@ -5,10 +5,10 @@
         </h2>
     </header>
 
-    
+
 
     <div style="width: 350px; margin:1em;">
-        <form method="post" action="{{ route('address.create') }}" class="sous-section">
+        <form method="post" action="{{ route('address.create') }}" class="sous-section address-form">
             @csrf
             <label style="margin: 10px 0;">Addresse name</label>
             <div class="content">
@@ -27,10 +27,8 @@
 
             <label style="margin: 10px 0;">Ville</label>
             <div class="autocomplete" style="width:300px;">
-                <input style="width:300px;" id="ville"  type="text"/>
+                <x-text-input style="width:300px" id="ville" name="ville" type="text" required autofocus/>
             </div>
-  
-
 
             <label style="margin: 10px 0;">Code postal</label>
             <label style="margin: 0 0 0 10px;">Departement</label>
