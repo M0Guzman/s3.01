@@ -1,43 +1,12 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-.segment {
-    width: 100%;
-}
-
-.content {
-    width: 300px;
-}
 
 
+  // Variables de couleur
+  $dark-brown: #3c2c28;
+  $light-gray: #f7f6f5;
+  $mauve: #7b2b80;
+  $hot-pink: #f50057;
+  $white: #ffffff;
 
-.formConteneur {
-    display:flex;
-    flex-wrap: wrap;
-    flex-direction: row;
-}
-
-.sous-section {
-    border: solid 1px $base;
-    box-shadow: 5px 6px 19px 0px $text;
-    margin-top: 5%;
-    padding: 1em;
-    border-radius: 20px;
-}
-
-.conteneur {
-    display: flex;
-    flex-wrap: wrap;
-    flex-basis: max-content;
-}
-
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f8f8f8;
-    margin: 0;
-    padding: 20px;
-  }
 
   .filters-container {
     max-width: 800px;
@@ -57,10 +26,11 @@ body {
 
   p {
     margin-bottom: 20px;
-    color: #666;
+    color: $dark-brown;
   }
 
-  .filters {
+
+.filters {
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
@@ -100,133 +70,117 @@ body {
     }
   }
 
-  // Variables de couleur
-$dark-brown: #3c2c28;
-$light-gray: #f7f6f5;
-$mauve: #7b2b80;
-$hot-pink: #f50057;
-$white: #ffffff;
 
-// Global styles
-header {
-    font-family: Arial, sans-serif;
-}
 
-// Bande supérieure
-.header-top {
-    background-color: $dark-brown;
-    color: $white;
-    padding: 10px 20px;
-
-    ul {
-        list-style: none;
-        display: flex;
-        justify-content: flex-end;
-        align-items: center;
-        margin: 0;
-        padding: 0;
-
-        li {
-            margin: 0 15px;
-
-            a, span {
-                color: $white;
-                text-decoration: none;
-                font-size: 0.9rem;
-            }
-        }
-
-        .panier {
-            background-color: $hot-pink;
-            color: $white;
-            padding: 5px 10px;
-            border-radius: 5px;
-            display: flex;
-            align-items: center;
-            gap: 5px;
-
-            .panier-count {
-                background-color: $white;
-                color: $hot-pink;
-                font-weight: bold;
-                padding: 2px 5px;
-                border-radius: 50%;
-            }
-        }
-    }
-}
-
-// Bande inférieure
-.header-bottom {
-    background-color: $light-gray;
-    padding: 15px 20px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-
-    .logo {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
-
-        img {
-            max-height: 50px;
-            margin-bottom: 5px;
-        }
-
-        p {
-            font-size: 0.8rem;
-            color: $mauve;
-            margin: 0;
-        }
-    }
-
-    .navigation {
-        ul {
-            list-style: none;
-            display: flex;
-            justify-content: center;
-            margin: 0;
-            padding: 0;
-
-            li {
-                margin: 0 15px;
-
-                a {
-                    color: $mauve;
-                    text-decoration: none;
-                    font-weight: bold;
-                    font-size: 1rem;
-                }
-            }
-        }
-    }
-}
-
-  .sejour{
-
+#container_travel{
     flex-direction:row;
     align-items: center;
     justify-content: center;
     display: flex;
     flex-wrap: wrap;
+}
 
 
-    & #num1{
-        width: 35vw;
-        height: 75vh;
-        border: 2px solid black;
-        margin: 5px;
-        padding: 10px;
-        text-align: center;
-        
+.cadre {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 400px;
+  width: 35vw;
+  height: 600px;
+  margin: 5px;
+  padding: 5px;
+}
 
-      & img{
-        
-        width: 25vw;
-        height: 25vh;
-      }
-
-    }
+.cadre:hover {
+  border-width: 5px;
+  border-style: solid;
+  border-color: $dark-brown;
+  padding: 0;
+  .discover_Offer_Button {
+    background-color: #3c2c28;
+    color: $white;
   }
+
+  .price {
+    left: 45px;
+  }
+
+  .container_info_sejour {
+    border-width: 1px;
+  }
+}
+
+.container_info_sejour {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 55%;
+  padding: 5px;
+  border-width: 1px 1px 5px 1px;
+  border-style: solid;
+  border-color: $dark-brown;
+}
+
+    
+
+.image {
+  width: 100%;
+  height: 60%;
+  object-fit: cover;
+}
+
+h1 {
+  font-weight:bold;
+  font-size: x-large;
+}
+h2 {
+  font-weight:bold;
+  font-size: medium;
+}
+
+.container_location_star {
+  display: flex;
+  flex-direction: row;
+  justify-content:space-between;
+  width: 100%;
+  padding: 0 10px 0 10px;
+}
+
+.title {
+  align-self: left;
+  margin-left: 5px;
+}
+
+.price {
+  position:absolute;
+  left: 50px;
+  color: $dark-brown;
+  background-color: $crust;
+  border: solid 1px $dark-brown;
+  padding: 5px;
+}
+.description {
+  align-self: left;
+  margin-left: 5px;
+}
+
+.jours {
+  position: absolute;
+  left: 10px;
+  bottom: 0;
+}
+
+.discover_Offer_Button {
+  position: absolute;
+  right: 10px;
+  bottom: 5px;
+  padding: 10px;
+  border: solid 2px $dark-brown;
+  border-radius: 20px;
+  text-align: center;
+  background-color: $white;
+  color: #3c2c28;
+}

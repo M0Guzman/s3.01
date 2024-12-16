@@ -124,4 +124,10 @@ class UserAddressController extends Controller
 
         return back()->with('status', 'Address-deleted');
     }
+
+
+    public function showCities(Request $request)
+    {
+        return City::whereRaw('LOWER(name) LIKE ?', [strtolower($request->input('name')) . '%'])->limit(10)->get();
+    }
 }

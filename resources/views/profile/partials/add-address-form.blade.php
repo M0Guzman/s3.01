@@ -5,7 +5,7 @@
         </h2>
     </header>
 
-
+    
 
     <div style="width: 350px; margin:1em;">
         <form method="post" action="{{ route('address.create') }}" class="sous-section">
@@ -17,7 +17,6 @@
 
             <label style="margin: 10px 0;">Rue</label>
             <div class="content">
-
                 <x-text-input style="width: 300px;" id="rue" name="rue" type="text" required autofocus />
             </div>
 
@@ -27,26 +26,29 @@
             </div>
 
             <label style="margin: 10px 0;">Ville</label>
-            <div>
-                <x-text-input style="width:300px" id="ville" name="ville" type="text" required autofocus/>
+            <div class="autocomplete" style="width:300px;">
+                <input style="width:300px;" id="ville"  type="text"/>
             </div>
+  
+
 
             <label style="margin: 10px 0;">Code postal</label>
             <label style="margin: 0 0 0 10px;">Departement</label>
-             <div class="conteneur">
+            <div class="conteneur">
                 <div style="width: 75px;">
-                    <x-text-input style="width: 75px;" id="cp" name="cp" type="text" required autofocus/>
+                    <x-text-input style="width:75px" id="cp" name="cp" type="text" required readonly/>
                 </div>
 
                 <div style="margin: 0 0 0 10px; width:215px;">
-                <select style="width: 215px;" id="department" name="department" required autofocus>
-                    <option>Selectionner un département</option>
-                    @foreach($departments as $unDepartment)
-                        <option value="{{ $unDepartment->id }}">
-                            {{ $unDepartment->name }}
-                        </option>
-                    @endforeach
-                </select>
+                    <select style="width: 215px;" id="department" name="department" required autofocus>
+                        <option>Selectionner un département</option>
+                        @foreach($departments as $unDepartment)
+                            <option value="{{ $unDepartment->id }}">
+                                {{ $unDepartment->name }}
+                            </option>
+                        @endforeach
+                    </select>
+                </div>
             </div>
 
             <div class="conteneur" style="margin: 10px 0 0 0;">
@@ -66,4 +68,6 @@
             </div>
         </form>
     </div>
+    <script>const api_url = "{{ route('autocomplete.cities') }}"</script>
+    @vite(['resources/js/address.js'])
 </section>

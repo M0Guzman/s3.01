@@ -18,12 +18,6 @@
         @method('patch')
 
         <div>
-
-        </div>
-
-        <div>
-
-
             @if ($user instanceof \Illuminate\Contracts\Auth\MustVerifyEmail && ! $user->hasVerifiedEmail())
                 <div>
                     <p class="text-sm mt-2 text-gray-800 dark:text-gray-200">

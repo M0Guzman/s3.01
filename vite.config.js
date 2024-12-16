@@ -12,10 +12,12 @@ export default defineConfig({
     plugins: [
         laravel({
             input: [
-                'resources/css/test.css',
+                'resources/js/address.js',
+                'resources/scss/address.scss',
                 'resources/js/process_order.js',
                 'resources/js/app.js',
                 'resources/scss/app.scss',
+                'resources/scss/partner.scss',
                 'resources/scss/travel.scss',
                 'resources/scss/travels.scss',
                 'resources/scss/panier.scss',

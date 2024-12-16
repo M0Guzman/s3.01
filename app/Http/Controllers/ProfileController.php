@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\City;
 use App\Models\UserAddress;
 use App\Models\VineyardCategory;
 use App\Http\Requests\ProfileUpdateRequest;
@@ -26,7 +27,8 @@ class ProfileController extends Controller
         return view('profile.edit', [
             'user' => $request->user(),
             'userAddresses' => $UserAdresse,
-            'departments' => $departments
+            'departments' => $departments,
+            'cities' => City::all()
         ]);
     }
 
