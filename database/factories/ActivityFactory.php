@@ -19,8 +19,8 @@ class ActivityFactory extends Factory
      */
     public function definition(): array
     {
-        $start = fake()->randomNumber(8, 18);
-        $end = $start + fake()->randomNumber(1, 3);
+        $start = fake()->numberBetween(8, 18);
+        $end = $start + fake()->numberBetween(1, 3);
 
         return [
             'partner_id' => Partner::factory(),
@@ -28,8 +28,8 @@ class ActivityFactory extends Factory
             'name' => fake()->sentence(),
             'description' => fake()->paragraph(),
             'timeslot' => $start . "h00-" . $end . "h00",
-            'adult_price' => fake()->randomFloat(100, 400),
-            'children_price' => fake()->randomFloat(100, 400),
+            'adult_price' => fake()->randomFloat(2,100, 400),
+            'children_price' => fake()->randomFloat(2,100, 400),
         ];
     }
 }
