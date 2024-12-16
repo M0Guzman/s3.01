@@ -1,7 +1,7 @@
 <x-app-layout>
   <section class="body_travels">
       <br>
-
+    @vite(['resources/scss/travels.scss'])
     <div class="filters-container" >
 
       <h1>Séjours Œnologiques</h1>
@@ -51,7 +51,7 @@
       </form>
     </div>
 
-    <section class="sejour">
+    <section id="container_travel">
 
       @if(count($sejours) == 0)
           <p>Aucun séjour ne correspond à vos critères.</p>
@@ -59,16 +59,23 @@
 
       @foreach ($sejours as $sejour)
 
-        <div id="num1">
-            <br>
+        <div class="cadre">
+          <h1 class="price">{{ $sejour->price_per_person }} € par personne</h1>
+          
+          <img class="image" src="{{ $sejour->resources[0]->get_url() }}"> </img>
+          
+          <div class="container_info_sejour">
+            <h1 class="title">{{ mb_substr($sejour->title,0,50,'UTF-8') }}</h1>
 
-            <img id="image" src="{{ $sejour->resources[0]->get_url() }}"> </img>
-            <p id="title">{{ mb_substr($sejour->title,0,50,'UTF-8') }}</p>
-            <p id="vignoble">
-              {{ mb_substr($sejour->vineyard_category->name,0,50,'UTF-8') }}
-              @if( $sejour->reviews_avg_rating != null)
-                @php
-                    $note = $sejour->reviews_avg_rating
+            <div class="container_location_star">
+              <h2 class="location">
+                {{ mb_substr($sejour->vineyard_category->name,0,50,'UTF-8') }}
+              </h2>
+              
+              <p class="star">
+                @if( $sejour->reviews_avg_rating != null)
+                  @php
+                      $note = $sejour->reviews_avg_rating
                   @endphp
                   @for ($i = 0; $i < 5; $i++)
                     @if ($note >= 1)
@@ -82,22 +89,25 @@
                       $note --
                     @endphp
                   @endfor
-                {{ round($sejour->reviews_avg_rating, 1) }}/5 
-              @endif
-            </p>
-            <p id="description">{{ mb_substr($sejour->description,0,50,'UTF-8') }}</p>
-            <p id="jours">{{ $sejour->days }} @if( $sejour->days >1)jours
+                  {{ round($sejour->reviews_avg_rating, 1) }}/5 
+                @endif
+              </p>
+
+            </div>
+            
+            <p class="description">{{ mb_substr($sejour->description,0,50,'UTF-8') }}</p>
+            
+            <p class="jours">{{ $sejour->days }} 
+              @if( $sejour->days >1)jours | {{ $sejour->days -1 }} nuit
               @else
-              jour
+                journée
               @endif
             </p>
-            <p id="price">{{ $sejour->price_per_person }} € par personne</p>
-            <a href="{{ route('travel.show', ['id' => $sejour->id]) }}"><button> Decouvrir l'offre</button></a>
+            
+            <button class="discover_Offer_Button" onclick="window.location.href='{{ route('travel.show', ['id' => $sejour->id]) }}'"> Decouvrir l'offre</button></a>
+      
+          </div>
         </div>
       @endforeach
     @endif
-
-  </section>
-    @vite(['resources/js/app.js'])
-  </section>
 </x-app-layout>
