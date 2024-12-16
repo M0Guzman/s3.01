@@ -12,6 +12,7 @@ export default defineConfig({
     plugins: [
         laravel({
             input: [
+                'resources/scss/facture.scss',
                 'resources/js/address.js',
                 'resources/scss/address.scss',
                 'resources/js/process_order.js',

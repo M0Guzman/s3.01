@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\WineRoadController;
 use App\Http\Controllers\PartnerController;
+use App\Http\Controllers\PDFController;
 
 /*
 |--------------------------------------------------------------------------
@@ -81,6 +82,9 @@ Route::get('/policies/cookies', function() {
 Route::get('/policies/privacy', function() {
     return view('policies.privacy');
 })->name('policies.privacy');
+
+
+Route::get('/PDF/factures', [PDFController::class, 'generatePDF'])->name('facture.show');
 
 require __DIR__.'/auth.php';
 

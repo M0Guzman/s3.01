@@ -79,6 +79,8 @@
 
                 </div>
             @endif
+
+            <a href="{{ route('facture.show') }}">lien facture</a>
         </div>
     </main>
 </x-app-layout>

@@ -10,6 +10,7 @@
         <h1 class="text-center text-3xl">Séjours coups de coeur</h1>
     </main>
 
+
     <!-- Contenu principal -->
     <main class="main_avis container mx-auto">
         <h1 class="text-center text-3xl">Avis des voyageurs</h1>
