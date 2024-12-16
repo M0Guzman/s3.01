@@ -32,7 +32,7 @@ Route::middleware([RedirectIfUnverified::class])->group(function() {
     Route::post('/order/travel/{id}', [PanierController::class, 'edit'])->name('travel.edit'); // used both for editing and adding
     Route::post('/order', [PanierController::class, 'update_booking'])->name('order.update_booking');
     Route::get('/panier/supprimer/{id}', [PanierController::class, 'supprimerProduit'])->name('panier.supprimer');
-
+    
 });
 
 

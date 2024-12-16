@@ -63,11 +63,14 @@
         <div class="options">
             <h2>Sélectionnez vos options</h2>            
                 @if($travel->travel_steps->count() != 0 )
+                
                     @foreach ( $travel->travel_steps as $travel_step)
-                        @foreach ($travel_step->activities as $activity)        
+                        @foreach ($travel_step->activities as $activity)
                         
-                        @if($activity->activity_type != null)              
-                            @if($activity->activity_type->name == 'Hotel')
+                        @if($activity->partner->activity_type != null)
+                               
+                            @if($activity->partner->activity_type->name == 'Hotel')
+                            
                                 <label>
                                     <input type="radio" name="{{ $activity->name }}" checked> {{ $activity->name }}: Non
                                 </label>

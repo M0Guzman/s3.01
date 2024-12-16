@@ -34,19 +34,9 @@ class PanierController extends Controller
             $order = Order::create([]);
             Session::put('order_id',$order->id);
         }
-        $coupon = Coupon::get();
-        $coupon = Coupon::where('id', '=', '15')->first(); // Retrieve the first matching coupon directly  
 
-        if ($coupon) {  
-            
-        } else {  
-            echo "Coupon not found."; // This will execute if no coupon was found  
-        }  
-
-// Return the coupon object (can be null) to the view  
-return view('panier', ['order' => $order, 'coupon' => $coupon]); 
+        return view('panier', ['order' => $order]);
     }
-
     public function edit(Request $request, $id)
     {
         $validated = $request->validate([
@@ -163,10 +153,35 @@ return view('panier', ['order' => $order, 'coupon' => $coupon]);
             return redirect(route('order.process.address.show'));
 
         $address = Address::find(Session::get('order_address'));
+        //------------coupon----------------------//
+        $codeCoupon = $request->get('code');
+        
+        $coupons = Coupon::get();
+        
+        $codeExist = false;
+
+        foreach ($coupons as $coupon){
+            $code = $coupon->code;
+            if($codeCoupon == $code)
+            {
+                $codeExist = true;                
+                break;
+            }            
+        }
+
+        if ($codeExist == 'true')
+        {
+            $codeVerif = $coupon;
+        }
+
+        else{
+            $codeVerif = null;
+        }
 
         return view('order_process.confirmation', [
             'order' => $order,
-            'address' => $address
+            'address' => $address,
+            'coupon'=> $codeVerif,
         ]);
     }
 

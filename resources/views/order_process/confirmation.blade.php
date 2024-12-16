@@ -39,6 +39,23 @@
                                     <td class="" id="prix">{{ $booking->travel->price_per_person * ( $booking->adult_count + $booking->children_count ) }} € </td>
                                 </tr>
                             @endforeach
+                            <tr>
+
+                            <td>Bon de réduction:</td>
+                            <td><form action="{{ route('order.process.confirmation.show')}}"><input type="text" name="code"></form></td>
+                            <td></td>
+                            <td></td>
+                            
+                            <td>
+                                @if($coupon != null)
+                                
+                                - {{$coupon->value}}
+                                @else
+                                    {{$coupon= 0}}
+                                @endif
+                             €</td>
+
+                        </tr>
 
                             <tr>
                                 <td>Prix total</td>
@@ -46,7 +63,26 @@
                                 <td></td>
                                 <td></td>
                                 <td>
-                                    {{ $order->bookings->sum(function($booking) { return $booking->travel->price_per_person * ( $booking->adult_count + $booking->children_count ); }) }} €
+                                @php $couponValue = 0; @endphp
+
+@if($coupon != null)
+    @php $couponValue = $coupon->value; @endphp
+@endif
+
+ 
+@php
+    $totalPrice = $order->bookings->sum(function($booking) {
+        return $booking->travel->price_per_person * ($booking->adult_count + $booking->children_count);
+    });
+
+    if ($totalPrice <= $couponValue) {
+        $finalPrice = "0€";
+    } else {
+        $finalPrice = ($totalPrice - $couponValue) . "€";
+    }
+@endphp
+
+{{ $finalPrice }}
                                 </td>
                             </tr>
                         </table>

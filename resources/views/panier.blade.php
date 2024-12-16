@@ -50,26 +50,7 @@
                             </tr>
                         @endforeach
                         
-                        @if ($coupon)  
-                            <!--<p>Coupon Code: {{ $coupon->code }}</p>  -->
-                            <!--<p>Coupon Value: {{ $coupon->value }}</p>  -->
-                        @else 
-                            {{$coupon->value = 0}}
-                            <p>Coupon not found.</p>  
-                        @endif 
-                      
                         
-
-                        <tr>
-
-                            <td>Bon de réduction:</td>
-                            <td><input type="text" value="{{ $coupon->code }}" name="code"></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>                                                     
-                            <td>{{ - $coupon->value }}€</td>
-
-                        </tr>
                             <!-- verifie code renter et mettre value  -->
                         <tr>
                             <td>Prix total</td>
@@ -77,9 +58,16 @@
                             <td></td>
                             <td></td>
                             <td></td>
-                            <td> {{ $order->bookings->sum(function($booking)
-                             { return $booking->travel->price_per_person * 
-                             ( $booking->adult_count + $booking->children_count ); }) }}€</td>
+                            <td> {{
+                            
+                            $order->bookings->sum(function($booking) 
+                            {
+                                $prix = $booking->travel->price_per_person * ( $booking->adult_count + $booking->children_count );
+                                return $prix;
+                            })
+                                                        
+                            }}
+                            </td>
                         </tr>
                         
                         <tr>
