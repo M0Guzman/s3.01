@@ -7,7 +7,7 @@
 
 <p>Qu'est-ce qu'un cookie ? Un cookie est un petit fichier de données envoyé par un site web et stocké sur le navigateur de l'utilisateur. Les cookies sont uniquement utilisés pour enregistrer des informations anonymes des utilisateurs.</p>
 
-<p>Pourquoi utilisons-nous des cookies sur notre site ? Nous utilisons des cookies sur notre site uniquement dans le but de mesurer l'audience de notre site afin de nous aider à en améliorer le contenu et l'ergonomie.</p>
+<p>Pourquoi utilisons-nous des cookies sur notre site ? Nous utilisons des cookies sur notre site uniquement dans le but du bon fonctionnement du site.</p>
 
 <p>Pourquoi je ne peux pas gérer les cookies ? Nous utilisons uniquement des cookies essentiels pour garantir le bon fonctionnement du site. Nous avons fait le maximum afin que tous les cookies que vous pourriez refusez ne soit pas présent sur notre site.</p>
 
