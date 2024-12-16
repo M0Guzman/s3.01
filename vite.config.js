@@ -16,6 +16,7 @@ export default defineConfig({
                 'resources/scss/address.scss',
                 'resources/js/process_order.js',
                 'resources/js/app.js',
+                'resources/js/partner.js',
                 'resources/scss/app.scss',
                 'resources/scss/partner.scss',
                 'resources/scss/travel.scss',
