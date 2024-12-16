@@ -49,8 +49,11 @@
                             
                             <td>
                                 @if($coupon != null)
-                                
-                                {{$coupon->value}}
+                                    @if($coupon->value < 0)
+                                    {{0}}
+                                    @else
+                                        {{$coupon->value}}
+                                    @endif
                                 @else
                                     {{$coupon= 0}}
                                 @endif
