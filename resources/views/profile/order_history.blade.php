@@ -16,8 +16,8 @@
                 <td></td>
                 <td>{{ $order->get_price() }}</td>
                 <td>{{ $order->order_state->name }}</td>
-                <td><a href="{{$order->resource->get_url()}}"></a></td>
-            </tr> 
+                <td><a href="{{$order->resource->get_url()}}">Facture.pdf</a></td>
+            </tr>
                 @foreach ($order->bookings as $booking)
                     <tr>
                             <td> <a href="{{ route('travel.show', ['id' => $booking->id]) }}"> {{ $booking->travel->title }} </a></td>

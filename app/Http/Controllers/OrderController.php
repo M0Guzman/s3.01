@@ -238,7 +238,12 @@ class OrderController extends Controller
             Storage::put($file->id, $pdf->stream("invoice.pdf"));
 
             $order->resource_id = $file->id;
+            $order->order_state_id = 1;
+            $order->user_id = $request->user()->id;
             $order->save();
+
+            $request->session()->forget('order_id');
+            $request->session()->save();
 
             Mail::to($request->user())->send(new PurchaseCompletedMail($order));
         }
