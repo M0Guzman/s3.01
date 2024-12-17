@@ -14,6 +14,34 @@
                     </a>
                 @endforeach
             </div>
+            <br>
+            <br>
+            <br>
+            <div id="Domaine">
+                <h2 class="text-2xl font-bold text-center mb-4">Chateau et Domaine</h2>
+                @foreach ($wineroad->travels as $travel)
+                    @foreach ($travel->travel_steps as $travelStep)
+                        @foreach ($travelStep->activities as $activity)
+                            @if( $activity->partner->winecellar != null || $activity->partner->restaurant != null)
+                                <div class="container_etape">
+                                    <div class="image-section">
+                                        <img class="img-etape" src="{{ $travelStep->resources[0]->get_url() }}">
+                                    </div>
+                                    <div class="info-section">
+                                        <h3 class="titre-etape">{{ $activity->name }}</h3>
+                                        <p>
+                                            {{ $activity->description }}
+                                        </p>
+                                        <a href="{{ route('partner.show', ['id' => $activity->partner->id]) }}">En savoir plus sur notre partenaire {{$activity->partner->name}}</a>
+                                    </div>
+                                </div>
+                                <br>
+                                <br>
+                            @endif
+                        @endforeach
+                    @endforeach
+                @endforeach
+            </div>
        </div>
     </div>
 </x-app-layout>

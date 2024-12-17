@@ -16,7 +16,7 @@
                 <td></td>
                 <td>{{ $order->get_price() }}</td>
                 <td>{{ $order->order_state->name }}</td>
-                <td>facture</td>
+                <td><a href="{{$order->resource->get_url()}}"></a></td>
             </tr> 
                 @foreach ($order->bookings as $booking)
                     <tr>
