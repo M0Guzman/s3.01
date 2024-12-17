@@ -45,6 +45,8 @@
                                         <p>
                                             {{ $activitiy->description }}
                                         </p>
+                                        <br>
+                                        <a href="{{ route('partner.show', ['id' => $activitiy->partner->id]) }}">En savoir plus sur notre partenaire {{$activitiy->partner->name}}</a>
                                     </div>
                                 </div>
                             @endif
@@ -66,6 +68,8 @@
                                         <p>
                                             {{ $activity->description }}
                                         </p>
+                                        <br>
+                                        <a href="{{ route('partner.show', ['id' => $activitiy->partner->id]) }}">En savoir plus sur notre partenaire {{$activitiy->partner->name}}</a>
                                     </div>
                                 </div>
                             @endif
