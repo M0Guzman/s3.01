@@ -159,7 +159,7 @@ class OrderController extends Controller
         //------------coupon----------------------//
 
         if($request->has('code') && $request->input('code') != '') {
-            $coupon = Coupon::where('code', '=', $request->input('code'))->first();
+            $coupon = Coupon::where('code', '=', $request->input('code'))->where('value', '>', '0')->first();
             $order->update([
                 'coupon_id' => $coupon == null ? null : $coupon->id
             ]);
@@ -223,7 +223,7 @@ class OrderController extends Controller
             $order = Booking::find(intval($res['purchase_units'][0]['reference_id']))->orders[0];
             if(isset($order['coupon_id']) && $order->coupon_id != null) {
                 $order->coupon->update([
-                    'value' => min(0, $order->coupon->value - $order->get_price(true))
+                    'value' => max(0, $order->coupon->value - $order->get_price(true))
                 ]);
             }
 
