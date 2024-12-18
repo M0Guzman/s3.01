@@ -36,5 +36,25 @@
             <!-- Carte Leaflet -->
             <div id="map"></div>    
         </div>
+
+        <hr class="hr_etape">
+        <div id="Hebergement">
+            <h2 class="titre_info">Activitée proposé</h2>
+            @foreach ($partner->activitytype->activities as $activitiy)
+                @if( $activitiy != null)
+                    <div class="container_etape">
+                        <div class="image-section">
+                            <img class="img-etape" src="{{ $travelStep->resources[0]->get_url() }}">
+                        </div>
+                        <div class="info-section">
+                            <h3 class="titre-etape">{{ $activitiy->name }}</h3>
+                            <p>
+                                {{ $activitiy->description }}
+                            </p>
+                        </div>
+                    </div>
+                @endif
+            @endforeach
+        </div>
     </section>
 </x-app-layout>
