@@ -37,24 +37,38 @@
             <div id="map"></div>    
         </div>
 
-        <hr class="hr_etape">
-        <div id="Hebergement">
-            <h2 class="titre_info">Activitée proposé</h2>
-            @foreach ($partner->activitytype->activities as $activitiy)
-                @if( $activitiy != null)
-                    <div class="container_etape">
-                        <div class="image-section">
-                            <img class="img-etape" src="{{ $travelStep->resources[0]->get_url() }}">
-                        </div>
-                        <div class="info-section">
-                            <h3 class="titre-etape">{{ $activitiy->name }}</h3>
-                            <p>
-                                {{ $activitiy->description }}
-                            </p>
-                        </div>
-                    </div>
-                @endif
-            @endforeach
-        </div>
+        <!--teste role-->
+
+        <!-- HTML : Éléments avec des IDs -->
+
+        @if(hasRole('service_vente'))
+            <div class="container_partenaire" id="serviceVente" >
+                <p>Bienvenue dans le Service Vente !</p>
+            </div>
+
+        @elseif(hasRole('directeur_service_vente'))
+            <div class="container_partenaire" id="directeurServiceVente">
+                <p>Bienvenue, Directeur du Service Vente !</p>
+            </div>
+            
+        @elseif(hasRole('service_marketing'))
+            <div class="container_partenaire" id="serviceMarketing">
+                <p>Bienvenue dans le Service Marketing !</p>
+            </div>
+            
+        @elseif(hasRole('dirigeant'))
+            <div class="container_partenaire" id="dirigeant">
+                <p>Bienvenue, Dirigeant !</p>
+            </div>
+            
+        @else
+            <div class="container_partenaire" id="harg">
+                <p>Bienvenue, Simple utilisateur !</p>
+            </div>
+        
+        @endif
+
+
+        <!--end teste-->
     </section>
 </x-app-layout>

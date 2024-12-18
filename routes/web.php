@@ -89,4 +89,20 @@ Route::get('/wine-roads', [WineRoadController::class, 'index'])->name('wine-road
 Route::get('/wine-roads/{id}', [WineRoadController::class, 'show'])->name('wine-road.show');
 
 
+//initialisation des role
+Route::get('/service_vente', function () {
+    return view('service_vente.dashboard');
+})->middleware('role:service_vente');
+
+Route::get('/directeur_service_vente', function () {
+    return view('directeur_service_vente.dashboard');
+})->middleware('role:directeur_service_vente');
+
+Route::get('/service_marketing', function () {
+    return view('service_marketing.dashboard');
+})->middleware('role:service_marketing');
+
+Route::get('/dirigeant', function () {
+    return view('dirigeant.dashboard');
+})->middleware('role:dirigeant');
 
