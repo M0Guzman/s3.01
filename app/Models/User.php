@@ -31,6 +31,7 @@ class User extends Authenticatable implements MustVerifyEmail, IMustVerifyMobile
         'birth_date',
         'mobile',
         'password',
+        'braintree_customer_id'
     ];
 
     /**

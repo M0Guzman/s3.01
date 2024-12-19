@@ -2,26 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use App\Mail\OfferedTravelCodeMail;
-use App\Mail\PurchaseCompletedMail;
 use App\Models\Address;
 use App\Models\City;
 use App\Models\Coupon;
 use App\Models\Department;
 use App\Models\Booking;
 use App\Models\OfferedTravel;
-use App\Models\Resource;
-use App\Providers\RouteServiceProvider;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Models\Travel;
 use App\Models\Order;
-use Illuminate\Support\Facades\Mail;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
-use Srmklive\PayPal\Services\PayPal as PayPalClient;
+use \Braintree\Gateway as BraintreeGateway;
 use Session;
-use PDF;
 
 class OrderController extends Controller
 {
@@ -148,7 +141,7 @@ class OrderController extends Controller
         return redirect(route('order.process.confirmation.show'));
     }
 
-    public function show_confirmation(Request $request)
+    public function show_confirmation(Request $request, BraintreeGateway $gateway)
     {
         if(!Session::has('order_id') || ($order = Order::find(Session::get('order_id'))) && $order->bookings->count() == 0)
             return redirect(route('order.show'));
@@ -156,7 +149,6 @@ class OrderController extends Controller
             return redirect(route('order.process.address.show'));
 
         $address = Address::find(Session::get('order_address'));
-        //------------coupon----------------------//
 
         if($request->has('code') && $request->input('code') != '') {
             $coupon = Coupon::where('code', '=', $request->input('code'))->where('value', '>', '0')->first();
@@ -165,91 +157,17 @@ class OrderController extends Controller
             ]);
         }
 
+        $client_token = $gateway->clientToken()->generate([
+            'customerId' => $request->user()->braintree_customer_id
+        ]);
+
         return view('order_process.confirmation', [
             'order' => $order,
             'address' => $address,
+            'client_token' => $client_token
         ]);
     }
-    public function create_order(Request $request) {
-        if(!$request->has('order_id')) {
-            return redirect(RouteServiceProvider::HOME);
-        }
 
-        $order = Order::find($request->input('order_id'));
-        $val = ($order->coupon == null ? 0 : $order->coupon->value) / $order->bookings()->count();
-        $units = [];
-
-        foreach($order->bookings as $booking) {
-            array_push($units, [
-                'reference_id' => strval($booking->id),
-                'amount' => [
-                    'currency_code' => 'EUR',
-                    'value' => strval($booking->get_price())
-                ]
-            ]);
-        }
-
-        $provider = app(PayPalClient::class);
-        $provider->getAccessToken();
-        $res = $provider->createOrder([
-            'intent' => 'CAPTURE',
-            'purchase_units' => $units,
-            'prefer' => 'return=minimal'
-        ]);
-
-
-        return $res;
-    }
-
-    public function approve_order(Request $request, $order_id)
-    {
-        $provider = app(PayPalClient::class);
-        $provider->getAccessToken();
-
-        $res = $provider->capturePaymentOrder($order_id, [
-            'prefer' => "return=minimal"
-        ]);
-
-        if($res["status"] == "COMPLETED") {
-            foreach($res['purchase_units'] as $unit) {
-                $booking_id = intval($unit['reference_id']);
-
-                $offered = OfferedTravel::find($booking_id);
-                if($offered != null) {
-                    Mail::to($request->user())->send(new OfferedTravelCodeMail($offered->booking->travel, $offered->code));
-                }
-            }
-
-            $order = Booking::find(intval($res['purchase_units'][0]['reference_id']))->orders[0];
-            if(isset($order['coupon_id']) && $order->coupon_id != null) {
-                $order->coupon->update([
-                    'value' => max(0, $order->coupon->value - $order->get_price(true))
-                ]);
-            }
-
-            $pdf = PDF::loadView('PDF.facture', ['order'=>$order]);
-
-            $file = Resource::create([
-                'filename' => 'invoice.pdf',
-                'mimetype' => 'application/pdf',
-                'permission' => 'user.' . $request->user()->id
-            ]);
-
-            Storage::put($file->id, $pdf->stream("invoice.pdf"));
-
-            $order->resource_id = $file->id;
-            $order->order_state_id = 1;
-            $order->user_id = $request->user()->id;
-            $order->save();
-
-            $request->session()->forget('order_id');
-            $request->session()->save();
-
-            Mail::to($request->user())->send(new PurchaseCompletedMail($order));
-        }
-
-        return $res;
-    }
 
     public function show_thanks() {
         return view('order_process.thanks');
