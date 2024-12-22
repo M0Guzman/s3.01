@@ -125,6 +125,10 @@ class DatabaseSeeder extends Seeder
 
         UserRole::create(['name' => 'User']);
         UserRole::create(['name' => 'Partner']);
+        UserRole::create(['name' => 'Service_vente']);
+        UserRole::create(['name' => 'Directeur_service_vente']);
+        UserRole::create(['name' => 'Service_marketing']);
+        UserRole::create(['name' => 'Dirigeant']);
         UserRole::create(['name' => 'Admin']);
 
         RolePermission::create(['name' => 'user.is_admin', 'value' => true, 'user_role_id' => 2]);

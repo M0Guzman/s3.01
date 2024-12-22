@@ -41,22 +41,22 @@
 
         <!-- HTML : Éléments avec des IDs -->
 
-        @if(hasRole('service_vente'))
+        @if(hasRole('Service_vente'))
             <div class="container_partenaire" id="serviceVente" >
                 <p>Bienvenue dans le Service Vente !</p>
             </div>
 
-        @elseif(hasRole('directeur_service_vente'))
+        @elseif(hasRole('Directeur_service_vente'))
             <div class="container_partenaire" id="directeurServiceVente">
                 <p>Bienvenue, Directeur du Service Vente !</p>
             </div>
             
-        @elseif(hasRole('service_marketing'))
+        @elseif(hasRole('Service_marketing'))
             <div class="container_partenaire" id="serviceMarketing">
                 <p>Bienvenue dans le Service Marketing !</p>
             </div>
             
-        @elseif(hasRole('dirigeant'))
+        @elseif(hasRole('Dirigeant'))
             <div class="container_partenaire" id="dirigeant">
                 <p>Bienvenue, Dirigeant !</p>
             </div>

@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\UserRole;
 use Illuminate\Support\Facades\Auth;
 /**
  * Vérifie si l'utilisateur authentifié possède un rôle spécifique.
@@ -16,5 +17,5 @@ function hasRole(string $role): bool
     }
 
     // Exemple : Supposons que $user->role contienne le rôle (ou une relation avec des rôles)
-    return $user->userrole->name == $role; // Adaptation possible selon ton modèle
+    return UserRole::find($user->user_role_id)->name == $role; // Adaptation possible selon ton modèle
 }
