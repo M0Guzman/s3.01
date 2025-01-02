@@ -358,11 +358,13 @@ class OrderController extends Controller
     public function show_history(Request $request)
     {
         $orders = Order::where('user_id', '=', $request->user()->id)->get();
-
+        
         $orders = $orders->sortBy(function ($order, int $key) {
             return Carbon::parse($order->bookings[0]['start_date'])->timestamp;
         });
+        $users = $request->user();
+       
 
-        return view('profile/order_history', ['orders' => $orders]);
+        return view('profile/order_history', ['orders' => $orders,'users' => $users]);
     }
 }
