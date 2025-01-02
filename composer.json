@@ -6,6 +6,7 @@
     "license": "MIT",
     "require": {
         "php": "^8.1",
+        "braintree/braintree_php": "^6.21",
         "barryvdh/laravel-dompdf": "^3.0",
         "fouladgar/laravel-mobile-verification": "^4.0",
         "guzzlehttp/guzzle": "^7.2",

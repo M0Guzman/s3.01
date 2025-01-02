@@ -51,6 +51,26 @@ class RegisteredUserController extends Controller
             'password' => Hash::make($request->password),
         ]);
 
+        $gateway = new \Braintree\Gateway([
+                'environment' => config('braintree.env'),
+                'merchantId' => config('braintree.merchant_id'),
+                'publicKey' => config('braintree.public_key'),
+                'privateKey' => config('braintree.private_key')
+            ]);
+
+         $res = $gateway->customer()->create([
+                'firstName' => $user->first_name,
+                'lastName' => $user->last_name,
+                'email' => $user->mail,
+        ]);
+
+        if($res->success) {
+            $user->update([
+                'braintree_customer_id' => $res->customer->id
+            ]);
+        }
+
+
         event(new Registered($user));
 
         Auth::login($user);

@@ -17,18 +17,27 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
+        $this->app->singleton(\Braintree\Gateway::class, static function() {
+            return new \Braintree\Gateway([
+                'environment' => config('braintree.env'),
+                'merchantId' => config('braintree.merchant_id'),
+                'publicKey' => config('braintree.public_key'),
+                'privateKey' => config('braintree.private_key')
+            ]);
+        });
+
     }
 
     /**
      * Bootstrap any application services.
      */
-    
+
     public function boot(): void
     {
-       
+
         Facades\View::composer('layouts.app', function(View $view) {
             $nborder = 0;
-            if(Session::has('order_id')) 
+            if(Session::has('order_id'))
             {
                 $order = Order::find(Session::get('order_id'));
                 $nborder = $order == null ? 0 : $order->bookings->count();
