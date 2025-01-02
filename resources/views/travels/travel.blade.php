@@ -1,5 +1,5 @@
 <x-app-layout>
-    @vite(['resources/scss/travel.scss'])
+    @vite(['resources/scss/travel/detail_travel.scss'])
         
         <div id="container_sejour">
 

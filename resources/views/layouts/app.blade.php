@@ -14,7 +14,7 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/js/all.min.js" integrity="sha512-1JkMy1LR9bTo3psH+H4SV5bO2dFylgOy+UJhMus1zF4VEFuZVu5lsi4I6iIndE4N9p01z1554ZDcvMSjMaqCBQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
         <!-- Scripts -->
-        @vite(['resources/js/app.js', 'resources/scss/app.scss'])
+        @vite(['resources/js/app.js', 'resources/scss/global/app.scss'])
     </head>
     <body class="font-sans antialiased">
           <!-- En-tête -->
@@ -37,7 +37,8 @@
                 {{ $slot }}
             </main>
 
-            <div class="mt-8 mb-6 flex flex-column gap-6 justify-center"">
+            @include('layouts.help')
+            <div class="mt-8 mb-6 flex flex-column gap-6 justify-center">
                 <a href="{{ route('policies.cookies') }}">Politique de cookies</a>
                 <a href="{{ route('policies.privacy') }}">Politique de confidencialité</a>
                 <a href="{{ route('policies.terms') }}">Politique particulière de vente</a>

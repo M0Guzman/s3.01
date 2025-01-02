@@ -37,8 +37,9 @@ Route::middleware([RedirectIfUnverified::class])->group(function() {
 Route::get('/partner/{id}', [PartnerController::class, 'show_single'])->name('partner.show');
 
 
+
 Route::get('/dashboard', function () {
-    return view('dashboard');
+    return view('dashboard.service_vente');
 })->middleware(['auth', FullyVerified::class])->name('dashboard');
 
 Route::middleware(['auth', FullyVerified::class])->group(function () {

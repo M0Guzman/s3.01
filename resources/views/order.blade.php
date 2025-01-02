@@ -1,5 +1,4 @@
 <x-app-layout>
-    @vite(['resources/scss/panier.scss'])
     <main class="body">
         <div class="commande-container">
             <h1 class="commande-title">RÉCAPITULATIF DE LA COMMANDE</h1>

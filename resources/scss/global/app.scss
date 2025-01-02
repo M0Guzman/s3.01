@@ -1,0 +1,39 @@
+@tailwind base;
+@tailwind text;
+@tailwind components;
+@tailwind utilities;
+
+
+body {
+    margin: 0;
+    padding: 0;
+}
+
+.segment {
+    width: 100%;
+}
+
+.content {
+    width: 300px;
+}
+
+.formConteneur {
+    display:flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+}
+
+.sous-section {
+    border: solid 1px;
+    box-shadow: 5px 6px 19px 0px;
+    margin-top: 5%;
+    padding: 1em;
+    border-radius: 20px;
+}
+
+.conteneur {
+    display: flex;
+    flex-wrap: wrap;
+    flex-basis: max-content;
+}
+

@@ -1,5 +1,5 @@
 <x-app-layout>
-    @vite(['resources/scss/panier.scss', 'resources/js/process_order.js'])
+    @vite(['resources/js/process_order.js'])
     <main class="body">
         <div class="commande-container">
             <h1 class="commande-title">SELECTIONNER UNE ADDRESSE DE FACTURATION</h1>

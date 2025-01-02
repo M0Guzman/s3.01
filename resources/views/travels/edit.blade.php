@@ -1,5 +1,4 @@
 <x-app-layout>
-    @vite(['resources/scss/modife.scss'])
     <form action="{{ route('order.update_booking') }}" method="post">
         @csrf
         <div class="container">
