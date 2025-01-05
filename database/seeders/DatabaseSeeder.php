@@ -123,11 +123,13 @@ class DatabaseSeeder extends Seeder
         CookingType::create(['name' => 'Dégustation de vins locaux']);
 
 
-        UserRole::create(['name' => 'User']);
-        UserRole::create(['name' => 'Partner']);
-        UserRole::create(['name' => 'Admin']);
-
-        RolePermission::create(['name' => 'user.is_admin', 'value' => true, 'user_role_id' => 2]);
+        UserRole::create(['id'=>1,'display_name' => 'User','name'=>'Utilisateur']);
+        UserRole::create(['id'=>2,'display_name' => 'Sales Department','name' => 'service_ventes']);
+        UserRole::create(['id'=>3,'display_name' => 'Sales Department Director','name'=> 'directeur_service_vente']);
+        UserRole::create(['id'=>4,'display_name' => 'Marketing Department','name'=>'service_marketing']);
+        UserRole::create(['id'=>5,'display_name' => 'Executive','name' =>'dirigant']);
+        UserRole::create(['id'=>6,'display_name' => 'Partner','name'=>'partenaire']);
+        
 
         OtherPartnerActivityType::create(['name' => 'tmp_plz_fix']);
         OrderState::create(['name' => 'En attente']);
