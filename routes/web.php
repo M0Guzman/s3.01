@@ -11,6 +11,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\WineRoadController;
 use App\Http\Controllers\PartnerController;
+use App\Http\Controllers\CommandeClientController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -27,6 +29,12 @@ Route::middleware([RedirectIfUnverified::class])->group(function() {
     Route::get('/', [HomeController::class, 'index']);
     Route::get('/travels', [TravelController::class, 'show'])->name('travels.show');
     Route::get('/travel/{id}', [TravelController::class, 'show_single'])->name('travel.show');
+
+    Route::get('/commande_client', [CommandeClientController::class, 'show'])->name('commandes_client.show');
+    Route::get('/commande_client/{id}', [CommandeClientController::class, 'show_single'])->name('commande_client.show');
+    // Route pour mettre à jour l'état de la commande et envoyer l'email
+    Route::post('/order/{id}/update', [CommandeClientController::class, 'updateOrder'])->name('order.update');
+    
 
     Route::get('/order', [OrderController::class, 'show'])->name('order.show');
     Route::post('/order/travel/{id}', [OrderController::class, 'edit'])->name('travel.edit'); // used both for editing and adding
@@ -83,7 +91,6 @@ Route::get('/policies/privacy', function() {
 
 
 require __DIR__.'/auth.php';
-
 
 Route::get('/wine-roads', [WineRoadController::class, 'index'])->name('wine-road.index');
 Route::get('/wine-roads/{id}', [WineRoadController::class, 'show'])->name('wine-road.show');
