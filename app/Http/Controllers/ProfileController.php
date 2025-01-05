@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\City;
+use App\Models\Travel;
 use App\Models\UserAddress;
 use App\Models\VineyardCategory;
 use App\Http\Requests\ProfileUpdateRequest;
@@ -20,11 +21,13 @@ class ProfileController extends Controller
      */
     public function edit(Request $request)
     {
+        $travel = Travel::get('*');
         $UserAdresse = UserAddress::where('user_id','=',$request->user()->id)->get();
         $departments = Department::all();
 
         return view('profile.edit', [
             'user' => $request->user(),
+            'travel' =>$travel,
             'userAddresses' => $UserAdresse,
             'departments' => $departments
         ]);

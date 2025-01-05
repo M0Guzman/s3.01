@@ -96,84 +96,42 @@
   </form>
 </div>
 
-<div class="max-w-4xl mx-auto p-6 bg-white shadow-lg rounded-lg">
-  <h1 class="text-2xl font-bold mb-4">Validation d'un Séjour</h1>
-  
-  <form action="#" method="POST">
-    <table class="table-auto border-collapse border border-gray-300 w-full text-left">
-      <thead class="bg-gray-100">
-        <tr>
-          <th class="border border-gray-300 px-4 py-2 text-gray-700 font-semibold">Nom du Séjour</th>
-          <th class="border border-gray-300 px-4 py-2 text-gray-700 font-semibold">Destination</th>
-          <th class="border border-gray-300 px-4 py-2 text-gray-700 font-semibold">Durée</th>
-          <th class="border border-gray-300 px-4 py-2 text-gray-700 font-semibold">Pour qui</th>
-          <th class="border border-gray-300 px-4 py-2 text-gray-700 font-semibold">Envie</th>
-          <th class="border border-gray-300 px-4 py-2 text-gray-700 font-semibold">Valider</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr class="hover:bg-gray-50">
-          <td class="border border-gray-300 px-4 py-2">
-            <input 
-              type="text" 
-              name="nom_sejour" 
-              value="Séjour en Provence" 
-              readonly 
-              class="w-full px-2 py-1 border bg-gray-100 rounded focus:outline-none">
-          </td>
-          <td class="border border-gray-300 px-4 py-2">
-            <input 
-              type="text" 
-              name="destination" 
-              value="Provence" 
-              readonly 
-              class="w-full px-2 py-1 border bg-gray-100 rounded focus:outline-none">
-          </td>
-          <td class="border border-gray-300 px-4 py-2">
-            <input 
-              type="text" 
-              name="duree" 
-              value="3 jours" 
-              readonly 
-              class="w-full px-2 py-1 border bg-gray-100 rounded focus:outline-none">
-          </td>
-          <td class="border border-gray-300 px-4 py-2">
-            <input 
-              type="text" 
-              name="pour_qui" 
-              value="Famille" 
-              readonly 
-              class="w-full px-2 py-1 border bg-gray-100 rounded focus:outline-none">
-          </td>
-          <td class="border border-gray-300 px-4 py-2">
-            <input 
-              type="text" 
-              name="envie" 
-              value="Bien-être" 
-              readonly 
-              class="w-full px-2 py-1 border bg-gray-100 rounded focus:outline-none">
-          </td>
-          <td class="border border-gray-300 px-4 py-2 text-center">
-            <input 
-              type="checkbox" 
-              name="valider_sejour" 
-              class="h-5 w-5 text-blue-500 focus:ring focus:ring-blue-300">
-          </td>
-        </tr>
-      </tbody>
-    </table>
 
-    <div class="mt-4">
-      <button 
-        type="submit" 
-        class="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600">
-        Valider le Séjour
-      </button>
+    <div class="py-12">
+      <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
+            <div class="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg">
+                <div>
+                    @include('profile.partials.update-profile-information-form')
+                </div>
+            </div>
+
+            <div class="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg">
+                <div>
+                    @include('profile.partials.update-password-form')
+                </div>
+            </div>
+
+            <div class="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg">
+                <div>
+                    @include('profile.partials.update-address-form')
+                </div>
+            </div>
+
+            <div class="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg">
+                <div>
+                    @include('profile.partials.add-address-form')
+                </div>
+            </div>
+
+            <div class="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg">
+                <div>
+                    @include('profile.partials.delete-user-form')
+                </div>
+            </div>
+        </div>
     </div>
-  </form>
-</div>
-
-<!--@if($user->id == 1){-->
+<!--
+@if($user->id == 1){
 
 
     <div class="py-12">
@@ -209,6 +167,6 @@
             </div>
         </div>
     </div>
-<!--}
+}
 @endif-->
 </x-app-layout>
