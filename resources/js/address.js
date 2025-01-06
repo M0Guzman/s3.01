@@ -1,7 +1,8 @@
 function autocomplete(inp, cp, dept) {//, arr) {
   if (inp == null) {return 1;}
     //
-    console.log("test")
+    console.log(inp, cp, dept)
+
     /*the autocomplete function takes two arguments,
     the text field element and an array of possible autocompleted values:*/
     var currentFocus;

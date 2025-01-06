@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\WineRoadController;
 use App\Http\Controllers\PartnerController;
+use App\Http\Controllers\Dashboard\ServiceVenteController;
 
 /*
 |--------------------------------------------------------------------------
@@ -38,9 +39,6 @@ Route::get('/partner/{id}', [PartnerController::class, 'show_single'])->name('pa
 
 
 
-Route::get('/dashboard', function () {
-    return view('dashboard.service_vente');
-})->middleware(['auth', FullyVerified::class])->name('dashboard');
 
 Route::middleware(['auth', FullyVerified::class])->group(function () {
     Route::get('/process-order/address', [OrderController::class, 'show_address'])->name('order.process.address.show');
@@ -64,6 +62,17 @@ Route::middleware(['auth', FullyVerified::class])->group(function () {
     Route::delete('/address', [UserAddressController::class, 'destroy'])->name('address.destroy');
 
     Route::get('/order/history', [OrderController::class, 'show_history'])->name('order.history.show');
+
+    
+
+    Route::get('/dashboard/service_vente/hotel', function () {
+        return view('dashboard.service_vente.hotel');
+    })->name('dashboard.vente.hotel'); 
+
+    
+    Route::post('/dashboard/service_vente/ajouterhotel', [ServiceVenteController::class, 'createPartenaire'])->name('dashboard.vente.Partenaire.create');
+    Route::get('/dashboard/service_vente/ajouterhotel', [ServiceVenteController::class, 'afficherPagePartenaire'])->name('dashboard.vente.Partenaire.afficher');
+    Route::get('/dashboard/service_vente/sejour', [ServiceVenteController::class, 'afficherPageSejour'])->name('dashboard.vente.Sejour.afficher');
 });
 
 Route::get('/file/{id}', [FileController::class, 'get_file'])->name('file');

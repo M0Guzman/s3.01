@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Hotel extends Model
 {
@@ -20,8 +21,8 @@ class Hotel extends Model
     ];
 
 
-    public function partner(): HasOne
+    public function partner(): BelongsTo
     {
-        return $this->hasOne(Partner::class);
+        return $this->belongsTo(Partner::class);
     }
 }
