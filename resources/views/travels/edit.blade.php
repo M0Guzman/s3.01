@@ -21,7 +21,7 @@
                 <br>
 
                 <label for="room_count">Chambre(s) :</label>
-                <input type="number" id="room_count" name="room_count" value="{{ $booking != null ? $booking->room_count : 1 }}" min="1">
+                <input type="number" id="room_count" name="room_count" value="{{ $booking != null ? $booking->room_count : 1 }}" min="1" max="30">
             </div>
 
                 <div>
