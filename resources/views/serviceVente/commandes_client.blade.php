@@ -1,16 +1,16 @@
 <x-app-layout>
   <section class="body_travels">
       <br>
-    @vite(['resources/scss/travels.scss'])
+    @vite(['resources/scss/travel/all_travel.scss'])
     <div class="filters-container" >
 
       <h1>Séjours Œnologiques</h1>
       <br>
-      <p> Envoyer les amiles au bonne personne.</p>
+      <p> Envoyer les mails aux bonnes personnes.</p>
       <form class="filters" action="#">
         @csrf
         <select id="order_state" name="order_state">
-          <option value="" @selected($order_state = "")>Etat Comande</option>
+          <option value="" @selected($order_state = "")>Etat Commande</option>
           @foreach ($order_states as $order_state)
             <option value="{{ $order_state->name}}" @selected($order_states == $order_state->name)> {{ $order_state->name}}</option>
           @endforeach
@@ -24,7 +24,7 @@
         //dd($orders);
       @endphp
       @if($orders->get()->isEmpty())
-        <p>Aucun séjour ne correspond à vos critères.</p>
+        <p>Aucun commande ne correspond à vos critères.</p>
       @else
       @foreach($orders as $order)
         <div class="cadre">

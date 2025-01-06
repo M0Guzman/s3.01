@@ -1,5 +1,6 @@
 <x-app-layout>
-    <div class="container">
+    @vite(['resources/scss/travel/wine_road.scss'])
+    <div class="containerwine">
         <h1 class="title">Route des Vins</h1>
         <section class="intro">
             <h2>PARTIR SUR LA ROUTE DES VINS</h2>
@@ -58,7 +59,7 @@
                         </p>
 
                         <a href="{{ route('wine-road.show', ['id' => $road->id ]) }}">
-                            <button>Découvrir la Route des Vins</button>
+                            <button class="button" >Découvrir la Route des Vins</button>
                         </a>
                     </div>
                 @endforeach

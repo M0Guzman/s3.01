@@ -1,4 +1,5 @@
 <x-app-layout>
+    @vite(['resources/scss/travel/wine_road.scss'])
     <div class="flex flex-col sm:justify-center items-center sm:pt-0 bg-gray-100 dark:bg-gray-900">
         <div class="w-full sm:max-w-6xl mt-6 px-6 py-4 bg-white dark:bg-gray-800 shadow-md overflow-hidden sm:rounded-lg">
             <div class="text-2xl font-bold text-center mb-4">{{ $wineroad->name }}</div>

@@ -33,6 +33,11 @@ export default defineConfig({
                 'resources/scss/dashboard/service_vente/hotel.scss',
                 'resources/scss/dashboard/service_vente/sejour.scss',
                 'resources/scss/dashboard/service_vente/addhotel.scss',
+                'resources/scss/travel/partner.scss',
+                'resources/scss/profile/panier.scss',
+                'resources/scss/travel/modife.scss',
+                'resources/scss/profile/order_history.scss',
+                'resources/scss/travel/wine_road.scss',
 
 
 

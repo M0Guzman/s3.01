@@ -1,5 +1,5 @@
 <x-app-layout>
-    @vite(['resources/js/partner.js'])
+    @vite(['resources/js/partner.js','resources/scss/travel/partner.scss'])
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
      integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
     <!-- Make sure you put this AFTER Leaflet's CSS -->
