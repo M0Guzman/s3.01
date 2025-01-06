@@ -1,5 +1,5 @@
 <x-app-layout>
-    @vite(['resources/scss/panier.scss', 'resources/js/process_order.js'])
+    @vite(['resources/scss/profile/panier.scss', 'resources/js/process_order.js'])
     <!-- <link
       rel="stylesheet"
       type="text/css"
