@@ -48,12 +48,12 @@ h4, p, label,a,span {
 }
 
 
-button {
+.button {
     background-color: $button;
     color: $text-white;
 }
 
-button:hover {
+.button:hover {
     background-color: $button-hover-hard;
 }
 

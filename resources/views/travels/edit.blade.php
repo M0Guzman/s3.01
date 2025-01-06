@@ -11,17 +11,17 @@
                 <h2>Informations</h2>
 
                 <label for="adult_count">Adultes :</label>
-                <input type="number" id="adult_count" name="adult_count" value="{{ $booking != null ? $booking->adult_count : 1 }}" min="1" max="150">
+                <input type="number" id="adult_count" name="adult_count" value="{{ $booking != null ? $booking->adult_count : 1 }}" min="1" max="15">
 
                 <br>
 
                 <label for="children_count">Enfants :</label>
-                <input type="number" id="children_count" name="children_count" value="{{ $booking != null ? $booking->children_count : 0 }}" min="0" max="150">
+                <input type="number" id="children_count" name="children_count" value="{{ $booking != null ? $booking->children_count : 0 }}" min="0" max="15">
 
                 <br>
 
                 <label for="room_count">Chambre(s) :</label>
-                <input type="number" id="room_count" name="room_count" value="{{ $booking != null ? $booking->room_count : 1 }}" min="1">
+                <input type="number" id="room_count" name="room_count" value="{{ $booking != null ? $booking->room_count : 1 }}" min="1" max="30">
             </div>
 
                 <div>
