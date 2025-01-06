@@ -1,55 +1,61 @@
 <x-app-layout>
   <section class="body_travels">
       <br>
-    @vite(['resources/scss/travels.scss'])
-    <div class="filters-container" >
-
-      <h1>Séjours Œnologiques</h1>
+    @vite(['resources/scss/travel/all_travel.scss'])
+    
+    <div id="intro">
+      <h1 id="page_title">Séjours Œnologiques</h1>
       <br>
-      <p> Personnalisez votre séjour œnologique en
-                  fonction de vos envies ! Séjourner au
-                  Château dans le Bordelais, réaliser
-                  votre propre cuvée en Champagne, découvrir
-                  les accords mets & vins en Bourgogne, se
-                  relaxer dans un spa au milieu des vignes ou
-                  encore survoler la plaine d'Alsace en
-                  montgolfière, ...
-                  Proposés par thématique – bien-être, gastronomie,
-                  culture ou sport – nos week-ends œnologiques
-                  sont élaborés pour permettre à tous les publics,
-                  de l’amateur au néophyte, de trouver leur bonheur.</p>
-      <form class="filters" action="#">
-        @csrf
-        <select id="vineyard_category" name="vineyard_category">
+      <p>
+        Personnalisez votre séjour œnologique en
+        fonction de vos envies ! Séjourner au
+        Château dans le Bordelais, réaliser
+        votre propre cuvée en Champagne, découvrir
+        les accords mets & vins en Bourgogne, se
+        relaxer dans un spa au milieu des vignes ou
+        encore survoler la plaine d'Alsace en
+        montgolfière, ...
+        Proposés par thématique – bien-être, gastronomie,
+        culture ou sport – nos week-ends œnologiques
+        sont élaborés pour permettre à tous les publics,
+        de l’amateur au néophyte, de trouver leur bonheur.
+      </p>
+    </div>
 
-          <option value="" @selected($vineyard_category == "")>Vignoble</option>
+    <div class="filter-container">
+      <form class="filter" action="#">
+        @csrf
+        <select id="vineyard_category">
+
+          <option value="" @selected($vineyard_category == "")>Quel Vignoble ?</option>
           @foreach ($vineyard_categories as $cat)
             <option value="{{ $cat->name}}" @selected($vineyard_category == $cat->name)> {{ $cat->name}}</option>
           @endforeach
         </select>
-        <select id="duree" name="duree">
-          <option value="" >Quelle durée</option>
+        <select id="duree">
+          <option value="" >Quelle durée ?</option>
           <option value="0.5" @selected($duree == "0.5")>Demi-journée</option>
           <option value="1" @selected($duree == "1")>1 jour</option>
           <option value="2" @selected($duree == "2")>2 jour / 1 nuit</option>
           <option value="3" @selected($duree == "3")>3 jours / 2 nuits</option>
         </select>
-        <select id="participant_category" name="participant_category">
-          <option value="" @selected($participant_category == "")>Pour qui</option>
+        <select id="participant_category">
+          <option value="" @selected($participant_category == "")>Pour qui ?</option>
 
           @foreach ($participant_categories as $cat)
             <option value="{{ $cat->name}}" @selected($participant_category == $cat->name)> {{ $cat->name}}</option>
           @endforeach
         </select>
-        <select id="travel_category" name="travel_category">
-          <option value="" @selected($travel_category = "")>Envie</option>
+        <select id="travel_category">
+          <option value="" @selected($travel_category = "")>Une envie spécial ?</option>
           @foreach ($travel_categories as $cat)
             <option value="{{ $cat->name}}" @selected($travel_category == $cat->name)> {{ $cat->name}}</option>
           @endforeach
         </select>
-        <input id="submit" type="submit" value="Recherche">
+       <button id="submit" type="submit" value="Recherche"> <i class="fa-solid fa-magnifying-glass"></i></button>
       </form>
     </div>
+    
 
     <section id="container_travel">
 

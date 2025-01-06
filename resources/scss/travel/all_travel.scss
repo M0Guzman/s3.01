@@ -1,0 +1,138 @@
+select {
+  height: 50px;
+  width: 20%;
+  padding: 5px;
+  border: 1px solid $border;
+  color: $text-black;
+  cursor: pointer;
+}
+
+#submit {
+  width: 50px;
+  height: 50px;
+  background-color: $button;
+  border-radius: 10%;
+}
+
+.filter {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  padding: 5px 10vw;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.filter-container {
+  background-color: $background-dark;
+  width: 100vw;
+  height: 60px;
+  margin: 10px 0;
+}
+
+#intro {
+  margin: 10px 10vw;
+}
+
+#page_title {
+  text-align: center;
+}
+
+
+#container_travel{
+    flex-direction:row;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+
+.cadre {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 400px;
+  width: 35vw;
+  height: 600px;
+  margin: 5px;
+  padding: 5px;
+}
+
+.cadre:hover {
+  border-width: 5px;
+  border-style: solid;
+  border-color: $border;
+  padding: 0;
+
+  .price {
+    left: 45px;
+  }
+
+  .container_info_sejour {
+    border-width: 1px;
+  }
+}
+
+.container_info_sejour {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 55%;
+  padding: 5px;
+  border-width: 1px 1px 5px 1px;
+  border-style: solid;
+}
+
+    
+
+.image {
+  width: 100%;
+  height: 60%;
+  object-fit: cover;
+}
+
+
+.container_location_star {
+  display: flex;
+  flex-direction: row;
+  justify-content:space-between;
+  width: 100%;
+  padding: 0 10px 0 10px;
+}
+
+.title {
+  align-self: left;
+  margin-left: 5px;
+}
+
+.price {
+  position:absolute;
+  left: 50px;
+  background-color:$background-white;
+  border: solid 1px;
+  padding: 5px;
+}
+.description {
+  align-self: left;
+  margin-left: 5px;
+}
+
+.jours {
+  position: absolute;
+  left: 10px;
+  bottom: 0;
+}
+
+.discover_Offer_Button {
+  position: absolute;
+  right: 10px;
+  bottom: 5px;
+  padding: 10px;
+  border: solid 2px;
+  border-radius: 20px;
+  text-align: center;
+}

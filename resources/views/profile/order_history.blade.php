@@ -1,5 +1,4 @@
 <x-app-layout>
-    @vite(['resources/scss/order_history.scss'])
     <h3><a href="{{route('profile.edit')}}">Mon Compte</a></h3>
     @if($users->id != 1)
         @if ($users->role)  

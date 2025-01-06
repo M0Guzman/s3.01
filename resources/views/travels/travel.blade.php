@@ -1,10 +1,10 @@
 <x-app-layout>
-    @vite(['resources/scss/travel.scss'])
+    @vite(['resources/scss/travel/detail_travel.scss'])
         
         <div id="container_sejour">
 
             <section id="container_left">
-                
+
                 <img id="image_travel" src="{{ $travel->resources[0]->get_url() }}">
 
                 <div id="container_button_left">
@@ -108,24 +108,24 @@
 
                 </div>
 
-                
+
             </section>
             <div id="container_right">
                 <div id="container_right_fixe">
-                    
+
                     <section id="container_right_information">
 
                         <h1 id="titre">{{ $travel->title }}</h1>
-                        
+
                         <div id="container_price_day">
                             <hr>
-                            <p id="jours">{{ $travel->days }} 
+                            <p id="jours">{{ $travel->days }}
                                 @if( $travel->days >1)jours | {{ $travel->days -1 }} nuit
                                 @else
                                     journée
                                 @endif
                             </p>
-                            
+
                             <h1 id="price">{{ $travel->price_per_person }} € par personne</h1>
                             <hr>
                         </div>
@@ -133,7 +133,7 @@
                         <div id="details">
                             <p>{{ $travel->description}}</p>
                         </div>
-                        
+
                         <hr class="hr_etape">
 
                         <p id="validity">Cadeau valable jusqu’au <strong> {{ $date }} </strong></p>
@@ -143,7 +143,7 @@
                         </p>
 
                     </section>
-                    
+
                     <div id="container_button_right">
                         <form action="{{ route('travel.edit', ['id' => $travel->id]) }}" method="post">
                             @csrf
@@ -152,7 +152,7 @@
                             <button id="paniers" class="button-acheter" type="submit" name='action' value="for_me">Ajouter aux panier</button>
                         </form>
                     </div>
-                    
+
                 </div>
             </div>
         </div>

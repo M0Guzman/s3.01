@@ -11,6 +11,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\WineRoadController;
 use App\Http\Controllers\PartnerController;
+use App\Http\Controllers\CommandeClientController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -28,6 +30,12 @@ Route::middleware([RedirectIfUnverified::class])->group(function() {
     Route::get('/travels', [TravelController::class, 'show'])->name('travels.show');
     Route::get('/travel/{id}', [TravelController::class, 'show_single'])->name('travel.show');
 
+    Route::get('/commande_client', [CommandeClientController::class, 'show'])->name('commandes_client.show');
+    Route::get('/commande_client/{id}', [CommandeClientController::class, 'show_single'])->name('commande_client.show');
+    // Route pour mettre à jour l'état de la commande et envoyer l'email
+    Route::post('/order/{id}/update', [CommandeClientController::class, 'updateOrder'])->name('order.update');
+    
+
     Route::get('/order', [OrderController::class, 'show'])->name('order.show');
     Route::post('/order/travel/{id}', [OrderController::class, 'edit'])->name('travel.edit'); // used both for editing and adding
     Route::post('/order', [OrderController::class, 'update_booking'])->name('order.update_booking');
@@ -37,8 +45,9 @@ Route::middleware([RedirectIfUnverified::class])->group(function() {
 Route::get('/partner/{id}', [PartnerController::class, 'show_single'])->name('partner.show');
 
 
+
 Route::get('/dashboard', function () {
-    return view('dashboard');
+    return view('dashboard.service_vente');
 })->middleware(['auth', FullyVerified::class])->name('dashboard');
 
 Route::middleware(['auth', FullyVerified::class])->group(function () {
@@ -53,8 +62,6 @@ Route::middleware(['auth', FullyVerified::class])->group(function () {
 
     Route::get('/process-order/thanks', [OrderController::class, 'show_thanks'])->name('order.thanks.show');
 
-    Route::post('/order/create', [OrderController::class, 'create_order'])->name('order.create');
-    Route::post('/order/approve/{order_id}/capture', [OrderController::class, 'approve_order'])->name('order.approve');
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
@@ -84,9 +91,24 @@ Route::get('/policies/privacy', function() {
 
 require __DIR__.'/auth.php';
 
-
 Route::get('/wine-roads', [WineRoadController::class, 'index'])->name('wine-road.index');
 Route::get('/wine-roads/{id}', [WineRoadController::class, 'show'])->name('wine-road.show');
 
 
+//initialisation des role
+Route::get('/service_vente', function () {
+    return view('service_vente.dashboard');
+})->middleware('role:service_vente');
+
+Route::get('/directeur_service_vente', function () {
+    return view('directeur_service_vente.dashboard');
+})->middleware('role:directeur_service_vente');
+
+Route::get('/service_marketing', function () {
+    return view('service_marketing.dashboard');
+})->middleware('role:service_marketing');
+
+Route::get('/dirigeant', function () {
+    return view('dirigeant.dashboard');
+})->middleware('role:dirigeant');
 

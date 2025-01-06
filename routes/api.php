@@ -1,5 +1,5 @@
 <?php
-use App\Http\Controllers\TravelController;
+use App\Http\Controllers\PaymentController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\User\UserAddressController;
@@ -17,6 +17,13 @@ use App\Http\Controllers\User\UserAddressController;
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
+});
+
+Route::middleware(['web', 'auth'])->group(function() {
+    Route::post('/order/create', [PaymentController::class, 'create_order'])->name('api.payment.paypal.create_order');
+    Route::post('/order/approve/{order_id}/capture', [PaymentController::class, 'approve_order'])->name('api.payment.paypal.approve_order');
+
+    Route::post('/payment/braintree/process', [ PaymentController::class, 'process_payment'])->name('api.payment.braintree.process');
 });
 
 Route::get('cities', [UserAddressController::class, 'showCities'])->name('autocomplete.cities');
