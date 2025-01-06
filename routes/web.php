@@ -45,8 +45,9 @@ Route::middleware([RedirectIfUnverified::class])->group(function() {
 Route::get('/partner/{id}', [PartnerController::class, 'show_single'])->name('partner.show');
 
 
+
 Route::get('/dashboard', function () {
-    return view('dashboard');
+    return view('dashboard.service_vente');
 })->middleware(['auth', FullyVerified::class])->name('dashboard');
 
 Route::middleware(['auth', FullyVerified::class])->group(function () {
@@ -61,8 +62,6 @@ Route::middleware(['auth', FullyVerified::class])->group(function () {
 
     Route::get('/process-order/thanks', [OrderController::class, 'show_thanks'])->name('order.thanks.show');
 
-    Route::post('/order/create', [OrderController::class, 'create_order'])->name('order.create');
-    Route::post('/order/approve/{order_id}/capture', [OrderController::class, 'approve_order'])->name('order.approve');
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');

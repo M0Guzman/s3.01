@@ -32,7 +32,7 @@ class Booking extends Model
         return $this->belongsTo(Travel::class);
     }
 
-    public function offeredTravel(): HasOne
+    public function offered_travel(): HasOne
     {
         return $this->hasOne(OfferedTravel::class);
     }

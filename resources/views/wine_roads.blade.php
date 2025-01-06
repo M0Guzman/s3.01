@@ -1,6 +1,4 @@
 <x-app-layout>
-    @vite(['resources/scss/wine_road.scss'])
-
     <div class="container">
         <h1 class="title">Route des Vins</h1>
         <section class="intro">

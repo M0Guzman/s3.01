@@ -1,10 +1,9 @@
 <x-app-layout>
-    @vite(['resources/scss/modife.scss'])
     <form action="{{ route('order.update_booking') }}" method="post">
         @csrf
         <div class="container">
             <h1>Votre séjour</h1>
-            
+
             <!-- Section Informations -->
             <div class="info-section">
                 <div>
@@ -23,12 +22,11 @@
                     <label for="room">Chambre(s) :</label>
                     <input type="number" id="room" name="room" value="{{ $booking != null ? $booking->room_count : 1 }}" min="1" onchange="updateTotalPrice()">
                 </div>
-
                 <div>
                     <h2>Période du séjour</h2>
-                    <p>Début: 
-                        <input type="date" id="dateInput" name="dateInput" 
-                            value="{{ $booking != null ? $booking->start_date : Carbon\Carbon::now()->format('Y-m-d') }}" 
+                    <p>Début:
+                        <input type="date" id="dateInput" name="dateInput"
+                            value="{{ $booking != null ? $booking->start_date : Carbon\Carbon::now()->format('Y-m-d') }}"
                             onchange="updateDate()">
                     </p>
                 </div>
@@ -38,11 +36,11 @@
             <div class="booking-section">
                 <div class="card">
                     @if($travel->travel_steps->count() != 0 )
-                        @foreach ($travel->travel_steps as $travel_step)                    
+                        @foreach ($travel->travel_steps as $travel_step)
                             @if($travel_step->activities->count() != 0 )
-                                @foreach ($travel_step->activities as $activity)                           
+                                @foreach ($travel_step->activities as $activity)
                                     @if($activity->partner->activity_type->name == 'Hotel')
-                                        <h2>{{ $activity->partner->name }}</h2>                                    
+                                        <h2>{{ $activity->partner->name }}</h2>
                                         <p>{{ $activity->partner->hotel->description }}</p>
                                         @break
                                     @endif
@@ -64,21 +62,21 @@
 
             <!-- Section Options -->
             <div class="options">
-                <h2>Sélectionnez vos options</h2>            
+                <h2>Sélectionnez vos options</h2>
                 @if($travel->travel_steps->count() != 0 )
                     @foreach ($travel->travel_steps as $travel_step)
                         @foreach ($travel_step->activities as $activity)
                             @if($activity->partner->activity_type != null && $activity->partner->activity_type->name == 'Hotel')
-                                <div class="activity-group" data-activity-id="{{ $activity->id }}" 
-                                     data-adult-price="{{ $activity->adult_price }}" 
+                                <div class="activity-group" data-activity-id="{{ $activity->id }}"
+                                     data-adult-price="{{ $activity->adult_price }}"
                                      data-children-price="{{ $activity->children_price }}">
-                                    
+
                                     <label>
-                                        <input type="radio" name="activity_{{ $activity->id }}" value="no" checked onchange="updateTotalPrice()"> 
+                                        <input type="radio" name="activity_{{ $activity->id }}" value="no" checked onchange="updateTotalPrice()">
                                         {{ $activity->name }}: Non ({{$activity->timeslot}})
                                     </label>
                                     <label>
-                                        <input type="radio" name="activity_{{ $activity->id }}" value="yes" onchange="updateTotalPrice()"> 
+                                        <input type="radio" name="activity_{{ $activity->id }}" value="yes" onchange="updateTotalPrice()">
                                         {{ $activity->name }}: Oui
                                     </label>
 
@@ -107,7 +105,7 @@
     <script>
         const baseAdultPrice = {{ $travel->price_per_person }};
         const baseChildPrice = {{ $travel->price_per_person }};
-        
+
         function updateTotalPrice() {
             // Récupérer les valeurs des inputs
             const numAdults = parseInt(document.getElementById('adults').value) || 0;

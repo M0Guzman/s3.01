@@ -1,0 +1,14 @@
+#video_container {
+    position: relative;
+    height: calc(100/16*9vw);
+    width: 100vw;
+    overflow: hidden; /* Coupe ce qui dépasse */
+  }
+  
+  #background_video {
+    position: relative;
+    //transform: translate(-50%, 0); /* Centre la vidéo */
+    width: 100%;
+    height: 100%; 
+    pointer-events: none; /* Empêche d'interagir avec la vidéo */
+  }

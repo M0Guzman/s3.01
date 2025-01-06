@@ -12,28 +12,36 @@ export default defineConfig({
     plugins: [
         laravel({
             input: [
-                'resources/scss/facture.scss',
-                'resources/js/address.js',
-                'resources/scss/address.scss',
-                'resources/js/process_order.js',
                 'resources/js/app.js',
                 'resources/js/partner.js',
-                'resources/scss/app.scss',
-                'resources/scss/partner.scss',
-                'resources/scss/travel.scss',
-                'resources/scss/travels.scss',
-                'resources/scss/panier.scss',
-                'resources/scss/modife.scss',
-                'resources/images/delete.png',
-                'resources/images/logo.png',
+                'resources/js/help.js',
+                'resources/js/address.js',
+                'resources/js/process_order.js',
+                'resources/js/carousel.js',
+
+                'resources/scss/global/header.scss',
+                'resources/scss/global/help.scss',
+                'resources/scss/profile/facture.scss',
+                'resources/scss/profile/address.scss',
+                'resources/scss/global/app.scss',
+                'resources/scss/travel/detail_travel.scss',
+                'resources/scss/travel/all_travel.scss',
+                'resources/scss/homePage/avis.scss',
+                'resources/scss/homePage/destination.scss',
+                'resources/scss/homePage/video.scss',
+
+
+
                 'resources/images/paypal.svg',
                 'resources/images/stripe.svg',
                 'resources/images/visa.svg',
-                'resources/scss/wine_road.scss',
-                'resources/scss/order_history.scss',
+                
                 'resources/images/vrdv.jpg',
                 'resources/images/trdv.jpg',
-                'resources/images/rdv.jpg'
+                'resources/images/rdv.jpg',
+
+                'resources/images/delete.png',
+                'resources/images/logo.png'
             ],
             refresh: true,
         }),

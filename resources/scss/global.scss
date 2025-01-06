@@ -1,3 +1,72 @@
+$background-white: #e6e9ef;
+$background-light: #c2c4c9;
+$background-dark: #470023;
+$background-black: #2c0015;
+$border: #2c0015;
+$text-white: hsl(0, 0%, 90%);
+$text-light: hsl(0, 0%, 75%);
+$text-medium: hsl(0, 0%, 50%);
+$text-dark: hsl(0, 0%, 25%);
+$text-black: hsl(0, 0%, 10%);
+$text-hover-light: #e0509d; 
+$text-hover-dark: #a13f3f;
+$text-red: #ff1616;
+$button: #80325c;
+$button-light:#e0509d; 
+$button-hover-smooth: #a13f73; 
+$button-hover-hard: #470023; 
+$ligne: #80325c;
+
+*{
+    font-size: 3vmin;
+}
+
+main {
+    background-color:$background-white;
+}
+
+h1 {
+    font-size: 1.5em;
+    color: $text-black;
+    font-weight:bold;
+}
+
+h2 {
+    font-size: 1.25em;
+    color: $text-black;
+    font-weight:bold;
+}
+
+h3 {
+    font-size: 1em;
+    color: $text-dark;
+}
+
+h4, p, label,a,span {
+    font-size: 0.75em;
+    color: $text-dark;
+}
+
+.white {
+    color: $text-white;
+}
+
+
+button {
+    background-color: $button;
+    color: $text-white;
+}
+
+button:hover {
+    background-color: $button-hover-hard;
+}
+
+
+
+
+  
+
+/*
 $rosewater: #dc8a78;
 $flamingo: #dd7878;
 $pink: #ea76cb;
@@ -24,3 +93,6 @@ $surface0: #313244;
 $base: #eff1f5;
 $mantle: #e6e9ef;
 $crust: #dce0e8;
+
+*/
+
