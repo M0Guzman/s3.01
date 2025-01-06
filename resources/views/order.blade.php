@@ -15,7 +15,7 @@
             @if($order == null || $order->bookings->count() == 0)
 
                 <div class="commande-panier">
-                    <p class="panier-vide">Votre panier est vide</p>
+                    <h2 class="panier-vide"><strong>Votre panier est vide</strong></h2>
                 </div>
 
             @else
