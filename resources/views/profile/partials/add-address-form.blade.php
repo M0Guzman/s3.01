@@ -5,7 +5,15 @@
         </h2>
     </header>
 
-
+    @if ($errors->any())
+        <div class="errors">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
 
     <div style="width: 350px; margin:1em;">
         <form method="post" action="{{ route('address.create') }}" class="sous-section address-form">
@@ -48,6 +56,8 @@
                     </select>
                 </div>
             </div>
+
+           
 
             <div class="conteneur" style="margin: 10px 0 0 0;">
                 <div>

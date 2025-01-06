@@ -38,7 +38,7 @@
                             @if( $activitiy->partner->Hotel != null)
                                 <div class="container_etape">
                                     <div class="image-section">
-                                        <img class="img-etape" src="{{ $travelStep->resources[0]->get_url() }}">
+                                        <img class="img-etape" src="{{ asset('storage/' . $travelStep->resources[0]->path) }}">
                                     </div>
                                     <div class="info-section">
                                         <h3 class="titre-etape">{{ $activitiy->name }}</h3>
@@ -61,7 +61,7 @@
                             @if( $activity->partner->winecellar != null || $activity->partner->restaurant != null)
                                 <div class="container_etape">
                                     <div class="image-section">
-                                        <img class="img-etape" src="{{ $travelStep->resources[0]->get_url() }}">
+                                        <img class="img-etape" src="{{ asset('storage/' . $travelStep->resources[0]->path) }}">
                                     </div>
                                     <div class="info-section">
                                         <h3 class="titre-etape">{{ $activity->name }}</h3>

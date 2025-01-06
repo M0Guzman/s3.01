@@ -6,7 +6,7 @@
         <nav>
             <ul>
                 <li>
-                    <a class="top_a" href="{{ route('dashboard') }}">Dashboard</a>
+                    <a class="top_a" href="{{ route('dashboard.vente.hotel') }}">Dashboard</a>
                 </li>
                 <li><a class="top_a" href="#">Bénéficiaire cadeau</a></li>
                 <li><a class="top_a" href="#">Contact</a></li>

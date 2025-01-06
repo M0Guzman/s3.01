@@ -29,6 +29,10 @@ export default defineConfig({
                 'resources/scss/homePage/avis.scss',
                 'resources/scss/homePage/destination.scss',
                 'resources/scss/homePage/video.scss',
+                'resources/scss/dashboard/dashboard.scss',
+                'resources/scss/dashboard/service_vente/hotel.scss',
+                'resources/scss/dashboard/service_vente/sejour.scss',
+                'resources/scss/dashboard/service_vente/addhotel.scss',
 
 
 
@@ -41,7 +45,8 @@ export default defineConfig({
                 'resources/images/rdv.jpg',
 
                 'resources/images/delete.png',
-                'resources/images/logo.png'
+                'resources/images/logo.png',
+                'resources/images/No_Image_Available.jpg'
             ],
             refresh: true,
         }),

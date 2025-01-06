@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class WineCellar extends Model
 {
@@ -12,8 +13,15 @@ class WineCellar extends Model
 
     public $timestamps = false;
     public $primaryKey = 'partner_id';
-    public function partner(): HasOne
+
+    protected $fillable = [
+        'partner_id',
+        'sampling_type_id'
+    ];
+
+
+    public function partner(): BelongsTo
     {
-        return $this->hasOne(Partner::class);
+        return $this->belongsTo(Partner::class);
     }
 }

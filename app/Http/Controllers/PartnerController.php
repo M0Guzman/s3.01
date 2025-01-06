@@ -8,6 +8,7 @@ use App\Models\Partner;
 use View;
 use Carbon\Carbon;
 
+
 class PartnerController extends Controller
 {
     public function show_single($id, Request $request)
@@ -16,4 +17,6 @@ class PartnerController extends Controller
         
         return view('partner',['partner' => $partner]);
     }
+
+    
 }

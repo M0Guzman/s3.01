@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class OtherPartner extends Model
 {
@@ -18,9 +19,9 @@ class OtherPartner extends Model
         'other_partner_activity_type_id',
     ];
 
-    public function partner(): HasOne
+    public function partner(): BelongsTo
     {
-        return $this->hasOne(Partner::class);
+        return $this->belongsTo(Partner::class);
     }
 
     public function other_partner_activity_type(): HasOne
