@@ -19,6 +19,7 @@ class HistoriqueControlleur extends Controller
             return Carbon::parse($order->bookings[0]['start_date'])->timestamp;
         });
         
+        
         return view('profile/historique', ['orders' => $orders]);
     }
 }

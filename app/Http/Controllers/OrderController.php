@@ -13,6 +13,7 @@ use Illuminate\Http\Request;
 use App\Models\Travel;
 use App\Models\Order;
 use Illuminate\Support\Str;
+use Validator;
 use \Braintree\Gateway as BraintreeGateway;
 use Session;
 
@@ -38,7 +39,7 @@ class OrderController extends Controller
     {
         $validated = $request->validate([
             'booking_id' => ['int', 'exists:bookings,id'],
-            'action' => ['string', 'in:gift,for_me,edit']
+            'action' => ['required','string', 'in:gift,for_me,edit']
         ]);
 
         $travel = Travel::find($id);
@@ -175,15 +176,29 @@ class OrderController extends Controller
 
     public function update_booking(Request $request)
     {
+        //dd($request->all());
+        $validator = Validator::make($request->all(), [
+            'travel_id' => ['required' ,'int',"exists:travel,id"],
+            'booking_id' => ['nullable', 'int', 'exists:bookings,id'],
+            'adult_count' => ['required','integer','min:1'],
+            'children_count'=>['required','integer','min:0'],
+            'room_count' => ['required','integer','min:'. floor($request->input('adult_count') / 2) ],
+            'start_date' => ['required','date_format:Y-m-d','after:' . Carbon::today()->format("Y-m-d")],
+            'action' => ['required', 'in:gift,for_me,edit']
+            // ATTENTION FORMAT Français
+        ]);
+
+        if ($validator->fails())
+        {
+            $errors = $validator->errors();
+            //dd($request->input('travel_id'));
+            //dd($errors);
+            //return redirect(RouteServiceProvider::HOME);
+        }
+
+        //dd($validator->validate());
+        $validated = $validator->validate();
         $order = null;
-        /*$validated = $request->validate([
-            'travel_id' => ['required' ,'int',"exists:bookings,travel_id"],
-            'booking_id' => ['int','exists:booking,id'],
-            'adult_count' => ['required','int','exists:booking,adult_count'],
-            'children_count'=>['required','int','exists:booking,children_count'],
-            'room_count' => ['required','int','exists:booking,children_count'],
-            'start_date' => ['required','int','exists:booking,start_date'],
-        ]);*/
 
         if(Session::has('order_id'))
         {
@@ -195,18 +210,18 @@ class OrderController extends Controller
             Session::put('order_id',$order->id);
         }
 
-        $bookingId = $request->input('booking_id');
-        $travelId = $request->input('travel_id');
 
-        $adultCount = $request->input('adults', 1);
-        $childCount = $request->input('children', 0);
-        $roomCount = $request->input('room', 1);
-        $startDate = $request->input('dateInput');
+        $travelId = $validated['travel_id'];
+        $bookingId = $validated['booking_id'];
 
-        if($request->has('booking_id') && $request->input('booking_id') != '')
+        $adultCount = $validated['adult_count'];
+        $childCount = $validated['children_count'];
+        $roomCount = $validated['room_count'];
+        $startDate = $validated['start_date'];
+
+        if($validated['action'] == 'edit' && $validated['booking_id'] != null)
         {
             $booking = $order->bookings()->find($bookingId);
-
             if($booking != null)
             {
                 $booking->update([
@@ -227,7 +242,7 @@ class OrderController extends Controller
                 'start_date' => $startDate,
             ]);
 
-            if($request->has('action') && $request->input('action') == 'gift') {
+            if($validated['action'] == 'gift') {
                 OfferedTravel::create([
                     'booking_id' => $booking->id,
                     'code' => Str::random(16)
@@ -258,7 +273,6 @@ class OrderController extends Controller
 
         return back()->with('status', 'Article-deleted');
     }
-
     public function show_history(Request $request)
     {
         $orders = Order::where('user_id', '=', $request->user()->id)->get();
@@ -266,7 +280,9 @@ class OrderController extends Controller
         $orders = $orders->sortBy(function ($order, int $key) {
             return Carbon::parse($order->bookings[0]['start_date'])->timestamp;
         });
+        $users = $request->user();
 
-        return view('profile/order_history', ['orders' => $orders]);
+
+        return view('profile/order_history', ['orders' => $orders,'users' => $users]);
     }
 }

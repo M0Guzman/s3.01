@@ -12,6 +12,7 @@ use App\Http\Controllers\OrderController;
 use App\Http\Controllers\WineRoadController;
 use App\Http\Controllers\PartnerController;
 use App\Http\Controllers\Dashboard\ServiceVenteController;
+use App\Http\Controllers\CommandeClientController;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,6 +29,12 @@ Route::middleware([RedirectIfUnverified::class])->group(function() {
     Route::get('/', [HomeController::class, 'index']);
     Route::get('/travels', [TravelController::class, 'show'])->name('travels.show');
     Route::get('/travel/{id}', [TravelController::class, 'show_single'])->name('travel.show');
+
+    Route::get('/commande_client', [CommandeClientController::class, 'show'])->name('commandes_client.show');
+    Route::get('/commande_client/{id}', [CommandeClientController::class, 'show_single'])->name('commande_client.show');
+    // Route pour mettre à jour l'état de la commande et envoyer l'email
+    Route::post('/order/{id}/update', [CommandeClientController::class, 'updateOrder'])->name('order.update');
+
 
     Route::get('/order', [OrderController::class, 'show'])->name('order.show');
     Route::post('/order/travel/{id}', [OrderController::class, 'edit'])->name('travel.edit'); // used both for editing and adding
@@ -63,13 +70,13 @@ Route::middleware(['auth', FullyVerified::class])->group(function () {
 
     Route::get('/order/history', [OrderController::class, 'show_history'])->name('order.history.show');
 
-    
+
 
     Route::get('/dashboard/service_vente/hotel', function () {
         return view('dashboard.service_vente.hotel');
-    })->name('dashboard.vente.hotel'); 
+    })->name('dashboard.vente.hotel');
 
-    
+
     Route::post('/dashboard/service_vente/ajouterhotel', [ServiceVenteController::class, 'createPartenaire'])->name('dashboard.vente.Partenaire.create');
     Route::get('/dashboard/service_vente/ajouterhotel', [ServiceVenteController::class, 'afficherPagePartenaire'])->name('dashboard.vente.Partenaire.afficher');
     Route::get('/dashboard/service_vente/sejour', [ServiceVenteController::class, 'afficherPageSejour'])->name('dashboard.vente.Sejour.afficher');
@@ -92,9 +99,24 @@ Route::get('/policies/privacy', function() {
 
 require __DIR__.'/auth.php';
 
-
 Route::get('/wine-roads', [WineRoadController::class, 'index'])->name('wine-road.index');
 Route::get('/wine-roads/{id}', [WineRoadController::class, 'show'])->name('wine-road.show');
 
 
+//initialisation des role
+Route::get('/service_vente', function () {
+    return view('service_vente.dashboard');
+})->middleware('role:service_vente');
+
+Route::get('/directeur_service_vente', function () {
+    return view('directeur_service_vente.dashboard');
+})->middleware('role:directeur_service_vente');
+
+Route::get('/service_marketing', function () {
+    return view('service_marketing.dashboard');
+})->middleware('role:service_marketing');
+
+Route::get('/dirigeant', function () {
+    return view('dirigeant.dashboard');
+})->middleware('role:dirigeant');
 

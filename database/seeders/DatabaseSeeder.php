@@ -51,7 +51,7 @@ class DatabaseSeeder extends Seeder
         ActivityType::create(['name' => 'Autres']);
 
 
-        
+
 
         //php artisan db:seed --class DatabaseSeeder
 
@@ -64,7 +64,7 @@ class DatabaseSeeder extends Seeder
             ]);
         }
 
-        
+
         $addresses_JSON = json_decode(file_get_contents('resources/data/cities.json'),true);
 
         foreach($addresses_JSON['cities'] as $citie) {
@@ -123,11 +123,12 @@ class DatabaseSeeder extends Seeder
         CookingType::create(['name' => 'Dégustation de vins locaux']);
 
 
-        UserRole::create(['name' => 'User']);
-        UserRole::create(['name' => 'Partner']);
-        UserRole::create(['name' => 'Admin']);
-
-        RolePermission::create(['name' => 'user.is_admin', 'value' => true, 'user_role_id' => 2]);
+        UserRole::create(['id' => 1,'display_name' => 'Utilisateur', 'name'=>'user']);
+        UserRole::create(['id' => 2,'display_name' => 'Service ventes', 'name' => 'sales_department']);
+        UserRole::create(['id' => 3,'display_name' => 'Directeur service ventes', 'name'=> 'sales_department_director']);
+        UserRole::create(['id' => 4,'display_name' => 'Service marketing', 'name' => 'marketing_department']);
+        UserRole::create(['id' => 5,'display_name' => 'Dirigeant', 'name' => 'executive']);
+        UserRole::create(['id' => 6,'display_name' => 'Partenaire', 'name' => 'partner']);
 
         OtherPartnerActivityType::create(['name' => 'tmp_plz_fix']);
         OrderState::create(['name' => 'En attente']);
