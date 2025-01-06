@@ -68,6 +68,13 @@
     border-radius: 4px;
     text-decoration: none;
     margin-top: 20px;
+    cursor: pointer;
+}
+
+.gift-option:disabled {
+    background-color: gray;
+    color: white;
+    cursor: not-allowed;
 }
 
 .steps {

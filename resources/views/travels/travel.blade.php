@@ -1,6 +1,6 @@
 <x-app-layout>
     @vite(['resources/scss/travel/detail_travel.scss'])
-        
+
         <div id="container_sejour">
 
             <section id="container_left">
@@ -148,8 +148,8 @@
                         <form action="{{ route('travel.edit', ['id' => $travel->id]) }}" method="post">
                             @csrf
 
-                            <button id="gift" class="button-acheter" type="submit" name='action' value="gift">J'opte pour le format cadeau</button>
-                            <button id="paniers" class="button-acheter" type="submit" name='action' value="for_me">Ajouter aux panier</button>
+                            <button id="gift" class="button button-acheter" type="submit" name='action' value="gift">J'opte pour le format cadeau</button>
+                            <button id="paniers" class="button button-acheter" type="submit" name='action' value="for_me">Ajouter aux panier</button>
                         </form>
                     </div>
 
