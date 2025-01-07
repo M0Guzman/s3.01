@@ -12,6 +12,7 @@ use App\Http\Controllers\OrderController;
 use App\Http\Controllers\WineRoadController;
 use App\Http\Controllers\PartnerController;
 use App\Http\Controllers\Dashboard\ServiceVenteController;
+use App\Http\Controllers\Dashboard\DirigeantController;
 use App\Http\Controllers\CommandeClientController;
 
 /*
@@ -80,9 +81,12 @@ Route::middleware(['auth', FullyVerified::class])->group(function () {
     Route::post('/dashboard/service_vente/ajouterhotel', [ServiceVenteController::class, 'createPartenaire'])->name('dashboard.vente.Partenaire.create');
     Route::get('/dashboard/service_vente/ajouterhotel', [ServiceVenteController::class, 'afficherPagePartenaire'])->name('dashboard.vente.Partenaire.afficher');
     Route::get('/dashboard/service_vente/sejour', [ServiceVenteController::class, 'afficherPageSejour'])->name('dashboard.vente.Sejour.afficher');
-
     Route::get('/dashboard/service_vente', [ServiceVenteController::class, 'showHomepage'])->name('dashboard.vente.homepage.show');
+    Route::post('/dashboard/dirigeant/createTravel', [DirigeantController::class,'EnrengistrerTravel'])->name('dashboard.dirigeant.create.Travel');
+    Route::get('/dashboard/dirigeant/createTravel', [DirigeantController::class,'createTravel'])->name('dashboard.dirigeant.create.Travel');
+    Route::get('/dashboard/dirigeant/validateTravel', [DirigeantController::class,'validateTravel'])->name('dashboard.dirigeant.validate.Travel');
 });
+
 
 Route::get('/file/{id}', [FileController::class, 'get_file'])->name('file');
 

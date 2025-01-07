@@ -39,7 +39,7 @@ class TravelFactory extends Factory
                 'Découvrez les techniques de récolte et de production du vin.',
                 'Vivez une expérience inoubliable entre nature et vin.'
             ]),
-            'price_per_person' => fake()->randomFloat(2, 100, 300),
+            'price_per_person' => fake()->randomFloat(2, 100, 500),
             'days' => fake()->randomElement([0.5, 1, 2, 3]),
         ];
     }

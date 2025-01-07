@@ -1,16 +1,17 @@
 <header>
     @vite(['resources/scss/global/header.scss'])
 
+
     <!-- Header Top -->
     <div id="header-top">
         <nav>
             <ul>
-            @if(!hasRole("user"))
+            @if(hasRole("executive") || hasRole("marketing_department") || hasRole("sales_department_director") || hasRole("sales_department")){
                 <li>
-                    <a class="top_a" href="{{ route('dashboard.vente.hotel') }}">Dashboard</a>
+                    <a class="top_a" href="{{ route('dashboard.vente.afficher') }}">Dashboard</a>
                 </li>
-                @endif
-                <li><a class="top_a" href="#">Bénéficiaire cadeau</a></li>
+            }
+            @endif
                 <li><a class="top_a" href="#">Contact</a></li>
                 <li><a class="top_a" href="#">07 66 69 71 18</a></li>
                 @if (Auth::check())

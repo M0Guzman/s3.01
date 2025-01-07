@@ -37,7 +37,8 @@ class WineRoadFactory extends Factory
                 'Vignes de Luxe',
                 'Sentier des Vins et Châteaux',
                 'Les Chemins de la Vigne',
-                'Route du Vin de Tradition'
+                'Route du Vin de Tradition',
+                'Route de Vin Creation'
             ]),
             'description' => fake()->randomElement([
                 'Explorez cette route mythique et découvrez les meilleurs crus de la région.',
@@ -59,7 +60,8 @@ class WineRoadFactory extends Factory
                 'Laissez-vous emporter par la magie des paysages et des vins de cette route célèbre.',
                 'Découvrez le secret des vignobles anciens et dégustez des vins rares et exquis.',
                 'Traversez des terres viticoles exceptionnelles et goûtez des vins savoureux.',
-                'Admirez le panorama des collines de vignes tout en savourant des vins de qualité.'
+                'Admirez le panorama des collines de vignes tout en savourant des vins de qualité.',
+                'Venez tester tout type de vin qui seront tous vous emerveiller vos papilles aussi que vos oeils'
             ]),        ];
     }
 }

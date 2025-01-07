@@ -6,7 +6,7 @@
 
       <h1>Séjours Œnologiques</h1>
       <br>
-      <p> Envoyer les mails aux bonnes personnes.</p>
+      <p> Envoyer les mailes au bonne personne.</p>
       <form class="filters" action="#">
         @csrf
         <select id="order_state" name="order_state">
@@ -39,7 +39,7 @@
                 {{ mb_substr($order->user->email, 0, 50, 'UTF-8') }}
               </p>
             </div>
-            
+
             <!-- Formulaire pour changer l'état et envoyer l'email -->
             <form action="{{ route('order.update', ['id' => $order->id]) }}" method="POST">
               @csrf

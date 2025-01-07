@@ -38,13 +38,11 @@ export default defineConfig({
                 'resources/scss/travel/modife.scss',
                 'resources/scss/profile/order_history.scss',
                 'resources/scss/travel/wine_road.scss',
-
-
-
+                'resources/scss/dashboard/dirigeant/dirigeant.scss',
                 'resources/images/paypal.svg',
                 'resources/images/stripe.svg',
                 'resources/images/visa.svg',
-                
+
                 'resources/images/vrdv.jpg',
                 'resources/images/trdv.jpg',
                 'resources/images/rdv.jpg',

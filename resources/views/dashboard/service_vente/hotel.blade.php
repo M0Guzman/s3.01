@@ -1,6 +1,5 @@
 <x-dashboard-layout>
     @vite(['resources/scss/dashboard/service_vente/hotel.scss'])
-
     <form method="post" action="{{ route('dashboard.service_vente.send_mail') }}">
     <div id="navigation">
         <a href="{{ route('dashboard.vente.hotel') }}">Hotels</a>

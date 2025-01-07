@@ -20,17 +20,31 @@ return new class extends Migration
         Schema::create('travel', function (Blueprint $table) {
             $table->id();
 
-            $table->foreignIdFor(WineRoad::class)->constrained();
-            $table->foreignIdFor(Department::class)->constrained();
+            $wineroad = $table->foreignIdFor(WineRoad::class);
+            $wineroad->constrained();
+            $wineroad->nullable();
+
+            $departement = $table->foreignIdFor(Department::class);
+            $departement->constrained();
+            $departement->nullable();
+
             //$table->foreignIdFor(Theme::class)->constrained();
-            $table->foreignIdFor(TravelCategory::class)->constrained();
-            $table->foreignIdFor(VineyardCategory::class)->constrained();
-            $table->foreignIdFor(ParticipantCategory::class)->constrained();
+            $category_travel = $table->foreignIdFor(TravelCategory::class);
+            $category_travel->constrained();
+            $category_travel->nullable();
+
+            $vineyardCategory = $table->foreignIdFor(VineyardCategory::class);
+            $vineyardCategory->constrained();
+            $vineyardCategory->nullable();
+
+            $participant_category = $table->foreignIdFor(ParticipantCategory::class);
+            $participant_category->constrained();
+            $participant_category->nullable();
 
 
             $table->string('title');
-            $table->text('description');
-            $table->double('price_per_person');
+            $table->text('description')->nullable();
+            $table->double('price_per_person')->nullable();
             $table->double('days');
         });
     }
