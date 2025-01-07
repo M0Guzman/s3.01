@@ -27,8 +27,9 @@ class DummySeeder extends Seeder
         Resource::factory(10)->create();
         Address::factory(1000)->create();
         Activity::factory(30)->create();
-        WineRoad::factory(10)->hasWineRoadSteps(3)->hasResources(1)->create();
+        WineRoad::factory(20)->hasWineRoadSteps(3)->hasResources(1)->create();
         Travel::factory(50)->hasResources(2)->create();
+        WineRoad::factory(1)->hasWineRoadSteps(3)->hasResources(1)->create();
         User::factory(50)->hasAddresses(1)->create();
         TravelStep::factory(200)->hasResources(2)->hasActivities(3)->create();
         Order::factory(10)->hasBookings(2)->create();

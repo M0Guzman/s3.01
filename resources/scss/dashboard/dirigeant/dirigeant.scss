@@ -1,0 +1,12 @@
+#navigation {
+    display: flex;
+    flex-direction: row;
+    justify-content:space-evenly;
+    background-color: $background-dark;
+    box-sizing: border-box;
+}
+
+#navigation a{
+    color: white;
+    font-size: 1em;
+}

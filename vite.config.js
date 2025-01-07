@@ -33,7 +33,7 @@ export default defineConfig({
                 'resources/scss/dashboard/service_vente/hotel.scss',
                 'resources/scss/dashboard/service_vente/sejour.scss',
                 'resources/scss/dashboard/service_vente/addhotel.scss',
-
+                'resources/scss/dashboard/dirigeant/dirigeant.scss',
 
 
                 'resources/images/paypal.svg',

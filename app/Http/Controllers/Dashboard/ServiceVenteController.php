@@ -15,6 +15,7 @@ use App\Models\City;
 use App\Models\Travel;
 use App\Models\CookingType;
 use App\Models\Address;
+use App\Models\User;
 
 class ServiceVenteController extends Controller
 {
@@ -36,7 +37,7 @@ class ServiceVenteController extends Controller
     {
         $users = User::get();
 
-        return view('dashboard.vente.afficher', [
+        return view('dashboard.service_vente', [
             'users' => $users
         ]);
     }

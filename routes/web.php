@@ -82,6 +82,7 @@ Route::middleware(['auth', FullyVerified::class])->group(function () {
     Route::get('/dashboard/service_vente/ajouterhotel', [ServiceVenteController::class, 'afficherPagePartenaire'])->name('dashboard.vente.Partenaire.afficher');
     Route::get('/dashboard/service_vente/sejour', [ServiceVenteController::class, 'afficherPageSejour'])->name('dashboard.vente.Sejour.afficher');
     Route::get('/dashboard/service_vente', [ServiceVenteController::class, 'afficher'])->name('dashboard.vente.afficher');
+    Route::post('/dashboard/dirigeant/createTravel', [DirigeantController::class,'EnrengistrerTravel'])->name('dashboard.dirigeant.create.Travel');
     Route::get('/dashboard/dirigeant/createTravel', [DirigeantController::class,'createTravel'])->name('dashboard.dirigeant.create.Travel');
     Route::get('/dashboard/dirigeant/validateTravel', [DirigeantController::class,'validateTravel'])->name('dashboard.dirigeant.validate.Travel');
 
