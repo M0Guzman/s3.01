@@ -5,9 +5,10 @@
         <div id="sidebar">
             <a href="">Administrateur</a>
             <a href="">Modérateur</a>
-            <a href="">Service Marketing</a>
+            <a href="{{ route('dashboard.vente.Partenaire.afficher') }}">Service Marketing</a>
+            <a href="{{ route('dashboard.vente.homepage.show') }}">Directeur Service Vente</a>
         </div>
-        
+
         <div id="content">
             <main >
                 {{ $slot }}
@@ -15,8 +16,8 @@
         </div>
     </div>
 
-    
 
-    
+
+
 
 </x-app-layout>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\ParticipantCategory;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Controller;
 use App\Models\Travel;
 use App\Models\TravelCategory;
 use App\Models\VineyardCategory;

@@ -27,6 +27,7 @@ class OrderFactory extends Factory
             'address_id' => $user->addresses->random()->id,
             'message' => fake()->paragraph(),
             'order_state_id' => OrderState::all()->random()->id,
+            'created_at' => fake()->dateTimeBetween('-3 month')
         ];
     }
 }

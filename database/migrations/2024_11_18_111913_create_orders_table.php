@@ -41,8 +41,9 @@ return new class extends Migration
             $address->nullable();
 
             $table->text('message')->nullable();
-            
+
             $table->foreignIdFor(OrderState::class)->default(0);
+            $table->timestamps();
         });
     }
 

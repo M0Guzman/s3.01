@@ -2,13 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Models\Review;
-use App\Models\ParticipantCategory;
-use App\Models\TravelCategory;
-use App\Models\TravelHasResource;
-use App\Models\VineyardCategory;
 use App\Models\Travel;
+use Illuminate\Routing\Controller;
 use View;
 
 class HomeController extends Controller

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\WineRoad;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Controller;
 
 class WineRoadController extends Controller
 {

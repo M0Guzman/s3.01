@@ -8,6 +8,7 @@ use App\Models\Travel;
 use App\Models\TravelCategory;
 use App\Models\VineyardCategory;
 use Illuminate\Support\Facades\Mail; // Pour envoyer des emails
+use Illuminate\Routing\Controller;
 use App\Mail\OrderStateChanged; // Crée une classe Mailable pour l'email
 use App\Models\Order;
 use App\Models\OrderState;
