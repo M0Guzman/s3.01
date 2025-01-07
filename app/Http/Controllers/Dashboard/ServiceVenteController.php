@@ -12,20 +12,32 @@ use App\Models\WineCellar;
 use App\Models\OtherPartner;
 use App\Models\Department;
 use App\Models\City;
+use App\Models\Travel;
 use App\Models\CookingType;
 use App\Models\Address;
 
 class ServiceVenteController extends Controller
 {
     public function afficherPagePartenaire(Request $request){
+        $travel = Travel::get('*');
         $departments = Department::all();
         $typePartenaires = ActivityType::all();
         $cookingTypes = CookingType::all();
 
         return view('dashboard.service_vente.addhotel', [
+            'user' => $request->user(),
             'departments' => $departments,
             'typePartenaires' => $typePartenaires,
             'cookingTypes' => $cookingTypes
+        ]);
+    }
+
+    public function afficher(Request $request)
+    {
+        $users = User::get();
+
+        return view('dashboard.vente.afficher', [
+            'users' => $users
         ]);
     }
 

@@ -1,6 +1,8 @@
 <x-dashboard-layout>
     @vite(['resources/scss/dashboard/service_vente/addhotel.scss'])
 
+
+    
     <div id="navigation">
         <a href="{{ route('dashboard.vente.hotel') }}">Hotels</a>
         <a href="{{ route('dashboard.vente.Partenaire.afficher') }}">Ajouter un Partenaire</a>
