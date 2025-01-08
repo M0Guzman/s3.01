@@ -15,3 +15,25 @@ function Open_Close_Modal() {
         Button_Aide.textContent = "?";
     }    
 }
+function afficherTexte(){
+
+    var element = document.getElementById('Connexion');
+
+    if (element.style.display === "none")
+    {
+        element.style.display = "block";
+    }
+    else
+    {
+        element.style.display = "none";
+    }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    afficherTexte(elementId)
+});
+document.getElementById("Connexion").addEventListener('change', () => afficherTexte());
+document.getElementById("Commande").addEventListener('change', () => afficherTexte());
+document.getElementById("Reservation").addEventListener('change', () => afficherTexte());
+document.getElementById("Support").addEventListener('change', () => afficherTexte());
+document.getElementById("Accessibilité").addEventListener('change', () => afficherTexte());

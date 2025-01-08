@@ -21,7 +21,7 @@ class AddressFactory extends Factory
             'name' => fake()->sentence(2),
             'street' => fake()->streetAddress(),
             'phone' => str_replace('+33', '0', str_replace('+33(0)', '0', str_replace(' ', '', fake()->phoneNumber()))),
-            'city_id' => City::factory()
+            'city_id' => City::all()->random()
         ];
     }
 }

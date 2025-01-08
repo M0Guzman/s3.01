@@ -13,6 +13,7 @@ use Illuminate\Http\Request;
 use App\Models\Travel;
 use App\Models\Order;
 use Illuminate\Support\Str;
+use Illuminate\Routing\Controller;
 use Validator;
 use \Braintree\Gateway as BraintreeGateway;
 use Session;

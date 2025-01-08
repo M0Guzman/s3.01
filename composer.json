@@ -6,8 +6,12 @@
     "license": "MIT",
     "require": {
         "php": "^8.1",
-        "braintree/braintree_php": "^6.21",
         "barryvdh/laravel-dompdf": "^3.0",
+        "botman/botman": "*",
+        "botman/driver-web": "^1.5",
+        "braintree/braintree_php": "^6.21",
+        "cloudstudio/ollama-laravel": "^1.0",
+        "codewithkyrian/chromadb-laravel": "^0.2.0",
         "fouladgar/laravel-mobile-verification": "^4.0",
         "guzzlehttp/guzzle": "^7.2",
         "laravel/framework": "^10.10",

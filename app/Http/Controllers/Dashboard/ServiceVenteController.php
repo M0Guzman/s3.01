@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers\Dashboard;
 
-use App\Http\Controllers\Controller;
+use App\Models\BookingOrder;
+use App\Models\Order;
+use App\Models\VineyardCategory;
+use Illuminate\Routing\Controller;
 use App\Models\ActivityType;
+use App\Models\OrderState;
 use Illuminate\Http\Request;
 use App\Models\Partner;
 use App\Models\Hotel;
@@ -12,8 +16,10 @@ use App\Models\WineCellar;
 use App\Models\OtherPartner;
 use App\Models\Department;
 use App\Models\City;
+use App\Models\Travel;
 use App\Models\CookingType;
 use App\Models\Address;
+use App\Models\User;
 use App\Models\Travel;
 
 class ServiceVenteController extends Controller
@@ -32,14 +38,25 @@ class ServiceVenteController extends Controller
 
 
     public function afficherPagePartenaire(Request $request){
+        $travel = Travel::get('*');
         $departments = Department::all();
         $typePartenaires = ActivityType::all();
         $cookingTypes = CookingType::all();
 
-        return view('dashboard.service_marketing.addpartenaire', [
+        return view('dashboard.service_vente.addhotel', [
+            'user' => $request->user(),
             'departments' => $departments,
             'typePartenaires' => $typePartenaires,
             'cookingTypes' => $cookingTypes
+        ]);
+    }
+
+    public function afficher(Request $request)
+    {
+        $users = User::get();
+
+        return view('dashboard.service_vente', [
+            'users' => $users
         ]);
     }
 
@@ -49,7 +66,7 @@ class ServiceVenteController extends Controller
         $hebergements = Hotel::all();
         $Travels = Travel::where("state_travel",'=',"Cree")->get();
         
-        return view('dashboard.service_marketing.sejour', [
+        return view('dashboard.service_vente.sejour', [
             'domains' => $domains,
             'hebergements' => $hebergements,
             'Travels' => $Travels
@@ -82,8 +99,8 @@ class ServiceVenteController extends Controller
             'description' => ['required','string']
         ]);
 
-        
-        
+
+
 
         $city=City::where('name','=',$validated['ville'])->where('zip', '=', $validated['cp'])->first();
         if($city == null) {
@@ -111,7 +128,7 @@ class ServiceVenteController extends Controller
         ]);
 
 
-        
+
         $typePartenaire = $validated['typePartenaire'];
         switch ($typePartenaire) {
 
@@ -130,7 +147,7 @@ class ServiceVenteController extends Controller
                     'speciality' => $validated['specialite'],
                 ]);
                 break;
-    
+
 
             case 3:
 
@@ -140,8 +157,8 @@ class ServiceVenteController extends Controller
                     'room_count' => $validated['nombre_chambre'],
                 ]);
                 break;
-                          
-            
+
+
             case 4:
                 $other = OtherPartner::create([
                     'partner_id' => $nouveauPartner ->id,
@@ -149,10 +166,28 @@ class ServiceVenteController extends Controller
                 ]);
                 break;
         }
-        
+
 
         return back()->with('success', 'oui');
     }
 
-    
+    public function showHomepage(Request $request) {
+        $sales_count = Order::query()->join('booking_orders', 'booking_orders.order_id', '=', 'orders.id')->whereRaw('orders.created_at >= current_timestamp - interval \'30 day\'')->count();
+        $sales_per_states = Order::query()->join('booking_orders', 'booking_orders.order_id', '=', 'orders.id')->join('order_states', 'orders.order_state_id', '=', 'order_states.id')->whereRaw('orders.created_at >= current_timestamp - interval \'30 day\'')->groupBy(['order_states.id'])->selectRaw('order_states.name, count(booking_orders.*)')->get();
+
+        $sales_per_vineyards = Order::query()->join('booking_orders', 'booking_orders.order_id', '=', 'orders.id')->join('bookings', 'bookings.id', '=', 'booking_orders.booking_id')->join('travel', 'travel.id', '=', 'bookings.travel_id')->join('vineyard_categories', 'travel.vineyard_category_id', '=', 'vineyard_categories.id')->whereRaw('orders.created_at >= current_timestamp - interval \'30 day\'')->groupBy(['vineyard_categories.id'])->selectRaw('vineyard_categories.name, count(booking_orders.*)')->get();
+
+        $sales_per_departments = Order::query()->join('booking_orders', 'booking_orders.order_id', '=', 'orders.id')->join('addresses', 'orders.address_id', '=', 'addresses.id')->join('cities', 'addresses.city_id', 'cities.id')->join('departments', 'cities.department_id', 'departments.id')->whereRaw('orders.created_at >= current_timestamp - interval \'30 day\'')->groupBy(['departments.id'])->selectRaw('departments.name, count(booking_orders.*)')->get();
+
+        $sales_per_cities = Order::query()->join('booking_orders', 'booking_orders.order_id', '=', 'orders.id')->join('addresses', 'orders.address_id', '=', 'addresses.id')->join('cities', 'addresses.city_id', 'cities.id')->whereRaw('orders.created_at >= current_timestamp - interval \'30 day\'')->groupBy(['cities.id'])->selectRaw('cities.*, count(booking_orders.*)')->get();
+;
+
+        return view('dashboard.service_vente.home', [
+            'sales_count' => $sales_count,
+            'sales_per_states' => $sales_per_states,
+            'sales_per_vineyards' => $sales_per_vineyards,
+            'sales_per_departments' => $sales_per_departments,
+            'sales_per_cities' => $sales_per_cities
+        ]);
+    }
 }

@@ -8,7 +8,7 @@
         <a  href="{{ route('dashboard.vente.Partenaire.afficher') }}">Ajouter un Partenaire</a>
         <a href="{{ route('dashboard.vente.Sejour.afficher') }}">Séjour</a>
     </div>
-    
+
 
     <div id="container_infoHotel">
         <select id="objectMSG" class="advancedSelect select2">
@@ -27,12 +27,12 @@
         <button id="send">Envoyer</button>
     </div>
 
-    
+
     <div id="container_mail">
         <textarea id="text" name="message" rows="20" cols="20">
 Madame, Monsieur,
 
-Je me permets de vous contacter au nom de VinoTrip, une société spécialisée dans l'organisation de séjours et de voyages. 
+Je me permets de vous contacter au nom de VinoTrip, une société spécialisée dans l'organisation de séjours et de voyages.
 Dans le cadre de l'élargissement de notre offre, nous envisageons de proposer à nos clients un séjour incluant l'hébergement dans votre établissement, l'hôtel [Nom de l'Hôtel] situé à [Adresse de l'Hôtel].
 
 Afin de pouvoir étudier la faisabilité de cette collaboration, nous souhaiterions obtenir des informations détaillées concernant les options d'hébergement disponibles au sein de votre hôtel. Plus précisément, nous serions intéressés par les éléments suivants :
@@ -57,6 +57,7 @@ Responsable du Service Marketing de VinoTrip
 contact@vinotrip.fr
         </textarea>
     </div>
+    </form>
 
     <script>
         function clearText() {

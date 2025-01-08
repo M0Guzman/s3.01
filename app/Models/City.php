@@ -15,7 +15,9 @@ class City extends Model
     protected $fillable = [
         'name',
         'zip',
-        'department_id'
+        'department_id',
+        'latitude',
+        'longitude'
     ];
 
     public function department(): BelongsTo

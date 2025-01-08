@@ -15,6 +15,7 @@ use App\Models\Partner;
 use Database\Factories\WineRoadFactory;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Carbon;
 
 class DummySeeder extends Seeder
 {
@@ -25,11 +26,13 @@ class DummySeeder extends Seeder
     {
         Resource::factory(10)->create();
         Activity::factory(30)->create();
-        WineRoad::factory(10)->hasWineRoadSteps(3)->hasResources(1)->create();
+        WineRoad::factory(20)->hasWineRoadSteps(3)->hasResources(1)->create();
         Travel::factory(50)->hasResources(2)->create();
+        WineRoad::factory(1)->hasWineRoadSteps(3)->hasResources(1)->create();
         User::factory(50)->hasAddresses(1)->create();
         TravelStep::factory(200)->hasResources(2)->hasActivities(3)->create();
-        Order::factory(10)->hasBookings(2)->create();
+        Order::factory(30)->hasBookings(2)->create();
+        Order::factory(1)->state(['created_at' => Carbon::now()])->hasBookings(25)->create();
         Coupon::factory(10)->hasOrder(1)->create();
         //Review::factory(100)->create();
 

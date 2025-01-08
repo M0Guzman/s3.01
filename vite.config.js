@@ -20,7 +20,7 @@ export default defineConfig({
                 'resources/js/carousel.js',
                 'resources/js/RechercheCustom.js',
                 'node_modules/select2/dist/js/select2.js',
-
+                'resources/js/dashboard/sales/home.js',
                 'resources/scss/global/header.scss',
                 'resources/scss/global/help.scss',
                 'resources/scss/profile/facture.scss',
@@ -40,7 +40,7 @@ export default defineConfig({
                 'resources/scss/travel/modife.scss',
                 'resources/scss/profile/order_history.scss',
                 'resources/scss/travel/wine_road.scss',
-
+                'resources/scss/dashboard/dirigeant/dirigeant.scss',
                 'select2/dist/css/select2.min.css',
 
 
@@ -48,7 +48,7 @@ export default defineConfig({
                 'resources/images/paypal.svg',
                 'resources/images/stripe.svg',
                 'resources/images/visa.svg',
-                
+
                 'resources/images/vrdv.jpg',
                 'resources/images/trdv.jpg',
                 'resources/images/rdv.jpg',

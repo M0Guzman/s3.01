@@ -11,15 +11,14 @@ class Order extends Model
 {
     use HasFactory;
 
-    public $timestamps = false;
-
     protected $fillable = [
         'payment_type_id',
         'resource_id',
         'user_id',
         'address_id',
         'order_state_id',
-        'coupon_id'
+        'coupon_id',
+        'created_at'
     ];
 
     public function get_price(bool $ignore_coupon = false): float

@@ -15,16 +15,16 @@ class Travel extends Model
     public $timestamps = false;
 
     protected $fillable = [
-        'name',
         'wine_road_id',
         'department_id',
         'travel_category_id',
         'vineyard_category_id',
-        'ParticipantCategory_id',
+        'participant_category_id',
         'title',
         'description',
         'price_per_person',
-        'days'
+        'days',
+        'state_travel'
     ];
 
     public function wine_road(): BelongsTo

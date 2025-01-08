@@ -44,5 +44,13 @@
                 <a href="{{ route('policies.terms') }}">Politique particulière de vente</a>
             </div>
         </div>
+
+                <script>
+var botmanWidget = {
+aboutText: '',
+introMessage: "Bienvenue dans notre site web"
+};
+</script>
+<script src='https://cdn.jsdelivr.net/npm/botman-web-widget@0/build/js/widget.js'></script>
     </body>
 </html>

@@ -67,12 +67,14 @@ class DatabaseSeeder extends Seeder
 
         $addresses_JSON = json_decode(file_get_contents('resources/data/cities.json'),true);
 
-        foreach($addresses_JSON['cities'] as $citie) {
+        foreach($addresses_JSON['cities'] as $city) {
             try {
                 City::create([
-                    'name' => $citie['city_name'],
-                    'zip' => $citie['zip_code'],
-                    'department_id' => $citie['department_number']
+                    'name' => $city['city_name'],
+                    'zip' => $city['zip_code'],
+                    'department_id' => $city['department_number'],
+                    'latitude' => $city['latitude'],
+                    'longitude' => $city['longitude']
                 ]);
             }
             catch(Exception $e) {}

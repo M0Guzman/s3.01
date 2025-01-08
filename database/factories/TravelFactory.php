@@ -28,6 +28,7 @@ class TravelFactory extends Factory
                 'Aventure dans les vignobles',
                 'Escapade œnologique',
                 'Voyage au cœur des terroirs'
+                
             ]),
             'description' => fake()->randomElement([
                 'Explorez les meilleurs vignobles de la région avec un guide expert.',
@@ -39,8 +40,9 @@ class TravelFactory extends Factory
                 'Découvrez les techniques de récolte et de production du vin.',
                 'Vivez une expérience inoubliable entre nature et vin.'
             ]),
-            'price_per_person' => fake()->randomFloat(2, 100, 300),
+            'price_per_person' => fake()->randomFloat(2, 100, 500),
             'days' => fake()->randomElement([0.5, 1, 2, 3]),
+            'state_travel' => fake()->randomElement(["Valide"]), //"aValide","Cree"
         ];
     }
 }
