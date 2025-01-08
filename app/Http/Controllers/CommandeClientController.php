@@ -2,11 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\ParticipantCategory;
 use Illuminate\Http\Request;
-use App\Models\Travel;
-use App\Models\TravelCategory;
-use App\Models\VineyardCategory;
 use Illuminate\Support\Facades\Mail; // Pour envoyer des emails
 use Illuminate\Routing\Controller;
 use App\Mail\OrderStateChanged; // Crée une classe Mailable pour l'email

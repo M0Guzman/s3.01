@@ -18,6 +18,7 @@ export default defineConfig({
                 'resources/js/address.js',
                 'resources/js/process_order.js',
                 'resources/js/carousel.js',
+                'resources/js/dashboard/sales/home.js',
 
                 'resources/scss/global/header.scss',
                 'resources/scss/global/help.scss',
@@ -30,6 +31,7 @@ export default defineConfig({
                 'resources/scss/homePage/destination.scss',
                 'resources/scss/homePage/video.scss',
                 'resources/scss/dashboard/dashboard.scss',
+                'resources/scss/dashboard/service_vente.scss',
                 'resources/scss/dashboard/service_vente/hotel.scss',
                 'resources/scss/dashboard/service_vente/sejour.scss',
                 'resources/scss/dashboard/service_vente/addhotel.scss',
