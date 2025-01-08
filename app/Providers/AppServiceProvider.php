@@ -7,6 +7,10 @@ use App\Models\VineyardCategory;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades;
 use Illuminate\View\View;
+use Codewithkyrian\ChromaDB\ChromaDB;
+use ModelflowAi\Ollama\Ollama;
+use Codewithkyrian\ChromaDB\Client as ChromaDBClient;
+use ModelflowAi\Ollama\Client as OllamaClient;
 use Session;
 
 
@@ -26,6 +30,13 @@ class AppServiceProvider extends ServiceProvider
             ]);
         });
 
+        $this->app->singleton(ChromaDBClient::class, static function() {
+            return ChromaDB::client();
+        });
+
+        $this->app->singleton(OllamaClient::class, static function() {
+            return Ollama::client();
+        });
     }
 
     /**

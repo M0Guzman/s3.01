@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BotmanController;
 use App\Http\Controllers\FileController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
@@ -45,7 +46,7 @@ Route::middleware([RedirectIfUnverified::class])->group(function() {
 
 Route::get('/partner/{id}', [PartnerController::class, 'show_single'])->name('partner.show');
 
-
+Route::match(['get', 'post'], '/botman', [BotmanController::class, 'handle']);
 
 
 Route::middleware(['auth', FullyVerified::class])->group(function () {
