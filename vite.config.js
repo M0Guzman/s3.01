@@ -18,7 +18,7 @@ export default defineConfig({
                 'resources/js/address.js',
                 'resources/js/process_order.js',
                 'resources/js/carousel.js',
-
+                'resources/js/dashboard/sales/home.js',
                 'resources/scss/global/header.scss',
                 'resources/scss/global/help.scss',
                 'resources/scss/profile/facture.scss',

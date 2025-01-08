@@ -23,7 +23,8 @@ class Travel extends Model
         'title',
         'description',
         'price_per_person',
-        'days'
+        'days',
+        'state_travel'
     ];
 
     public function wine_road(): BelongsTo

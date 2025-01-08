@@ -85,6 +85,8 @@ Route::middleware(['auth', FullyVerified::class])->group(function () {
     Route::post('/dashboard/dirigeant/createTravel', [DirigeantController::class,'EnrengistrerTravel'])->name('dashboard.dirigeant.create.Travel');
     Route::get('/dashboard/dirigeant/createTravel', [DirigeantController::class,'createTravel'])->name('dashboard.dirigeant.create.Travel');
     Route::get('/dashboard/dirigeant/validateTravel', [DirigeantController::class,'validateTravel'])->name('dashboard.dirigeant.validate.Travel');
+    Route::post('/dashboard/dirigeant/actualiserTravel', [DirigeantController::class,'actualiserTravel'])->name('dashboard.dirigeant.actualiserTravel');
+
 });
 
 

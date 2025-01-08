@@ -46,6 +46,7 @@ return new class extends Migration
             $table->text('description')->nullable();
             $table->double('price_per_person')->nullable();
             $table->double('days');
+            $table->string('state_travel')->constraint();
         });
     }
 

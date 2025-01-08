@@ -8,7 +8,7 @@
             <ul>
             @if(hasRole("executive") || hasRole("marketing_department") || hasRole("sales_department_director") || hasRole("sales_department")){
                 <li>
-                    <a class="top_a" href="{{ route('dashboard.vente.afficher') }}">Dashboard</a>
+                    <a class="top_a" href="{{ route('dashboard.dirigeant.create.Travel') }}">Dashboard</a>
                 </li>
             }
             @endif

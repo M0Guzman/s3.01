@@ -19,6 +19,7 @@
           <th class="border border-gray-300 px-4 py-2 text-gray-700 font-semibold">Durée</th>
           <th class="border border-gray-300 px-4 py-2 text-gray-700 font-semibold">Pour qui</th>
           <th class="border border-gray-300 px-4 py-2 text-gray-700 font-semibold">Envie</th>
+          <th class="border border-gray-300 px-4 py-2 text-gray-700 font-semibold">Prix</th>
         </tr>
       </thead>
       <tbody>
@@ -71,12 +72,15 @@
               class="w-full px-2 py-1 border rounded focus:outline-none focus:ring focus:ring-blue-300">
               <option value="">Choisir</option>
 
-              @foreach ($travelCategory as $category)
+              @foreach ($travelCategory as $category) <!--enleve toute les envies-->
               
               <option value="{{ $category->id }}">{{ $category->name }}</option>
 
               @endforeach
             </select>
+          </td>
+          <td class="border border-gray-300 px-4 py-2">
+            <input name="prix" class="w-full px-2 py-1 border rounded focus:outline-none focus:ring focus:ring-blue-300"/>
           </td>
         </tr>
       </tbody>
