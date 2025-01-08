@@ -18,6 +18,8 @@ export default defineConfig({
                 'resources/js/address.js',
                 'resources/js/process_order.js',
                 'resources/js/carousel.js',
+                'resources/js/RechercheCustom.js',
+                'node_modules/select2/dist/js/select2.js',
 
                 'resources/scss/global/header.scss',
                 'resources/scss/global/help.scss',
@@ -32,12 +34,14 @@ export default defineConfig({
                 'resources/scss/dashboard/dashboard.scss',
                 'resources/scss/dashboard/service_vente/hotel.scss',
                 'resources/scss/dashboard/service_vente/sejour.scss',
-                'resources/scss/dashboard/service_vente/addhotel.scss',
+                'resources/scss/dashboard/service_vente/addpartenaire.scss',
                 'resources/scss/travel/partner.scss',
                 'resources/scss/profile/panier.scss',
                 'resources/scss/travel/modife.scss',
                 'resources/scss/profile/order_history.scss',
                 'resources/scss/travel/wine_road.scss',
+
+                'select2/dist/css/select2.min.css',
 
 
 
@@ -56,4 +60,9 @@ export default defineConfig({
             refresh: true,
         }),
     ],
+    resolve: {
+        alias: {
+            jquery: 'jquery/dist/jquery.js'
+        },
+    },
 });

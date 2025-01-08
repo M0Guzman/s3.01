@@ -1,5 +1,7 @@
 <x-dashboard-layout>
-    @vite(['resources/scss/dashboard/service_vente/hotel.scss'])
+    
+    @vite(['resources/scss/dashboard/service_vente/hotel.scss','resources/js/RechercheCustom.js'])
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 
     <div id="navigation">
         <a href="{{ route('dashboard.vente.hotel') }}">Hotels</a>
@@ -9,15 +11,25 @@
     
 
     <div id="container_infoHotel">
-        <input id="objectMSG" placeholder="objet du message"></input>
-        <input id="objectMSG" placeholder="Destinataire"></input>
-        <button onclick="clearText()">vider la zone de texte</button>
+        <select id="objectMSG" class="advancedSelect select2">
+            <option value="1">Informations complémentaire</option>
+            <option value="1">Ajouter un Hotel</option>
+            <option value="1">Custom</option>
+        </select>
+        <select id="Destinataire" class="advancedSelect select2">
+            <option value="thomas.betrix@etu.univ-smb.fr">THOMAS</option>
+            @foreach($hotels as $unhotel)
+                <option value="{{$unhotel->partner->email}}"> 
+                    {{$unhotel->partner->name}} {{$unhotel->partner->email}}
+                </option>
+            @endforeach
+        </select>
         <button id="send">Envoyer</button>
     </div>
 
     
     <div id="container_mail">
-        <textarea id="text" name="message" rows="20" cols="50">
+        <textarea id="text" name="message" rows="20" cols="20">
 Madame, Monsieur,
 
 Je me permets de vous contacter au nom de VinoTrip, une société spécialisée dans l'organisation de séjours et de voyages. 
@@ -51,7 +63,7 @@ contact@vinotrip.fr
             const zoneText = document.getElementById("text")
             zoneText.value = "";
         }
-    </script>
+</script>
 
 
 </x-dashboard-layout>

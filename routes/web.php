@@ -72,14 +72,14 @@ Route::middleware(['auth', FullyVerified::class])->group(function () {
 
 
 
-    Route::get('/dashboard/service_vente/hotel', function () {
-        return view('dashboard.service_vente.hotel');
-    })->name('dashboard.vente.hotel');
 
 
     Route::post('/dashboard/service_vente/ajouterhotel', [ServiceVenteController::class, 'createPartenaire'])->name('dashboard.vente.Partenaire.create');
     Route::get('/dashboard/service_vente/ajouterhotel', [ServiceVenteController::class, 'afficherPagePartenaire'])->name('dashboard.vente.Partenaire.afficher');
+    
     Route::get('/dashboard/service_vente/sejour', [ServiceVenteController::class, 'afficherPageSejour'])->name('dashboard.vente.Sejour.afficher');
+
+    Route::get('/dashboard/service_vente/hotel', [ServiceVenteController::class, 'afficherPageHotel'])->name('dashboard.vente.hotel');
 });
 
 Route::get('/file/{id}', [FileController::class, 'get_file'])->name('file');

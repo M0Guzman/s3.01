@@ -1,5 +1,5 @@
 <x-dashboard-layout>
-    @vite(['resources/scss/dashboard/service_vente/addhotel.scss'])
+    @vite(['resources/scss/dashboard/service_vente/addpartenaire.scss'])
 
     <div id="navigation">
         <a href="{{ route('dashboard.vente.hotel') }}">Hotels</a>
@@ -58,7 +58,7 @@
                 <input type="text" name="telephone" required/>
             </div>
             <div id="email" class="conteneur_name_input">
-                <label >Addresse mail</label>
+                <label>Addresse mail</label>
                 <input type="text" name="email" required/>
             </div>
         </div>
@@ -74,7 +74,7 @@
             </div>
             <div id="cdepartment" class="conteneur_name_input">
                 <label>Départment</label>
-                <select id="department" name="department" required>
+                <select id="department" class="select" name="department" required>
                     <option>Selectionner un département</option>
                     @foreach($departments as $unDepartment)
                         <option value="{{ $unDepartment->id }}">
@@ -117,7 +117,7 @@
 
             <div id="cookingtype" class="conteneur_name_input">
                 <label>Type de cuisine</label>
-                <select name="cookingType">
+                <select class="select" name="cookingType">
                     <option value="">Selectionner un type de Cuisine</option>
                     @foreach($cookingTypes as $onetype)
                         <option value="{{ $onetype->id }}">

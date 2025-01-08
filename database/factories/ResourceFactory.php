@@ -17,7 +17,7 @@ class ResourceFactory extends Factory
     public function definition(): array
     {
         return [
-            'filename' => fake()->dateTime()->format("Y-m-d-H-i-s") .  ".jpeg",
+            'filename' => fake()->dateTime()->format("d-m-Y-H-i-s") .  ".jpeg",
             'mimetype' => 'image/jpeg'
         ];
     }
