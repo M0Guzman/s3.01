@@ -107,11 +107,17 @@
     <form method="post" action="#" id="addhotel-form">
         @csrf
         
+
+        <select id="TitreSejour" class="advancedSelect select2">
+            @foreach($Travels as $oneTravel)
+                <option value="{{$oneTravel}}"> 
+                    {{$oneTravel->title}}
+                </option>
+            @endforeach
+        </select>
+
         <div class="conteneur_ligne">
-            <div id="name" class="conteneur_name_input">
-                <label>Titre du séjour</label>
-                <input type="text" required/>
-            </div>
+            
 
             <div id="prix" class="conteneur_name_input">
                 <label>Prix par personne</label>

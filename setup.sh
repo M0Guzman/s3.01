@@ -25,6 +25,7 @@ fi
 # Installer les dépendances Node.js via npm
 echo "Installation des dépendances Node.js..."
 npm install
+npm install jquery --save
 
 # Mettre à jour Composer (mises à jour des dépendances PHP)
 echo "Mise à jour de Composer..."
@@ -39,13 +40,9 @@ echo "Exécution de la migration de la base de données..."
 php artisan migrate:fresh
 
 # Exécuter les seeds pour initialiser la base de données
-echo "Exécution du seeder DatabaseSeeder..."
 php artisan db:seed --class DatabaseSeeder
-
-echo "Exécution du seeder DummySeeder..."
+php artisan db:seed --class PartnerSeeder
 php artisan db:seed --class DummySeeder
-
-echo "Exécution du seeder UserSeeder..."
 php artisan db:seed --class UserSeeder
 
 npm run build

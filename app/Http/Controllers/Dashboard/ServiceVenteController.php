@@ -20,9 +20,23 @@ use App\Models\Travel;
 use App\Models\CookingType;
 use App\Models\Address;
 use App\Models\User;
+use App\Models\Travel;
 
 class ServiceVenteController extends Controller
 {
+
+    public function afficherPageHotel(Request $request) {
+
+        $hotels = Hotel::all();
+
+
+        return view('dashboard.service_marketing.hotel', [
+            'hotels' => $hotels,
+        ]);
+
+    }
+
+
     public function afficherPagePartenaire(Request $request){
         $travel = Travel::get('*');
         $departments = Department::all();
@@ -50,10 +64,12 @@ class ServiceVenteController extends Controller
 
         $domains = WineCellar::all();
         $hebergements = Hotel::all();
-
+        $Travels = Travel::where("state_travel",'=',"Cree")->get();
+        
         return view('dashboard.service_vente.sejour', [
             'domains' => $domains,
             'hebergements' => $hebergements,
+            'Travels' => $Travels
         ]);
     }
 
@@ -99,7 +115,7 @@ class ServiceVenteController extends Controller
             'name' => $validated['name'], // $validated["name"] correspond au nom du partenaire
             'phone' => $validated['telephone'],
             'street' => $validated['rue'],
-            'city_id' => $city->id,
+            'city_id' => $city->id
         ]);
 
         $nouveauPartner = Partner::create([

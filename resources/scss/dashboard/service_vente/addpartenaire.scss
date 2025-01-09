@@ -52,40 +52,63 @@
     justify-content: space-evenly;
 }
 
-
-#prix_adulte, #prix_enfant {
-    width: 10%;
-}
-
-#horaire {
-    width: 15%;
-}
-
-#name {
-    width: 55%;
-}
-
-#categorie,#specialite {
-    width: 70%;
-}
-
-#nombre_chambre,#nombre_etoile {
-    width: 20%;
+.conteneur_ligne {
+    display: flex;
+    flex-wrap: wrap;  /* Permet aux éléments de se mettre sur plusieurs lignes si nécessaire */
+    gap: 20px;  /* Espace entre les éléments */
 }
 
 #cp {
-    margin-top: 25px;
-    width: 10%;
+    margin-top: 20px;
 }
 
-#rue,#cville,#cdepartment {
-    width: 27%;
+.select {
+    height: 50px;
+}
+
+#prix_adulte, #prix_enfant, #cp {
+    flex-grow: 1;  /* Ces éléments peuvent grandir, mais auront une largeur plus petite par défaut */
+    min-width: 20px;  /* Définit une largeur minimale pour ces éléments */
+}
+
+#horaire {
+    flex-grow: 2;  /* L'élément horaire peut grandir davantage que les autres */
+}
+
+#name {
+    flex-grow: 3;  /* L'élément nom du partenaire prendra plus de place */
+}
+
+#categorie, #specialite {
+    flex-grow: 2;  /* Ces éléments grandissent un peu moins que #name mais plus que les autres */
+}
+
+#nombre_chambre, #nombre_etoile {
+    flex-grow: 1;  /* Ces éléments ont la même priorité que #prix_adulte et #prix_enfant */
+}
+
+#rue, #cville, #cdepartment {
+    flex-grow: 2;  /* Ces champs auront également un flex-grow plus grand */
+    min-width: 150px;  /* Définit une largeur minimale pour chaque élément */
+}
+
+#villeautocomplete-list {
+    position: absolute;
+    top: 75px;
+    background-color: $background-white;
+    border: solid 1px $border;
+    padding: 10px;
+}
+
+#cville {
+    position: relative;
 }
 
 input {
     width: auto;
     height: 50px;
 }
+
 
 button {
     padding: 8px 16px;

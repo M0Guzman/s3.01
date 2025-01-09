@@ -3,9 +3,8 @@
 namespace Database\Factories;
 
 use App\Models\ActivityCategory;
-use App\Models\Partner;
-use App\Models\Travel;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use App\Models\Partner;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Model>
@@ -23,7 +22,7 @@ class ActivityFactory extends Factory
         $end = $start + fake()->numberBetween(1, 3);
 
         return [
-            'partner_id' => Partner::factory(),
+            'partner_id' => random_int(1,Partner::count()),
             'activity_category_id' => ActivityCategory::all()->random()->id,
             'name' => fake()->randomElement([
                 "Visite de vignoble", "Dégustation de vin", "Atelier d'oenologie", "Balade dans les vignes", "Cours de cuisine avec accord mets et vins",

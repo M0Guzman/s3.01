@@ -54,14 +54,14 @@
                         </x-slot>
                     </x-dropdown>
                 @else
-                    <li>
+                    <li class="li">
                         <a class="top_a" href="{{ route('login') }}">Se connecter</a>
                     </li>
-                    <li>
+                    <li class="li">
                         <a class="top_a" href="{{ route('register') }}">s'enregistrer</a>
                     </li>
                 @endif
-                <li>
+                <li class="li">
                     <a id="panier" href="{{ route('order.show') }}" id="header_panier">
                         <i class="fa-solid fa-cart-shopping" style="color: #ffffff;"></i>
                         <span class="white">Panier</span>
@@ -77,39 +77,39 @@
         <a href="/" id="img_container" class="container">
             <img id="img_VinoTrip" src="{{ Vite::asset('resources/images/logo.png') }}" alt="Logo VinoTrip">
         </a>
-        <nav class="navigation">
-            <ul>
-                <li><a href="{{ route('travels.show')}}">Tous nos séjours</a></li>
-                <li class="menu">
+        <nav class="navigation nav">
+            <ul class="ul">
+                <li class="li"><a href="{{ route('travels.show')}}">Tous nos séjours</a></li>
+                <li class="menu li">
                     <a href="#">Destinations</a>
-                    <ul id="subMenuDestination">
+                    <ul id="subMenuDestination" class="ul">
                     @foreach ($vinecats as $vinecat)
-                        <li>
+                        <li class="li">
                             <a class="subcategory" href="{{ route('travels.show', ['vignoble' => $vinecat->name]) }}">{{ substr($vinecat->name,0,50) }}</a>
                         </li>
                     @endforeach
                     </ul>
                 </li>
-                <li class="menu">
+                <li class="menu li">
                     <a href="#">Thématiques</a>
-                    <ul class="menu-lvl2">
-                        <li><a class="subcategory" href="https://www.vinotrip.com/fr/sejours-oenologiques-alsace">Alsace</a></li>
-                        <li><a class="subcategory" href="https://www.vinotrip.com/fr/sejours-oenologiques-bordeaux">Bordeaux</a></li>
-                        <li><a class="subcategory" href="https://www.vinotrip.com/fr/sejours-oenologiques-champagne">Champagne</a></li>
+                    <ul class="menu-lvl2 ul">
+                        <li class="li"><a class="subcategory" href="https://www.vinotrip.com/fr/sejours-oenologiques-alsace">Alsace</a></li>
+                        <li class="li"><a class="subcategory" href="https://www.vinotrip.com/fr/sejours-oenologiques-bordeaux">Bordeaux</a></li>
+                        <li class="li"><a class="subcategory" href="https://www.vinotrip.com/fr/sejours-oenologiques-champagne">Champagne</a></li>
                     </ul>
                 </li>
-                <li class="menu">
+                <li class="menu li">
                     <a href="#">Coffret cadeau</a>
 
                     <!-- <ul class="menu-lvl2">
                         <li><a class="subcategory" href="#">..</a></li>
                     </ul> -->
                 </li>
-                <li class="menu">
+                <li class="menu li">
                     <a href="#">Préparer votre séjour</a>
-                    <ul class="menu-lvl2">
-                        <li><a class="subcategory" href="{{ route('wine-road.index') }}">Route des vins</a></li>
-                        <li><a class="subcategory" href="https://www.vinotrip.com/fr/vignoble">Guide des vignobles</a></li>
+                    <ul class="menu-lvl2 ul">
+                        <li class="li"><a class="subcategory" href="{{ route('wine-road.index') }}">Route des vins</a></li>
+                        <li class="li"><a class="subcategory" href="https://www.vinotrip.com/fr/vignoble">Guide des vignobles</a></li>
                     </ul>
                 </li>
             </ul>
