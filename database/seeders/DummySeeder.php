@@ -25,17 +25,17 @@ class DummySeeder extends Seeder
      */
     public function run(): void
     {
-        Resource::factory(10)->create();
+        Resource::factory(100)->create();
         Address::factory(1000)->create();
-        Activity::factory(30)->create();
+        Activity::factory(200)->create();
         WineRoad::factory(20)->hasWineRoadSteps(3)->hasResources(1)->create();
-        Travel::factory(50)->hasResources(2)->create();
+        Travel::factory(100)->hasResources(2)->create();
         WineRoad::factory(1)->hasWineRoadSteps(3)->hasResources(1)->create();
-        User::factory(50)->hasAddresses(1)->create();
-        TravelStep::factory(200)->hasResources(2)->hasActivities(3)->create();
-        Order::factory(30)->hasBookings(2)->create();
+        User::factory(100)->hasAddresses(1)->create();
+        TravelStep::factory(count: 400)->hasResources(2)->hasActivities(3)->create();
+        Order::factory(100)->hasBookings(2)->create();
         Order::factory(1)->state(['created_at' => Carbon::now()])->hasBookings(25)->create();
-        Coupon::factory(10)->hasOrder(1)->create();
+        Coupon::factory(50)->hasOrder(1)->create();
         //Review::factory(100)->create();
 
         $titles = [
