@@ -21,6 +21,9 @@ export default defineConfig({
                 'resources/js/RechercheCustom.js',
                 'node_modules/select2/dist/js/select2.js',
                 'resources/js/dashboard/sales/home.js',
+                'resources/js/dashboard/sejour.js',
+                
+
                 'resources/scss/global/header.scss',
                 'resources/scss/global/help.scss',
                 'resources/scss/profile/facture.scss',

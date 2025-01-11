@@ -26,6 +26,7 @@ fi
 echo "Installation des dépendances Node.js..."
 npm install
 npm install jquery --save
+npm install chart.js
 
 # Mettre à jour Composer (mises à jour des dépendances PHP)
 echo "Mise à jour de Composer..."

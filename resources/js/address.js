@@ -123,7 +123,7 @@ function autocompleteRue(inp, ville ,cp, dept) {//, arr) {
     var currentFocus;
     /*execute a function when someone writes in the text field:*/
     inp.addEventListener("input", async function(e) {
-        var a, b, i, val = this.value;
+        var a, b, i, val = e.target.value; //this.value; 
         /*close any already open lists of autocompleted values*/
         closeAllLists();
         if (val.length < 3) { return false;}

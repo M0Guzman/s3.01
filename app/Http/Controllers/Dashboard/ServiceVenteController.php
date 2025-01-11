@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Dashboard;
 
 use App\Models\BookingOrder;
 use App\Models\Order;
+use App\Models\TravelHasResource;
+use App\Models\TravelStep;
 use App\Models\VineyardCategory;
 use Illuminate\Routing\Controller;
 use App\Models\ActivityType;
@@ -20,7 +22,8 @@ use App\Models\Travel;
 use App\Models\CookingType;
 use App\Models\Address;
 use App\Models\User;
-use App\Models\Travel;
+use App\Models\Resource;
+use Illuminate\Support\Facades\Storage;
 
 class ServiceVenteController extends Controller
 {
@@ -38,12 +41,11 @@ class ServiceVenteController extends Controller
 
 
     public function afficherPagePartenaire(Request $request){
-        $travel = Travel::get('*');
         $departments = Department::all();
         $typePartenaires = ActivityType::all();
         $cookingTypes = CookingType::all();
 
-        return view('dashboard.service_vente.addhotel', [
+        return view('dashboard.service_marketing.addpartenaire', [
             'user' => $request->user(),
             'departments' => $departments,
             'typePartenaires' => $typePartenaires,
@@ -66,11 +68,63 @@ class ServiceVenteController extends Controller
         $hebergements = Hotel::all();
         $Travels = Travel::where("state_travel",'=',"Cree")->get();
         
-        return view('dashboard.service_vente.sejour', [
+        return view('dashboard.service_marketing.sejour', [
             'domains' => $domains,
             'hebergements' => $hebergements,
             'Travels' => $Travels
         ]);
+    }
+
+    public function modifierSejour(Request $request){
+
+        
+
+        $validated = $request->validate([
+            'idTravel' => ['required','int','exists:travel,id'],
+            'description' => ['required','string'],
+            'housings' => ['required','array'],
+            'domains' => ['required','array'],
+            'steps' => ['required', 'array']
+        ]);
+
+        
+
+        
+        $travelToModifie = Travel::find($validated['idTravel'])->first();
+
+        if($travelToModifie != null) {
+            $travelToModifie -> description = $validated['description'];
+            $travelToModifie -> state_travel = 'A_valider';
+
+            foreach($validated['steps'] as $oneStep) {
+                TravelStep::create([
+                    'travel_id' => $travelToModifie->id,
+                    'title'=> $oneStep["title"],
+                    'description'=> $oneStep["description"]
+                ]);
+                
+
+                $image_parts = explode(";base64,", $oneStep['image']);
+                $image_type_aux = explode("image/", $image_parts[0]);
+                $image_type = $image_type_aux[1];
+                $image_base64 = base64_decode($image_parts[1]);
+                $Image = Resource::create([
+                    'filename' => substr($oneStep["title"], 0, 50),
+                    'mimetype' => "image/" . $image_type,
+                ]);
+                Storage::put($Image->id, $image_base64);
+                
+
+
+                TravelHasResource::create([
+                    'travel_id' => $travelToModifie->id,
+                    'resource_id' => $Image->id
+                ]);
+            }
+
+            return back()->with('success', 'oui');
+        }
+        
     }
 
     public function createPartenaire(Request $request) {
@@ -182,7 +236,7 @@ class ServiceVenteController extends Controller
         $sales_per_cities = Order::query()->join('booking_orders', 'booking_orders.order_id', '=', 'orders.id')->join('addresses', 'orders.address_id', '=', 'addresses.id')->join('cities', 'addresses.city_id', 'cities.id')->whereRaw('orders.created_at >= current_timestamp - interval \'30 day\'')->groupBy(['cities.id'])->selectRaw('cities.*, count(booking_orders.*)')->get();
 ;
 
-        return view('dashboard.service_vente.home', [
+        return view('dashboard.service_marketing.home', [
             'sales_count' => $sales_count,
             'sales_per_states' => $sales_per_states,
             'sales_per_vineyards' => $sales_per_vineyards,
