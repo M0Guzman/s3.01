@@ -55,15 +55,13 @@ class DirigeantController extends Controller
     public function validateTravel(Request $request)
     {
         $travel = Travel::get();
-        $activty = Activity::all();
+        
         $partner = Partner::all();
         //$vineyardCategory = $travel->vineyard_category_id;
         
 
         return view("dashboard.Dirigeant.validateTravel", [
             "travels" => $travel,
-            "activity" => $activty,
-            "partner" => $partner,
             "travel_step" => TravelStep::all(),
             "participant_categories" => ParticipantCategory::all(),
             "vineyardCategory" => VineyardCategory:: all(),
@@ -73,19 +71,53 @@ class DirigeantController extends Controller
 
     public function actualiserTravel(Request $request)
     {
-        $travels = Travel::where("state_travel","=","aValidee")->get();
+        foreach ($request->all() as $key => $value) {
 
-        $valider =  $request->input("valider");
-        $refuser = $request->input("refuser");
+            if (strpos($key, 'travel_') === 0) { 
 
-        if($valider == "true"){
+                $travelId = str_replace('travel_', '', $key); 
+                $status = $value; 
+    
+                $travel = Travel::find($travelId);
 
+                if ($status === 'valider') {
+                    Travel::where("id","=", $travel->id)->update(["state_travel" => "Valide"]);
+
+                } 
+                elseif ($status === 'refuser') 
+                {
+                    Travel::where("id","=", $travel->id)->delete();
+                }
+
+                $travel->save(); 
+            }
         }
-        elseif($refuser =="false"){
-            $travels = Travel::where('id','=', $travels->id);
-        }
+        return redirect()->route('dashboard.dirigeant.create.Travel')->with('success', 'Le sejour est valide ou non par le dirigeant.');
+    }/*
+        
+        $travels = Travel::where("state_travel","=","aValide")->get();
+        
+            foreach ($travels as $travel) {
+
+                $travel_id = $travel->id;
+                
+                $valider =  $request->input($travel_id);
+                $refuser = $request->input("refuser");
+                dd($valider, $refuser);
+
+                foreach ($travels as $travel) {
+                    
+                    if($valider == "true"){
+                        Travel::where("id","=", $travel->id)->update(["state_travel" => "Valide"]);
+                    }
+                    elseif($refuser =="false"){
+                        Travel::where("id","=", $travel->id)->delete();
+                    }
+                }
+            }
+        
 
         return redirect()->route('dashboard.dirigeant.create.Travel',["travels" => $travels])->with('success', 'Le sejour est valide ou non par le dirigeant.');
-    }
+    }*/
  
 }

@@ -52,16 +52,29 @@
         <td>{{ $travel->title }}</td>
         <td>{{ $travel->description }}</td>
         <td>{{ $vineyard_categoryName }}</td>
-        <td>{{ $travel->Departement }}</td>
+        <td>{{ $travel->department }}</td>
         <td>{{ $travel->days }} jours</td>
         <td>{{ $participant_categorieName }}</td>
         <td>{{ $travelCategoryName }}</td>
-        <td>{{ $travel->activity }}</td> 
-        <td>{{ $travel->partner }}</td>
+        <td>@php
+          foreach($travel->travel_steps as $travel_step)
+            foreach ($travel_step->activities as $activity)
+              $activity->name;
+        @endphp
+        </td> <!-- a tester   $travel->travel_steps->activities-->
+        <td>
+        @php
+          foreach($travel->travel_steps as $travel_step)
+            foreach ($travel_step->activities as $activity)
+              foreach($activity->partner as $partner)
+                $partner->name;
+                $partner->activity_type;
+        @endphp
+        <!-- $travel->travel_steps->activities->partner --></td> <!-- a tester -->
         <td>{{ $travel->state_travel }}</td>
         <td>{{ $travel->price_per_person }} €</td>
-        <td><input type="radio" name="{{$travel->id}}" value="valider" id="valider"></td>
-        <td><input type="radio" name="{{$travel->id}}" value="refuser" id="refuser"></td>
+        <td><input type="radio" name="travel_{{ $travel->id }}" id="valider_{{ $travel->id }}" value="valider"></td>
+        <td><input type="radio" name="travel_{{ $travel->id }}" id="refuser_{{ $travel->id }}" value="refuser"></td>
       </tr>
     @endif
   @endforeach

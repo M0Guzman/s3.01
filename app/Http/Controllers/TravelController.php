@@ -24,7 +24,9 @@ class TravelController extends Controller
             $request->has('duree') &&  $request->input('duree') != '' ||
             $request->has('participant_category') &&   $request->input('participant_category') != '' ||
             $request->has('travel_category') && $request->input('travel_category') != '') {
-            $wheres = [];
+            $wheres = [
+                ['state_travel', '=', 'Valide']
+            ];
 
             if($request->has('vineyard_category') && $request->input('vineyard_category') != '')
             {
