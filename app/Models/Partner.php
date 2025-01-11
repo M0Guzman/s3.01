@@ -14,7 +14,7 @@ class Partner extends Model
 
     public $timestamps = false;
 
-    protected $fillables = [
+    protected $fillable = [
         'activity_type_id',
         'address_id',
         'name',

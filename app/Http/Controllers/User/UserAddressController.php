@@ -6,8 +6,8 @@ use App\Models\City;
 use App\Models\Department;
 use App\Models\UserAddress;
 use App\Models\Address;
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Controller;
 
 class UserAddressController extends Controller
 {

@@ -16,8 +16,8 @@ return new class extends Migration
             $table->id();
             $table->string('name')->index();
             $table->string('zip');
-            $table->string('latitude');
-            $table->string('longitude');
+            $table->string('latitude')->nullable();
+            $table->string('longitude')->nullable();
             $table->foreignIdFor(Department::class)->constrained();
             $table->unique(['name','zip']);
         });

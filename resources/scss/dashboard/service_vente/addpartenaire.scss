@@ -59,6 +59,7 @@
 }
 
 #cp {
+    width: 80px;
     margin-top: 20px;
 }
 
@@ -66,7 +67,7 @@
     height: 50px;
 }
 
-#prix_adulte, #prix_enfant, #cp {
+#prix_adulte, #prix_enfant {
     flex-grow: 1;  /* Ces éléments peuvent grandir, mais auront une largeur plus petite par défaut */
     min-width: 20px;  /* Définit une largeur minimale pour ces éléments */
 }
@@ -100,7 +101,15 @@
     padding: 10px;
 }
 
-#cville {
+#rueautocomplete-list {
+    position: absolute;
+    top: 75px;
+    background-color: $background-white;
+    border: solid 1px $border;
+    padding: 10px;
+}
+
+#cville,#crue {
     position: relative;
 }
 

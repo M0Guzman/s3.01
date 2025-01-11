@@ -5,7 +5,7 @@
         <div id="sidebar">
             <!--<a href="">Administrateur</a>
             <a href="">Modérateur</a>-->
-            @if(hasRole("marketing_department"))<a href="">Service Marketing</a>@endif
+            @if(hasRole("marketing_department"))<a href="{{ route("dashboard.vente.Sejour.afficher") }}">Service Marketing</a>@endif
             @if(hasRole("sales_department") || hasRole("sales_department_director"))<a href="">Service Vente</a>@endif
             @if(hasRole("sales_department_director"))<a href="{{ route('dashboard.vente.homepage.show') }}">Directeur Service Vente</a>@endif
             @if(hasRole("executive"))<a href="{{route('dashboard.dirigeant.validate.Travel') }}">Dirigeant</a>@endif

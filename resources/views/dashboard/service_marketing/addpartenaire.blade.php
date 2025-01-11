@@ -66,7 +66,7 @@
         </div>
 
         <div class="conteneur_ligne">
-            <div id="rue" class="conteneur_name_input">
+            <div id="crue" class="conteneur_name_input">
                 <label>Rue</label>
                 <input id="rue" type="text" name="rue" required/>
             </div>

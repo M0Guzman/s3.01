@@ -10,6 +10,19 @@ class TravelHasResource extends Model
 {
     use HasFactory;
 
+    public $timestamps = false;
+
+    public $primaryKey = ['travel_id', 'resource_id'];
+
+    public $incrementing = false;
+
+    protected $fillable = [
+        'travel_id',
+        'resource_id'
+    ];
+
+
+
     public function travel(): BelongsTo
     {
         return $this->belongsTo(Travel::class);

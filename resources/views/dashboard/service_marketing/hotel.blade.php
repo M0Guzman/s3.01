@@ -11,11 +11,7 @@
 
 
     <div id="container_infoHotel">
-        <select id="objectMSG" class="advancedSelect select2">
-            <option value="1">Informations complémentaire</option>
-            <option value="1">Ajouter un Hotel</option>
-            <option value="1">Custom</option>
-        </select>
+        <input id="Objet" type="text" placeholder="Objet du Message"></input>
         <select id="Destinataire" class="advancedSelect select2">
             <option value="thomas.betrix@etu.univ-smb.fr">THOMAS</option>
             @foreach($hotels as $unhotel)

@@ -4,16 +4,15 @@
 
     <!-- Header Top -->
     <div id="header-top">
-        <nav>
-            <ul>
-            @if(hasRole("executive") || hasRole("marketing_department") || hasRole("sales_department_director") || hasRole("sales_department")){
-                <li>
+        <nav class="nav">
+            <ul class="ul">
+            @if(hasRole("executive") || hasRole("marketing_department") || hasRole("sales_department_director") || hasRole("sales_department"))
+                <li class="li">
                     <a class="top_a" href="{{ route('dashboard.dirigeant.create.Travel') }}">Dashboard</a>
                 </li>
-            }
             @endif
-                <li><a class="top_a" href="#">Contact</a></li>
-                <li><a class="top_a" href="#">07 66 69 71 18</a></li>
+                <li class="li"><a class="top_a" href="#">Contact</a></li>
+                <li class="li"><a class="top_a" href="#">07 66 69 71 18</a></li>
                 @if (Auth::check())
                     <!--<li>
                         <i class="fa-solid fa-child" style="color: #ffffff;"></i>

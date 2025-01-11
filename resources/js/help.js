@@ -30,10 +30,10 @@ function afficherTexte(){
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-    afficherTexte(elementId)
+    //afficherTexte(elementId)
 });
-document.getElementById("Connexion").addEventListener('change', () => afficherTexte());
-document.getElementById("Commande").addEventListener('change', () => afficherTexte());
-document.getElementById("Reservation").addEventListener('change', () => afficherTexte());
-document.getElementById("Support").addEventListener('change', () => afficherTexte());
-document.getElementById("Accessibilité").addEventListener('change', () => afficherTexte());
+//document.getElementById("Connexion").addEventListener('change', () => afficherTexte());
+//document.getElementById("Commande").addEventListener('change', () => afficherTexte());
+//document.getElementById("Reservation").addEventListener('change', () => afficherTexte());
+//document.getElementById("Support").addEventListener('change', () => afficherTexte());
+//document.getElementById("Accessibilité").addEventListener('change', () => afficherTexte());
