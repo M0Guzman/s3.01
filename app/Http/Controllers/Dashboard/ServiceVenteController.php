@@ -20,7 +20,6 @@ use App\Models\Travel;
 use App\Models\CookingType;
 use App\Models\Address;
 use App\Models\User;
-use App\Models\Travel;
 
 class ServiceVenteController extends Controller
 {

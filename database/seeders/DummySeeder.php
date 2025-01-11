@@ -12,6 +12,7 @@ use App\Models\TravelStep;
 use App\Models\User;
 use App\Models\WineRoad;
 use App\Models\Partner;
+use App\Models\Address;
 use Database\Factories\WineRoadFactory;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;

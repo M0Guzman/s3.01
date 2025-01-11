@@ -21,8 +21,7 @@
     <th class="border border-gray-300 px-4 py-2 text-gray-700 font-semibold">Pour qui</th>
     <th class="border border-gray-300 px-4 py-2 text-gray-700 font-semibold">Envie</th>
     <th class="border border-gray-300 px-4 py-2 text-gray-700 font-semibold">Activity</th>
-    <th class="border border-gray-300 px-4 py-2 text-gray-700 font-semibold">Partner</th>
-    <th class="border border-gray-300 px-4 py-2 text-gray-700 font-semibold">Etat</th>    
+    <th class="border border-gray-300 px-4 py-2 text-gray-700 font-semibold">Partner</th> 
     <th class="border border-gray-300 px-4 py-2 text-gray-700 font-semibold">Prix</th>
     <th class="border border-gray-300 px-4 py-2 text-gray-700 font-semibold">Valide</th>
     <th class="border border-gray-300 px-4 py-2 text-gray-700 font-semibold">Refuse</th>
@@ -56,7 +55,8 @@
         <td>{{ $travel->days }} jours</td>
         <td>{{ $participant_categorieName }}</td>
         <td>{{ $travelCategoryName }}</td>
-        <td>@php
+        <td>
+        @php
           foreach($travel->travel_steps as $travel_step)
             foreach ($travel_step->activities as $activity)
               $activity->name;
@@ -71,7 +71,7 @@
                 $partner->activity_type;
         @endphp
         <!-- $travel->travel_steps->activities->partner --></td> <!-- a tester -->
-        <td>{{ $travel->state_travel }}</td>
+      
         <td>{{ $travel->price_per_person }} €</td>
         <td><input type="radio" name="travel_{{ $travel->id }}" id="valider_{{ $travel->id }}" value="valider"></td>
         <td><input type="radio" name="travel_{{ $travel->id }}" id="refuser_{{ $travel->id }}" value="refuser"></td>
