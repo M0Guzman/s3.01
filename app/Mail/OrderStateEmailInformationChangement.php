@@ -6,14 +6,14 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
-class OrderStateEmailEnAttente extends Mailable
+class OrderStateEmailInformationChangement extends Mailable
 {
     use Queueable, SerializesModels;
 
     public $order;
 
     /**
-     * Créer une nouvelle instance de la classe OrderStateEmailType1.
+     * Créer une nouvelle instance de la classe OrderStateEmailInformationChangement.
      *
      * @param Order $order
      */
@@ -29,7 +29,7 @@ class OrderStateEmailEnAttente extends Mailable
      */
     public function build()
     {
-        return $this->subject('Notification de commande - En Attente')
-                    ->view('emails.order_state_en_attente');  // Vue spécifique pour En Attente
+        return $this->subject('Notification de commande - information changement')
+                    ->view('mails.order_state_email_information_changement');  // Vue spécifique pour information changement
     }
 }

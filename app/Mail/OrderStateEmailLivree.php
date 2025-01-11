@@ -30,6 +30,6 @@ class OrderStateEmailLivree extends Mailable
     public function build()
     {
         return $this->subject('Notification de commande - Livree')
-                    ->view('emails.order_state_livree');  // Vue spécifique pour Livree
+                    ->view('mails.order_state_livree');  // Vue spécifique pour Livree
     }
 }
