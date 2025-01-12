@@ -29,6 +29,12 @@ class DirigeantController extends Controller
         ]);
     }
 
+    public function affiche(Request $request){
+        $travel = Travel::all();
+
+        return view("dashboard.dirigeant");
+    }
+
     public function EnrengistrerTravel(Request $request){
        
         
