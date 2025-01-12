@@ -41,7 +41,15 @@ class ChromaSeeder extends Seeder
     }
 
     public function addToCollection(CollectionResource $collection, string $question, string $answer) {
-        $embeddings = Ollama::model('mxbai-embed-large')->embeddings($question);
+        $embeddings = Ollama::model('snowflake-arctic-embed2')->embeddings($question);
+        $collection->add(
+            ids: [Str::random()],
+            documents: ['Q: ' . $question . '\nA: ' . $answer],
+            metadatas: [["question" => $question, "answer" => $answer]],
+            embeddings: [$embeddings['embedding']]
+        );
+
+        $embeddings = Ollama::model('snowflake-arctic-embed2')->embeddings($answer);
         $collection->add(
             ids: [Str::random()],
             documents: ['Q: ' . $question . '\nA: ' . $answer],
