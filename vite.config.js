@@ -19,11 +19,8 @@ export default defineConfig({
                 'resources/js/process_order.js',
                 'resources/js/carousel.js',
                 'resources/js/RechercheCustom.js',
-                'node_modules/select2/dist/js/select2.js',
                 'resources/js/dashboard/sales/home.js',
                 'resources/js/dashboard/sejour.js',
-                
-
                 'resources/scss/global/header.scss',
                 'resources/scss/global/help.scss',
                 'resources/scss/profile/facture.scss',
@@ -35,6 +32,7 @@ export default defineConfig({
                 'resources/scss/homePage/destination.scss',
                 'resources/scss/homePage/video.scss',
                 'resources/scss/dashboard/dashboard.scss',
+                'resources/scss/dashboard/service_vente.scss',
                 'resources/scss/dashboard/service_vente/hotel.scss',
                 'resources/scss/dashboard/service_vente/sejour.scss',
                 'resources/scss/dashboard/service_vente/addpartenaire.scss',
@@ -45,8 +43,6 @@ export default defineConfig({
                 'resources/scss/travel/wine_road.scss',
                 'resources/scss/dashboard/dirigeant/dirigeant.scss',
                 'select2/dist/css/select2.min.css',
-
-
 
                 'resources/images/paypal.svg',
                 'resources/images/stripe.svg',
