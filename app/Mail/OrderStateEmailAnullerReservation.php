@@ -10,16 +10,14 @@ class OrderStateEmailAnullerReservation extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public $activity;
 
     /**
      * Créer une nouvelle instance de la classe OrderStateEmailAnullerReservation.
      *
      * @param Activity $activity
      */
-    public function __construct(Activity $activity)
+    public function __construct(public Activity $activity)
     {
-        $this->activity = $activity;
     }
 
     /**

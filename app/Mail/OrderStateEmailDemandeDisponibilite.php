@@ -10,16 +10,14 @@ class OrderStateEmailDemandeDisponibilite extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public $activity;
 
     /**
      * Créer une nouvelle instance de la classe OrderStateEmailDemandeDisponibilite.
      *
      * @param Activity $activity
      */
-    public function __construct(Activity $activity)
+    public function __construct(public Activity $activity)
     {
-        $this->activity = $activity;
     }
 
     /**

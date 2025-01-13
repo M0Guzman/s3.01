@@ -10,16 +10,14 @@ class OrderStateChanged extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public $order;
 
     /**
      * Créer une nouvelle instance de la classe OrderStateChanged.
      *
      * @param Order $order
      */
-    public function __construct(Order $order)
+    public function __construct(public Order $order)
     {
-        $this->order = $order;
     }
 
     /**
