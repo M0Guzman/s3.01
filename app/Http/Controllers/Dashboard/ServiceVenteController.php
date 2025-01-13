@@ -7,6 +7,7 @@ use App\Models\Order;
 use App\Models\TravelHasResource;
 use App\Models\TravelStep;
 use App\Models\VineyardCategory;
+use DB;
 use Illuminate\Routing\Controller;
 use App\Models\ActivityType;
 use App\Models\OrderState;
@@ -89,12 +90,10 @@ class ServiceVenteController extends Controller
 
         
 
-        
-        $travelToModifie = Travel::find($validated['idTravel'])->first();
+        $travelToModifie = Travel::where('id', $validated['idTravel'])->first();
 
         if($travelToModifie != null) {
-            $travelToModifie -> description = $validated['description'];
-            $travelToModifie -> state_travel = 'A_valider';
+           
 
             foreach($validated['steps'] as $oneStep) {
                 TravelStep::create([
@@ -121,6 +120,12 @@ class ServiceVenteController extends Controller
                     'resource_id' => $Image->id
                 ]);
             }
+
+            $travelToModifie->description = $validated['description'];
+            $travelToModifie->state_travel = 'A_valider';
+            $travelToModifie->save();
+
+            
 
             return back()->with('success', 'oui');
         }
