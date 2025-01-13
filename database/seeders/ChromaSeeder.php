@@ -23,6 +23,7 @@ class ChromaSeeder extends Seeder
         }
 
         $collection = ChromaDB::createCollection('chatbot');
+        $this->addToCollection($collection, "Bonjour", "Bonjour, Que pouvont nous faire poure vous ?");
         $this->addToCollection($collection, "Que faire si je ne parviens pas à me connecter à mon compte ?", "Si vous ne parvenez pas à vous connecter, vérifiez d'abord vos identifiants et votre mot de passe. Si le problème persiste, vous pouvez utiliser la fonction de réinitialisation du mot de passe ou contacter le support.");
         $this->addToCollection($collection, "Que faire si mon mot de passe ne fonctionne pas ?", "Si votre mot de passe ne fonctionne pas, vous pouvez utiliser l'option 'Mot de passe oublié' pour le réinitialiser par email.");
         $this->addToCollection($collection, "Mon adresse e-mail est obsolète, que faire ?", "Vous pouvez mettre à jour votre adresse e-mail dans les paramètres de votre compte ou contacter le support client pour effectuer la modification.");
@@ -81,7 +82,7 @@ class ChromaSeeder extends Seeder
 
         $this->addToCollection($collection, "Quelle est le meilleur jeu ?", "Worms");
         $this->addToCollection($collection, "Quelle est le meilleur prof ?", "Colin");
-        $this->addToCollection($collection, "everyone", "Faut pas faire ça ! 'Mme Emmanuelle Graziano'");
+        $this->addToCollection($collection, "here", "Faut pas faire ça ! 'Mme Emmanuelle Graziano' https://fautpasfaireca.fr");
     }
 
     public function addToCollection(CollectionResource $collection, string $question, string $answer) {

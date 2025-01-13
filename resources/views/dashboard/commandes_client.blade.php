@@ -25,9 +25,7 @@
         @foreach($orders->get() as $order)
           @if ($order->user_id != null)
             <div class="cadre">
-              @if($order->coupon_id != null)
-                <h1 class="price">{{ $order->coupon->value }} € </h1>
-              @endif
+              <h1 class="price">{{$order->get_price()}} € </h1>
               <div class="container_info_comande">
                 <h1 class="title">
                   Commande N° {{$order->id}}
@@ -90,9 +88,9 @@
                         </select>
                       @elseif ($order->order_state->name == 'En cours de livraison')
                         <p>L'utilisateur a finaliser le payement de la commande</p>
-                        <input type="checkbox" name="comande_finaliser" >
+                        <input type="checkbox" name="commande_finaliser" >
                         <p>L'utilisateur a annuler la commande</p>
-                        <input type="checkbox" name="comande_annuler" >
+                        <input type="checkbox" name="commande_annuler" >
                       @endif
                       <input type="hidden" value="{{$order->id}}" name="order_id"/>
                     <button type="submit" class="discover_Oder_Button">Envoyer les mails et changer l'état</button>
