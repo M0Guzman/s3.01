@@ -8,14 +8,21 @@ use App\Models\Order;
 use App\Models\Resource;
 use App\Models\Review;
 use App\Models\Travel;
+use App\Models\TravelHasResource;
 use App\Models\TravelStep;
+use App\Models\TravelStepActivity;
 use App\Models\User;
 use App\Models\WineRoad;
 use App\Models\Partner;
+use App\Models\Address;
+use App\Models\TravelStepHasResource;
 use Database\Factories\WineRoadFactory;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Illuminate\Database\Eloquent\Factories\Sequence;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Carbon;
+use App\Models\WineRoadHasResource;
+use Storage;
 
 class DummySeeder extends Seeder
 {
@@ -24,17 +31,83 @@ class DummySeeder extends Seeder
      */
     public function run(): void
     {
-        Resource::factory(10)->create();
-        Activity::factory(30)->create();
-        WineRoad::factory(20)->hasWineRoadSteps(3)->hasResources(1)->create();
-        Travel::factory(50)->hasResources(2)->create();
-        WineRoad::factory(1)->hasWineRoadSteps(3)->hasResources(1)->create();
+
+
+        Activity::factory(100)->create();
+
+
+        
+        $wineRoads = WineRoad::factory(20)->hasWineRoadSteps(3)->create();
+
+        foreach ($wineRoads as $index => $wineRoad) {
+
+            WineRoadHasResource::create([
+                'wine_road_id' => $wineRoad->id,
+                'resource_id' => ($index % 8) + 1
+            ]);
+        }
+
+
+        $travels = Travel::factory(100)->create();    
+        
+
+        foreach ($travels as $index => $travel) {
+            // Associer la ressource au voyage
+            TravelHasResource::create([
+                'travel_id' => $travel->id,
+                'resource_id' => ($index % 8) + 1
+            ]);
+
+            $travelSteps = TravelStep::factory(3)->state(['travel_id' => $travel->id])->create();
+
+            foreach ($travelSteps as $index => $travelStep) {
+                // Associer la ressource au voyage
+                TravelStepHasResource::create([
+                    'travel_step_id' => $travelStep->id,
+                    'resource_id' => rand(9,14)
+                ]);
+
+                $activities = Activity::factory(4)->state(
+                    new Sequence(
+                    ['partner_id' => Partner::where('activity_type_id','=',1)->get()->random()->id],
+                    ['partner_id' => Partner::where('activity_type_id','=',2)->get()->random()->id],
+                    ['partner_id' => Partner::where('activity_type_id','=',3)->get()->random()->id],
+                    ['partner_id' => Partner::where('activity_type_id','=',4)->get()->random()->id]
+                ))->create();
+
+                foreach($activities as $activity) {
+                    TravelStepActivity::create([
+                        'travel_step_id' => $travelStep->id,
+                        'activity_id' => $activity->id,
+                    ]);
+                }
+            }
+
+
+        }
+
+
         User::factory(50)->hasAddresses(1)->create();
-        TravelStep::factory(200)->hasResources(2)->hasActivities(3)->create();
-        Order::factory(30)->hasBookings(2)->create();
+
+        /*
+
+        $travelSteps = TravelStep::factory(count: 100)->hasActivities(3)->create();
+
+        
+        foreach ($travelSteps as $index => $travelStep) {
+            // Associer la ressource au voyage
+            TravelStepHasResource::create([
+                'travel_step_id' => $travelStep->id,
+                'resource_id' => rand(9,14)
+            ]);
+        }
+        */
+        
+
+        Order::factory(100)->hasBookings(2)->create();
         Order::factory(1)->state(['created_at' => Carbon::now()])->hasBookings(25)->create();
-        Coupon::factory(10)->hasOrder(1)->create();
-        //Review::factory(100)->create();
+        Coupon::factory(50)->hasOrder(1)->create();
+
 
         $titles = [
             'Excellent séjour dans le Bordelais',
@@ -68,7 +141,7 @@ class DummySeeder extends Seeder
             'J ai vraiment apprécié la visite du domaine viticole et les dégustations de leurs meilleurs crus.'
         ];
 
-        for($i = 0; $i < 400; $i++) {
+        for($i = 0; $i < 200; $i++) {
             $index = fake()->numberBetween(0, count($titles)) % count($titles);
             Review::create([
                 'travel_id' => Travel::all()->random()->id,
@@ -78,6 +151,7 @@ class DummySeeder extends Seeder
                 'description' => $descriptions[$index]
             ]);
         }
+
 
 
     }

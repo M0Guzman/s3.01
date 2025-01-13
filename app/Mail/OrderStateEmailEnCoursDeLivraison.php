@@ -30,6 +30,6 @@ class OrderStateEmailEnCoursDeLivraison extends Mailable
     public function build()
     {
         return $this->subject('Notification de commande - En cours de livraison')
-                    ->view('emails.order_state_en_cours_de_livraison');  // Vue spécifique pour En cours de livraison
+                    ->view('mails.order_state_en_cours_de_livraison');  // Vue spécifique pour En cours de livraison
     }
 }

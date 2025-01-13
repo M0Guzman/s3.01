@@ -10,9 +10,18 @@ class TravelStepHasResource extends Model
 {
     use HasFactory;
 
-    public function travel(): BelongsTo
+    public $timestamps = false;
+    public $primaryKey = ['travel_step_id', 'resource_id'];
+    public $incrementing = false;
+
+    protected $fillable = [
+        'travel_step_id',
+        'resource_id'
+    ];
+
+    public function travel_step(): BelongsTo
     {
-        return $this->belongsTo(Travel::class);
+        return $this->belongsTo(TravelStep::class);
     }
 
     public function resource(): BelongsTo

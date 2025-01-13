@@ -80,12 +80,15 @@ Route::middleware(['auth', FullyVerified::class])->group(function () {
     Route::get('/dashboard/service_vente/ajouterhotel', [ServiceVenteController::class, 'afficherPagePartenaire'])->name('dashboard.vente.Partenaire.afficher');
     
     Route::get('/dashboard/service_vente/sejour', [ServiceVenteController::class, 'afficherPageSejour'])->name('dashboard.vente.Sejour.afficher');
+    Route::post('/dashboard/service_vente/sejour', [ServiceVenteController::class, 'modifierSejour'])->name('dashboard.vente.Sejour.modifier');
+
     Route::get('/dashboard/service_vente', [ServiceVenteController::class, 'showHomepage'])->name('dashboard.vente.homepage.show');
+    
     Route::post('/dashboard/dirigeant/createTravel', [DirigeantController::class,'EnrengistrerTravel'])->name('dashboard.dirigeant.create.Travel');
     Route::get('/dashboard/dirigeant/createTravel', [DirigeantController::class,'createTravel'])->name('dashboard.dirigeant.create.Travel');
     Route::get('/dashboard/dirigeant/validateTravel', [DirigeantController::class,'validateTravel'])->name('dashboard.dirigeant.validate.Travel');
     Route::post('/dashboard/dirigeant/actualiserTravel', [DirigeantController::class,'actualiserTravel'])->name('dashboard.dirigeant.actualiserTravel');
-
+    Route::get('/dashboard/affiche',[DirigeantController::class, 'affiche'])->name('dashboard.affiche');
 
     Route::get('/dashboard/service_vente/hotel', [ServiceVenteController::class, 'afficherPageHotel'])->name('dashboard.vente.hotel');
 });

@@ -26,6 +26,7 @@ fi
 echo "Installation des dépendances Node.js..."
 npm install
 npm install jquery --save
+npm install chart.js
 
 # Mettre à jour Composer (mises à jour des dépendances PHP)
 echo "Mise à jour de Composer..."
@@ -39,10 +40,15 @@ php artisan key:generate
 echo "Exécution de la migration de la base de données..."
 php artisan migrate:fresh
 
+echo "Environ 2min"
+
 # Exécuter les seeds pour initialiser la base de données
 php artisan db:seed --class DatabaseSeeder
+echo "12%"
 php artisan db:seed --class PartnerSeeder
+echo "50%"
 php artisan db:seed --class DummySeeder
+echo "65%"
 php artisan db:seed --class UserSeeder
 
 npm run build
