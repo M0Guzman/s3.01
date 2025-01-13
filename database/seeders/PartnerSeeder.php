@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\PartnerHasResource;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models\Hotel;
@@ -10,6 +11,7 @@ use App\Models\Partner;
 use App\Models\Restaurant;
 use App\Models\WineCellar;
 use App\Models\Address;
+use App\Models\Resource;
 
 class PartnerSeeder extends Seeder
 {
@@ -18,6 +20,15 @@ class PartnerSeeder extends Seeder
      */
     public function run(): void
     {
+
+        for ($i=1; $i < 24;$i++){
+            Resource::create([
+                'filename' => $i . '.jpg',
+                'mimetype' => 'image/jpg',
+                'permission' => 'user.default'
+            ]);
+        }
+
         $partenaires = [
             [
                 [
@@ -330,7 +341,7 @@ class PartnerSeeder extends Seeder
         ];
 
 
-        Address::factory(1000)->create();
+        Address::factory(100)->create();
         for ($i = 0; $i < count($partenaires); $i++) {
             foreach ($partenaires[$i] as $unPartenaire) {
                 $nouveauPartner = Partner::create([
@@ -341,27 +352,44 @@ class PartnerSeeder extends Seeder
                     'description' => $unPartenaire['description'],
                     'phone' => fake()->phoneNumber()
                 ]);
-                info('test');
 
                 switch ($i) {
                     case 0:
                         WineCellar::factory(1)->state(['partner_id' => $nouveauPartner->id])->create();
+                        PartnerHasResource::create([
+                            'partner_id' => $nouveauPartner->id,
+                            'resource_id' => rand(19,20)
+                        ]);
                         break;
                         
                         
                     case 1:
                         Restaurant::factory(1)->state(['partner_id' => $nouveauPartner->id])->create();
+                        PartnerHasResource::create([
+                            'partner_id' => $nouveauPartner->id,
+                            'resource_id' => rand(17,18)
+                        ]);
                         break;
                         
                     case 2:
                         Hotel::factory(1)->state(['partner_id' => $nouveauPartner->id])->create();
+                        PartnerHasResource::create([
+                            'partner_id' => $nouveauPartner->id,
+                            'resource_id' => rand(15,16)
+                        ]);
                         break;
                         
                     case 3:
                         OtherPartner::factory(1)->state(['partner_id' => $nouveauPartner->id])->create();
+                        PartnerHasResource::create([
+                            'partner_id' => $nouveauPartner->id,
+                            'resource_id' => rand(9,14)
+                        ]);
                         break;
                 }
             }
         }
+
+
     }
 }

@@ -10,16 +10,14 @@ class OrderStateEmailLivree extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public $order;
 
     /**
      * Créer une nouvelle instance de la classe OrderStateEmailLivree.
      *
      * @param Order $order
      */
-    public function __construct(Order $order)
+    public function __construct(public Order $order)
     {
-        $this->order = $order;
     }
 
     /**
@@ -30,6 +28,6 @@ class OrderStateEmailLivree extends Mailable
     public function build()
     {
         return $this->subject('Notification de commande - Livree')
-                    ->view('emails.order_state_livree');  // Vue spécifique pour Livree
+                    ->view('mails.order_state_livree');  // Vue spécifique pour Livree
     }
 }

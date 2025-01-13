@@ -5,9 +5,6 @@
         </h2>
     </x-slot>
     <!--Permettre que si tu es dirigeant -->
-    
-<!--
-@if($user->id == 1){
 
 
     <div class="py-12">
@@ -43,6 +40,4 @@
             </div>
         </div>
     </div>
-}
-@endif-->
 </x-app-layout>

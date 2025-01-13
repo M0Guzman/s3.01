@@ -11,7 +11,7 @@
                 </li>
             @if(hasRole("executive") || hasRole("marketing_department") || hasRole("sales_department_director") || hasRole("sales_department"))
                 <li class="li">
-                    <a class="top_a" href="{{ route('dashboard.dirigeant.create.Travel') }}">Dashboard</a>
+                    <a class="top_a" href="{{ route('dashboard.affiche') }}">Dashboard</a>
                 </li>
             @endif
                 <li class="li"><a class="top_a" href="#">Contact</a></li>

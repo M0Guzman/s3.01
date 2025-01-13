@@ -5,7 +5,7 @@
 
             <section id="container_left">
 
-                <img id="image_travel" src="{{ $travel->resources[0]->get_url() }}">
+                <img id="image_travel" src="{{  $travel->resources[0]->get_url() }}">
 
                 <div id="container_button_left">
                     <a id="button-programme" class="button-programme" href="#Programme" name='action'>Programme du séjour</a>
@@ -18,7 +18,7 @@
                     @foreach ($travel->travel_steps as $travelStep)
                         <div class="container_etape">
                             <div class="image-section">
-                                <img class="img-etape" src="{{ $travelStep->resources[0]->get_url() }}">
+                                <img class="img-etape" src="{{  $travelStep->resources[0]->get_url() }}">
                             </div>
                             <div class="info-section">
                                 <h3 class="titre-etape">{{ $travelStep->title }}</h3>
@@ -33,19 +33,19 @@
                 <div id="Hebergement">
                     <h2 class="titre_info">hébergements</h2>
                     @foreach ($travel->travel_steps as $travelStep)
-                        @foreach ($travelStep->activities as $activitiy)
-                            @if( $activitiy->partner->Hotel != null)
+                        @foreach ($travelStep->activities as $activity)
+                            @if( $activity->partner->hotel != null)
                                 <div class="container_etape">
                                     <div class="image-section">
-                                        <img class="img-etape" src="{{ asset('storage/' . $travelStep->resources[0]->path) }}">
+                                        <img class="img-etape" src="{{  $activity->partner->resources[0]->get_url() }}">
                                     </div>
                                     <div class="info-section">
-                                        <h3 class="titre-etape">{{ $activitiy->name }}</h3>
+                                        <h3 class="titre-etape">{{ $activity->partner->name }}</h3>
                                         <p>
-                                            {{ $activitiy->description }}
+                                            {{ $activity->partner->description }}
                                         </p>
                                         <br>
-                                        <a href="{{ route('partner.show', ['id' => $activitiy->partner->id]) }}">En savoir plus sur notre partenaire {{$activitiy->partner->name}}</a>
+                                        <a href="https://paris-clignancourt-montmartre.kyriad.com/fr-fr/?utm_source=bing&utm_medium=cpc&utm_campaign=ASUC%20-%20KY%20FR%20T1%20-%20Bing%20-%20SN%20-%20Gen%20%2B%20Geo%20IMC%20-%20FR&utm_content=KY%20FR%20T1%20-%20Bing%20-%20Gen%20%2B%20Paris%20FR&utm_"  target="_blank">En savoir plus sur notre partenaire {{$activity->partner->name}}</a>
                                     </div>
                                 </div>
                             @endif
@@ -57,18 +57,18 @@
                     <h2 class="titre_info">Chateau et Domaine</h2>
                     @foreach ($travel->travel_steps as $travelStep)
                         @foreach ($travelStep->activities as $activity)
-                            @if( $activity->partner->winecellar != null || $activity->partner->restaurant != null)
+                            @if( $activity->partner->wine_cellar != null)
                                 <div class="container_etape">
                                     <div class="image-section">
-                                        <img class="img-etape" src="{{ asset('storage/' . $travelStep->resources[0]->path) }}">
+                                        <img class="img-etape" src="{{  $activity->partner->resources[0]->get_url() }}">
                                     </div>
                                     <div class="info-section">
-                                        <h3 class="titre-etape">{{ $activity->name }}</h3>
+                                        <h3 class="titre-etape">{{ $activity->partner->name }}</h3>
                                         <p>
-                                            {{ $activity->description }}
+                                            {{ $activity->partner->description }}
                                         </p>
                                         <br>
-                                        <a href="{{ route('partner.show', ['id' => $activitiy->partner->id]) }}">En savoir plus sur notre partenaire {{$activitiy->partner->name}}</a>
+                                        <a href="https://www.lescavesduvieuxpressoir.com/" target="_blank">En savoir plus sur notre partenaire {{$activity->partner->name}}</a>
                                     </div>
                                 </div>
                             @endif
