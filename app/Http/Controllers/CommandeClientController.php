@@ -8,6 +8,8 @@ use Illuminate\Routing\Controller;
 use App\Models\Order;
 use App\Models\OrderState;
 use App\Models\Hotel;
+use App\Models\Coupon;
+use Str;
 use App\Mail\OrderStateChanged; // Crée une classe Mailable pour l'email
 use App\Mail\OrderStateEmailEnCoursDeLivraison; 
 use App\Mail\OrderStateEmailLivree;
@@ -43,7 +45,7 @@ class CommandeClientController extends Controller
             'order_state' => $request->input('order_state'),
             'order_states' => OrderState::all(),
             'hotels' => Hotel::all(),
-            'orders' => $orders->limit(10)
+            'orders' => $orders->limit(10)//->offset(page * 10)->get()
         ]);
     }
 
@@ -66,20 +68,7 @@ class CommandeClientController extends Controller
             return redirect()->route('commande_client.index')->with('error', 'Commande non trouvée');
         }
 
-        $validated = $request->validate([
-            'hotel_id' => ['required','int',"exists:hotels,partner_id"]
-        ]);
-        // Récupère la'hotel par son ID
-        $hotel = Hotel::find($validated['hotel_id']);
-
-        // Change l'état de la commande si un nouvel état est sélectionné
-        if ($request->has('order_state') && $request->input('order_state') != '') {
-            $orderstate = OrderState::where('name', $request->input('order_state'))->first();
-            if ($orderstate) {
-                $order->order_state_id = $orderstate->id;
-                $order->save();  // Enregistre l'état mis à jour dans la base de données
-            }
-        }
+        
 
         // Envoie l'email en fonction de l'état de la commande
         if ($order->order_state->name == 'En attente') {
@@ -96,6 +85,12 @@ class CommandeClientController extends Controller
                                 foreach ($travelStep->activities as $activity){
                                     if( $activity->partner->hotel != null) {
                                         Mail::to($activity->partner->email)->send(new OrderStateEmailDemandeDisponibilite($activity));  // Email pour "En attente"
+                                        //valier hotel
+                                        $validated = $request->validate([
+                                            'hotel_id' => ['int',"exists:hotels,partner_id"]
+                                        ]);
+                                        // Récupère la'hotel par son ID
+                                        $hotel = Hotel::find($validated['hotel_id']);
                                         $activity->partner->hotel_id = $hotel;
                                         $order->save();
                                     }
@@ -117,9 +112,8 @@ class CommandeClientController extends Controller
                     }
                 }
             }
-        }
-        elseif ($order->order_state->name == 'En cours de livraison') {
-            if ($request->input("comande_finaliser")){
+        } elseif ($order->order_state->name == 'En cours de livraison') {
+            if ($request->input("commande_finaliser")){
                 foreach ($order->bookings as $booking_order){
                     if ($booking_order->travel_id != null) {
                         foreach ($booking_order->travel->travel_steps as $travelStep) {
@@ -134,7 +128,7 @@ class CommandeClientController extends Controller
                 Mail::to($order->user->email)->send(new OrderStateEmailLivree($order));  // Email pour user "Livraison"
                 $order->order_state_id = 3;
                 $order->save();
-            } elseif ($request->input("comande_annuler")) {
+            } elseif ($request->input("commande_annuler")) {
                 foreach ($order->bookings as $booking_order){
                     if ($booking_order->travel_id != null) {
                         foreach ($booking_order->travel->travel_steps as $travelStep) {
@@ -146,8 +140,16 @@ class CommandeClientController extends Controller
                         }
                     }
                 }
+                $prix = $order->get_price();
+                $coupon = Coupon::create([
+                    'code' => Str::random(),
+                    'value' => $prix,
+                    'expiration_date' => fake()->dateTimeBetween('13-06-2025','13-06-2026')
+                ]);
+
                 Mail::to($order->user->email)->send(new OrderStateEmailAnnule($order));  // Email pour user "Annule"
                 $order->order_state_id = 4;
+                $order->coupon_id = $coupon->id;
                 $order->save();
             }
             
@@ -158,6 +160,6 @@ class CommandeClientController extends Controller
         }
 
         // Redirige avec un message de succès
-        return redirect()->route('commande_client.index')->with('success', 'L\'état de la commande a été mis à jour et un email a été envoyé.');
+        return redirect()->route('commandes_client.show')->with('success', 'L\'état de la commande a été mis à jour et un email a été envoyé.');
     }
 }
