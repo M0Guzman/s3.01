@@ -30,6 +30,6 @@ class OrderStateChanged extends Mailable
     public function build()
     {
         return $this->subject('Changement d\'état de commande')
-                    ->view('emails.order_state_changed'); // Vue de l'email
+                    ->view('mails.order_state_changed'); // Vue de l'email
     }
 }

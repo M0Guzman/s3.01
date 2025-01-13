@@ -30,6 +30,6 @@ class OrderStateEmailAnnule extends Mailable
     public function build()
     {
         return $this->subject('Notification de commande - Annule')
-                    ->view('emails.order_state_annule');  // Vue spécifique pour Annule
+                    ->view('mails.order_state_annule');  // Vue spécifique pour Annule
     }
 }

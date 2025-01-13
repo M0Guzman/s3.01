@@ -7,6 +7,7 @@ use Illuminate\Routing\Controller;
 use Cloudstudio\Ollama\Facades\Ollama;
 use BotMan\BotMan\Drivers\DriverManager;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class BotmanController extends Controller
 {
@@ -16,7 +17,7 @@ class BotmanController extends Controller
         $botman = app('botman');
 
         $botman->hears('{message}', function($botman, $message) {
-            $questionEmbeddings = Ollama::model('mxbai-embed-large')->embeddings($message);
+            $questionEmbeddings = Ollama::model('snowflake-arctic-embed2')->embeddings($message);
 
             $collection = ChromaDB::getCollection("chatbot");
             $query = $collection->query(
@@ -25,7 +26,9 @@ class BotmanController extends Controller
                 include: ['documents', 'distances', 'metadatas']
             );
 
-            if(count($query->distances) == 0 || $query->distances[0][0] > 180) {
+            Log::debug(json_encode($query));
+
+            if(count($query->distances) == 0 || $query->distances[0][0] > 170) {
                 $botman->reply("Désoler, je n'ai pas compris votre question.");
             } else {
                 $botman->reply($query->metadatas[0][0]["answer"]);
