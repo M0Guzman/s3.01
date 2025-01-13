@@ -1,5 +1,5 @@
 
-@vite(['resources/scss/facture.scss'])
+@vite(['resources/scss/profile/facture.scss'])
 
 @foreach ($order->bookings as $booking)
 
