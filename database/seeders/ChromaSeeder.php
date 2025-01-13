@@ -79,10 +79,6 @@ class ChromaSeeder extends Seeder
         $this->addToCollection($collection, "Pourquoi le site est-il parfois lent ?", "Le site peut être lent en raison d'une forte affluence de visiteurs ou de problèmes techniques temporaires. Veuillez essayer plus tard.");
         $this->addToCollection($collection, "Est-ce que les prix affichés incluent toutes les taxes ?", "Oui, les prix affichés sur le site incluent toutes les taxes applicables, sauf indication contraire.");
         $this->addToCollection($collection, "Existe-t-il des réductions pour les membres fidèles ?", "Des réductions peuvent être proposées aux membres fidèles ou abonnés. Vérifiez les offres spéciales dans votre compte ou sur notre page promotions.");
-
-        $this->addToCollection($collection, "Quelle est le meilleur jeu ?", "Worms");
-        $this->addToCollection($collection, "Quelle est le meilleur prof ?", "Colin");
-        $this->addToCollection($collection, "here", "Faut pas faire ça ! 'Mme Emmanuelle Graziano' https://fautpasfaireca.fr");
     }
 
     public function addToCollection(CollectionResource $collection, string $question, string $answer) {
