@@ -46,7 +46,7 @@
                                             {{ $activity->partner->description }}
                                         </p>
                                         <br>
-                                        <a href="{{ route('partner.show', ['id' => $activity->partner->id]) }}">En savoir plus sur notre partenaire {{$activity->partner->name}}</a>
+                                        <a href="https://paris-clignancourt-montmartre.kyriad.com/fr-fr/?utm_source=bing&utm_medium=cpc&utm_campaign=ASUC%20-%20KY%20FR%20T1%20-%20Bing%20-%20SN%20-%20Gen%20%2B%20Geo%20IMC%20-%20FR&utm_content=KY%20FR%20T1%20-%20Bing%20-%20Gen%20%2B%20Paris%20FR&utm_"  target="_blank">En savoir plus sur notre partenaire {{$activity->partner->name}}</a>
                                     </div>
                                 </div>
                             @endif
@@ -69,7 +69,7 @@
                                             {{ $activity->partner->description }}
                                         </p>
                                         <br>
-                                        <a href="{{ route('partner.show', ['id' => $activity->partner->id]) }}">En savoir plus sur notre partenaire {{$activity->partner->name}}</a>
+                                        <a href="https://www.lescavesduvieuxpressoir.com/" target="_blank">En savoir plus sur notre partenaire {{$activity->partner->name}}</a>
                                     </div>
                                 </div>
                             @endif
