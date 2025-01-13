@@ -84,6 +84,8 @@ Route::middleware(['auth', FullyVerified::class])->group(function () {
 
     Route::get('/dashboard/service_vente', [ServiceVenteController::class, 'showHomepage'])->name('dashboard.vente.homepage.show');
     
+
+
     Route::post('/dashboard/dirigeant/createTravel', [DirigeantController::class,'EnrengistrerTravel'])->name('dashboard.dirigeant.create.Travel');
     Route::get('/dashboard/dirigeant/createTravel', [DirigeantController::class,'createTravel'])->name('dashboard.dirigeant.create.Travel');
     Route::get('/dashboard/dirigeant/validateTravel', [DirigeantController::class,'validateTravel'])->name('dashboard.dirigeant.validate.Travel');
@@ -93,6 +95,10 @@ Route::middleware(['auth', FullyVerified::class])->group(function () {
     Route::get('/dashboard/service_vente/hotel', [ServiceVenteController::class, 'afficherPageHotel'])->name('dashboard.vente.hotel');
 });
 
+
+Route::get('/help', function() {
+    return view('mainHelp');
+})->name('mainHelp');
 
 Route::get('/file/{id}', [FileController::class, 'get_file'])->name('file');
 

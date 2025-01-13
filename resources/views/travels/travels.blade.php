@@ -6,7 +6,7 @@
     <div id="intro">
       <h1 id="page_title">Séjours Œnologiques</h1>
       <br>
-      <p>
+      <h3>
         Personnalisez votre séjour œnologique en
         fonction de vos envies ! Séjourner au
         Château dans le Bordelais, réaliser
@@ -19,7 +19,7 @@
         culture ou sport – nos week-ends œnologiques
         sont élaborés pour permettre à tous les publics,
         de l’amateur au néophyte, de trouver leur bonheur.
-      </p>
+      </h3>
     </div>
 
     <div class="filter-container">
@@ -52,9 +52,24 @@
             <option value="{{ $cat->name}}" @selected($travel_category == $cat->name)> {{ $cat->name}}</option>
           @endforeach
         </select>
-       <button id="submit" type="submit" value="Recherche"> <i class="fa-solid fa-magnifying-glass"></i></button>
+        <button id="submit" type="submit" value="Recherche"> <i class="fa-solid fa-magnifying-glass"></i></button>
+        <button id="help" type="button"> <i class="fa-regular fa-circle-question"></i></button>
       </form>
+  </div>
+
+  <div id="SectionHelp">
+  	  <h3>
+        Cette page présente l'ensemble des séjours que nous proposons.<br><br>
+        Vous pouvez filter les séjours selon quatre critères :<br>
+        "Quel vignoble" pour selectionner la région du séjour.<br>
+        "Quelle durée" : pour choisir la durée en nombre de jours.<br>
+        "Pour qui" : pour trouver un séjour adapté à  votre situation (famille, couple,amis)<br>
+        "Une envie spécial" : pour explorer une selection de séjours atypiques.<br><br>
+
+        Si un séjour vous plait, cliquer simplement sur "Découvrir l'offre"
+      </h3>
     </div>
+    
     
 
     <section id="container_travel">
@@ -116,4 +131,24 @@
         </div>
       @endforeach
     @endif
+
+    <script>
+      const helpButton = document.getElementById("help");
+      const helpSection = document.getElementById('SectionHelp');
+      let help = false;
+
+      helpButton.addEventListener('click',function() {
+        if(help) {
+          helpSection.style.display = 'none';
+          helpButton.innerHTML = '<i class="fa-solid fa-magnifying-glass"></i>';
+        }
+        else 
+        {
+          helpSection.style.display = 'flex';
+          helpButton.innerHTML = '<i class="fa-solid fa-circle-xmark"></i>';
+        }
+        help = !help;
+        console.log(help);
+      })
+    </script>
 </x-app-layout>
