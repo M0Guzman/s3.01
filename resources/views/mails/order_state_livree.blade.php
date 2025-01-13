@@ -10,7 +10,7 @@
     <h2 class="titre_info">Le programme détaillé de votre séjour</h2>
     @foreach ($order->bookings as $booking_order)
         @if ($booking_order->travel_id != null)
-            @foreach ($booking_order->$travel->travel_steps as $travelStep)
+            @foreach ($booking_order->travel->travel_steps as $travelStep)
                 <div class="container_etape">
                     <div class="image-section">
                         <img class="img-etape" src="{{ $travelStep->resources[0]->get_url() }}">
