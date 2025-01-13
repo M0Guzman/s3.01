@@ -43,7 +43,7 @@
         
             <div class="contener_one_housing conteneur_ligne supprimable">
                 <select id="typePartenaire" name="typePartenaire" class="select_housing">
-                    <option value="">Selectionner un hébergement</option>
+                    <option value="none">Selectionner un hébergement</option>
                     @foreach($hebergements as $unhebergement)
                         <option value="{{ $unhebergement->partner_id }}">
                             {{ $unhebergement->partner->name }}
@@ -128,8 +128,12 @@
         const road = "{{ route('dashboard.vente.Sejour.modifier') }}"
 
         TitreSejour.addEventListener('change', function() {
-        // Récupère la valeur de l'option sélectionnée           
-            if (TitreSejour.value != null) {
+            console.log(TitreSejour.value)
+        // Récupère la valeur de l'option sélectionnée   
+            if (TitreSejour.selectedIndex == 0) {
+                informationSejour.style.display = 'none';
+            }
+            else if (TitreSejour.value != null) {
                 let selectedOption = TitreSejour.options[TitreSejour.selectedIndex];
                 
                 let travelPrice = document.getElementById("TravelPrice");

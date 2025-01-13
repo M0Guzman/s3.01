@@ -2,7 +2,6 @@ const TitreSejour = document.getElementById("TitreSejour");
 const informationSejour = document.getElementById("informationSejour");
 
 document.getElementById('ValiderForm').addEventListener('click', async function() {
-        
     
     let housingsData = [];
 
@@ -105,7 +104,7 @@ document.getElementById('ValiderForm').addEventListener('click', async function(
                 toast.style.opacity = 0;
             }, 3000);
         }
-    });
+    });    
 });
 
 
