@@ -123,6 +123,7 @@ class ServiceVenteController extends Controller
 
             $travelToModifie->description = $validated['description'];
             $travelToModifie->state_travel = 'avalide';
+            $travelToModifie->department_id = 74;
             $travelToModifie->save();
 
 
