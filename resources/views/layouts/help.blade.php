@@ -11,7 +11,7 @@
         </div>
         <div id="modal-body"> 
             <ul id="theme">
-                <li class="li" >Connexion et compte</li>
+                <li class="li">Connexion et compte</li>
                 <li class="li">Commande et paiement</li>
                 <li class="li">Séjour et Réservation</li>
                 <li class="li">Support</li>

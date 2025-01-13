@@ -22,6 +22,7 @@ export default defineConfig({
                 'node_modules/select2/dist/js/select2.js',
                 'resources/js/dashboard/sales/home.js',
                 'resources/js/dashboard/sejour.js',
+                'resources/js/faq.js',
                 
 
                 'resources/scss/global/header.scss',
@@ -45,6 +46,7 @@ export default defineConfig({
                 'resources/scss/travel/wine_road.scss',
                 'resources/scss/dashboard/dirigeant/dirigeant.scss',
                 'select2/dist/css/select2.min.css',
+                'resources/scss/other/mainHelp.scss',
 
 
 
@@ -58,7 +60,9 @@ export default defineConfig({
 
                 'resources/images/delete.png',
                 'resources/images/logo.png',
-                'resources/images/No_Image_Available.jpg'
+                'resources/images/No_Image_Available.jpg',
+
+                'resources/images/FAQ/creationCompte_1.png'
             ],
             refresh: true,
         }),
