@@ -68,7 +68,7 @@ class ServiceVenteController extends Controller
         $domains = WineCellar::all();
         $hebergements = Hotel::all();
         $Travels = Travel::where("state_travel",'=',"Cree")->get();
-        
+
         return view('dashboard.service_marketing.sejour', [
             'domains' => $domains,
             'hebergements' => $hebergements,
@@ -78,7 +78,7 @@ class ServiceVenteController extends Controller
 
     public function modifierSejour(Request $request){
 
-        
+
 
         $validated = $request->validate([
             'idTravel' => ['required','int','exists:travel,id'],
@@ -88,12 +88,12 @@ class ServiceVenteController extends Controller
             'steps' => ['required', 'array']
         ]);
 
-        
+
 
         $travelToModifie = Travel::where('id', $validated['idTravel'])->first();
 
         if($travelToModifie != null) {
-           
+
 
             foreach($validated['steps'] as $oneStep) {
                 TravelStep::create([
@@ -101,7 +101,7 @@ class ServiceVenteController extends Controller
                     'title'=> $oneStep["title"],
                     'description'=> $oneStep["description"]
                 ]);
-                
+
 
                 $image_parts = explode(";base64,", $oneStep['image']);
                 $image_type_aux = explode("image/", $image_parts[0]);
@@ -112,7 +112,7 @@ class ServiceVenteController extends Controller
                     'mimetype' => "image/" . $image_type,
                 ]);
                 Storage::put($Image->id, $image_base64);
-                
+
 
 
                 TravelHasResource::create([
@@ -122,14 +122,14 @@ class ServiceVenteController extends Controller
             }
 
             $travelToModifie->description = $validated['description'];
-            $travelToModifie->state_travel = 'A_valider';
+            $travelToModifie->state_travel = 'avalide';
             $travelToModifie->save();
 
-            
+
 
             return back()->with('success', 'oui');
         }
-        
+
     }
 
     public function createPartenaire(Request $request) {
