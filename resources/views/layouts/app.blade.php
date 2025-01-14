@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
         <title>{{ config('app.name', 'Laravel') }}</title>
-
+        <link rel="icon" href="https://api-upload-public.s3.eu-west-1.amazonaws.com/website/c0583ffa-561e-09b4-3147-ced2e50c90a3/static/logo.png" type="image/x-icon">
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
         <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
