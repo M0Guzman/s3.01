@@ -1,15 +1,15 @@
 <x-app-layout>
-    @vite(['resources/scss/homePage/avis.scss','resources/scss/homePage/destination.scss','resources/scss/homePage/video.scss','resources/js/carousel.js'])
-    
+    @vite(['resources/scss/homePage/avis.scss','resources/scss/homePage/destination.scss','resources/scss/homePage/video.scss'])
+
 
     <main>
         <div id="video_container">
-            <iframe 
-                id="background_video" 
-                class="video-stream" 
-                src="https://www.youtube.com/embed/UBYRBxo7PHg?autoplay=1&mute=1&loop=1&rel=0&showinfo=0&modestbranding=1&playlist=UBYRBxo7PHg&loop=1" 
-                frameborder="0" 
-                allow="autoplay; encrypted-media" 
+            <iframe
+                id="background_video"
+                class="video-stream"
+                src="https://www.youtube.com/embed/UBYRBxo7PHg?autoplay=1&mute=1&loop=1&rel=0&showinfo=0&modestbranding=1&playlist=UBYRBxo7PHg&loop=1"
+                frameborder="0"
+                allow="autoplay; encrypted-media"
                 allowfullscreen>
             </iframe>
         </div>
@@ -19,7 +19,7 @@
     <main class="main_destinations container">
         <h1>Nos destinations</h1>
 
-        
+
     </main>
 
     <!-- Contenu principal -->
@@ -35,7 +35,7 @@
             <div class="container_one_review">
 
                 <div class="review-topinfo-container">
-                    
+
                     <a class="review-title hover_underline" href="{{ route('travel.show', [ 'id' => $travel_avis->id ]) }}">
                         {{ substr($travel_avis->title,0,50) }}
                     </a>
@@ -56,11 +56,11 @@
                                 $note --
                             @endphp
                         @endfor
-                        
+
                         <span class="note">{{ round($travel_avis->reviews_avg_rating, 1) }}/5</span>
                     </div>
                 </div>
-                
+
                 <div class="review-bottominfo-container">
                     <div class="review-content">
                         <!-- <h2>{{ $travel_avis->review_title }}</h2> -->
