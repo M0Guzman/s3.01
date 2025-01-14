@@ -34,22 +34,7 @@
 
             <!-- Section Détails Booking -->
             <div class="booking-section">
-                <div class="card">
-                    @if($travel->travel_steps->count() != 0 )
-                        @foreach ($travel->travel_steps as $travel_step)
-                            @if($travel_step->activities->count() != 0 )
-                                @foreach ($travel_step->activities as $activity)
-                                    @if($activity->partner->activity_type->name == 'Hotel')
-                                        <h2>{{ $activity->partner->name }}</h2>
-                                        <p>{{ $activity->partner->hotel->description }}</p>
-                                        @break
-                                    @endif
-                                @endforeach
-                                @break
-                            @endif
-                        @endforeach
-                    @endif
-                </div>
+                <div></div>
 
                 <div class="steps">
                     <h2>Étapes de réservation</h2>
