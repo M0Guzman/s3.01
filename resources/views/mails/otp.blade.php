@@ -1,3 +1,3 @@
 <div>
-    Votre code de confirmation : {{ $code }}
+<p>Votre code de confirmation : {{ $code }}</p>
 </div>
