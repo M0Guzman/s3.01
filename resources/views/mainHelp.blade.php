@@ -76,7 +76,7 @@
                         <strong>Date de naissance</strong> : Choisissez votre date de naissance.<br>
                         <strong>Numéro de téléphone</strong> : Entrez un numéro valide pour être contacté.<br>
                         <strong>Email</strong> : Saisissez une adresse email valide.<br>
-                        <strong>Mot de passe</strong> : <i class="fa-solid fa-triangle-exclamation"></i> il doit respecter les critères suivants<br>
+                        <strong>Mot de passe</strong> <i class="fa-solid fa-triangle-exclamation"></i> il doit respecter les critères suivants<br>
                         Compris entre <strong>8 et 50 caractères</strong><br>
                         Doit contenir au moins <strong>une lettre MAJUSCULE ou minuscule</strong><br>
                         Doit contenir au moins <strong>un caractère spécial</strong><br>

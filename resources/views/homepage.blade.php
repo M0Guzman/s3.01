@@ -15,21 +15,8 @@
         </div>
     </main>
 
-    <!-- Contenu principal -->
-    <main class="main_destinations container">
-        <h1>Nos destinations</h1>
-
-        
-    </main>
-
-    <!-- Contenu principal -->
-    <main class="main_coeur container">
-        <h1>Séjours coups de coeur</h1>
-    </main>
-
-
-    <!-- Contenu principal -->
-    <main class="main_avis container">
+    
+    <main class="main_avis">
         <h1>Avis des voyageurs</h1>
         @foreach ($travels_avis as $travel_avis)
             <div class="container_one_review">
