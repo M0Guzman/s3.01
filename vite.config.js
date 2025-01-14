@@ -61,7 +61,16 @@ export default defineConfig({
                 'resources/images/logo.png',
                 'resources/images/No_Image_Available.jpg',
 
-                'resources/images/FAQ/creationCompte_1.png'
+                'resources/images/FAQ/creationCompte_1.png',
+                'resources/images/FAQ/mdpOublie.png',
+                'resources/images/FAQ/mdpEmail.png',
+                'resources/images/FAQ/sejourRecherche.png',
+                'resources/images/FAQ/editTravel.png',
+                'resources/images/FAQ/editNbPersonne.png',
+                'resources/images/FAQ/identifiez_vous.png',
+                'resources/images/FAQ/monCompte.png',
+                'resources/images/FAQ/addresse.png',
+                'resources/images/FAQ/cookies.png',
             ],
             refresh: true,
         }),

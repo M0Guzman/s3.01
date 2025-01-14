@@ -1,3 +1,3 @@
 <div>
-    Your vino confirmation code is: {{ $code }}
+<p>Votre code de confirmation : {{ $code }}</p>
 </div>

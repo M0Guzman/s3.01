@@ -5,7 +5,7 @@
 </head>
 <body>
     <h1>Bonjour {{ $order->user->first_name }},</h1>
-    <p>Votre commande a changé d'état à "Livree".</p>
+    <p>Votre commande a changé d'état en "Livrée".</p>
     <br>
     <h2 class="titre_info">Le programme détaillé de votre séjour</h2>
     @foreach ($order->bookings as $booking_order)
@@ -27,6 +27,6 @@
             <br>
         @endif
     @endforeach
-    <p>Merci de votre fin de commande!</p>
+    <p>Merci pour votre commande !</p>
 </body>
 </html>

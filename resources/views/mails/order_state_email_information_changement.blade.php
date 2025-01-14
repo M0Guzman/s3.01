@@ -20,7 +20,7 @@
             @endforeach
         @endif
     @endforeach
-    <p>Voiçi le nouvel hotel {{ $partner_ok }}</p>
-    <p>Merci de votre commande!</p>
+    <p>Voici le nouvel hotel {{ $partner_ok }}</p>
+    <p>Merci de votre commande !</p>
 </body>
 </html>
