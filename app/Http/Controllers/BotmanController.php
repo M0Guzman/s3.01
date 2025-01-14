@@ -22,7 +22,6 @@ class BotmanController extends Controller
         $botman = app('botman');
 
         $botman->hears('{message}', function(BotMan $botman, string $message) use ($user_id) {
-            $cache = Cache::get("chatbothistory_" . $user_id, []);
             $questionEmbeddings = Ollama::model('snowflake-arctic-embed2')->embeddings($message);
 
             $collection = ChromaDB::getCollection("chatbot");
@@ -43,31 +42,34 @@ class BotmanController extends Controller
                 return;
             }
 
-            $messages = [];
 
-            foreach($query->metadatas as $meta) {
-                array_push($messages, ['role' => 'user', 'content' => $meta[0]['question']]);
-                array_push($messages, ['role' => 'assistant', 'content' => $meta[0]['answer']]);
-            }
+            if(config("chatbot.use_llm")) {
+                $messages = [];
 
-            array_push($messages, ['role' => 'sytem', 'content' => "***DEBUT DE NOUVELLE CONVERSATION***"]);
-            array_push($messages, ['role' => 'system', 'content' => "En tant que modèle linguistique, votre tâche consiste à répondre à toutes les questions posées de manière concise, courte et sincère. Veillez à fournir des réponses diversifiées et informatives afin de maintenir l'intérêt de la conversation. IL FAUT ABSOLUMENT EVITER DE DONNER DES REPONSE SANS PREUVE NOTER CI-DESSUS. Évitez de rester bloqué dans des boucles ou de répéter la même réponse à plusieurs reprises. Vous êtes un assistant pour la société Vinotrip qui vend des séjours oenologique dans toute le france."]);
+                foreach($query->metadatas as $meta) {
+                    array_push($messages, ['role' => 'user', 'content' => $meta[0]['question']]);
+                    array_push($messages, ['role' => 'assistant', 'content' => $meta[0]['answer']]);
+                }
 
-            $cache[] = ['role' => 'user', 'content' => $message];
-            $messages = array_merge($messages, $cache);
+                array_push($messages, ['role' => 'sytem', 'content' => "***DEBUT DE NOUVELLE CONVERSATION***"]);
+                array_push($messages, ['role' => 'system', 'content' => "En tant que modèle linguistique, votre tâche consiste à répondre à toutes les questions posées de manière concise, courte et sincère. Veillez à fournir des réponses diversifiées et informatives afin de maintenir l'intérêt de la conversation. IL FAUT ABSOLUMENT EVITER DE DONNER DES REPONSE SANS PREUVE NOTER CI-DESSUS. Évitez de rester bloqué dans des boucles ou de répéter la même réponse à plusieurs reprises. Vous êtes un assistant pour la société Vinotrip qui vend des séjours oenologique dans toute le france."]);
 
-            $llm = Ollama::agent("")->model('mistral')->options(['temperature' => 0.3])->stream(false)->chat($messages);
-            $botman->reply($llm['message']['content']);
-            $cache[] =  $llm['message'];
+                $cache = Cache::get("chatbothistory_" . $user_id, []);
+                $cache[] = ['role' => 'user', 'content' => $message];
+                $messages = array_merge($messages, $cache);
 
-            Cache::put('chatbothistory_' . $user_id, $cache, 600); // 10 minutes
+                $llm = Ollama::agent("")->model('mistral')->options(['temperature' => 0.3])->stream(false)->chat($messages);
+                $botman->reply($llm['message']['content']);
+                $cache[] =  $llm['message'];
 
-
-            /*if(count($query->distances) == 0 || $query->distances[0][0] > 170) {
-                $botman->reply("Désoler, je n'ai pas compris votre question.");
+                Cache::put('chatbothistory_' . $user_id, $cache, 600); // 10 minutes
             } else {
-                $botman->reply($query->metadatas[0][0]["answer"]);
-            }*/
+                if(count($query->distances) == 0 || $query->distances[0][0] > 170) {
+                    $botman->reply("Désoler, je n'ai pas compris votre question.");
+                } else {
+                    $botman->reply($query->metadatas[0][0]["answer"]);
+                }
+            }
         });
 
         $botman->listen();
