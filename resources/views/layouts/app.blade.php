@@ -48,6 +48,7 @@
                 <script>
 var botmanWidget = {
 aboutText: '',
+title: 'Assistant'
 introMessage: "Bienvenue dans notre site web"
 };
 </script>
