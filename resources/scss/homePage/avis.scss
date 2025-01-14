@@ -1,11 +1,12 @@
 
 
-.container {
+.main_avis {
   display: flex;
   align-items: center;
   flex-direction: column;
   justify-content: center;
 }
+
 
 .container_one_review {
   border-bottom: 1px solid $background-light;

@@ -93,25 +93,9 @@
                     </ul>
                 </li>
                 <li class="menu li">
-                    <a href="#">Thématiques</a>
-                    <ul class="menu-lvl2 ul">
-                        <li class="li"><a class="subcategory" href="https://www.vinotrip.com/fr/sejours-oenologiques-alsace">Alsace</a></li>
-                        <li class="li"><a class="subcategory" href="https://www.vinotrip.com/fr/sejours-oenologiques-bordeaux">Bordeaux</a></li>
-                        <li class="li"><a class="subcategory" href="https://www.vinotrip.com/fr/sejours-oenologiques-champagne">Champagne</a></li>
-                    </ul>
-                </li>
-                <li class="menu li">
-                    <a href="#">Coffret cadeau</a>
-
-                    <!-- <ul class="menu-lvl2">
-                        <li><a class="subcategory" href="#">..</a></li>
-                    </ul> -->
-                </li>
-                <li class="menu li">
                     <a href="#">Préparer votre séjour</a>
                     <ul class="menu-lvl2 ul">
                         <li class="li"><a class="subcategory" href="{{ route('wine-road.index') }}">Route des vins</a></li>
-                        <li class="li"><a class="subcategory" href="https://www.vinotrip.com/fr/vignoble">Guide des vignobles</a></li>
                     </ul>
                 </li>
             </ul>

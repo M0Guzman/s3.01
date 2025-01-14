@@ -1,1 +1,1 @@
-Le code pour offrire votre séjour `{{ $travel->title }}` est `{{ $code }}`
+<p>Le code pour offrir votre séjour "{{ $travel->title }}" est "{{ $code }}".</p>

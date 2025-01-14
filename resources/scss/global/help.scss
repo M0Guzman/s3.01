@@ -1,3 +1,5 @@
+
+
 /* Bouton principal */
 #Button_Aide {
     position: fixed;
@@ -6,16 +8,35 @@
     width: 50px;
     height: 50px;
     padding: 10px 20px;
-    background-color: #8e44ad;
+    background-color: $background-dark;
     cursor: pointer;
     font-size: 16px;
     border-bottom: 4px solid black;
     border-radius: 200px 70px 200px 120px;
+    color: white;
 }
 
 #Button_Aide:hover {
-    background-color: #732d91;
+    background-color: $background-black;
 }
+
+.hidden {
+    display: none;
+}
+
+
+#modal_aide {
+    overflow: hidden;
+    position: fixed;
+    bottom: 100px;
+    left: 100px;
+    width: 40vw;
+    height: 60vh;
+    background-color: white;
+    border: 4px solid black;
+    border-radius: 30px;
+}
+
 
 #modal-content {
     display: flex;
@@ -25,59 +46,88 @@
     height: 100%;
     width: 100%;
 }
+
 #modal-header {
-    flex-grow: 1;
     display: flex;
     flex-direction: row;
     justify-content: center;
+    height: 35px;
+    background-color: $background-black;
+
+    h2 {
+        text-align: center;
+        color: $text-white;
+        width: 100%
+    }
+}
+
+.content {
+    width: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: 10px;
+    p {
+        color: $text-white;
+        width: 100%;
+        font-size: 1em;
+    }
+
+    a {
+        color: #3597ff;    
+        font-size: 1em;  
+    }
+    
+    a:hover {
+        text-decoration: underline;         
+    }
+}
+
+
+#buttonBack {
+    margin-left: 8px;
+    margin-top: 2px;
+    font-size: 20px;
+    :hover {
+        transform: scale(1.15);
+    }
+}
+
+#modal-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: $background-dark;
+    color: $text-white;
 }
 
 #modal-body {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    flex-grow: 5;
-}
-#theme{
     width: 100%;
 }
 
-.li{
-    font-size: 7;
-    cursor: pointer;
-}
-
-#modal-body > p {
+.content {
     display: none;
-  opacity: 0;
-  transition: opacity 0.5s ease-in-out;
-}
-#modal-body > p.show {
-    display: block;
-    opacity: 1;
+    flex-direction: column;
+    justify-content: center;
+    flex-grow: 5;
+    background-color: $background-dark;
 }
 
-
-/* Modale */
-#modal_aide {
-    position: fixed;
-    bottom: 100px;
-    left: 100px;
-    width: 40vw;
-    height: 20vh;
-    background-color: white;
-    border: 4px solid black;
-    border-radius: 20px;
-    padding: 5px;
+#listquestions {
+    width: 100%;
 }
 
-.hidden {
-    display: none;
-}
-
-
-#ButtonRetour {
-    background-color: #e74c3c;
-    color: white;
+.onequestion{
+    padding: 5px 40px;
+    margin: 0;
+    font-size: 2em;
     cursor: pointer;
+    width: 100%;
+}
+
+.onequestion:hover {
+    color: $text-light;
+    transform: scale(1.05);
 }

@@ -64,11 +64,16 @@
 
 #header-bottom {
 
+    display: flex;
+    flex-direction: row;
     background-color: $background-light;
     padding: 0px 20px;
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content:space-evenly;
+    .navigation{
+        width: auto;
+    }
 
     a {
         color: $text-black;
@@ -123,5 +128,3 @@
 }
 
 
-.subcategory {
-}

@@ -29,11 +29,40 @@ function afficherTexte(){
     }
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-    //afficherTexte(elementId)
+
+
+const listquestion = document.querySelectorAll('.onequestion');
+const listdiv = document.querySelectorAll('.content');
+
+const buttonBack = document.getElementById('buttonBack');
+const home = document.getElementById('modal-body');
+
+buttonBack.addEventListener('click', function() {
+    listdiv.forEach(element => {
+        element.style.display = 'none';
+    });
+    home.style.display = "flex";
+})
+
+
+// Ajouter un événement de clic à chaque <li>
+listquestion.forEach(question => {
+    question.addEventListener('click', function() {
+        const divID = this.getAttribute('id-section-help');
+        
+        // Vérifier si l'attribut id-section existe et est valide
+        if (!divID) return; // Si l'attribut id-section n'existe pas, on arrête l'exécution de la fonction
+        
+        const divToShow = document.getElementById(divID); // Sélectionner la div correspondante à cet ID
+
+        // Masquer toutes les divs
+        listdiv.forEach(element => {
+            element.style.display = 'none';
+        });
+
+        // Si la div existe, la rendre visible
+        if (divToShow) {
+            divToShow.style.display = 'block';
+        }
+    });
 });
-//document.getElementById("Connexion").addEventListener('change', () => afficherTexte());
-//document.getElementById("Commande").addEventListener('change', () => afficherTexte());
-//document.getElementById("Reservation").addEventListener('change', () => afficherTexte());
-//document.getElementById("Support").addEventListener('change', () => afficherTexte());
-//document.getElementById("Accessibilité").addEventListener('change', () => afficherTexte());

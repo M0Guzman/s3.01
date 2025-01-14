@@ -194,7 +194,7 @@
       helpButton.addEventListener('click',function() {
         if(help) {
           helpSection.style.display = 'none';
-          helpButton.innerHTML = '<i class="fa-solid fa-magnifying-glass"></i>';
+          helpButton.innerHTML = '<i class="fa-regular fa-circle-question"></i>';
         }
         else
         {
