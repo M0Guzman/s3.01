@@ -18,6 +18,9 @@ class TravelController extends Controller
 
     public function show(Request $request)
     {
+        $page = $request->input("page", 1);
+        $total_pages = 0;
+
         $travels = [];
         if (
             $request->has('vineyard_category') && $request->input('vineyard_category') != ''||
@@ -65,10 +68,14 @@ class TravelController extends Controller
 
             if($travels != null) {
                 $travels->withAvg('reviews', 'rating');
-                $travels = $travels->get();
+                $travels = $travels->limit(20);
+
+                $total_pages = $travels->count() / 20;
+                $travels = $travels->offset(($page - 1) * 20)->get();
             }
         } else {
-            $travels = Travel::take(1000);
+            $total_pages = Travel::query()->limit(20)->count() / 20;
+            $travels = Travel::query()->limit(20)->offset(($page - 1) * 20);
             $travels->withAvg('reviews', 'rating');
             $travels = $travels->get(['travel.*', 'rating']);
         }
@@ -81,7 +88,9 @@ class TravelController extends Controller
             "vineyard_categories" => VineyardCategory::all(),
             "travel_categories" => TravelCategory::all(),
             "participant_categories" => ParticipantCategory::all(),
-            'sejours' => $travels
+            'sejours' => $travels,
+            'current_page' => $page,
+            'total_pages' => $total_pages
         ]);
     }
     public function show_single($id, Request $request)
