@@ -27,9 +27,10 @@ use App\Http\Controllers\CommandeClientController;
 |
 */
 
+Route::get('/travels', [TravelController::class, 'show'])->name('travels.show');
+
 Route::middleware([RedirectIfUnverified::class])->group(function() {
     Route::get('/', [HomeController::class, 'index']);
-    Route::get('/travels', [TravelController::class, 'show'])->name('travels.show');
     Route::get('/travel/{id}', [TravelController::class, 'show_single'])->name('travel.show');
 
     Route::get('/commande_client', [CommandeClientController::class, 'show'])->name('commandes_client.show');
@@ -101,6 +102,10 @@ Route::get('/help', function() {
 })->name('mainHelp');
 
 Route::get('/file/{id}', [FileController::class, 'get_file'])->name('file');
+
+Route::get('/contact', function() {
+    return view('policies.contact');
+})->name('contact');
 
 Route::get('/policies/terms', function() {
     return view('policies.terms');

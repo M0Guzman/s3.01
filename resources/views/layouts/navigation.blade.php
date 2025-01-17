@@ -14,8 +14,7 @@
                     <a class="top_a" href="{{ route('dashboard.affiche') }}">Dashboard</a>
                 </li>
             @endif
-                <li class="li"><a class="top_a" href="#">Contact</a></li>
-                <li class="li"><a class="top_a" href="#">07 66 69 71 18</a></li>
+                <li class="li"><a class="top_a" href="{{ route('contact') }}">contact</a></li>
                 @if (Auth::check())
                     <!--<li>
                         <i class="fa-solid fa-child" style="color: #ffffff;"></i>
@@ -87,7 +86,7 @@
                     <ul id="subMenuDestination" class="ul">
                     @foreach ($vinecats as $vinecat)
                         <li class="li">
-                            <a class="subcategory" href="{{ route('travels.show', ['vignoble' => $vinecat->name]) }}">{{ substr($vinecat->name,0,50) }}</a>
+                            <a class="subcategory" href="{{ route('travels.show', ['vineyard_category' => $vinecat->id]) }}">{{ substr($vinecat->name,0,50) }}</a>
                         </li>
                     @endforeach
                     </ul>

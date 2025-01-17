@@ -21,58 +21,61 @@ class TravelController extends Controller
         $page = $request->input("page", 1);
         $total_pages = 0;
 
+        $validated = $request->validate([
+            'vineyard_category' => ['nullable','int','exists:vineyard_categories,id'],
+            'duree' => ['nullable','numeric', 'max:5'],
+            'participant_category' => ['nullable','int','exists:participant_categories,id'],
+            'travel_category' => ['nullable','int','exists:travel_categories,id'],
+        ]);
+
+        $vineyardCatID = "";
+        $ParticiantId = "";
+        $TravelCategoryId = "";
+        $Duree = "";
+
         $travels = [];
+        $query = Travel::query()->where('state_travel', '=', 'Valide');
         if (
-            $request->has('vineyard_category') && $request->input('vineyard_category') != ''||
-            $request->has('duree') &&  $request->input('duree') != '' ||
-            $request->has('participant_category') &&   $request->input('participant_category') != '' ||
-            $request->has('travel_category') && $request->input('travel_category') != '') {
-            $wheres = [
-                ['state_travel', '=', 'Valide']
-            ];
+            isset($validated['vineyard_category']) ||
+            isset($validated['duree']) ||
+            isset($validated['participant_category']) ||
+            isset($validated['travel_category'])
+            ) {
 
-            if($request->has('vineyard_category') && $request->input('vineyard_category') != '')
+
+            if( isset($validated['vineyard_category']) )
             {
-                $cavignoble = VineyardCategory::where('name', '=', $request->input('vineyard_category'))->first();
-
-                array_push($wheres, ['vineyard_category_id', '=', $cavignoble->id]);
+                $vineyardCatID = $validated['vineyard_category'];
+                $query->where('vineyard_category_id', '=', $validated['vineyard_category']);
             }
-            if($request->has('duree') && $request->input('duree') != '')
+            if( isset($validated['duree']) )
             {
-
-                array_push($wheres, ['days', '=', $request->input('duree')]);
-
+                $query->where('days', '=', $validated['duree']);
+                $Duree = $validated['duree'];
             }
-            if($request->has('participant_category') && $request->input('participant_category') != '')
+            if( isset($validated['participant_category']) )
             {
-                $caParticipant = ParticipantCategory::where('name','=',$request->input('participant_category'))->first();
-
-                array_push($wheres, ['participant_category_id', '=', $caParticipant->id]);
-
+                $ParticiantId = $validated['participant_category'];
+                $query->where('participant_category_id', '=', $validated['participant_category']);
             }
-            if($request->has('travel_category') && $request->input('travel_category') != '')
+            if( isset($validated['travel_category']) )
             {
-                $caTravel = TravelCategory::where('name','=',$request->input('travel_category'))->first();
-
-                array_push($wheres, ['travel_category_id', '=', $caTravel->id]);
-            }
-
-            foreach($wheres as $where) {
-                if($travels == null) {
-                    $travels = Travel::where($where[0], $where[1], $where[2]);
-                } else {
-                    $travels = $travels->where($where[0], $where[1], $where[2]);
-                }
+                $TravelCategoryId = $validated['travel_category'];
+                $query->where('travel_category_id', '=', $validated['travel_category']);
             }
 
 
-            if($travels != null) {
-                $travels->withAvg('reviews', 'rating');
-                $travels = $travels->limit(20);
+            // Appliquer la moyenne sur les reviews avant d'effectuer la récupération des données
+            $query->withAvg('reviews', 'rating');
 
-                $total_pages = $travels->count() / 20;
-                $travels = $travels->offset(($page - 1) * 20)->get();
-            }
+            // Limiter à 20 résultats par page avant de paginer
+            $travels = $query->limit(20)->offset(($page - 1) * 20)->get();
+
+            // Calculer le nombre total de pages après avoir récupéré les résultats
+            $total_travels = $query->count(); // Nombre total de séjours pour calculer les pages
+            $total_pages = ceil($total_travels / 20); // Arrondir à l'entier supérieur
+
+
         } else {
             $total_pages = Travel::query()->limit(20)->count() / 20;
             $travels = Travel::query()->limit(20)->offset(($page - 1) * 20);
@@ -81,18 +84,21 @@ class TravelController extends Controller
         }
 
         return view('travels.travels', [
-            'vineyard_category' => $request->input('vineyard_category'),
-            'duree' => $request->input('duree'),
-            'participant_category' => $request->input('pour-qui'),
-            'travel_category'=> $request->input('travel_category'),
+            'vineyard_category' => $vineyardCatID,
+            'participant_category' => $ParticiantId,
+            'travel_category' => $TravelCategoryId,
+            'duree' => $Duree,
+
             "vineyard_categories" => VineyardCategory::all(),
             "travel_categories" => TravelCategory::all(),
             "participant_categories" => ParticipantCategory::all(),
+
             'sejours' => $travels,
             'current_page' => $page,
             'total_pages' => $total_pages
         ]);
     }
+    
     public function show_single($id, Request $request)
     {
         $travel = Travel::find($id);

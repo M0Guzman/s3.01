@@ -23,37 +23,36 @@
     </div>
 
     <div class="filter-container">
-      <form class="filter" action="#">
-        @csrf
-        <select id="vineyard_category">
-
-          <option value="" @selected($vineyard_category == "")>Quel Vignoble ?</option>
+      <form class="filter"  method="get">
+        <select id="vineyard_category" name="vineyard_category">
+          <option value="">Quel Vignoble ?</option>
           @foreach ($vineyard_categories as $cat)
-            <option value="{{ $cat->name}}" @selected($vineyard_category == $cat->name)> {{ $cat->name}}</option>
+            <option value="{{ $cat->id}}" @selected($vineyard_category == $cat->id)> {{ $cat->name}}</option>
           @endforeach
         </select>
-        <select id="duree">
-          <option value="" >Quelle durée ?</option>
-          <option value="0.5" @selected($duree == "0.5")>Demi-journée</option>
-          <option value="1" @selected($duree == "1")>1 jour</option>
-          <option value="2" @selected($duree == "2")>2 jour / 1 nuit</option>
-          <option value="3" @selected($duree == "3")>3 jours / 2 nuits</option>
+        <select id="duree" name="duree">
+          <option value="">Quelle durée ?</option>
+          <option value="0.5" @selected($duree == 0.5)>Demi-journée</option>
+          <option value="1" @selected($duree == 1)>1 jour</option>
+          <option value="2" @selected($duree == 2)>2 jour / 1 nuit</option>
+          <option value="3" @selected($duree == 3)>3 jours / 2 nuits</option>
         </select>
-        <select id="participant_category">
-          <option value="" @selected($participant_category == "")>Pour qui ?</option>
+        <select id="participant_category" name="participant_category">
+          <option value="">Pour qui ?</option>
 
           @foreach ($participant_categories as $cat)
-            <option value="{{ $cat->name}}" @selected($participant_category == $cat->name)> {{ $cat->name}}</option>
+            <option value="{{ $cat->id}}" @selected($participant_category == $cat->id)> {{ $cat->name}}</option>
           @endforeach
         </select>
-        <select id="travel_category">
-          <option value="" @selected($travel_category = "")>Une envie spécial ?</option>
+        <select id="travel_category" name="travel_category">
+          <option value="">Une envie spécial ?</option>
           @foreach ($travel_categories as $cat)
-            <option value="{{ $cat->name}}" @selected($travel_category == $cat->name)> {{ $cat->name}}</option>
+            <option value="{{ $cat->id}}" @selected($travel_category == $cat->id)> {{ $cat->name}}</option>
           @endforeach
         </select>
-        <button id="submit" type="submit" value="Recherche"> <i class="fa-solid fa-magnifying-glass"></i></button>
-        <button id="help" type="button"> <i class="fa-regular fa-circle-question"></i></button>
+        <button id="submit" type="submit"> <i style="color: white;font-size: 30px" class="fa-solid fa-magnifying-glass"></i></button>
+        <button id="help" type="button"> <i style="color: white;font-size: 30px" class="fa-regular fa-circle-question"></i></button>
+        
       </form>
   </div>
 
@@ -116,7 +115,7 @@
 
             </div>
 
-            <p class="description">{{ mb_substr($sejour->description,0,50,'UTF-8') }}</p>
+            <p class="description">{{ mb_substr($sejour->description,0,300,'UTF-8') }}</p>
 
             <p class="jours">{{ $sejour->days }}
               @if( $sejour->days >1)jours | {{ $sejour->days -1 }} nuit
@@ -194,12 +193,12 @@
       helpButton.addEventListener('click',function() {
         if(help) {
           helpSection.style.display = 'none';
-          helpButton.innerHTML = '<i class="fa-regular fa-circle-question"></i>';
+          helpButton.innerHTML = '<i style="color: white;font-size: 30px" class="fa-regular fa-circle-question"></i>';
         }
         else
         {
           helpSection.style.display = 'flex';
-          helpButton.innerHTML = '<i class="fa-solid fa-circle-xmark"></i>';
+          helpButton.innerHTML = '<i style="color: white;font-size: 30px" class="fa-solid fa-circle-xmark"></i>';
         }
         help = !help;
         console.log(help);
