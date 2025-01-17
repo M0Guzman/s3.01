@@ -15,6 +15,7 @@ use App\Http\Controllers\PartnerController;
 use App\Http\Controllers\Dashboard\ServiceVenteController;
 use App\Http\Controllers\Dashboard\DirigeantController;
 use App\Http\Controllers\CommandeClientController;
+use Illuminate\Support\Facades\URL;
 
 /*
 |--------------------------------------------------------------------------
@@ -79,12 +80,12 @@ Route::middleware(['auth', FullyVerified::class])->group(function () {
 
     Route::post('/dashboard/service_vente/ajouterhotel', [ServiceVenteController::class, 'createPartenaire'])->name('dashboard.vente.Partenaire.create');
     Route::get('/dashboard/service_vente/ajouterhotel', [ServiceVenteController::class, 'afficherPagePartenaire'])->name('dashboard.vente.Partenaire.afficher');
-    
+
     Route::get('/dashboard/service_vente/sejour', [ServiceVenteController::class, 'afficherPageSejour'])->name('dashboard.vente.Sejour.afficher');
     Route::post('/dashboard/service_vente/sejour', [ServiceVenteController::class, 'modifierSejour'])->name('dashboard.vente.Sejour.modifier');
 
     Route::get('/dashboard/service_vente', [ServiceVenteController::class, 'showHomepage'])->name('dashboard.vente.homepage.show');
-    
+
 
 
     Route::post('/dashboard/dirigeant/createTravel', [DirigeantController::class,'EnrengistrerTravel'])->name('dashboard.dirigeant.create.Travel');
@@ -143,3 +144,13 @@ Route::get('/dirigeant', function () {
     return view('dirigeant.dashboard');
 })->middleware('role:dirigeant');
 
+$proxy_url    = getenv('PROXY_URL');
+$proxy_scheme = getenv('PROXY_SCHEME');
+
+if (!empty($proxy_url)) {
+   URL::forceRootUrl($proxy_url);
+}
+
+if (!empty($proxy_schema)) {
+   URL::forceScheme($proxy_scheme);
+}
