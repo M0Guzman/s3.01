@@ -42,7 +42,7 @@ return new class extends Migration
             $participant_category->nullable();
 
 
-            $table->string('title');
+            $table->string('title')->index();
             $table->text('description')->nullable();
             $table->double('price_per_person')->nullable();
             $table->double('days');

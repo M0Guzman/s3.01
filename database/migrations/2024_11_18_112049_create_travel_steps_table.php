@@ -15,7 +15,7 @@ return new class extends Migration
         Schema::create('travel_steps', function (Blueprint $table) {
             $table->id();
             $table->foreignIdFor(Travel::class)->constrained();
-            $table->string('title');
+            $table->string('title')->index();
             $table->text('description');
         });
     }

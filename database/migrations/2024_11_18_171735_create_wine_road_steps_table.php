@@ -23,7 +23,7 @@ return new class extends Migration
             $address->constrained();
             $address->nullable();
             $table->foreignIdFor(WineRoad::class)->constrained();
-            $table->string('name');
+            $table->string('name')->index();
         });
     }
 
